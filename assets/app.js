@@ -205,20 +205,39 @@ window.MS = (function () {
     return (s && s.progress[slug]) || {};
   }
 
-  /* ---------- Theme toggle ---------- */
+  /* ---------- Theme: system → day → night cycle ---------- */
+  var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  function applyTheme(mode) {
+    var resolved = mode === "system"
+      ? (mq && mq.matches ? "night" : "day")
+      : mode;
+    document.documentElement.setAttribute("data-theme", resolved);
+  }
   function initTheme() {
-    var saved = localStorage.getItem("ms_theme");
-    if (saved) document.documentElement.setAttribute("data-theme", saved);
+    var mode = localStorage.getItem("ms_theme") || "system";
+    applyTheme(mode);
+    if (mq && mq.addEventListener) {
+      mq.addEventListener("change", function () {
+        if ((localStorage.getItem("ms_theme") || "system") === "system") applyTheme("system");
+      });
+    }
     var btn = document.querySelector(".theme-btn");
     if (btn) {
+      var ICONS = { system: "◐", day: "☀", night: "☾" };
+      var LABELS = { system: "Theme: system default", day: "Theme: day", night: "Theme: night" };
       var sync = function () {
-        btn.textContent = document.documentElement.getAttribute("data-theme") === "night" ? "☀" : "☾";
+        var m = localStorage.getItem("ms_theme") || "system";
+        btn.textContent = ICONS[m];
+        btn.title = LABELS[m] + " — click to change";
+        btn.setAttribute("aria-label", LABELS[m]);
       };
       sync();
       btn.addEventListener("click", function () {
-        var next = document.documentElement.getAttribute("data-theme") === "night" ? "day" : "night";
-        document.documentElement.setAttribute("data-theme", next);
+        var order = ["system", "day", "night"];
+        var cur = localStorage.getItem("ms_theme") || "system";
+        var next = order[(order.indexOf(cur) + 1) % order.length];
         localStorage.setItem("ms_theme", next);
+        applyTheme(next);
         sync();
       });
     }

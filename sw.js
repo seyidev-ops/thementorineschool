@@ -1,9 +1,9 @@
 /* Mentorine School service worker — bump CACHE on EVERY HTML change and deploy sw.js alongside it. */
-const CACHE = "mentorine-v1";
+const CACHE = "mentorine-v2";
 const ASSETS = [
   "index.html", "syllabus.html", "login.html", "dashboard.html",
   "assets/style.css", "assets/app.js", "assets/liveliness.js",
-  "assets/logo-full.png", "assets/icon-192.png", "assets/icon-512.png",
+  "assets/logo.svg", "assets/og-image.png", "assets/icon-192.png", "assets/icon-512.png",
   "manifest.json"
 ];
 self.addEventListener("install", e => {

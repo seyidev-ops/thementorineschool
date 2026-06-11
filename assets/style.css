@@ -54,11 +54,13 @@ img{max-width:100%}
   max-width:1000px;margin:0 auto;padding:.85rem clamp(1.2rem,4vw,2rem);
   display:flex;align-items:center;justify-content:space-between;gap:1rem;
 }
-.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.brand img{height:34px;width:auto;display:block}
-html[data-theme="night"] .brand img{filter:brightness(1.6) saturate(.9)}
-.brand-name{font-family:'Fraunces',serif;font-size:1.02rem;letter-spacing:-.3px}
-.brand-name i{color:var(--accent)}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none}
+.brand .mark{height:36px;width:auto;display:block}
+.wm{display:flex;flex-direction:column;line-height:1.18;font-family:'Cinzel',serif}
+.wm-top{font-size:.8rem;font-weight:600;letter-spacing:1.5px;color:var(--ink);white-space:nowrap}
+.wm-top em{font-style:normal;color:var(--accent)}
+.wm-sub{font-size:.5rem;font-weight:400;letter-spacing:3.5px;color:var(--ink-faint)}
+@media(max-width:420px){.wm-top{font-size:.7rem}.wm-sub{display:none}}
 .nav-links{display:flex;align-items:center;gap:1.5rem;font-size:.86rem;font-weight:400}
 .nav-links a{text-decoration:none;color:var(--ink-soft)}
 .nav-links a:hover{color:var(--accent)}

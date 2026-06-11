@@ -4,12 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student Login — The Mentorine School</title>
+<script>/* theme bootstrap: system default, no flash */
+(function(){var m=localStorage.getItem("ms_theme")||"system";
+var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
+document.documentElement.setAttribute("data-theme",r);})();</script>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="assets/icon-192.png">
 <meta name="theme-color" content="#0D8C4F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <style>
 .login-shell{
@@ -34,7 +38,11 @@
 <nav class="nav" data-live="off">
   <div class="nav-inner">
     <a class="brand" href="index.html">
-      <img src="assets/logo-full.png" alt="The Mentorine School">
+      <img class="mark" src="assets/logo.svg" alt="The Mentorine School mark">
+      <span class="wm">
+        <span class="wm-top"><em>The</em> Mentorine <em>School</em></span>
+        <span class="wm-sub">BY ONA</span>
+      </span>
     </a>
     <div class="nav-links" id="navLinks">
       <a href="index.html#courses">Courses</a>
