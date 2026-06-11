@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Login — The Mentorine School</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<meta name="theme-color" content="#0D8C4F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.login-shell{
+  min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;
+  padding:clamp(2rem,6vw,4rem) 1.2rem;
+}
+.login-card{width:100%;max-width:420px;padding:clamp(1.8rem,5vw,2.6rem)}
+.login-card h1{font-size:clamp(1.7rem,5vw,2.2rem);margin-bottom:.5rem}
+.login-card .sub{color:var(--ink-soft);font-size:.92rem;margin-bottom:1.8rem}
+.err{
+  display:none;font-size:.85rem;color:var(--accent-h);border:1px solid var(--line);
+  border-left:2px solid var(--accent);border-radius:var(--r);padding:.7rem 1rem;margin-bottom:1.1rem;
+}
+.login-foot{margin-top:1.4rem;font-size:.85rem;color:var(--ink-faint);text-align:center}
+</style>
+<script>
+  window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900 };
+</script>
+</head>
+<body>
+
+<nav class="nav" data-live="off">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/logo-full.png" alt="The Mentorine School">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#courses">Courses</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#register">Register</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="theme-btn" aria-label="Toggle theme">☾</button>
+      <button class="menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="login-shell">
+  <div class="card login-card">
+    <div class="kicker">Student Login</div>
+    <h1>Welcome <em class="ac">back</em>.</h1>
+    <p class="sub">Sign in to continue your course. Your dashboard opens straight to your registered track.</p>
+    <div class="err" id="loginErr">No matching student found. Check your email and password — or register first.</div>
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="lEmail">Email</label>
+        <input type="email" id="lEmail" required placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="lPass">Password</label>
+        <input type="password" id="lPass" required placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button class="btn" type="submit" style="width:100%;justify-content:center">Sign in <span class="arr">→</span></button>
+    </form>
+    <p class="login-foot">New here? <a class="link-quiet" href="index.html#register">Register for a course track</a></p>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+MS.initTheme();
+if (MS.session()) location.href = 'dashboard.html';
+
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var s = MS.login(document.getElementById('lEmail').value, document.getElementById('lPass').value);
+  if (s) location.href = 'dashboard.html';
+  else document.getElementById('loginErr').style.display = 'block';
+});
+</script>
+<script src="assets/liveliness.js" defer></script>
+</body>
+</html>

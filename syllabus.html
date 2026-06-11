@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syllabus — The Mentorine School</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<meta name="theme-color" content="#0D8C4F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.syl-hero{padding:clamp(3rem,8vw,5rem) 0 clamp(1.8rem,4vw,2.6rem)}
+.syl-hero h1{font-size:clamp(2.2rem,6vw,3.6rem);max-width:20ch}
+.syl-hero p{color:var(--ink-soft);max-width:60ch;margin-top:1rem}
+.syl-meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+
+.notice{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
+  border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.4rem;
+  background:var(--paper-2);margin-bottom:clamp(1.8rem,4vw,2.6rem);
+}
+.notice p{font-size:.9rem;color:var(--ink-soft)}
+.notice.open{border-color:color-mix(in srgb, var(--accent) 45%, transparent)}
+
+.roadmap{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:clamp(2rem,5vw,3rem)}
+.roadmap th{
+  text-align:left;font-weight:500;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--ink-faint);padding:.7rem .8rem;border-bottom:1px solid var(--line);
+}
+.roadmap td{padding:.85rem .8rem;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-soft)}
+.roadmap td:first-child{font-family:'Fraunces',serif;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.roadmap td:nth-child(2){color:var(--ink);font-weight:400}
+@media(max-width:680px){
+  .roadmap thead{display:none}
+  .roadmap, .roadmap tbody, .roadmap tr, .roadmap td{display:block;width:100%}
+  .roadmap tr{border-bottom:1px solid var(--line);padding:.6rem 0}
+  .roadmap td{border:none;padding:.25rem .2rem}
+}
+
+.module{border-bottom:1px solid var(--line-soft);padding:1.1rem 0}
+.module summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+}
+.module summary h3{font-size:1.15rem;letter-spacing:-.3px;font-weight:400}
+.module summary::after{content:"+";color:var(--accent);font-family:'Fraunces',serif;font-size:1.2rem}
+.module[open] summary::after{content:"–"}
+.module ul{list-style:none;margin-top:.9rem}
+.module li{padding:.4rem 0;font-size:.92rem;color:var(--ink-soft)}
+.module li::before{content:"—";color:var(--accent);margin-right:.7rem}
+
+.syl-cta{margin-top:clamp(2rem,5vw,3rem);display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+</style>
+<script>
+  window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900, stagger: 90 };
+</script>
+</head>
+<body>
+
+<nav class="nav" data-live="off">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/logo-full.png" alt="The Mentorine School">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#courses">Courses</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#register">Register</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="theme-btn" aria-label="Toggle theme">☾</button>
+      <a class="nav-cta" id="loginCta" href="login.html">Student Login</a>
+      <button class="menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="syl-hero">
+  <div class="wrap narrow">
+    <div class="kicker">Course Syllabus</div>
+    <h1 id="sylTitle">Loading…</h1>
+    <p id="sylSub"></p>
+    <div class="syl-meta" id="sylMeta"></div>
+  </div>
+</header>
+
+<main class="wrap narrow" style="padding-bottom:2rem">
+  <div class="notice" id="sylNotice"></div>
+
+  <div id="roadmapWrap" style="display:none">
+    <div class="kicker">The 16-Week Fast-Track Roadmap</div>
+    <table class="roadmap">
+      <thead><tr><th>Weeks</th><th>Part</th><th>What you master</th><th>Project milestone</th></tr></thead>
+      <tbody id="roadmapBody"></tbody>
+    </table>
+  </div>
+
+  <div class="kicker">Modules</div>
+  <div id="modules"></div>
+
+  <div class="syl-cta" id="sylCta"></div>
+</main>
+
+<footer class="footer" data-live="off">
+  <div class="wrap">
+    <span>Mentorine School by Ona Services — building the workforce of tomorrow, today.</span>
+    <a class="link-quiet" href="index.html">← Back to all courses</a>
+  </div>
+</footer>
+
+<a class="chip-float" href="#" data-live="off" aria-label="Chat with admissions" title="Chat with admissions">✆</a>
+
+<script src="assets/app.js"></script>
+<script>
+MS.initTheme();
+if (MS.session()){
+  var cta = document.getElementById('loginCta');
+  cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+}
+
+var slug = new URLSearchParams(location.search).get('course') || 'software-development';
+var track = MS.findTrack(slug);
+var syl = MS.getSyllabus(slug);
+
+if (!syl){
+  document.getElementById('sylTitle').textContent = 'Course not found';
+  document.getElementById('sylSub').textContent = 'Please return to the course catalogue and choose a track.';
+} else {
+  document.title = syl.title + ' — Syllabus — The Mentorine School';
+  document.getElementById('sylTitle').innerHTML = syl.title;
+  document.getElementById('sylSub').textContent = syl.subtitle;
+
+  var unlocked = MS.isUnlocked(slug);
+  document.getElementById('sylMeta').innerHTML =
+    (track ? '<span class="badge">'+track.courses+'</span><span class="badge">'+track.duration+'</span>' : '') +
+    (unlocked ? '<span class="badge open">● Unlocked</span>' : '<span class="badge locked">🔒 Course locked</span>');
+
+  var n = document.getElementById('sylNotice');
+  if (unlocked){
+    n.classList.add('open');
+    n.innerHTML = '<p><strong>This course is unlocked for you.</strong> Pick up where you left off in your dashboard.</p>'+
+                  '<a class="btn" href="dashboard.html">Continue learning <span class="arr">→</span></a>';
+  } else {
+    n.innerHTML = '<p><strong>The full course is locked until you register.</strong> The complete syllabus below is open — explore it, then unlock the course in one step.</p>'+
+                  '<a class="btn" href="index.html#register">Register to unlock <span class="arr">→</span></a>';
+  }
+
+  if (syl.roadmap){
+    document.getElementById('roadmapWrap').style.display = 'block';
+    document.getElementById('roadmapBody').innerHTML = syl.roadmap.map(function(r){
+      return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>';
+    }).join('');
+  }
+
+  document.getElementById('modules').innerHTML = syl.modules.map(function(m, i){
+    return '<details class="module"'+(i===0?' open':'')+'><summary><h3>'+m.title+'</h3></summary>'+
+      '<ul>'+m.items.map(function(it){return '<li>'+it+'</li>';}).join('')+'</ul></details>';
+  }).join('');
+
+  document.getElementById('sylCta').innerHTML = unlocked
+    ? '<a class="btn" href="dashboard.html">Open my dashboard <span class="arr">→</span></a><a class="link-quiet" href="index.html#courses">Browse other tracks</a>'
+    : '<a class="btn" href="index.html#register">Register for this track <span class="arr">→</span></a><a class="link-quiet" href="index.html#courses">Browse other tracks</a>';
+}
+</script>
+<script src="assets/liveliness.js" defer></script>
+</body>
+</html>

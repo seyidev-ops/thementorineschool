@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard — The Mentorine School</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<meta name="theme-color" content="#0D8C4F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.dash-head{padding:clamp(2.4rem,6vw,3.6rem) 0 1.6rem}
+.dash-head h1{font-size:clamp(2rem,5.5vw,3rem)}
+.dash-head .sub{color:var(--ink-soft);margin-top:.6rem;font-size:.95rem}
+.dash-meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
+
+.progress-strip{
+  display:flex;align-items:center;gap:1.2rem;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);padding:1.1rem 0;margin:1.6rem 0 2.2rem;flex-wrap:wrap;
+}
+.pct{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:500;font-variant-numeric:tabular-nums}
+.pbar{flex:1;min-width:180px;height:4px;background:var(--line-soft);border-radius:var(--r-pill);overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--accent);width:0;transition:width .6s cubic-bezier(.22,.61,.36,1)}
+.pnote{font-size:.8rem;color:var(--ink-faint);letter-spacing:1.5px;text-transform:uppercase}
+
+.lesson{display:flex;gap:1rem;align-items:flex-start;margin-bottom:.8rem}
+.lesson .tick{
+  flex:none;width:26px;height:26px;border:1px solid var(--line);border-radius:var(--r-pill);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;
+  color:transparent;transition:.2s;margin-top:.2rem;background:var(--card);
+}
+.lesson.done .tick{background:var(--accent);border-color:var(--accent);color:#fff}
+.lesson .body{flex:1}
+.lesson h3{font-size:1.05rem;font-weight:400;letter-spacing:-.2px}
+.lesson.done h3{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--line)}
+.lesson p{font-size:.85rem;color:var(--ink-faint);margin-top:.2rem}
+.lesson details{margin-top:.4rem}
+.lesson summary{cursor:pointer;font-size:.82rem;color:var(--accent);list-style:none}
+.lesson ul{list-style:none;margin-top:.5rem}
+.lesson li{font-size:.86rem;color:var(--ink-soft);padding:.25rem 0}
+.lesson li::before{content:"—";color:var(--accent);margin-right:.6rem}
+
+.other-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.other{display:flex;flex-direction:column;gap:.5rem}
+.other h3{font-size:1.02rem;font-weight:400}
+.other .meta{font-size:.78rem;color:var(--ink-faint)}
+.other .row{display:flex;justify-content:space-between;align-items:center;padding-top:.7rem;margin-top:auto;border-top:1px solid var(--line-soft)}
+</style>
+<script>
+  window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900, stagger: 80 };
+</script>
+</head>
+<body>
+
+<nav class="nav" data-live="off">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/logo-full.png" alt="The Mentorine School">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#course">My Course</a>
+      <a href="#explore">Explore Tracks</a>
+      <a href="index.html#pricing">Pricing</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="theme-btn" aria-label="Toggle theme">☾</button>
+      <a class="nav-cta" href="#" id="logoutBtn">Log out</a>
+      <button class="menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="dash-head" id="course">
+  <div class="wrap">
+    <div class="kicker">Student Dashboard</div>
+    <h1 id="hello">Welcome.</h1>
+    <p class="sub" id="courseLine"></p>
+    <div class="dash-meta" id="dashMeta"></div>
+    <div class="progress-strip">
+      <span class="pct" id="pct">0%</span>
+      <div class="pbar"><i id="pbarFill"></i></div>
+      <span class="pnote" id="pnote">0 of 0 modules complete</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="kicker">Your modules — tap the circle to mark complete</div>
+  <div id="lessons"></div>
+
+  <section class="section" id="explore">
+    <div class="section-head">
+      <div class="kicker">Explore Other Tracks</div>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.2rem)">Locked, but the <em class="ac">syllabi</em> are open.</h2>
+      <p>Every other track stays locked until you register for it — but you can study any syllabus before deciding. Track switches are free within your first 14 days.</p>
+    </div>
+    <div class="other-grid" id="otherGrid"></div>
+  </section>
+</main>
+
+<footer class="footer" data-live="off">
+  <div class="wrap">
+    <span>Mentorine School by Ona Services — building the workforce of tomorrow, today.</span>
+    <a class="link-quiet" href="index.html">← Back to home</a>
+  </div>
+</footer>
+
+<a class="chip-float" href="#" data-live="off" aria-label="Chat with admissions" title="Chat with admissions">✆</a>
+
+<script src="assets/app.js"></script>
+<script>
+MS.initTheme();
+
+var student = MS.session();
+if (!student) location.href = 'login.html';
+else {
+  var track = MS.findTrack(student.course);
+  var syl = MS.getSyllabus(student.course);
+
+  document.getElementById('hello').innerHTML =
+    'Welcome back, <em class="ac">' + student.name.split(' ')[0] + '</em>.';
+  document.getElementById('courseLine').textContent =
+    'Your registered course: ' + (track ? track.name : student.course) + ' — ' + student.tier + '.';
+  document.getElementById('dashMeta').innerHTML =
+    '<span class="badge open">● Course unlocked</span>' +
+    (track ? '<span class="badge">'+track.courses+'</span><span class="badge">'+track.duration+'</span>' : '') +
+    '<a class="badge" style="text-decoration:none" href="syllabus.html?course='+student.course+'">View full syllabus</a>';
+
+  /* ---- lessons with progress ---- */
+  var lessonsEl = document.getElementById('lessons');
+  function render(){
+    var prog = MS.getProgress(student.course);
+    var total = syl.modules.length, done = 0;
+    lessonsEl.innerHTML = syl.modules.map(function(m, i){
+      var isDone = !!prog[i]; if (isDone) done++;
+      return '<div class="card lesson'+(isDone?' done':'')+'" data-i="'+i+'">'+
+        '<span class="tick" role="button" aria-label="Mark module complete">✓</span>'+
+        '<div class="body"><h3>'+m.title+'</h3>'+
+        '<p>'+m.items.length+' lessons in this module</p>'+
+        '<details><summary>Show lessons</summary><ul>'+
+          m.items.map(function(it){return '<li>'+it+'</li>';}).join('')+
+        '</ul></details></div></div>';
+    }).join('');
+    var pct = total ? Math.round(done/total*100) : 0;
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('pbarFill').style.width = pct + '%';
+    document.getElementById('pnote').textContent = done + ' of ' + total + ' modules complete';
+  }
+  lessonsEl.addEventListener('click', function(e){
+    var t = e.target.closest('.tick'); if(!t) return;
+    var card = t.closest('.lesson'); var i = card.dataset.i;
+    MS.setProgress(student.course, i, !card.classList.contains('done'));
+    render();
+  });
+  render();
+
+  /* ---- other tracks (locked) ---- */
+  document.getElementById('otherGrid').innerHTML = MS.allTracks()
+    .filter(function(t){ return t.slug !== student.course; })
+    .map(function(t){
+      return '<article class="card other">'+
+        '<h3>'+t.name+'</h3>'+
+        '<span class="meta">'+t.courses+' · '+t.duration+'</span>'+
+        '<div class="row"><span class="badge locked">🔒 Locked</span>'+
+        '<a class="link-quiet" href="syllabus.html?course='+t.slug+'">View syllabus</a></div>'+
+      '</article>';
+    }).join('');
+
+  document.getElementById('logoutBtn').addEventListener('click', function(e){
+    e.preventDefault(); MS.logout(); location.href = 'index.html';
+  });
+}
+</script>
+<script src="assets/liveliness.js" defer></script>
+</body>
+</html>
