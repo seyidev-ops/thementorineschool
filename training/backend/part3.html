@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Node.js — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,119 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 3 · WEEKS 4–5</div>
+    <h1>Node.js Deep Dive: Your JavaScript Engine Room</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#3-1-what-node-js-actually-is">3.1 What Node.js Actually Is</a><a href="#3-2-modules-splitting-code-across-files">3.2 Modules: Splitting Code Across Files</a><a href="#3-3-npm-the-world-s-largest-code-library">3.3 npm: The World's Largest Code Library</a><a href="#3-4-the-file-system-node-s-superpower">3.4 The File System: Node's Superpower</a><a href="#3-5-environment-variables-secrets-stay-out-of-code">3.5 Environment Variables: Secrets Stay Out of Code</a><a href="#3-6-checkpoint-project-the-notes-cli">3.6 Checkpoint Project: The Notes CLI</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="3-1-what-node-js-actually-is">3.1 What Node.js Actually Is</h2>
+<p>Node.js is Chrome's JavaScript engine (V8) lifted out of the browser and given new powers: reading files, opening network connections, talking to the operating system. The browser deliberately forbids those things for safety; the server <em>requires</em> them. Same language, new permissions.</p>
+<p>One mental model carries you far: <strong>Node is single-threaded but never waits.</strong> One chef, many dishes, nothing blocking. That is why your async training in Part 2 was not optional — it is Node's whole personality.</p>
+<h2 id="3-2-modules-splitting-code-across-files">3.2 Modules: Splitting Code Across Files</h2>
+<p>Real projects are many small files, each exporting what others may use. Node's modern module system uses <code>export</code> and <code>import</code>. To enable it, your project needs a <code>package.json</code> with <code>"type": "module"</code> — you will create one in the next section; for now, see the shape:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-node/fees.js</code></div>
+<pre><code>export const calculateFee = (amount) =&gt; Math.min(amount * 0.015, 2000);
+export const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-node/app.js</code></div>
+<pre><code>import { calculateFee, naira } from "./fees.js";
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+console.log(`Fee on ${naira(80000)}: ${naira(calculateFee(80000))}`);</code></pre>
+<p><code>./fees.js</code> — the dot-slash means “in this same folder”. Forgetting it is the single most common import error in Node.</p>
+<h2 id="3-3-npm-the-world-s-largest-code-library">3.3 npm: The World's Largest Code Library</h2>
+<p>npm is two things: a command-line tool and a registry of over two million free packages. Professional back-end work is largely <em>assembling</em> well-tested packages and writing the logic that is unique to your product. Initialise a project and install your first package:</p>
+<pre><code>cd backend-journey/part3-node
+npm init -y
+npm install chalk</code></pre>
+<p><code>npm init -y</code> creates <code>package.json</code> — your project's identity card, listing its name and dependencies. Open it and add one line so modern imports work: <code>"type": "module",</code> right under the name field. The install command created <code>node_modules/</code> (the actual library code — never edit, never upload to GitHub) and <code>package-lock.json</code> (exact version receipts).</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-node/colour-demo.js</code></div>
+<pre><code>import chalk from "chalk";
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
+console.log(chalk.green("\u2713 Payment processed"));
+console.log(chalk.yellow("\u26a0 Low balance warning"));
+console.log(chalk.red.bold("\u2717 Transaction failed"));</code></pre>
+<div class="callout"><div class="co-label">PRO HABIT</div><p>Before writing anything generic — date formatting, validation, IDs — search npm first. Someone has solved it, tested it, and documented it. Your job is judgement, not reinvention.</p></div>
+<h2 id="3-4-the-file-system-node-s-superpower">3.4 The File System: Node's Superpower</h2>
+<p>The <code>fs/promises</code> module reads and writes real files — config, logs, uploads, reports. Combined with <code>JSON.stringify</code> and <code>JSON.parse</code>, a plain text file becomes a tiny database (your training wheels until Part 5).</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-node/files-demo.js</code></div>
+<pre><code>import { writeFile, readFile } from "fs/promises";
+
+const students = [
+  { name: "Ada", course: "backend" },
+  { name: "Femi", course: "frontend" }
+];
+
+const main = async () =&gt; {
+  // WRITE: object -&gt; JSON text -&gt; disk
+  await writeFile("students.json", JSON.stringify(students, null, 2));
+  console.log("Saved students.json");
+
+  // READ: disk -&gt; JSON text -&gt; object
+  const raw = await readFile("students.json", "utf-8");
+  const loaded = JSON.parse(raw);
+  console.log(`Loaded ${loaded.length} students. First: ${loaded[0].name}`);
+};
+
+main();</code></pre>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Open students.json in VS Code — there is your data, human-readable. Add a third student by hand, run the script again, and watch your code pick up the change.</p></div>
+<h2 id="3-5-environment-variables-secrets-stay-out-of-code">3.5 Environment Variables: Secrets Stay Out of Code</h2>
+<p>Database passwords, API keys, payment secrets — these must <strong>never</strong> be typed into source code, because source code gets shared, uploaded and leaked. Instead they live in the <em>environment</em>: a <code>.env</code> file on each machine, read at startup, and excluded from Git.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-node/.env</code></div>
+<pre><code>PORT=4000
+DB_PASSWORD=super-secret-do-not-commit
+PAYSTACK_KEY=your-paystack-test-secret-key</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-node/env-demo.js</code></div>
+<pre><code>import "dotenv/config";   // npm install dotenv
+
+console.log(`Server will run on port ${process.env.PORT}`);
+console.log(`Key loaded: ${process.env.PAYSTACK_KEY ? "yes" : "NO - check .env"}`);</code></pre>
+<p>Create a <code>.gitignore</code> file containing two lines — <code>node_modules/</code> and <code>.env</code> — and this discipline becomes automatic. Every deployment platform (Part 9) has a settings screen where you set the same variables in production.</p>
+<div class="callout"><div class="co-label">WARNING</div><p>A leaked payment key is money gone. The .env pattern is not style — it is the first security habit of your career. Part 7 builds on it.</p></div>
+<h2 id="3-6-checkpoint-project-the-notes-cli">3.6 Checkpoint Project: The Notes CLI</h2>
+<p>Build a command-line notes tool: <code>node notes.js add "Buy data bundle"</code> appends a note; <code>node notes.js list</code> shows all notes; <code>node notes.js delete 2</code> removes one. Notes persist in <code>notes.json</code> between runs — your first program with <em>memory</em>.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-node/notes.js</code></div>
+<pre><code>import { readFile, writeFile } from "fs/promises";
+
+const FILE = "notes.json";
+
+const load = async () =&gt; {
+  try { return JSON.parse(await readFile(FILE, "utf-8")); }
+  catch { return []; }                  // first run: no file yet
+};
+const save = (notes) =&gt; writeFile(FILE, JSON.stringify(notes, null, 2));
+
+const [,, command, ...rest] = process.argv;   // words typed after node notes.js
+const notes = await load();
+
+if (command === "add") {
+  notes.push({ text: rest.join(" "), created: new Date().toISOString() });
+  await save(notes);
+  console.log(`Added. You now have ${notes.length} note(s).`);
+} else if (command === "list") {
+  notes.forEach((n, i) =&gt; console.log(`${i + 1}. ${n.text}`));
+  if (!notes.length) console.log("No notes yet.");
+} else if (command === "delete") {
+  const index = Number(rest[0]) - 1;
+  if (!notes[index]) { console.log("No such note."); }
+  else {
+    const [removed] = notes.splice(index, 1);
+    await save(notes);
+    console.log(`Deleted: "${removed.text}"`);
+  }
+} else {
+  console.log("Usage: node notes.js add &lt;text&gt; | list | delete &lt;number&gt;");
 }</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
-
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
-
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
-
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
-
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+<p><strong>Upgrade challenges:</strong> add a <code>clear</code> command; colour the output with chalk; add a <code>search &lt;word&gt;</code> command using <code>filter</code>. When this works, notice what you have actually built: input parsing, persistence, validation, CRUD. That is an API without the network — and the network arrives next.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part2.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 2 · JavaScript Core</span></a>
+  <a class="next" href="part4.html"><span class="dir">NEXT →</span><span class="pt">Part 4 · Express &amp; REST</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +402,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

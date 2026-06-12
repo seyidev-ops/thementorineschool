@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Start Here — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,61 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 0 · START HERE</div>
+    <h1>Start Here: How This Guide Works</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#0-1-who-this-guide-is-for-and-what-you-will-become">0.1 Who This Guide Is For — and What You Will Become</a><a href="#0-2-the-golden-rules-of-learning-back-end-development">0.2 The Golden Rules of Learning Back-End Development</a><a href="#0-3-the-16-week-fast-track-roadmap">0.3 The 16-Week Fast-Track Roadmap</a><a href="#0-4-set-up-your-workstation-practical">0.4 Set Up Your Workstation (Practical)</a><a href="#0-5-how-every-lesson-is-structured">0.5 How Every Lesson Is Structured</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
-
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
-
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
-
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
-
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
-
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+<h2 id="0-1-who-this-guide-is-for-and-what-you-will-become">0.1 Who This Guide Is For — and What You Will Become</h2>
+<p>This guide takes you from <strong>absolute zero</strong> — no coding experience whatsoever — to a job-ready <strong>back-end web developer</strong> in 16 weeks of honest, consistent work. A back-end developer builds the part of an application users never see: the servers, the APIs, the databases, the payment systems, the security. When you tap “Pay” in an app and money moves, when you log in and the system remembers you, when ten thousand people order at once and nothing breaks — that is back-end engineering.</p>
+<p>Front-end developers make software <em>look</em> right. Back-end developers make software <em>be</em> right. The work is logical, deeply in demand, pays among the best salaries in remote tech, and — unlike what you may fear — does not require advanced mathematics. It requires patience, curiosity, and typing every example in this guide with your own hands.</p>
+<div class="callout"><div class="co-label">WHY THIS MATTERS</div><p>Every company that stores data, takes payments, or has user accounts needs back-end developers. That is effectively every company on the internet.</p></div>
+<h2 id="0-2-the-golden-rules-of-learning-back-end-development">0.2 The Golden Rules of Learning Back-End Development</h2>
+<p><strong>Type it, then run it.</strong> Never copy-paste on the first encounter. Typing builds the muscle memory reading never will. After you have typed an example once, the copy-paste versions in this guide become your reference library.</p>
+<p><strong>Break things on purpose.</strong> After every working example, change something and predict what will happen. Delete a line. Misspell a variable. Send the wrong data to your API. Back-end engineering is 50% building and 50% understanding failure.</p>
+<p><strong>Code every day.</strong> One hour daily beats seven hours on Saturday. Your brain consolidates programming patterns during sleep — give it something to consolidate every night.</p>
+<p><strong>Build, don't just watch.</strong> Every part of this guide ends in a checkpoint project. Do not move on until your checkpoint runs. The projects stack: by Part 9 you will assemble them into a capstone you can show employers.</p>
+<h2 id="0-3-the-16-week-fast-track-roadmap">0.3 The 16-Week Fast-Track Roadmap</h2>
+<p>This is the fastest <em>honest</em> route from zero to employable. Each part lists the weeks it occupies and the project milestone that proves you have mastered it.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Weeks</th><th>Part</th><th>What You Master</th><th>Project Milestone</th></tr></thead><tbody>
+<tr><td>1</td><td>Part 1: Terminal, HTTP &amp; the Web</td><td>Command line, how requests travel, status codes, curl</td><td>You can speak raw HTTP to any server</td></tr>
+<tr><td>2–4</td><td>Part 2: JavaScript for the Back End</td><td>Variables, logic, loops, functions, data shapes, async</td><td>Bank-account simulator in the terminal</td></tr>
+<tr><td>4–5</td><td>Part 3: Node.js Deep Dive</td><td>Modules, npm, the file system, environment variables</td><td>A notes CLI tool that saves real files</td></tr>
+<tr><td>5–7</td><td>Part 4: Express &amp; REST APIs</td><td>Routing, middleware, CRUD, validation, status codes</td><td>Task Manager API, tested with curl and Postman</td></tr>
+<tr><td>7–9</td><td>Part 5: Databases I — SQL</td><td>SQLite, CRUD, JOINs, parameterized queries</td><td>Task Manager persists data forever</td></tr>
+<tr><td>9–10</td><td>Part 6: Databases II — MongoDB</td><td>Documents, Mongoose, SQL vs NoSQL decisions</td><td>Product catalogue service on Atlas</td></tr>
+<tr><td>10–12</td><td>Part 7: Authentication &amp; Security</td><td>bcrypt, JWT, protected routes, OWASP, CORS</td><td>Secure multi-user Task API</td></tr>
+<tr><td>12–14</td><td>Part 8: Integration</td><td>Python FastAPI, child processes, Paystack, email, webhooks</td><td>A polyglot pipeline with real payments</td></tr>
+<tr><td>14–16</td><td>Part 9: Professional Practice</td><td>Testing, Docker, CI/CD, deployment, the capstone</td><td>NaijaStore API live on the internet</td></tr>
+</tbody></table></div>
+<h2 id="0-4-set-up-your-workstation-practical">0.4 Set Up Your Workstation (Practical)</h2>
+<p>You need exactly four tools. Install them now, in this order, and back-end development becomes possible on any laptop made in the last decade — Windows, Mac, or Linux.</p>
+<p><strong>1. Node.js (LTS version).</strong> Go to <code>nodejs.org</code> and download the LTS installer. Node is the engine that runs JavaScript outside the browser — it <em>is</em> your back end. <strong>2. Visual Studio Code</strong> from <code>code.visualstudio.com</code> — your editor. <strong>3. Git</strong> from <code>git-scm.com</code> — version control, and on Windows it also gives you the excellent Git Bash terminal. <strong>4. Postman</strong> from <code>postman.com</code> (or rely on curl, which you already have) — a friendly tool for poking APIs.</p>
+<p>Now verify everything. Open your terminal (Git Bash on Windows, Terminal on Mac/Linux) and run each line. Every command should print a version number, not an error.</p>
+<pre><code>node --version
+npm --version
+git --version
+curl --version</code></pre>
+<p>Finally, create the folder where your entire journey will live:</p>
+<pre><code>mkdir backend-journey
+cd backend-journey
+mkdir part1-http part2-js part3-node part4-express part5-sql part6-mongo part7-auth part8-integration part9-capstone</code></pre>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Type <code>ls</code> (or <code>dir</code> on Windows CMD) and confirm you can see all nine folders. You just used the terminal like a professional — Part 1 makes you fluent.</p></div>
+<h2 id="0-5-how-every-lesson-is-structured">0.5 How Every Lesson Is Structured</h2>
+<p>Each section follows the same rhythm: <strong>Concept</strong> — a plain-English explanation with a real-world analogy. <strong>Copy-and-Paste Practical</strong> — complete, runnable code with a FILE label telling you exactly where to save it. <strong>Line-by-Line Breakdown</strong> — what each important line does. <strong>Try This</strong> — a small modification that forces you to think. Parts end with a <strong>Checkpoint Project</strong> that proves mastery.</p>
+<p>One promise from you in return: when a checkpoint fails, you will read the error message <em>slowly, out loud, top line first</em>. Ninety percent of debugging is simply reading what the computer already told you.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="index.html"><span class="dir">← CURRICULUM</span><span class="pt">All parts</span></a>
+  <a class="next" href="part1.html"><span class="dir">NEXT →</span><span class="pt">Part 1 · Terminal &amp; HTTP</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +344,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

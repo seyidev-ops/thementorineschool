@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>JavaScript Core — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,170 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 2 · WEEKS 2–4</div>
+    <h1>JavaScript for the Back End: Thinking in Logic and Data</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#2-1-why-javascript-on-the-server">2.1 Why JavaScript on the Server?</a><a href="#2-2-variables-the-computer-s-labelled-boxes">2.2 Variables: The Computer's Labelled Boxes</a><a href="#2-3-conditionals-teaching-the-computer-to-decide">2.3 Conditionals: Teaching the Computer to Decide</a><a href="#2-4-loops-doing-things-ten-thousand-times">2.4 Loops: Doing Things Ten Thousand Times</a><a href="#2-5-functions-reusable-machines">2.5 Functions: Reusable Machines</a><a href="#2-6-arrays-and-objects-the-data-shapes-of-every-api">2.6 Arrays and Objects: The Data Shapes of Every API</a><a href="#2-7-asynchronous-javascript-the-restaurant-kitchen">2.7 Asynchronous JavaScript: The Restaurant Kitchen</a><a href="#2-8-checkpoint-project-the-bank-account-simulator">2.8 Checkpoint Project: The Bank Account Simulator</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="2-1-why-javascript-on-the-server">2.1 Why JavaScript on the Server?</h2>
+<p>JavaScript began in the browser, but <strong>Node.js</strong> (Part 3) lets it run anywhere — and it now powers the back ends of Netflix, PayPal, LinkedIn and Uber. For you, JavaScript means one language for your entire career surface: APIs, scripts, tooling, and (if you ever cross over) the front end too. Everything in this part runs in the terminal with <code>node filename.js</code> — no browser involved.</p>
+<p>Create your working folder and a first file:</p>
+<pre><code>cd backend-journey/part2-js
+touch 01-variables.js</code></pre>
+<h2 id="2-2-variables-the-computer-s-labelled-boxes">2.2 Variables: The Computer's Labelled Boxes</h2>
+<p>A variable is a labelled box in memory. <code>const</code> creates a box whose contents cannot be replaced (use it by default); <code>let</code> creates one that can. The data inside has a <strong>type</strong>: strings (text), numbers, booleans (true/false), or the special emptiness values <code>null</code> and <code>undefined</code>.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part2-js/01-variables.js</code></div>
+<pre><code>const schoolName = "The Mentorine School";   // string
+const yearFounded = 2024;                     // number
+let studentsEnrolled = 1280;                  // number that will change
+const isAcceptingStudents = true;             // boolean
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
+studentsEnrolled = studentsEnrolled + 1;      // allowed: let
+// schoolName = "Other School";               // ERROR: const cannot be reassigned
+
+console.log(`${schoolName} has ${studentsEnrolled} students.`);
+console.log("Accepting new students:", isAcceptingStudents);</code></pre>
+<p>Run it with <code>node 01-variables.js</code>. The backtick string on the last lines is a <strong>template literal</strong> — <code>${...}</code> inserts a value into text, and you will use it hundreds of times a week.</p>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Uncomment the schoolName reassignment line and run again. Read the error: “Assignment to constant variable.” You have just met your first runtime error — and survived.</p></div>
+<h2 id="2-3-conditionals-teaching-the-computer-to-decide">2.3 Conditionals: Teaching the Computer to Decide</h2>
+<p>Back ends are decision factories: <em>is this password correct? does this user have permission? is there stock left?</em> Decisions are written with <code>if</code>, <code>else if</code>, and <code>else</code>, comparing values with <code>===</code> (equals), <code>!==</code> (not equals), <code>&gt;</code> and <code>&lt;</code>.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part2-js/02-atm.js</code></div>
+<pre><code>const balance = 45000;
+const withdrawal = 50000;
+const dailyLimit = 100000;
+
+if (withdrawal &gt; balance) {
+  console.log("Insufficient funds. Your balance is " + balance);
+} else if (withdrawal &gt; dailyLimit) {
+  console.log("Amount exceeds your daily limit of " + dailyLimit);
+} else {
+  const newBalance = balance - withdrawal;
+  console.log(`Take your cash. New balance: ${newBalance}`);
+}</code></pre>
+<p>Always use <code>===</code>, never <code>==</code>. The triple version refuses to compare apples with oranges; the double version silently converts types and causes bugs that take hours to find.</p>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Set withdrawal to 45000 exactly. Which branch runs? Now add a fourth rule: withdrawals must be multiples of 500 — the % (remainder) operator gives 0 when the division is clean: withdrawal % 500 === 0.</p></div>
+<h2 id="2-4-loops-doing-things-ten-thousand-times">2.4 Loops: Doing Things Ten Thousand Times</h2>
+<p>A server that sends one email is a toy; a server that sends an email to every student is a product. Loops repeat work. The classic <code>for</code> loop counts; <code>for...of</code> walks through a collection.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part2-js/03-loops.js</code></div>
+<pre><code>// Classic counting loop
+for (let i = 1; i &lt;= 5; i++) {
+  console.log(`Processing payment batch ${i} of 5`);
 }
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
+// Walking a collection
+const students = ["Ada", "Femi", "Ngozi", "Tunde"];
+for (const name of students) {
+  console.log(`Sending welcome email to ${name}...`);
 }</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+<div class="callout"><div class="co-label">COMMON MISTAKE</div><p>Off-by-one errors: i &lt;= 5 runs five times, i &lt; 5 runs four. When a loop misbehaves, print i on every pass — console.log is the beginner's debugger, and honestly, the professional's too.</p></div>
+<h2 id="2-5-functions-reusable-machines">2.5 Functions: Reusable Machines</h2>
+<p>A function is a machine: ingredients in (<strong>parameters</strong>), result out (<strong>return value</strong>). Functions are how you stop repeating yourself and start building systems. Modern JavaScript writes them as <strong>arrow functions</strong>.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part2-js/04-functions.js</code></div>
+<pre><code>// A machine that calculates transaction fees: 1.5% capped at 2000
+const calculateFee = (amount) =&gt; {
+  const fee = amount * 0.015;
+  return Math.min(fee, 2000);
+};
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+// A machine that formats money
+const naira = (amount) =&gt; `\u20a6${amount.toLocaleString()}`;
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+console.log(`Fee on ${naira(50000)}:  ${naira(calculateFee(50000))}`);
+console.log(`Fee on ${naira(500000)}: ${naira(calculateFee(500000))}`);</code></pre>
+<p>Notice how <code>naira</code> and <code>calculateFee</code> <em>compose</em> — small machines plugging into each other. Professional back ends are thousands of small functions, each doing one thing well, not one giant scroll of instructions.</p>
+<h2 id="2-6-arrays-and-objects-the-data-shapes-of-every-api">2.6 Arrays and Objects: The Data Shapes of Every API</h2>
+<p>Two shapes carry essentially all data on the internet. An <strong>array</strong> is an ordered list. An <strong>object</strong> is a labelled record of <code>key: value</code> pairs. Every JSON response you saw in Part 1 was just these two shapes nested inside each other — and every API you build will speak them.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part2-js/05-data-shapes.js</code></div>
+<pre><code>const course = {
+  title: "Back-End Web Developer",
+  durationWeeks: 16,
+  priceNaira: 250000,
+  topics: ["Node", "Express", "SQL", "MongoDB", "Security"]
+};
 
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
+console.log(course.title);          // dot access
+console.log(course.topics[0]);      // first item of a nested array
 
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
+// The three array superpowers of API work:
+const prices = [250000, 500000, 700000];
 
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
+const withVAT   = prices.map(p =&gt; p * 1.075);          // transform every item
+const affordable = prices.filter(p =&gt; p &lt;= 500000);     // keep some items
+const revenue   = prices.reduce((sum, p) =&gt; sum + p, 0);// boil down to one value
 
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
+console.log({ withVAT, affordable, revenue });</code></pre>
+<div class="callout"><div class="co-label">WHY THIS MATTERS</div><p>map, filter and reduce are 80% of real back-end data handling: “take these database rows, reshape them, drop the private fields, total the amounts.” Learn these three and API code starts reading like English.</p></div>
+<h2 id="2-7-asynchronous-javascript-the-restaurant-kitchen">2.7 Asynchronous JavaScript: The Restaurant Kitchen</h2>
+<p>A good kitchen never stands still waiting for the oven — the chef starts the soup while bread bakes. JavaScript works the same way: slow operations (database queries, network calls, file reads) are started, and the program continues; when the result arrives, your code resumes. This is <strong>asynchronous</strong> programming, and the modern syntax for it is <code>async</code>/<code>await</code> on top of <strong>promises</strong>.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part2-js/06-async.js</code></div>
+<pre><code>// A pretend slow operation, like a database query (1.5s)
+const fetchBalance = (account) =&gt;
+  new Promise((resolve) =&gt; {
+    setTimeout(() =&gt; resolve({ account, balance: 45000 }), 1500);
+  });
 
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+const main = async () =&gt; {
+  console.log("Requesting balance...");
+  const result = await fetchBalance("0123456789");   // pause HERE only
+  console.log(`Account ${result.account}: \u20a6${result.balance}`);
+  console.log("Done.");
+};
+
+main();
+console.log("(The kitchen keeps moving while we wait...)");</code></pre>
+<p>Run it and study the <em>order</em> of the output: the kitchen line prints before the balance arrives. <code>await</code> pauses only the function it lives in — the rest of your server keeps serving other customers. This single idea is why Node handles thousands of simultaneous users on one modest machine.</p>
+<div class="callout"><div class="co-label">GOLDEN RULE</div><p>Anything touching a network, a disk, or a database is asynchronous. If a value seems mysteriously “undefined”, you almost certainly forgot an await.</p></div>
+<h2 id="2-8-checkpoint-project-the-bank-account-simulator">2.8 Checkpoint Project: The Bank Account Simulator</h2>
+<p>Build a terminal program that simulates a bank account using everything from this part: an object for the account, functions for deposit/withdraw/statement, validation with conditionals, a loop to process a batch of transactions, and an async “processing” delay for realism.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part2-js/checkpoint-bank.js</code></div>
+<pre><code>const account = { owner: "Ada Obi", balance: 100000, history: [] };
+
+const delay = (ms) =&gt; new Promise(r =&gt; setTimeout(r, ms));
+
+const deposit = (amount) =&gt; {
+  if (amount &lt;= 0) return "Deposit must be positive.";
+  account.balance += amount;
+  account.history.push({ type: "deposit", amount });
+  return `Deposited \u20a6${amount}. New balance: \u20a6${account.balance}`;
+};
+
+const withdraw = (amount) =&gt; {
+  if (amount &gt; account.balance) return "Insufficient funds.";
+  account.balance -= amount;
+  account.history.push({ type: "withdraw", amount });
+  return `Withdrew \u20a6${amount}. New balance: \u20a6${account.balance}`;
+};
+
+const statement = () =&gt;
+  account.history.map((t, i) =&gt; `${i + 1}. ${t.type} \u20a6${t.amount}`).join("\n");
+
+const main = async () =&gt; {
+  const batch = [
+    () =&gt; deposit(50000), () =&gt; withdraw(20000),
+    () =&gt; withdraw(999999), () =&gt; deposit(-5)
+  ];
+  for (const transaction of batch) {
+    await delay(700);                 // pretend processing time
+    console.log(transaction());
+  }
+  console.log("\n--- STATEMENT for " + account.owner + " ---");
+  console.log(statement());
+};
+
+main();</code></pre>
+<p><strong>Upgrade challenges</strong> (do at least two): add a transfer function that moves money between two account objects; reject withdrawals over a daily limit by summing today's history with <code>reduce</code>; add a timestamp to every history entry with <code>new Date().toISOString()</code>.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>When this runs cleanly and you can explain every line to the empty chair, Part 2 is complete. You now think in logic and data — the rest of the guide is giving that thinking superpowers.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part1.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 1 · Terminal &amp; HTTP</span></a>
+  <a class="next" href="part3.html"><span class="dir">NEXT →</span><span class="pt">Part 3 · Node.js</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +453,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

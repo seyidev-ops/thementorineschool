@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Auth &amp; Security — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -282,109 +282,120 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
 <main class="col">
   <div class="part-hero">
     <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <h1>Authentication &amp; Security: Guarding the Door</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#7-1-security-is-a-feature-not-a-garnish">7.1 Security Is a Feature, Not a Garnish</a><a href="#7-2-passwords-hash-never-store-practical">7.2 Passwords: Hash, Never Store (Practical)</a><a href="#7-3-jwt-the-nightclub-wristband">7.3 JWT: The Nightclub Wristband</a><a href="#7-4-the-secure-user-system-practical">7.4 The Secure User System (Practical)</a><a href="#7-5-the-owasp-hall-of-shame-mistakes-you-will-never-make">7.5 The OWASP Hall of Shame: Mistakes You Will Never Make</a><a href="#7-6-checkpoint-project-the-secure-task-api">7.6 Checkpoint Project: The Secure Task API</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="7-1-security-is-a-feature-not-a-garnish">7.1 Security Is a Feature, Not a Garnish</h2>
+<p>Everything you have built so far trusts everyone completely — anyone can read, edit or delete anything. Real systems must answer two questions on every request: <strong>Who are you?</strong> (<em>authentication</em>) and <strong>What are you allowed to do?</strong> (<em>authorization</em>). This part installs both, plus the defensive habits that keep you off the news.</p>
+<h2 id="7-2-passwords-hash-never-store-practical">7.2 Passwords: Hash, Never Store (Practical)</h2>
+<p>Storing a password is malpractice — databases leak, and leaked plaintext passwords destroy users who reuse them everywhere. Instead you store a <strong>hash</strong>: a one-way fingerprint computed by <code>bcrypt</code>, deliberately slow to compute so brute-force attacks become economically absurd. At login, you hash what the user typed and compare fingerprints.</p>
+<pre><code>cd backend-journey/part7-auth
+npm init -y &amp;&amp; npm install express bcrypt jsonwebtoken dotenv
+# add "type": "module" to package.json</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-auth/hash-demo.js</code></div>
+<pre><code>import bcrypt from "bcrypt";
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+const password = "mentorine2026";
+const hash = await bcrypt.hash(password, 10);   // 10 = cost factor
+console.log("Stored in DB:", hash);
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+console.log("Right password:", await bcrypt.compare("mentorine2026", hash)); // true
+console.log("Wrong password:", await bcrypt.compare("password123", hash));   // false</code></pre>
+<p>Run it twice — the hash differs each time (bcrypt salts automatically), yet <code>compare</code> still works. Magic, formally verified.</p>
+<h2 id="7-3-jwt-the-nightclub-wristband">7.3 JWT: The Nightclub Wristband</h2>
+<p>HTTP has no memory — every request arrives as a stranger. A <strong>JSON Web Token</strong> fixes this like a club wristband: at login (showing ID once), the server signs a token containing who you are and hands it over; every later request presents the wristband in a header; the server verifies the <em>signature</em> — no database lookup needed — and trusts the contents. Tamper with the token and the signature breaks.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-auth/jwt-demo.js</code></div>
+<pre><code>import "dotenv/config";
+import jwt from "jsonwebtoken";
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+// .env: JWT_SECRET=use-a-long-random-string-here
+const token = jwt.sign(
+  { userId: 42, name: "Ada" },
+  process.env.JWT_SECRET,
+  { expiresIn: "2h" }
+);
+console.log("Wristband:", token);
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+const decoded = jwt.verify(token, process.env.JWT_SECRET);
+console.log("Verified wearer:", decoded);</code></pre>
+<div class="callout"><div class="co-label">COMMON MISTAKE</div><p>JWTs are signed, NOT encrypted — anyone can read the payload at jwt.io. Never put passwords or secrets inside one. The signature proves authenticity, not secrecy.</p></div>
+<h2 id="7-4-the-secure-user-system-practical">7.4 The Secure User System (Practical)</h2>
+<p>Now assemble register, login, and a <strong>protected route</strong> guarded by middleware — the airport security training from Part 4 paying off:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-auth/server.js</code></div>
+<pre><code>import "dotenv/config";
+import express from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
+const app = express();
+app.use(express.json());
+const users = [];   // swap for SQLite/Mongo using Parts 5–6 — upgrade challenge
 
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
+app.post("/auth/register", async (req, res) =&gt; {
+  const { email, password } = req.body;
+  if (!email || !password || password.length &lt; 8)
+    return res.status(400).json({ error: "Valid email and 8+ char password required" });
+  if (users.find(u =&gt; u.email === email))
+    return res.status(409).json({ error: "Email already registered" });
+  users.push({ id: users.length + 1, email, passwordHash: await bcrypt.hash(password, 10) });
+  res.status(201).json({ message: "Registered. Please log in." });
+});
 
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
+app.post("/auth/login", async (req, res) =&gt; {
+  const user = users.find(u =&gt; u.email === req.body.email);
+  const ok = user &amp;&amp; await bcrypt.compare(req.body.password || "", user.passwordHash);
+  if (!ok) return res.status(401).json({ error: "Invalid credentials" });   // never say which part failed
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "2h" });
+  res.json({ token });
+});
 
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
+// The guard: verifies the wristband, attaches the wearer to req
+const requireAuth = (req, res, next) =&gt; {
+  const header = req.headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+  if (!token) return res.status(401).json({ error: "Token required" });
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch {
+    return res.status(401).json({ error: "Invalid or expired token" });
+  }
+};
 
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+app.get("/me/tasks", requireAuth, (req, res) =&gt; {
+  res.json({ message: `Private tasks for user #${req.user.userId}` });
+});
+
+app.listen(4000, () =&gt; console.log("Auth server on :4000"));</code></pre>
+<p>Walk the whole journey with curl — register, log in, copy the token, and present the wristband:</p>
+<pre><code>curl -X POST http://localhost:4000/auth/register -H "Content-Type: application/json" -d '{"email":"ada@x.com","password":"longpassword"}'
+curl -X POST http://localhost:4000/auth/login -H "Content-Type: application/json" -d '{"email":"ada@x.com","password":"longpassword"}'
+curl http://localhost:4000/me/tasks -H "Authorization: Bearer PASTE_TOKEN_HERE"
+curl -i http://localhost:4000/me/tasks    # no wristband -&gt; 401</code></pre>
+<h2 id="7-5-the-owasp-hall-of-shame-mistakes-you-will-never-make">7.5 The OWASP Hall of Shame: Mistakes You Will Never Make</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Vulnerability</th><th>The mistake</th><th>Your defence (already learned)</th></tr></thead><tbody>
+<tr><td>SQL Injection</td><td>Gluing input into queries</td><td>Parameterized ? queries — Part 5</td></tr>
+<tr><td>Leaked secrets</td><td>Keys committed to GitHub</td><td>Everything secret lives in .env — Part 3</td></tr>
+<tr><td>Plaintext passwords</td><td>Storing what users typed</td><td>bcrypt hash + compare — Part 7</td></tr>
+<tr><td>Information leakage</td><td>Stack traces sent to clients</td><td>Central error handler, log privately — Part 4</td></tr>
+<tr><td>Broken access control</td><td>Trusting the client's claims</td><td>requireAuth middleware + checking ownership server-side</td></tr>
+</tbody></table></div>
+<p>Two more guards every public API wears: <strong>CORS</strong> (<code>npm install cors</code> — declares which websites may call you) and <strong>rate limiting</strong> (<code>npm install express-rate-limit</code> — caps requests per visitor so brute-forcers and accidental loops can't drown you). Both are two-line middleware; add them to the checkpoint.</p>
+<h2 id="7-6-checkpoint-project-the-secure-task-api">7.6 Checkpoint Project: The Secure Task API</h2>
+<p>Merge everything: take your persistent Task API from Part 5, add the auth system, give the tasks table a <code>user_id</code> column, and make every task route both <code>requireAuth</code>-protected <em>and</em> ownership-checked — users see and touch only their own rows (<code>WHERE user_id = ?</code>). Add CORS and a rate limiter on <code>/auth/login</code> (try 5 attempts per minute). When two different registered users each maintain private task lists on the same server, you have built what most tutorials never reach: a genuinely multi-user, secured back end.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · MongoDB &amp; NoSQL</span></a>
+  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Integration</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +404,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

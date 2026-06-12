@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Professional Practice — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,109 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 9 · WEEKS 14–16</div>
+    <h1>Professional Practice: Testing, Deployment &amp; the Capstone</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#9-1-automated-testing-your-robot-quality-inspector">9.1 Automated Testing: Your Robot Quality Inspector</a><a href="#9-2-git-github-the-professional-workflow">9.2 Git &amp; GitHub: The Professional Workflow</a><a href="#9-3-docker-in-twenty-minutes">9.3 Docker in Twenty Minutes</a><a href="#9-4-ci-cd-robots-that-test-every-push">9.4 CI/CD: Robots That Test Every Push</a><a href="#9-5-deployment-your-api-on-the-real-internet-practical">9.5 Deployment: Your API on the Real Internet (Practical)</a><a href="#9-6-the-capstone-naijastore-api">9.6 THE CAPSTONE: NaijaStore API</a><a href="#9-7-the-job-hunt-turning-the-capstone-into-offers">9.7 The Job Hunt: Turning the Capstone into Offers</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="9-1-automated-testing-your-robot-quality-inspector">9.1 Automated Testing: Your Robot Quality Inspector</h2>
+<p>Professionals do not re-curl every endpoint after every change — they write tests once and let the machine re-check forever. Node ships a test runner in the box (<code>node:test</code>), and the pattern is simply: arrange, act, assert.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part9-capstone/tests/fees.test.js</code></div>
+<pre><code>import { test } from "node:test";
+import assert from "node:assert";
+import { calculateFee } from "../fees.js";
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+test("fee is 1.5% of small amounts", () =&gt; {
+  assert.strictEqual(calculateFee(100000), 1500);
+});
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+test("fee is capped at 2000", () =&gt; {
+  assert.strictEqual(calculateFee(10000000), 2000);
+});
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+test("fee on zero is zero", () =&gt; {
+  assert.strictEqual(calculateFee(0), 0);
+});</code></pre>
+<pre><code>node --test</code></pre>
+<p>Green ticks scroll by; break the cap in <code>fees.js</code> on purpose and watch a test catch you in milliseconds. For testing whole endpoints, the <code>supertest</code> package fires requests at your Express app in-memory — add it to the capstone as an upgrade. The professional rule of thumb: every bug you fix earns a test that would have caught it.</p>
+<h2 id="9-2-git-github-the-professional-workflow">9.2 Git &amp; GitHub: The Professional Workflow</h2>
+<p>Git records snapshots of your project; GitHub publishes them. The daily loop is four commands, and from today every checkpoint you have built goes into it:</p>
+<pre><code>cd backend-journey
+git init
+git add .
+git commit -m "Parts 1-8: terminal to payments"
+# create an empty repo on github.com, then:
+git remote add origin https://github.com/YOUR-USERNAME/backend-journey.git
+git push -u origin main</code></pre>
+<p>Commit small and often, with messages that say <em>why</em>: <code>git commit -m "Reject negative deposits (caught by Ada in review)"</code> is documentation your future self will thank you for. Your <code>.gitignore</code> from Part 3 keeps <code>node_modules/</code> and <code>.env</code> out — verify on GitHub that neither appears. <strong>A recruiter checking your profile and finding a steady green commit graph plus documented projects is the cheapest interview advantage that exists.</strong></p>
+<h2 id="9-3-docker-in-twenty-minutes">9.3 Docker in Twenty Minutes</h2>
+<p>“Works on my machine” dies here. <strong>Docker</strong> packages your app <em>with</em> its environment — Node version, dependencies, OS libraries — into an image that runs identically everywhere. One file describes the recipe:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part9-capstone/Dockerfile</code></div>
+<pre><code>FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+EXPOSE 4000
+CMD ["node", "server.js"]</code></pre>
+<pre><code>docker build -t naijastore .
+docker run -p 4000:4000 --env-file .env naijastore</code></pre>
+<p>Read the Dockerfile top to bottom: start from a slim official Node image, copy the dependency manifests first (so Docker caches the slow <code>npm ci</code> layer), copy the code, declare the port, state the start command. That mental model — <em>layers, cached top-down</em> — is most of practical Docker.</p>
+<h2 id="9-4-ci-cd-robots-that-test-every-push">9.4 CI/CD: Robots That Test Every Push</h2>
+<p>Continuous Integration means GitHub runs your tests automatically on every push — a tireless reviewer who never lets broken code sneak in. One small file in your repo switches it on:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>.github/workflows/ci.yml</code></div>
+<pre><code>name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: node --test</code></pre>
+<p>Push it, open the <strong>Actions</strong> tab on GitHub, and watch a fresh Ubuntu machine boot, install your project and run your tests — in about a minute, for free. The green badge it earns belongs at the top of your README.</p>
+<h2 id="9-5-deployment-your-api-on-the-real-internet-practical">9.5 Deployment: Your API on the Real Internet (Practical)</h2>
+<p><strong>Render</strong> (render.com) deploys straight from GitHub on a free tier. The steps: push your project → New ▸ Web Service → connect the repo → build command <code>npm ci</code>, start command <code>node server.js</code> → add your environment variables (<code>JWT_SECRET</code>, <code>PAYSTACK_SECRET</code>, database URL) in the dashboard — the production <code>.env</code> → deploy. Two code details make any Node app deploy-ready:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>server.js (deploy-ready details)</code></div>
+<pre><code>// 1. The platform chooses your port — accept it
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () =&gt; console.log(`Live on :${PORT}`));
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
-
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
-
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+// 2. A health check route platforms (and you) can ping
+app.get("/health", (req, res) =&gt; res.json({ status: "ok", uptime: process.uptime() }));</code></pre>
+<p>Minutes later you hold a URL like <code>https://naijastore-api.onrender.com</code> — and the curl commands you have typed at <code>localhost</code> all week now work from any computer on Earth. Send one to a friend. Savour it. (For the database in production, Render and Railway both offer free Postgres; swapping SQLite for Postgres is a connection-string change with the <code>pg</code> package — the SQL you wrote is the same.)</p>
+<div class="callout"><div class="co-label">PRO HABIT</div><p>Add console.log lines with context ("order 123 paid, ref xyz") — on Render they stream into the Logs tab, your eyes in production. Structured logging tools come later; the habit starts now.</p></div>
+<h2 id="9-6-the-capstone-naijastore-api">9.6 THE CAPSTONE: NaijaStore API</h2>
+<p>Everything converges. <strong>NaijaStore</strong> is a complete e-commerce back end — the genre of system most companies will pay you to build and maintain. Specification:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Area</th><th>Endpoints</th><th>Built with (the Part that trained you)</th></tr></thead><tbody>
+<tr><td>Auth</td><td>POST /auth/register, POST /auth/login</td><td>bcrypt + JWT (P7)</td></tr>
+<tr><td>Products</td><td>GET /products (+filters), POST/PUT/DELETE (admin only)</td><td>Express CRUD (P4) + SQL (P5)</td></tr>
+<tr><td>Cart</td><td>GET /cart, POST /cart/items, DELETE /cart/items/:id</td><td>Ownership-checked routes (P7)</td></tr>
+<tr><td>Orders</td><td>POST /orders (from cart), GET /orders/:id</td><td>JOINs across tables (P5)</td></tr>
+<tr><td>Payments</td><td>POST /orders/:id/pay, GET /orders/:id/verify, webhook</td><td>Paystack (P8)</td></tr>
+<tr><td>Receipts</td><td>Email on verified payment</td><td>nodemailer (P8)</td></tr>
+<tr><td>Analytics</td><td>GET /admin/stats (totals, averages)</td><td>Python FastAPI service (P8)</td></tr>
+<tr><td>Ops</td><td>/health, tests, Dockerfile, CI, deployed on Render</td><td>P9 end to end</td></tr>
+</tbody></table></div>
+<p>Build order (one to two weeks, exactly as a professional would sequence it): <strong>(1)</strong> schema on paper — users, products, cart_items, orders, order_items, with foreign keys drawn as arrows; <strong>(2)</strong> auth, tested; <strong>(3)</strong> product CRUD with an <code>is_admin</code> column gating writes; <strong>(4)</strong> cart and orders inside a SQL transaction so stock and order rows change together or not at all; <strong>(5)</strong> payments and the webhook; <strong>(6)</strong> receipts and analytics; <strong>(7)</strong> tests for the money paths at minimum; <strong>(8)</strong> Docker, CI, deploy. Commit at every step.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Done means: a stranger with only your README and a curl client can register, browse, fill a cart, pay with the test card, and receive a receipt — against your live Render URL. That stranger will eventually be an interviewer.</p></div>
+<h2 id="9-7-the-job-hunt-turning-the-capstone-into-offers">9.7 The Job Hunt: Turning the Capstone into Offers</h2>
+<p>Your portfolio is now arguments, not claims: a live API URL, a documented GitHub repo with green CI, a commit history showing sixteen weeks of steady work. Package it: a README with an architecture diagram (even hand-drawn and photographed), a Postman collection export so reviewers can click through your endpoints, and a five-line <em>“what I'd build next”</em> section showing product thinking. Target roles titled Back-End Developer (Node), API Developer, or Junior Software Engineer; in interviews, walk through NaijaStore's payment flow on a whiteboard — webhook signature verification included — and you will be discussing engineering as a peer, not auditioning as a student. The Mentorine School's career pillars (CV positioning, portfolio review, mock interviews) take it from here.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part8.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 8 · Integration</span></a>
+  <a class="next" href="part10.html"><span class="dir">NEXT →</span><span class="pt">Part 10 · Cheat Sheets</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +392,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

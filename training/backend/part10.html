@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Cheat Sheets — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,65 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 10 · REFERENCE</div>
+    <h1>Quick-Reference Cheat Sheets</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#a-1-http-status-codes-you-will-actually-use">A.1 HTTP Status Codes You Will Actually Use</a><a href="#a-2-sql-on-one-page">A.2 SQL on One Page</a><a href="#a-3-express-patterns-on-one-page">A.3 Express Patterns on One Page</a><a href="#a-4-terminal-git-on-one-page">A.4 Terminal &amp; Git on One Page</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
-
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
-
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
-
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
-
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
-
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+<h2 id="a-1-http-status-codes-you-will-actually-use">A.1 HTTP Status Codes You Will Actually Use</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Code</th><th>Name</th><th>Use it when</th></tr></thead><tbody>
+<tr><td>200</td><td>OK</td><td>Successful read or update</td></tr>
+<tr><td>201</td><td>Created</td><td>POST made a new resource</td></tr>
+<tr><td>204</td><td>No Content</td><td>Successful delete; nothing to return</td></tr>
+<tr><td>400</td><td>Bad Request</td><td>Validation failed — say what's wrong</td></tr>
+<tr><td>401</td><td>Unauthorized</td><td>No/invalid token — who are you?</td></tr>
+<tr><td>403</td><td>Forbidden</td><td>Valid user, insufficient rights</td></tr>
+<tr><td>404</td><td>Not Found</td><td>Resource or route doesn't exist</td></tr>
+<tr><td>409</td><td>Conflict</td><td>Duplicate email, version clash</td></tr>
+<tr><td>429</td><td>Too Many Requests</td><td>Rate limit tripped</td></tr>
+<tr><td>500</td><td>Internal Server Error</td><td>Your bug — log it, apologise blandly</td></tr>
+</tbody></table></div>
+<h2 id="a-2-sql-on-one-page">A.2 SQL on One Page</h2>
+<pre><code>CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL);
+INSERT INTO t (name) VALUES (?);
+SELECT * FROM t WHERE id = ?;
+SELECT col FROM t WHERE x &gt; ? ORDER BY col DESC LIMIT 10;
+UPDATE t SET name = ? WHERE id = ?;
+DELETE FROM t WHERE id = ?;
+SELECT a.*, b.col FROM a JOIN b ON b.a_id = a.id;
+-- Aggregates: COUNT(*), SUM(col), AVG(col), GROUP BY col</code></pre>
+<h2 id="a-3-express-patterns-on-one-page">A.3 Express Patterns on One Page</h2>
+<pre><code>app.use(express.json());
+app.get("/things", handler);            // list
+app.get("/things/:id", handler);        // read   -&gt; req.params.id
+app.post("/things", handler);           // create -&gt; req.body, res.status(201)
+app.put("/things/:id", handler);        // update
+app.delete("/things/:id", handler);     // res.status(204).end()
+// query strings: /things?done=true     -&gt; req.query.done
+// middleware: (req, res, next) =&gt; { ...; next(); }
+// guard:      app.get("/private", requireAuth, handler)
+// 404 catch-all, then (err, req, res, next) handler — always last</code></pre>
+<h2 id="a-4-terminal-git-on-one-page">A.4 Terminal &amp; Git on One Page</h2>
+<pre><code>pwd / ls / cd &lt;dir&gt; / cd ..          # where am I, what's here, move
+mkdir &lt;dir&gt; / touch &lt;file&gt; / rm &lt;x&gt;  # create and delete
+cat &lt;file&gt;                            # print a file
+node file.js / node --watch file.js  # run / auto-restart
+npm init -y / npm install &lt;pkg&gt;      # project / dependency
+git status / git add . / git commit -m "msg" / git push
+curl -i URL                           # request with status+headers
+curl -X POST URL -H "Content-Type: application/json" -d '{...}'</code></pre>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part9.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 9 · Professional Practice</span></a>
+  <a class="next" href="part11.html"><span class="dir">NEXT →</span><span class="pt">Part 11 · 16-Week Plan</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +348,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Integration — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,102 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 8 · WEEKS 12–14</div>
+    <h1>Integration: Other Languages, Payments &amp; the Outside World</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#8-1-http-is-the-lingua-franca">8.1 HTTP Is the Lingua Franca</a><a href="#8-2-a-python-microservice-consumed-from-node-practical">8.2 A Python Microservice, Consumed from Node (Practical)</a><a href="#8-3-payments-with-paystack-practical">8.3 Payments with Paystack (Practical)</a><a href="#8-4-webhooks-when-the-internet-calls-you-back">8.4 Webhooks: When the Internet Calls You Back</a><a href="#8-5-email-and-file-uploads-in-ten-minutes">8.5 Email and File Uploads in Ten Minutes</a><a href="#8-6-checkpoint-project-the-polyglot-pipeline">8.6 Checkpoint Project: The Polyglot Pipeline</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="8-1-http-is-the-lingua-franca">8.1 HTTP Is the Lingua Franca</h2>
+<p>How does a Node API use a Python machine-learning model? How does Paystack tell your server a payment cleared? The same answer: <strong>services talk HTTP to each other</strong>, exactly the protocol you mastered in Part 1. A “microservice architecture” is simply several small servers being curl-style clients of one another. You already own every skill this part requires — now point them outward.</p>
+<h2 id="8-2-a-python-microservice-consumed-from-node-practical">8.2 A Python Microservice, Consumed from Node (Practical)</h2>
+<p>Python dominates data work; Node dominates API work; professionals wire them together. Install Python from <code>python.org</code> if needed, then build a tiny analytics service with <strong>FastAPI</strong>:</p>
+<pre><code>cd backend-journey/part8-integration
+pip install fastapi uvicorn</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/analytics.py</code></div>
+<pre><code>from fastapi import FastAPI
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+app = FastAPI()
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+@app.get("/stats")
+def stats(amounts: str):
+    nums = [float(x) for x in amounts.split(",") if x.strip()]
+    if not nums:
+        return {"error": "no numbers"}
+    return {
+        "count": len(nums),
+        "total": sum(nums),
+        "average": round(sum(nums) / len(nums), 2),
+        "max": max(nums),
+    }</code></pre>
+<pre><code>uvicorn analytics:app --port 8000</code></pre>
+<p>Now a Node server that <em>calls</em> Python with the built-in <code>fetch</code> — your API composing another API:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/node-client.js</code></div>
+<pre><code>import express from "express";
+const app = express();
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+app.get("/report", async (req, res) =&gt; {
+  const sales = [250000, 150000, 700000, 250000];
+  const response = await fetch(`http://localhost:8000/stats?amounts=${sales.join(",")}`);
+  const stats = await response.json();
+  res.json({ source: "python-analytics", stats });
+});
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+app.listen(4000, () =&gt; console.log("Node on :4000, consuming Python on :8000"));</code></pre>
+<p>Two terminals, two languages, one product: <code>curl http://localhost:4000/report</code>. (Alternative for scripts rather than services: Node's <code>child_process.execFile("python3", ["script.py"])</code> runs Python directly and captures its output — handy for one-off jobs like PDF generation.)</p>
+<h2 id="8-3-payments-with-paystack-practical">8.3 Payments with Paystack (Practical)</h2>
+<p>Money is the most real-world integration there is. Paystack (the Nigerian standard, free test mode) follows the universal payment pattern: <strong>(1) initialize</strong> a transaction server-side with your <em>secret key</em> — never the browser — receiving a checkout URL; <strong>(2) the customer pays</strong> on Paystack's secure page; <strong>(3) verify</strong> server-side before delivering value. Create a free account at <code>paystack.com</code>, copy your <em>test</em> secret key into <code>.env</code> as <code>PAYSTACK_SECRET</code>, then:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/payments.js</code></div>
+<pre><code>import "dotenv/config";
+import express from "express";
+const app = express();
+app.use(express.json());
 
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
+const PAYSTACK = "https://api.paystack.co";
+const headers = {
+  Authorization: `Bearer ${process.env.PAYSTACK_SECRET}`,
+  "Content-Type": "application/json"
+};
 
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
+// Step 1: initialize
+app.post("/pay", async (req, res) =&gt; {
+  const { email, amountNaira } = req.body;
+  const response = await fetch(`${PAYSTACK}/transaction/initialize`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ email, amount: amountNaira * 100 })   // kobo!
+  });
+  const data = await response.json();
+  res.json({ checkout: data.data.authorization_url, reference: data.data.reference });
+});
 
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
+// Step 3: verify before delivering anything of value
+app.get("/pay/verify/:reference", async (req, res) =&gt; {
+  const response = await fetch(`${PAYSTACK}/transaction/verify/${req.params.reference}`, { headers });
+  const data = await response.json();
+  const paid = data.data &amp;&amp; data.data.status === "success";
+  res.json({ paid, amount: paid ? data.data.amount / 100 : 0 });
+});
 
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+app.listen(4000, () =&gt; console.log("Payments demo on :4000"));</code></pre>
+<p>POST to <code>/pay</code> with your own email and <code>amountNaira: 500</code>, open the checkout URL, pay with Paystack's test card (<code>4084 0840 8408 4081</code>, any future date, CVV 408), then hit <code>/pay/verify/...</code> and watch <code>paid: true</code> come back. You have moved (test) money with your own code.</p>
+<div class="callout"><div class="co-label">GOLDEN RULE</div><p>Trust only your server-side verify call. Never mark an order paid because the browser said so — browsers belong to customers, and some customers lie.</p></div>
+<h2 id="8-4-webhooks-when-the-internet-calls-you-back">8.4 Webhooks: When the Internet Calls You Back</h2>
+<p>Verification by polling works, but production systems prefer <strong>webhooks</strong>: Paystack POSTs to <em>your</em> URL the instant a payment settles — the roles reverse and your API becomes the one receiving calls. A webhook endpoint is just a route: <code>app.post("/webhooks/paystack", ...)</code> that reads the event and updates your database. Two professional rules: respond <code>200</code> immediately (do slow work after responding), and <strong>verify the signature header</strong> (<code>x-paystack-signature</code>, an HMAC of the body with your secret) so pranksters cannot fake “payment received” calls. The same pattern powers GitHub pushes, WhatsApp messages and Stripe events — learn it once, integrate everything.</p>
+<h2 id="8-5-email-and-file-uploads-in-ten-minutes">8.5 Email and File Uploads in Ten Minutes</h2>
+<p>Two integrations every product eventually needs. <strong>Email:</strong> <code>npm install nodemailer</code>, point it at any SMTP service (Gmail app-password for learning; Resend/Brevo in production) and <code>transporter.sendMail({ to, subject, html })</code> — your Part 9 capstone sends order receipts this way. <strong>Uploads:</strong> <code>npm install multer</code>, add <code>upload.single("photo")</code> middleware to a route, and <code>req.file</code> appears with the stored file's details. Both are documented to death; the skill is recognising <em>they are just middleware and async calls</em> — shapes you already own.</p>
+<h2 id="8-6-checkpoint-project-the-polyglot-pipeline">8.6 Checkpoint Project: The Polyglot Pipeline</h2>
+<p>Wire one flow end-to-end: <code>POST /orders</code> (Node, JWT-protected) accepts an order → initializes a Paystack test payment → on verify, stores the order (SQLite) → calls the Python service to recompute sales stats → emails a receipt. Five technologies, one request chain, every link individually testable with curl. Draw the flow on paper first — architecture is a drawing skill before it is a typing skill. This pipeline <em>is</em> the spine of your capstone.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part7.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 7 · Auth &amp; Security</span></a>
+  <a class="next" href="part9.html"><span class="dir">NEXT →</span><span class="pt">Part 9 · Professional Practice</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +385,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

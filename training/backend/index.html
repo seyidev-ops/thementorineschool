@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.3rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-
+<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,117 +274,137 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      <a class="nav-link" href="index.html">Curriculum</a>
-      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
+      
+      
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-<main class="col">
-  <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+</header>
+
+<main>
+  <div class="col">
+    <section class="hero">
+      <div class="kicker">Mentorine School · Back-End Web Developer</div>
+      <h1>Become a <span class="em">back-end developer</span> in 16 weeks.</h1>
+      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
+      <div class="cta-row">
+        
+        <a class="link-quiet" href="#curriculum">See the curriculum</a>
+      </div>
+    </section>
+
+    <div class="stat-strip" data-live="stagger">
+      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
+      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
+      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
+    </div>
   </div>
-  <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+  <div class="wide">
+    <section class="section" id="curriculum">
+      <div class="kicker">The curriculum</div>
+      <h2 class="section-head">Fifteen parts. One transformation.</h2>
+      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
+      <div class="parts-grid" data-live="stagger">
+            <a class="part-card" href="part0.html">
+      <div class="pc-kicker">PART 0 · START HERE</div>
+      <h3>Start Here</h3>
+      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
+    </a>
+    <a class="part-card" href="part1.html">
+      <div class="pc-kicker">PART 1 · WEEK 1</div>
+      <h3>Terminal &amp; HTTP</h3>
+      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
+    </a>
+    <a class="part-card" href="part2.html">
+      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
+      <h3>JavaScript Core</h3>
+      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
+    </a>
+    <a class="part-card" href="part3.html">
+      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
+      <h3>Node.js</h3>
+      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
+    </a>
+    <a class="part-card" href="part4.html">
+      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
+      <h3>Express &amp; REST</h3>
+      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
+    </a>
+    <a class="part-card" href="part5.html">
+      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
+      <h3>SQL Databases</h3>
+      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
+    </a>
+    <a class="part-card" href="part6.html">
+      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
+      <h3>MongoDB &amp; NoSQL</h3>
+      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
+    </a>
+    <a class="part-card" href="part7.html">
+      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
+      <h3>Auth &amp; Security</h3>
+      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
+    </a>
+    <a class="part-card" href="part8.html">
+      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
+      <h3>Integration</h3>
+      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
+    </a>
+    <a class="part-card" href="part9.html">
+      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
+      <h3>Professional Practice</h3>
+      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
+    </a>
+    <a class="part-card" href="part10.html">
+      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
+      <h3>Cheat Sheets</h3>
+      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
+    </a>
+    <a class="part-card" href="part11.html">
+      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
+      <h3>16-Week Plan</h3>
+      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
+      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
+    </a>
+      </div>
+    </section>
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+    <section class="section">
+      <div class="kicker">The toolbox</div>
+      <h2 class="section-head">Every tool professionals actually use.</h2>
+      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
+      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
+      </div>
+    </section>
+  </div>
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
-
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
-
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
-
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
-  </article>
-<nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
-</nav>
+  <div class="col">
+    <section class="cta-band">
+      <div class="kicker">Day one starts now</div>
+      <h2>If you can type and save a file, you have every prerequisite.</h2>
+      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
+      
+    </section>
+  </div>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +413,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

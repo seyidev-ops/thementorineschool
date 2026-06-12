@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Terminal &amp; HTTP — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,89 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 1 · WEEK 1</div>
+    <h1>The Terminal, HTTP &amp; How the Web Actually Works</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#1-1-why-back-end-developers-live-in-the-terminal">1.1 Why Back-End Developers Live in the Terminal</a><a href="#1-2-the-ten-commands-you-will-use-forever-practical">1.2 The Ten Commands You Will Use Forever (Practical)</a><a href="#1-3-what-actually-happens-when-you-visit-a-url">1.3 What Actually Happens When You Visit a URL</a><a href="#1-4-the-anatomy-of-http-requests-responses-status-codes">1.4 The Anatomy of HTTP — Requests, Responses, Status Codes</a><a href="#1-5-speak-http-yourself-with-curl-practical">1.5 Speak HTTP Yourself with curl (Practical)</a><a href="#1-6-checkpoint-narrate-a-request-out-loud">1.6 Checkpoint: Narrate a Request Out Loud</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="1-1-why-back-end-developers-live-in-the-terminal">1.1 Why Back-End Developers Live in the Terminal</h2>
+<p>Servers do not have screens, mice, or buttons. A real production server is a computer in a data centre in Frankfurt or Virginia that you will only ever touch through text commands. The terminal is not a relic — it is the <strong>native language of servers</strong>, and back-end developers speak it daily: starting services, reading logs, deploying code, inspecting databases.</p>
+<p>The good news: you need about ten commands to be productive, and you will use them so often they become reflexes within a week.</p>
+<h2 id="1-2-the-ten-commands-you-will-use-forever-practical">1.2 The Ten Commands You Will Use Forever (Practical)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Command</th><th>What it does</th><th>Example</th></tr></thead><tbody>
+<tr><td>pwd</td><td>Print where you are</td><td>pwd</td></tr>
+<tr><td>ls</td><td>List files here (dir on Windows CMD)</td><td>ls</td></tr>
+<tr><td>cd</td><td>Change directory</td><td>cd part1-http</td></tr>
+<tr><td>cd ..</td><td>Go up one level</td><td>cd ..</td></tr>
+<tr><td>mkdir</td><td>Make a folder</td><td>mkdir logs</td></tr>
+<tr><td>touch</td><td>Create an empty file</td><td>touch notes.txt</td></tr>
+<tr><td>cat</td><td>Print a file's contents</td><td>cat notes.txt</td></tr>
+<tr><td>cp / mv</td><td>Copy / move-rename</td><td>mv notes.txt ideas.txt</td></tr>
+<tr><td>rm</td><td>Delete (no recycle bin — careful)</td><td>rm ideas.txt</td></tr>
+<tr><td>clear</td><td>Clean the screen</td><td>clear</td></tr>
+</tbody></table></div>
+<p>Drill them now. From your <code>backend-journey</code> folder:</p>
+<pre><code>cd part1-http
+mkdir practice
+cd practice
+touch server-notes.txt
+ls
+cd ..
+rm -r practice
+ls</code></pre>
+<div class="callout"><div class="co-label">COMMON MISTAKE</div><p>If the terminal says “No such file or directory”, you are almost certainly <em>standing in the wrong folder</em>. Run <code>pwd</code> first, always. Location is everything in the terminal.</p></div>
+<h2 id="1-3-what-actually-happens-when-you-visit-a-url">1.3 What Actually Happens When You Visit a URL</h2>
+<p>Type <code>mentorineschool.com</code> into a browser and press Enter. In roughly 200 milliseconds, this happens: <strong>(1) DNS lookup</strong> — your computer asks a phone-book service “what is the IP address for this name?” and gets back something like <code>76.76.21.21</code>. <strong>(2) Connection</strong> — your browser opens a TCP connection to that address, like dialling a phone number. <strong>(3) Request</strong> — the browser sends a small, structured text message: an <em>HTTP request</em>. <strong>(4) The server thinks</strong> — code (soon, <em>your</em> code) reads the request, maybe queries a database, and builds an answer. <strong>(5) Response</strong> — the server sends back an <em>HTTP response</em>: a status code, some headers, and a body. <strong>(6) Render</strong> — the browser draws what it received.</p>
+<p>Steps 4 and 5 are your new profession. Everything in this guide — Express, databases, authentication, payments — is just increasingly sophisticated ways of <em>answering requests</em>.</p>
+<h2 id="1-4-the-anatomy-of-http-requests-responses-status-codes">1.4 The Anatomy of HTTP — Requests, Responses, Status Codes</h2>
+<p>An HTTP request has three parts: a <strong>request line</strong> (<code>GET /products HTTP/1.1</code> — the verb, the path, the protocol), <strong>headers</strong> (metadata, like <code>Content-Type: application/json</code>), and an optional <strong>body</strong> (the data you are sending, used with POST and PUT). The verbs you will use constantly:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Verb</th><th>Meaning</th><th>Everyday analogy</th></tr></thead><tbody>
+<tr><td>GET</td><td>Read data</td><td>Asking a librarian for a book</td></tr>
+<tr><td>POST</td><td>Create new data</td><td>Submitting a new form</td></tr>
+<tr><td>PUT / PATCH</td><td>Update existing data</td><td>Correcting your address on file</td></tr>
+<tr><td>DELETE</td><td>Remove data</td><td>Cancelling a subscription</td></tr>
+</tbody></table></div>
+<p>The response begins with a <strong>status code</strong> — three digits that summarise the outcome. Memorise the families now; specific codes come naturally with use:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Family</th><th>Meaning</th><th>Codes you will meet constantly</th></tr></thead><tbody>
+<tr><td>2xx</td><td>Success</td><td>200 OK, 201 Created, 204 No Content</td></tr>
+<tr><td>3xx</td><td>Redirection</td><td>301 Moved Permanently, 304 Not Modified</td></tr>
+<tr><td>4xx</td><td>Client made a mistake</td><td>400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found</td></tr>
+<tr><td>5xx</td><td>Server made a mistake</td><td>500 Internal Server Error, 503 Service Unavailable</td></tr>
+</tbody></table></div>
+<div class="callout"><div class="co-label">GOLDEN RULE</div><p>4xx means <em>they</em> sent something wrong; 5xx means <em>you</em> wrote something wrong. Production back-end work is a lifelong campaign to turn 5xx errors into helpful 4xx messages.</p></div>
+<h2 id="1-5-speak-http-yourself-with-curl-practical">1.5 Speak HTTP Yourself with curl (Practical)</h2>
+<p><code>curl</code> sends HTTP requests from your terminal — no browser, no interface, just you talking to servers directly. Run each of these and <em>read the output slowly</em>:</p>
+<pre><code># 1. A simple GET — fetch a fake to-do item
+curl https://jsonplaceholder.typicode.com/todos/1
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+# 2. See the full conversation: status line + headers (-i)
+curl -i https://jsonplaceholder.typicode.com/todos/1
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+# 3. POST — create something, sending a JSON body
+curl -X POST https://jsonplaceholder.typicode.com/posts \
+  -H "Content-Type: application/json" \
+  -d '{"title":"My first POST","body":"Sent from my own terminal","userId":1}'
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
-
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
-
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
-
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
-
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
-
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+# 4. Trigger a 404 on purpose and read it
+curl -i https://jsonplaceholder.typicode.com/todos/99999999</code></pre>
+<p>In example 3, <code>-X POST</code> chooses the verb, <code>-H</code> adds a header telling the server “the body is JSON”, and <code>-d</code> carries the body itself. The server answers with <code>201 Created</code> and echoes your new resource back — exactly what your own APIs will do from Part 4 onward.</p>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Change example 3's verb to PUT and the URL to /posts/1. You just performed an update. Now run example 4 with -i and find the status code in the very first line of output.</p></div>
+<h2 id="1-6-checkpoint-narrate-a-request-out-loud">1.6 Checkpoint: Narrate a Request Out Loud</h2>
+<p>No code for this checkpoint — something harder. Open a terminal and run <code>curl -i https://api.github.com/users/torvalds</code>. Then explain <em>out loud, to an empty chair</em>: what verb was used, what path was requested, what status family came back, what two headers mean, and what the body contains. If you can narrate a request, you understand the web better than most people who have “coded” for a year. Welcome to the back end.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part0.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 0 · Start Here</span></a>
+  <a class="next" href="part2.html"><span class="dir">NEXT →</span><span class="pt">Part 2 · JavaScript Core</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +372,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>SQL Databases — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,126 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 5 · WEEKS 7–9</div>
+    <h1>Databases I: SQL, the Language of Structured Data</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#5-1-why-files-break-and-databases-don-t">5.1 Why Files Break and Databases Don't</a><a href="#5-2-sql-in-one-sitting-practical">5.2 SQL in One Sitting (Practical)</a><a href="#5-3-the-question-marks-parameterized-queries-vs-sql-injection">5.3 The Question Marks: Parameterized Queries vs SQL Injection</a><a href="#5-4-relationships-and-joins-where-sql-earns-its-keep">5.4 Relationships and JOINs: Where SQL Earns Its Keep</a><a href="#5-5-checkpoint-project-the-task-api-persists-forever">5.5 Checkpoint Project: The Task API Persists Forever</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="5-1-why-files-break-and-databases-don-t">5.1 Why Files Break and Databases Don't</h2>
+<p>Your <code>tasks.json</code> upgrade exposed the problem: two requests writing the file at the same moment corrupt it; finding one record means reading everything; there are no rules stopping bad data. A <strong>database</strong> is a program whose entire job is storing data <em>safely, quickly, and with rules</em> — handling thousands of simultaneous writers without breaking a sweat.</p>
+<p><strong>SQL</strong> (Structured Query Language) databases — PostgreSQL, MySQL, SQLite — store data in tables with strict columns, like rigorous spreadsheets that enforce their own integrity. We learn with <strong>SQLite</strong>: a complete, genuinely production-grade SQL database that lives in a single file and needs zero installation.</p>
+<pre><code>cd backend-journey/part5-sql
+npm init -y &amp;&amp; npm install better-sqlite3
+# add "type": "module" to package.json</code></pre>
+<h2 id="5-2-sql-in-one-sitting-practical">5.2 SQL in One Sitting (Practical)</h2>
+<p>SQL reads almost like English. Four statements are 90% of daily work — <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code> — plus <code>CREATE TABLE</code> to define structure once. Run this and study every line of output:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part5-sql/learn-sql.js</code></div>
+<pre><code>import Database from "better-sqlite3";
+const db = new Database("school.db");      // creates the file if absent
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+db.exec(`
+  CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    course TEXT NOT NULL,
+    fee_paid INTEGER DEFAULT 0
+  )
+`);
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+// CREATE
+db.prepare("INSERT INTO students (name, course, fee_paid) VALUES (?, ?, ?)")
+  .run("Ada Obi", "backend", 250000);
+db.prepare("INSERT INTO students (name, course) VALUES (?, ?)")
+  .run("Femi Ade", "frontend");
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+// READ
+const all = db.prepare("SELECT * FROM students").all();
+console.log("All students:", all);
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+const paid = db.prepare("SELECT name, fee_paid FROM students WHERE fee_paid &gt; ?").all(0);
+console.log("Paid students:", paid);
 
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
+// UPDATE
+db.prepare("UPDATE students SET fee_paid = ? WHERE name = ?").run(150000, "Femi Ade");
 
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
+// DELETE
+// db.prepare("DELETE FROM students WHERE id = ?").run(2);
 
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
+console.log("After update:", db.prepare("SELECT * FROM students").all());</code></pre>
+<p><code>PRIMARY KEY AUTOINCREMENT</code> hands out unique IDs automatically; <code>NOT NULL</code> refuses incomplete rows — the database enforcing rules <em>for</em> you, exactly what JSON files never did.</p>
+<h2 id="5-3-the-question-marks-parameterized-queries-vs-sql-injection">5.3 The Question Marks: Parameterized Queries vs SQL Injection</h2>
+<p>Notice the <code>?</code> placeholders. The catastrophic alternative is gluing user input into SQL with template strings — and it is the most famous security hole in software history. If a user types their “name” as <code>'; DROP TABLE students; --</code>, a glued query executes it <em>as SQL</em> and your table vanishes. Parameterized queries make this categorically impossible: the database treats parameters as <strong>pure data, never as commands</strong>.</p>
+<div class="callout"><div class="co-label">WARNING</div><p>Rule with zero exceptions, today and forever: user input NEVER touches a query string. Always ?, always .run(value) / .all(value). Interviewers ask about this; production incidents are made of forgetting it.</p></div>
+<h2 id="5-4-relationships-and-joins-where-sql-earns-its-keep">5.4 Relationships and JOINs: Where SQL Earns Its Keep</h2>
+<p>Real data relates: students <em>enrol in</em> courses, orders <em>belong to</em> customers. SQL models this with a <strong>foreign key</strong> — a column holding another table's ID — and reunites the pieces at read time with <code>JOIN</code>:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part5-sql/learn-joins.js</code></div>
+<pre><code>import Database from "better-sqlite3";
+const db = new Database("school.db");
 
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
+db.exec(`
+  CREATE TABLE IF NOT EXISTS enrollments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER NOT NULL REFERENCES students(id),
+    course_title TEXT NOT NULL,
+    enrolled_on TEXT DEFAULT CURRENT_TIMESTAMP
+  )
+`);
 
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+db.prepare("INSERT INTO enrollments (student_id, course_title) VALUES (?, ?)")
+  .run(1, "Back-End Web Developer");
+
+const report = db.prepare(`
+  SELECT students.name, enrollments.course_title, enrollments.enrolled_on
+  FROM enrollments
+  JOIN students ON students.id = enrollments.student_id
+`).all();
+
+console.log(report);</code></pre>
+<p>Read the JOIN aloud: <em>“from enrollments, attach the matching students row where the IDs agree.”</em> Two narrow tables, one rich answer — this is the move that separates database users from database understanders.</p>
+<h2 id="5-5-checkpoint-project-the-task-api-persists-forever">5.5 Checkpoint Project: The Task API Persists Forever</h2>
+<p>Return to your Part 4 Task Manager and replace the in-memory array with SQLite. Same endpoints, same responses — different engine room. The full pattern for two routes; you complete the rest:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part5-sql/server.js</code></div>
+<pre><code>import express from "express";
+import Database from "better-sqlite3";
+
+const db = new Database("tasks.db");
+db.exec(`CREATE TABLE IF NOT EXISTS tasks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  done INTEGER DEFAULT 0
+)`);
+
+const app = express();
+app.use(express.json());
+
+app.get("/tasks", (req, res) =&gt; {
+  res.json(db.prepare("SELECT * FROM tasks").all());
+});
+
+app.post("/tasks", (req, res) =&gt; {
+  const { title } = req.body;
+  if (!title || !title.trim()) return res.status(400).json({ error: "title is required" });
+  const info = db.prepare("INSERT INTO tasks (title) VALUES (?)").run(title.trim());
+  res.status(201).json(db.prepare("SELECT * FROM tasks WHERE id = ?").get(info.lastInsertRowid));
+});
+
+// YOUR TURN: GET /tasks/:id, PUT /tasks/:id, DELETE /tasks/:id
+// using db.prepare(...).get(...) and .run(...) with ? placeholders
+
+app.listen(4000, () =&gt; console.log("Persistent Task API on :4000"));</code></pre>
+<p>The proof of the milestone: create three tasks with curl, press <code>Ctrl+C</code>, restart the server, list tasks. <strong>They are still there.</strong> Your software now has a memory that survives — the moment back ends become real.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Upgrade challenges: add a created_at column with DEFAULT CURRENT_TIMESTAMP; add GET /tasks?done=true filtering in SQL with WHERE done = ?; deliberately attempt an injection against your own API and watch parameterization shrug it off.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part4.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 4 · Express &amp; REST</span></a>
+  <a class="next" href="part6.html"><span class="dir">NEXT →</span><span class="pt">Part 6 · MongoDB &amp; NoSQL</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +409,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

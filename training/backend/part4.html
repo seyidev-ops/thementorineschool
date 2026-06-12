@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>React — Full-Stack Developer · The Mentorine School</title>
+<title>Express &amp; REST — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -281,110 +281,131 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">Part 7 · WEEKS 10–12</div>
-    <h1>React for Full-Stack: A Front End That Scales</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</a><a href="#7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</a><a href="#7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</a><a href="#7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</a></div>
+    <div class="kicker">Part 4 · WEEKS 5–7</div>
+    <h1>Express &amp; REST APIs: Your First Real Back End</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#4-1-a-web-server-in-eleven-lines">4.1 A Web Server in Eleven Lines</a><a href="#4-2-routing-different-paths-different-answers">4.2 Routing: Different Paths, Different Answers</a><a href="#4-3-middleware-the-airport-security-line">4.3 Middleware: The Airport Security Line</a><a href="#4-4-full-crud-the-task-manager-api-practical">4.4 Full CRUD: The Task Manager API (Practical)</a><a href="#4-5-validation-and-error-handling-like-a-professional">4.5 Validation and Error Handling Like a Professional</a><a href="#4-6-checkpoint-project-task-manager-api-documented">4.6 Checkpoint Project: Task Manager API, Documented</a></div>
   </div>
   <article>
-<h2 id="7-1-why-teams-reach-for-react">7.1 Why Teams Reach for React</h2>
-<p>Your <code>app.js</code> works, but feel the strain: HTML strings in JavaScript, manual refreshes after every change, state scattered across variables and the DOM. <strong>React</strong> ends that by letting you declare <em>“given this data, the screen looks like this”</em> — and re-rendering automatically whenever the data changes. Scaffold with <strong>Vite</strong>, the modern build tool:</p>
-<pre><code>cd part7-react
-npm create vite@latest mentormarket -- --template react
-cd mentormarket
-npm install
-npm run dev</code></pre>
-<p>Open the printed URL (usually <code>http://localhost:5173</code>) — a live-reloading React app. Keep your Part 5 API running on 4000; the two will talk just like before.</p>
-<h2 id="7-2-components-and-props-lego-for-interfaces">7.2 Components and Props: LEGO for Interfaces</h2>
-<p>A component is a function that returns markup (JSX); <strong>props</strong> are its inputs. Replace <code>src/App.jsx</code> entirely:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx</code></div>
-<pre><code>const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+<h2 id="4-1-a-web-server-in-eleven-lines">4.1 A Web Server in Eleven Lines</h2>
+<p><strong>Express</strong> is the most-used web framework in the Node world — a thin, elegant layer that turns “answer HTTP requests” into a few readable lines. Set up a fresh project and meet your first server:</p>
+<pre><code>cd backend-journey/part4-express
+npm init -y
+npm install express
+# add "type": "module" to package.json as before</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-express/server.js</code></div>
+<pre><code>import express from "express";
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;p&gt;Category: {listing.category}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+const app = express();
+app.use(express.json());          // understand JSON request bodies
 
-export default function App() {
-  const demo = { id: 1, title: "CV Review", price: 5000, category: "career" };
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;MentorMarket&lt;/h1&gt;
-      &lt;ListingCard listing={demo} onAdd={(l) =&gt; alert(`Added ${l.title}`)} /&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>One card component, reused forever, configured by props. (Copy your Part 2 CSS into <code>src/index.css</code> and the brand comes with you.)</p>
-<h2 id="7-3-state-and-effects-data-that-drives-the-screen-practical">7.3 State and Effects: Data That Drives the Screen (Practical)</h2>
-<p><strong>useState</strong> declares data that, when changed, repaints the screen; <strong>useEffect</strong> runs side effects — like fetching from your API when the page loads. The full storefront:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>mentormarket/src/App.jsx (replace)</code></div>
-<pre><code>import { useState, useEffect } from "react";
+app.get("/", (req, res) =&gt; {
+  res.json({ message: "The Mentorine Task API is alive" });
+});
 
-const API = "http://localhost:4000/api";
-const naira = (n) =&gt; `\u20a6${n.toLocaleString()}`;
+const PORT = 4000;
+app.listen(PORT, () =&gt; {
+  console.log(`Server running at http://localhost:${PORT}`);
+});</code></pre>
+<p>Run <code>node server.js</code>, open a <strong>second terminal</strong> (the first is now busy <em>being</em> a server), and:</p>
+<pre><code>curl http://localhost:4000/</code></pre>
+<p>You just answered your first HTTP request with your own code. The <code>req</code> object is everything the client sent; <code>res</code> is your microphone back to them. Stop the server anytime with <code>Ctrl+C</code>.</p>
+<div class="callout"><div class="co-label">PRO HABIT</div><p>Run node --watch server.js instead and Node restarts automatically every time you save — the standard development rhythm.</p></div>
+<h2 id="4-2-routing-different-paths-different-answers">4.2 Routing: Different Paths, Different Answers</h2>
+<p>A route is verb + path + handler. Path <strong>parameters</strong> (<code>:id</code>) capture values from the URL; <strong>query strings</strong> (<code>?done=true</code>) carry options. Add these below your first route:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-express/server.js (add routes)</code></div>
+<pre><code>const tasks = [
+  { id: 1, title: "Finish Part 4", done: false },
+  { id: 2, title: "Drink water", done: true }
+];
 
-function ListingCard({ listing, onAdd }) {
-  return (
-    &lt;article className="card"&gt;
-      &lt;h3&gt;{listing.title}&lt;/h3&gt;
-      &lt;p className="price"&gt;{naira(listing.price)}&lt;/p&gt;
-      &lt;button onClick={() =&gt; onAdd(listing)}&gt;Add to cart&lt;/button&gt;
-    &lt;/article&gt;
-  );
-}
+// GET all tasks, with optional filtering: /tasks?done=true
+app.get("/tasks", (req, res) =&gt; {
+  if (req.query.done !== undefined) {
+    const want = req.query.done === "true";
+    return res.json(tasks.filter(t =&gt; t.done === want));
+  }
+  res.json(tasks);
+});
 
-export default function App() {
-  const [listings, setListings] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [status, setStatus] = useState("loading");
+// GET one task by id: /tasks/1
+app.get("/tasks/:id", (req, res) =&gt; {
+  const task = tasks.find(t =&gt; t.id === Number(req.params.id));
+  if (!task) return res.status(404).json({ error: "Task not found" });
+  res.json(task);
+});</code></pre>
+<div class="callout"><div class="co-label">TRY THIS</div><p>curl http://localhost:4000/tasks?done=true — then ask for /tasks/99 and confirm you get a clean 404 with a JSON error, not a crash. Honest errors are a feature.</p></div>
+<h2 id="4-3-middleware-the-airport-security-line">4.3 Middleware: The Airport Security Line</h2>
+<p>Middleware is a chain of checkpoints every request walks through before reaching its gate. Each checkpoint can inspect the request, stamp it, reject it, or wave it on with <code>next()</code>. Logging, JSON parsing, authentication (Part 7), rate limiting — all middleware. Write your first:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-express/server.js (above the routes)</code></div>
+<pre><code>// Logger: every request gets a line in the terminal
+app.use((req, res, next) =&gt; {
+  console.log(`${new Date().toISOString()}  ${req.method} ${req.url}`);
+  next();   // forgetting next() leaves the request hanging forever
+});</code></pre>
+<p>Order matters: middleware runs top to bottom, so the logger must be registered <em>before</em> the routes it should observe. You already used built-in middleware without knowing — <code>express.json()</code> is the checkpoint that unpacks JSON bodies into <code>req.body</code>.</p>
+<h2 id="4-4-full-crud-the-task-manager-api-practical">4.4 Full CRUD: The Task Manager API (Practical)</h2>
+<p>CRUD — Create, Read, Update, Delete — is the heartbeat of practically every product. You have Read; now complete the set:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-express/server.js (add below the GET routes)</code></div>
+<pre><code>// CREATE
+app.post("/tasks", (req, res) =&gt; {
+  const { title } = req.body;
+  if (!title || !title.trim()) {
+    return res.status(400).json({ error: "title is required" });
+  }
+  const task = { id: Date.now(), title: title.trim(), done: false };
+  tasks.push(task);
+  res.status(201).json(task);          // 201 = Created
+});
 
-  useEffect(() =&gt; {
-    fetch(`${API}/listings`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; { setListings(data); setStatus("ready"); })
-      .catch(() =&gt; setStatus("error"));
-  }, []);   // empty array: run once, on first render
+// UPDATE
+app.put("/tasks/:id", (req, res) =&gt; {
+  const task = tasks.find(t =&gt; t.id === Number(req.params.id));
+  if (!task) return res.status(404).json({ error: "Task not found" });
+  if (req.body.title !== undefined) task.title = req.body.title;
+  if (req.body.done !== undefined) task.done = Boolean(req.body.done);
+  res.json(task);
+});
 
-  const addToCart = (listing) =&gt; setCart([...cart, listing]);
-  const total = cart.reduce((sum, l) =&gt; sum + l.price, 0);
+// DELETE
+app.delete("/tasks/:id", (req, res) =&gt; {
+  const index = tasks.findIndex(t =&gt; t.id === Number(req.params.id));
+  if (index === -1) return res.status(404).json({ error: "Task not found" });
+  tasks.splice(index, 1);
+  res.status(204).end();               // 204 = success, nothing to say
+});</code></pre>
+<p>Exercise the whole lifecycle from your second terminal:</p>
+<pre><code>curl -X POST http://localhost:4000/tasks -H "Content-Type: application/json" -d '{"title":"Master CRUD"}'
+curl http://localhost:4000/tasks
+curl -X PUT http://localhost:4000/tasks/1 -H "Content-Type: application/json" -d '{"done":true}'
+curl -i -X DELETE http://localhost:4000/tasks/2</code></pre>
+<h2 id="4-5-validation-and-error-handling-like-a-professional">4.5 Validation and Error Handling Like a Professional</h2>
+<p>Clients send nonsense — not maliciously (usually), but constantly. A professional API validates <em>everything</em> at the door and answers mistakes with helpful 400s. Centralise disaster handling with Express's special four-argument middleware at the very bottom of the file:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-express/server.js (at the very bottom, before listen)</code></div>
+<pre><code>// Any route nobody claimed -&gt; clean 404
+app.use((req, res) =&gt; {
+  res.status(404).json({ error: `No route for ${req.method} ${req.url}` });
+});
 
-  if (status === "loading") return &lt;p&gt;Loading services...&lt;/p&gt;;
-  if (status === "error")   return &lt;p&gt;Could not reach the API. Is it running?&lt;/p&gt;;
-
-  return (
-    &lt;main&gt;
-      &lt;header&gt;
-        &lt;h1&gt;MentorMarket&lt;/h1&gt;
-        &lt;p&gt;Cart: {cart.length} item(s) — {naira(total)}&lt;/p&gt;
-      &lt;/header&gt;
-      &lt;div className="grid"&gt;
-        {listings.map(l =&gt; (
-          &lt;ListingCard key={l.id} listing={l} onAdd={addToCart} /&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-<p>Click “Add to cart” and watch the header update <em>itself</em> — no <code>getElementById</code>, no manual repaint. You changed state; React redrew. That inversion is the entire framework.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a search box: const [query, setQuery] = useState("") bound to an input's value/onChange, then render listings.filter(l =&gt; l.title.toLowerCase().includes(query.toLowerCase())). Live search in five lines — feel how state makes features cheap.</p></div>
-<h2 id="7-4-checkpoint-project-the-react-storefront-complete">7.4 Checkpoint Project: The React Storefront, Complete</h2>
-<p>Port everything from Part 6 into React: the sell form (controlled inputs in state, POST on submit, then re-fetch), category filter buttons, the cart with a slide-down summary listing items and total. <strong>Upgrade challenges:</strong> extract <code>SellForm</code> and <code>Cart</code> into their own components in <code>src/components/</code>; show per-card “Added ✓” feedback for two seconds with <code>setTimeout</code>; persist the cart in <code>localStorage</code> (<code>useEffect</code> watching <code>cart</code>). This is the front end you will deploy in Part 9.</p>
+// Any uncaught explosion -&gt; clean 500, details stay in YOUR logs
+app.use((err, req, res, next) =&gt; {
+  console.error(err);                       // full story for you
+  res.status(500).json({ error: "Something went wrong on our side" });   // calm message for them
+});</code></pre>
+<div class="callout"><div class="co-label">GOLDEN RULE</div><p>Never leak stack traces or database errors to clients — they reveal your architecture to attackers. Log the truth privately; respond with dignity publicly.</p></div>
+<h2 id="4-6-checkpoint-project-task-manager-api-documented">4.6 Checkpoint Project: Task Manager API, Documented</h2>
+<p>Your checkpoint is the complete server you have been building, plus a professional touch: a <code>README.md</code> in the folder documenting every endpoint — verb, path, body, possible status codes. (Open Postman and click through each endpoint too; seeing your API in a real client is a milestone worth a screenshot.)</p>
+<p><strong>Upgrade challenges:</strong> add <code>priority: "low" | "normal" | "high"</code> with validation that rejects other values; add <code>GET /tasks/stats</code> returning counts by status using <code>reduce</code>; persist tasks to <code>tasks.json</code> with your Part 3 file skills so a restart no longer wipes them — and feel precisely the pain that databases exist to solve.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Connecting the Halves</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Auth Across the Stack</span></a>
+  <a href="part3.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 3 · Node.js</span></a>
+  <a class="next" href="part5.html"><span class="dir">NEXT →</span><span class="pt">Part 5 · SQL Databases</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Full-Stack Developer · zero to professional in a recommended 12–16 weeks</div>
+    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -393,7 +414,7 @@ export default function App() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"fullstack-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>
