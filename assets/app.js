@@ -12,8 +12,12 @@ window.MS = (function () {
     {
       id: "tech", label: "Tech & Development",
       tracks: [
-        { slug: "software-development", name: "Software Development", courses: "Full guided curriculum", duration: "16 weeks", featured: true,
+        { slug: "software-development-full", name: "Software Development — Full Program", courses: "15 guided parts", duration: "24 weeks", featured: true, training: "training/sd-full/index.html",
+          blurb: "The flagship zero-to-professional program: terminal to React, Python, Node, databases, DevOps and the MentorLink LMS capstone — with full training pages inside." },
+        { slug: "software-development", name: "Software Development — Core (JS + HTML)", courses: "Full guided curriculum", duration: "16 weeks", featured: true,
           blurb: "The complete JavaScript + HTML developer training — from your first web page to a deployed full-stack capstone." },
+        { slug: "javascript-developer", name: "JavaScript Developer", courses: "10 parts + appendices", duration: "16 weeks",
+          blurb: "Master the language of the web end to end — fundamentals, the DOM, async, Node.js, databases and a full-stack capstone." },
         { slug: "frontend-developer",  name: "Front-end Web Developer", courses: "12 courses", duration: "8–10 weeks" },
         { slug: "backend-developer",   name: "Back-end Web Developer", courses: "15 courses", duration: "10–12 weeks" },
         { slug: "fullstack-developer", name: "Full-stack Developer", courses: "18 courses", duration: "12–16 weeks" },
@@ -88,8 +92,124 @@ window.MS = (function () {
      Software Development syllabus is extracted directly from the
      JavaScript-HTML Developer Training Guide (Parts 0–9 + appendices). */
   const SYLLABI = {
+    "software-development-full": {
+      title: "Software Development — Full Program",
+      subtitle: "The flagship 24-week zero-to-professional curriculum, with complete training pages for every part.",
+      training: "training/sd-full/index.html",
+      roadmap: [
+        ["Start Here", "Part 0 \u00b7 Start Here", "What developers do, the golden rules, the 24-week roadmap, and full workstation setup. Milestone \u2014 Workstation ready", ""],
+        ["Week 1", "Part 1 \u00b7 Terminal & How Code Runs", "Command-line mastery, paths, and your first programs in two languages. Milestone \u2014 hello.js + hello.py from the terminal", ""],
+        ["Weeks 2\u20133", "Part 2 \u00b7 HTML & CSS", "Structure, styling, flexbox, and responsive design that works on every screen. Milestone \u2014 Personal landing page", ""],
+        ["Weeks 4\u20136", "Part 3 \u00b7 JavaScript Fundamentals", "Variables, logic, loops, functions, arrays, objects \u2014 programming itself. Milestone \u2014 Console Student Manager", ""],
+        ["Week 7", "Part 4 \u00b7 Git & GitHub", "Version control, branching, merging, and publishing every project you build. Milestone \u2014 All work on GitHub + first live site", ""],
+        ["Weeks 8\u20139", "Part 5 \u00b7 The DOM", "Interactive apps: state \u2192 render architecture, events, localStorage, and fetch. Milestone \u2014 To-Do app + Quiz app", ""],
+        ["Weeks 10\u201311", "Part 6 \u00b7 React", "Components, props, state, and effects \u2014 how modern teams build frontends. Milestone \u2014 Course Catalogue app", ""],
+        ["Weeks 12\u201313", "Part 7 \u00b7 Python", "Your second language: automation, files, CSV, APIs, pip and virtual environments. Milestone \u2014 Expense Analyser CLI", ""],
+        ["Weeks 14\u201315", "Part 8 \u00b7 Node.js & Express", "Backend engineering: REST APIs, CRUD, validation, status codes, curl. Milestone \u2014 Students API", ""],
+        ["Weeks 16\u201317", "Part 9 \u00b7 Databases (SQL & NoSQL)", "SQL hands-on with SQLite, relationships and JOINs, injection-proof queries. Milestone \u2014 Persistent API with JOINs", ""],
+        ["Week 18", "Part 10 \u00b7 Testing & Debugging", "The DIRE debugging method and automated tests with the built-in Node test runner. Milestone \u2014 10+ green tests", ""],
+        ["Weeks 19\u201320", "Part 11 \u00b7 DevOps: Docker, CI/CD, Cloud", "Environment variables, Docker containers, GitHub Actions, Netlify and Render. Milestone \u2014 Deployed app + API, CI green", ""],
+        ["Week 21", "Part 12 \u00b7 Cross-Language Integration", "JavaScript \u2194 Python (FastAPI), child processes, PHP, CORS, and WebAssembly. Milestone \u2014 Polyglot dashboard", ""],
+        ["Weeks 22\u201323", "Part 13 \u00b7 Capstone: MentorLink LMS", "A real learning platform: auth, enrolments, progress tracking, tests, deployment. Milestone \u2014 Live, tested, documented product", ""],
+        ["Week 24", "Part 14 \u00b7 Professional Practice", "Portfolio, CV, interviews, job search, and the habits that compound for years. Milestone \u2014 Portfolio live, applications out", ""]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here (Start Here)",
+          items: ["What developers do, the golden rules, the 24-week roadmap, and full workstation setup. Milestone \u2014 Workstation ready"] },
+        { title: "Part 1 \u2014 Terminal & How Code Runs (Week 1)",
+          items: ["Command-line mastery, paths, and your first programs in two languages. Milestone \u2014 hello.js + hello.py from the terminal"] },
+        { title: "Part 2 \u2014 HTML & CSS (Weeks 2\u20133)",
+          items: ["Structure, styling, flexbox, and responsive design that works on every screen. Milestone \u2014 Personal landing page"] },
+        { title: "Part 3 \u2014 JavaScript Fundamentals (Weeks 4\u20136)",
+          items: ["Variables, logic, loops, functions, arrays, objects \u2014 programming itself. Milestone \u2014 Console Student Manager"] },
+        { title: "Part 4 \u2014 Git & GitHub (Week 7)",
+          items: ["Version control, branching, merging, and publishing every project you build. Milestone \u2014 All work on GitHub + first live site"] },
+        { title: "Part 5 \u2014 The DOM (Weeks 8\u20139)",
+          items: ["Interactive apps: state \u2192 render architecture, events, localStorage, and fetch. Milestone \u2014 To-Do app + Quiz app"] },
+        { title: "Part 6 \u2014 React (Weeks 10\u201311)",
+          items: ["Components, props, state, and effects \u2014 how modern teams build frontends. Milestone \u2014 Course Catalogue app"] },
+        { title: "Part 7 \u2014 Python (Weeks 12\u201313)",
+          items: ["Your second language: automation, files, CSV, APIs, pip and virtual environments. Milestone \u2014 Expense Analyser CLI"] },
+        { title: "Part 8 \u2014 Node.js & Express (Weeks 14\u201315)",
+          items: ["Backend engineering: REST APIs, CRUD, validation, status codes, curl. Milestone \u2014 Students API"] },
+        { title: "Part 9 \u2014 Databases (SQL & NoSQL) (Weeks 16\u201317)",
+          items: ["SQL hands-on with SQLite, relationships and JOINs, injection-proof queries. Milestone \u2014 Persistent API with JOINs"] },
+        { title: "Part 10 \u2014 Testing & Debugging (Week 18)",
+          items: ["The DIRE debugging method and automated tests with the built-in Node test runner. Milestone \u2014 10+ green tests"] },
+        { title: "Part 11 \u2014 DevOps: Docker, CI/CD, Cloud (Weeks 19\u201320)",
+          items: ["Environment variables, Docker containers, GitHub Actions, Netlify and Render. Milestone \u2014 Deployed app + API, CI green"] },
+        { title: "Part 12 \u2014 Cross-Language Integration (Week 21)",
+          items: ["JavaScript \u2194 Python (FastAPI), child processes, PHP, CORS, and WebAssembly. Milestone \u2014 Polyglot dashboard"] },
+        { title: "Part 13 \u2014 Capstone: MentorLink LMS (Weeks 22\u201323)",
+          items: ["A real learning platform: auth, enrolments, progress tracking, tests, deployment. Milestone \u2014 Live, tested, documented product"] },
+        { title: "Part 14 \u2014 Professional Practice (Week 24)",
+          items: ["Portfolio, CV, interviews, job search, and the habits that compound for years. Milestone \u2014 Portfolio live, applications out"] }
+      ]
+    },
+    "frontend-developer": {
+      title: "Front-end Web Developer",
+      subtitle: "The complete front-end training — HTML, CSS, JavaScript, modern tooling and React, in 16 weeks.",
+      roadmap: null,
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1  Who This Guide Is For", "0.2  The Golden Rules of Learning to Code", "0.3  The 16-Week Fast-Track Roadmap", "0.4  Setting Up Your Developer Workstation", "0.5  How Each Lesson Is Structured"] },
+        { title: "Part 1 \u2014 HTML: The Skeleton of Every Web Page",
+          items: ["1.1  What Is HTML?", "1.2  Your First Web Page (Practical)", "1.3  The Essential Tags (Your Daily Vocabulary)", "1.4  Attributes: Giving Tags Extra Information", "1.5  Semantic HTML: Writing Pages That Mean Something", "1.6  Forms: Collecting Information From Users", "1.7  Tables and Media", "1.8  Checkpoint Project: Your Personal Profile Page"] },
+        { title: "Part 2 \u2014 CSS: Making It Beautiful",
+          items: ["2.1  What Is CSS, and Three Ways to Use It", "2.2  Selectors: Targeting What You Style", "2.3  The Box Model: The Most Important Idea in CSS", "2.4  Colour, Typography, and Units", "2.5  Flexbox: Arranging Things in a Row or Column", "2.6  CSS Grid: Two-Dimensional Layouts", "2.7  Responsive Design: One Site, Every Screen", "2.8  Transitions, Transforms, and CSS Variables", "2.9  Checkpoint Project: Style Your Profile Into a Portfolio"] },
+        { title: "Part 3 \u2014 JavaScript Fundamentals: Learning to Think Like a Programmer",
+          items: ["3.1  What Is JavaScript, and Where Does It Run?", "3.2  Variables: The Computer's Memory", "3.3  Operators: Doing Things With Values", "3.4  Conditionals: Teaching the Computer to Decide", "3.5  Loops: Doing Things Repeatedly", "3.6  Functions: Reusable Machines", "3.7  Arrays: Ordered Lists of Anything", "3.8  Objects: Describing Real-World Things", "3.9  Checkpoint Project 1: The Number-Guessing Game", "3.10  Checkpoint Project 2: Console Expense Tracker"] },
+        { title: "Part 4 \u2014 The DOM: Making Web Pages Come Alive",
+          items: ["4.1  What Is the DOM?", "4.2  Selecting and Changing Elements", "4.3  Events: Responding to the User", "4.4  Project: The To-Do List (Every Developer's Rite of Passage)", "4.5  localStorage: Remembering Data After the Tab Closes", "4.6  Checkpoint Project: The Quiz App"] },
+        { title: "Part 5 \u2014 Modern & Asynchronous JavaScript: Talking to the Internet",
+          items: ["5.1  Modern JavaScript (ES6+) Power Features", "5.2  Asynchronous JavaScript: The Restaurant Analogy", "5.3  Promises and async/await", "5.4  fetch(): Getting Real Data From Real Servers", "5.5  Project: GitHub Profile Finder", "5.6  Checkpoint Project: Live Weather App"] },
+        { title: "Part 6 \u2014 Professional Tooling: Git, npm, Vite & Tailwind",
+          items: ["6.1  Git & GitHub: The Developer's Time Machine", "6.2  npm: The World's Largest Code Library", "6.3  Vite: The Modern Build Tool", "6.4  Tailwind CSS: Styling at Professional Speed", "6.5  Checkpoint Project: Rebuild Your Portfolio With Modern Tooling"] },
+        { title: "Part 7 \u2014 React: Building Real Applications",
+          items: ["7.1  Why React, and How It Thinks", "7.2  Components and JSX", "7.3  Props: Passing Data Into Components", "7.4  State: Data That Changes (the useState Hook)", "7.5  Rendering Lists and Handling Forms", "7.6  useEffect: Fetching Data and Side Effects", "7.7  Multi-Page Apps With React Router", "7.8  CAPSTONE: The Remote Job Finder"] },
+        { title: "Part 8 \u2014 Integrating With Back Ends & Other Languages",
+          items: ["8.1  How a Front End Talks to Everything Else", "8.2  JavaScript + Node/Express: Your Own API in 25 Lines", "8.3  JavaScript + Python: The Power Couple", "8.4  JavaScript + PHP & WordPress: The Classic Web", "8.5  Integrating Payments: Paystack in the Front End", "8.6  WebAssembly: When JavaScript Needs a Turbocharger", "8.7  Checkpoint Project: The Connected Dashboard"] },
+        { title: "Part 9 \u2014 Professional Practice: Debugging, Deployment & Getting Hired",
+          items: ["9.1  Debugging Like a Professional", "9.2  Performance & Accessibility: The Professional's Edge", "9.3  Deploying: Putting Your Work on the Real Internet", "9.4  Your Portfolio and the Job Hunt", "9.5  Your Daily Professional Habits, From Today"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1  HTML Skeleton (memorise this)", "A.2  CSS Essentials on One Page", "A.3  JavaScript Essentials on One Page", "A.4  Terminal & Git on One Page", "A.5  Recommended Free Resources"] },
+        { title: "Appendix B \u2014 The 16-Week Daily Study Plan",
+          items: ["Full lesson set inside the training guide"] }
+      ]
+    },
+    "javascript-developer": {
+      title: "JavaScript Developer",
+      subtitle: "The complete JavaScript developer training — fundamentals to full-stack capstone, in 16 weeks.",
+      roadmap: null,
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1  Who This Guide Is For", "0.2  The Golden Rules of Learning to Code", "0.3  The 16-Week Fast-Track Roadmap", "0.4  Setting Up Your Developer Workstation", "0.5  How Each Lesson Is Structured"] },
+        { title: "Part 1 \u2014 HTML: The Skeleton of Every Web Page",
+          items: ["1.1  What Is HTML?", "1.2  Your First Web Page (Practical)", "1.3  The Essential Tags (Your Daily Vocabulary)", "1.4  Attributes: Giving Tags Extra Information", "1.5  Semantic HTML: Writing Pages That Mean Something", "1.6  Forms: Collecting Information From Users", "1.7  Tables and Media", "1.8  Checkpoint Project: Your Personal Profile Page"] },
+        { title: "Part 2 \u2014 CSS: Making It Beautiful",
+          items: ["2.1  What Is CSS?", "2.2  Selectors: Targeting What You Style", "2.3  The Box Model: The Most Important Idea in CSS", "2.4  Flexbox: Arranging Things in a Row or Column", "2.5  CSS Grid: Two-Dimensional Layouts", "2.6  Checkpoint Project: Style Your Profile Page"] },
+        { title: "Part 3 \u2014 JavaScript Fundamentals: Learning to Think Like a Programmer",
+          items: ["3.1  What Is JavaScript, and Where Does It Run?", "3.2  Variables: The Computer\u2019s Memory", "3.3  Operators: Doing Things With Values", "3.4  Conditionals: Teaching the Computer to Decide", "3.5  Loops: Doing Things Repeatedly", "3.6  Functions: Reusable Machines", "3.7  Arrays: Ordered Lists of Anything", "3.8  Objects: Describing Real-World Things", "3.9  Checkpoint Project 1: The Number-Guessing Game", "3.10  Checkpoint Project 2: Console Expense Tracker"] },
+        { title: "Part 4 \u2014 The DOM: Making Web Pages Come Alive",
+          items: ["4.1  What Is the DOM?", "4.2  Selecting and Changing Elements", "4.3  Events: Responding to the User", "4.4  Project: The To-Do List (Every Developer\u2019s Rite of Passage)", "4.5  localStorage: Remembering Data After the Tab Closes", "4.6  Project: A Working Calculator", "4.7  Checkpoint Project: The Quiz App"] },
+        { title: "Part 5 \u2014 Modern & Asynchronous JavaScript: Talking to the Internet",
+          items: ["5.1  Modern JavaScript (ES6+) Power Features", "5.2  Modules: Splitting Code Across Files", "5.3  Asynchronous JavaScript: The Restaurant Analogy", "5.4  fetch(): Getting Real Data From Real Servers", "5.5  Project: GitHub Profile Finder", "5.6  Checkpoint Project: Live Weather App"] },
+        { title: "Part 6 \u2014 Node.js & Express: Building the Back End",
+          items: ["6.1  Front End vs Back End: The Full Picture", "6.2  npm: The World\u2019s Largest Code Library", "6.3  Your First Web Server (Practical)", "6.4  REST APIs: The Grammar of the Web", "6.5  Project: The Remote Job Board API", "6.6  Serving Your Front End From Your Back End"] },
+        { title: "Part 7 \u2014 Databases & the Full-Stack Capstone",
+          items: ["7.1  Why Databases?", "7.2  SQL in One Sitting (Practical)", "7.3  THE CAPSTONE: Remote Job Board \u2014 A Complete Full-Stack Application"] },
+        { title: "Part 8 \u2014 Integrating JavaScript With Other Languages",
+          items: ["8.1  How Languages Actually Talk to Each Other", "8.2  JavaScript + Python: The Power Couple", "8.3  JavaScript + PHP: Working With the Classic Web", "8.4  JavaScript + SQL: A Deeper Look", "8.5  JavaScript + Compiled Languages: WebAssembly", "8.6  Checkpoint Project: The Polyglot Dashboard"] },
+        { title: "Part 9 \u2014 Professional Practice: Git, Debugging, Deployment & Getting Hired",
+          items: ["9.1  Git & GitHub: The Developer\u2019s Time Machine", "9.2  Debugging Like a Professional", "9.3  Deploying: Putting Your Work on the Real Internet", "9.4  Your Portfolio and the Job Hunt", "9.5  Your Daily Professional Habits, From Today"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1  HTML Skeleton (memorise this)", "A.2  JavaScript Essentials on One Page", "A.3  Terminal & Git on One Page", "A.4  Recommended Free Resources"] },
+        { title: "Appendix B \u2014 The 16-Week Daily Study Plan",
+          items: ["Full lesson set inside the training guide"] }
+      ]
+    },
     "software-development": {
-      title: "Software Development",
+      title: "Software Development — Core (JS + HTML)",
       subtitle: "The Complete JavaScript + HTML Developer Training — zero to deployed full-stack capstone in 16 weeks.",
       roadmap: [
         ["Weeks 1–2",  "Part 1 · HTML", "Structure of every web page; semantic markup; forms, tables, media", "Personal profile page + registration form"],
@@ -167,10 +287,16 @@ window.MS = (function () {
     catch (e) { return null; }
   }
   function saveStudent(s) { localStorage.setItem("ms_student", JSON.stringify(s)); }
+  function makeCode() {
+    var A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", c = "MS-";
+    for (var i = 0; i < 8; i++) { if (i === 4) c += "-"; c += A[Math.floor(Math.random() * A.length)]; }
+    return c;
+  }
   function register(data) {
     var s = {
       name: data.name, email: data.email.toLowerCase().trim(), pass: data.pass,
       course: data.course, tier: data.tier,
+      accessCode: makeCode(), codeVerified: false,
       registeredAt: new Date().toISOString(), progress: {}
     };
     saveStudent(s);
@@ -189,6 +315,13 @@ window.MS = (function () {
   function session() {
     var s = getStudent();
     return (s && sessionStorage.getItem("ms_session") === s.email) ? s : null;
+  }
+  function verifyCode(input) {
+    var s = getStudent(); if (!s) return false;
+    if (input.trim().toUpperCase() === s.accessCode) {
+      s.codeVerified = true; saveStudent(s); return true;
+    }
+    return false;
   }
   function isUnlocked(slug) {
     var s = getStudent();
@@ -256,7 +389,7 @@ window.MS = (function () {
 
   return {
     CATALOGUE: CATALOGUE, allTracks: allTracks, findTrack: findTrack, getSyllabus: getSyllabus,
-    register: register, login: login, logout: logout, session: session,
+    register: register, login: login, logout: logout, session: session, verifyCode: verifyCode,
     getStudent: getStudent, isUnlocked: isUnlocked,
     setProgress: setProgress, getProgress: getProgress, initTheme: initTheme
   };

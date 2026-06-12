@@ -16,11 +16,17 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `syllabus.html` | Syllabus viewer (`?course=slug`) — open to everyone, even for locked courses. Software Development carries the full extracted 16-week JavaScript + HTML curriculum (Parts 0–9 + appendices) |
 | `login.html` | Student login — routes each student straight to their registered course |
 | `dashboard.html` | Learner portal — the student's unique course unlocked with module-by-module progress tracking; all other tracks shown locked with open syllabus links |
+| `access.html` | Unique access-code gate — verifies the student's code before opening their training portal |
+| `admin.html` | Admin login — view registrations, copy/issue access codes, revoke portal access, reset progress (default passcode `ona-admin-2026`, change before deploying) |
+| `training/sd-full/` | Full training portal for **Software Development — Full Program**: 15 part pages (Part 0–14, terminal → React → Python → Node → databases → DevOps → MentorLink LMS capstone) rethemed to Mentorine green, gated by login + access code, with automatic progress mapping |
 
 ## Key behaviours
 
 - **Locked until registered.** Every course shows a 🔒 badge and stays locked until a student registers for it — but every syllabus is fully viewable first.
 - **One student → one unique course.** Registration unlocks exactly the chosen track; the dashboard opens straight to it.
+- **Unique access codes.** Registration generates a one-per-student code (`MS-XXXX-XXXX`). Admissions issues it after payment via the admin panel; the student enters it once on `access.html` to open the training portal. Admins can revoke access at any time.
+- **Progress mapping.** Visiting a training part records it automatically; the training index paints ✓ ticks and a progress bar over the curriculum map, mirrored on the student dashboard and visible to admins.
+- **Real curricula.** Front-end Web Developer, JavaScript Developer, and both Software Development tracks carry their full extracted curricula from the official training guides.
 - **Theme toggle with system default.** Cycles **system → day → night** (`◐ / ☀ / ☾`); "system" follows the OS `prefers-color-scheme` live, and a no-flash bootstrap snippet applies the theme before first paint.
 - **SVG brand mark.** `assets/logo.svg` is a vector trace of the shield with transparent negative space, so it blends on both day and night surfaces. The wordmark is typeset in **Cinzel** (the Trajan-style serif of the logo).
 - **Quiet motion.** The Liveliness Layer (`assets/liveliness.js`) adds scroll reveals and micro-interactions without touching the design, honouring `prefers-reduced-motion`.
@@ -36,10 +42,14 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 ├── manifest.json
 ├── sw.js
 ├── README.md
+├── access.html
+├── admin.html
+├── training/sd-full/   # gated training portal (index + part0–14)
 └── assets/
     ├── style.css        # design tokens + components (day/night)
     ├── app.js           # course catalogue, syllabi, auth, theme
     ├── liveliness.js    # drop-in motion layer
+    ├── gate.js          # training-portal access gate + progress mapping
     ├── logo.svg         # shield mark (theme-blending vector)
     ├── og-image.png     # social preview / repo thumbnail (1280×640)
     ├── icon-192.png     # PWA icon
@@ -56,11 +66,12 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v2` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v3` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 
 - Replace the `#` href on the floating **✆ chat chip** (all four pages) with the real WhatsApp admissions link.
+- Change the **admin passcode** in `admin.html` (`ADMIN_PASS`).
 - Authentication is a **localStorage demo** (single student per browser, plain-text password, client-side only). Swap `assets/app.js`'s `register/login` functions for a real backend before charging students.
 - Pricing, tiers, tracks, and FAQ content all live in `index.html` and `assets/app.js` (`CATALOGUE` / `SYLLABI`) for easy editing.
 

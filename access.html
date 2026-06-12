@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Access — The Mentorine School</title>
+<script>/* theme bootstrap: system default, no flash */
+(function(){var m=localStorage.getItem("ms_theme")||"system";
+var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
+document.documentElement.setAttribute("data-theme",r);})();</script>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0D8C4F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.gate-shell{min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:clamp(2rem,6vw,4rem) 1.2rem}
+.gate-card{width:100%;max-width:440px;padding:clamp(1.8rem,5vw,2.6rem)}
+.gate-card h1{font-size:clamp(1.7rem,5vw,2.2rem);margin-bottom:.5rem}
+.gate-card .sub{color:var(--ink-soft);font-size:.92rem;margin-bottom:1.6rem}
+.code-input{font-family:'Cinzel',serif;letter-spacing:3px;text-transform:uppercase;text-align:center;font-size:1.05rem !important}
+.err{display:none;font-size:.85rem;border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:var(--r);padding:.7rem 1rem;margin-bottom:1.1rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<nav class="nav" data-live="off">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <img class="mark" src="assets/logo.svg" alt="The Mentorine School mark">
+      <span class="wm">
+        <span class="wm-the">THE</span>
+        <span class="wm-name">MENTORINE</span>
+        <span class="wm-school">SCHOOL</span>
+        <span class="wm-sub">BY ONA SERVICES</span>
+      </span>
+    </a>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="theme-btn" aria-label="Toggle theme">◐</button>
+      <a class="nav-cta" href="dashboard.html">My Dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<div class="gate-shell">
+  <div class="card gate-card">
+    <div class="kicker">Unique Access Code</div>
+    <h1>Unlock your <em class="ac">training portal</em>.</h1>
+    <p class="sub" id="gateSub">Enter the unique access code issued by admissions after your payment is confirmed. It unlocks your course's full training pages.</p>
+    <div class="err" id="gateErr">That code doesn't match. Check it carefully — or chat with admissions if you haven't received yours.</div>
+    <form id="gateForm" novalidate>
+      <div class="field">
+        <label for="gCode">Access code</label>
+        <input type="text" id="gCode" class="code-input" required placeholder="MS-XXXX-XXXX" autocomplete="off" spellcheck="false">
+      </div>
+      <button class="btn" type="submit" style="width:100%;justify-content:center">Verify &amp; enter <span class="arr">→</span></button>
+    </form>
+    <p style="font-size:.78rem;color:var(--ink-faint);margin-top:1rem;text-align:center">Codes are issued once per student per course. Need yours? Chat with admissions via the ✆ button.</p>
+  </div>
+</div>
+
+<a class="chip-float" href="#" data-live="off" aria-label="Chat with admissions" title="Chat with admissions">✆</a>
+
+<script src="assets/app.js"></script>
+<script>
+MS.initTheme();
+var student = MS.session();
+if (!student) location.replace('login.html');
+
+var course = new URLSearchParams(location.search).get('course') || (student && student.course);
+var track = MS.findTrack(course);
+var syl = course && MS.getSyllabus(course);
+var trainingUrl = (track && track.training) || (syl && syl.training);
+
+if (student && (!trainingUrl || student.course !== course)) {
+  // no training portal for this course, or not their course
+  location.replace('dashboard.html');
+} else if (student && student.codeVerified) {
+  location.replace(trainingUrl);
+} else if (track) {
+  document.getElementById('gateSub').innerHTML =
+    'Enter the unique access code for <strong>' + track.name + '</strong>, issued by admissions after your payment is confirmed.';
+}
+
+document.getElementById('gateForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if (MS.verifyCode(document.getElementById('gCode').value)) location.href = trainingUrl;
+  else document.getElementById('gateErr').style.display = 'block';
+});
+</script>
+<script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
+<script src="assets/liveliness.js" defer></script>
+</body>
+</html>

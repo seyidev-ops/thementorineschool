@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — The Mentorine School</title>
+<script>/* theme bootstrap: system default, no flash */
+(function(){var m=localStorage.getItem("ms_theme")||"system";
+var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
+document.documentElement.setAttribute("data-theme",r);})();</script>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0D8C4F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.admin-shell{max-width:760px;margin:0 auto;padding:clamp(2rem,6vw,3.6rem) clamp(1.2rem,4vw,2rem)}
+.admin-shell h1{font-size:clamp(1.8rem,5vw,2.5rem);margin-bottom:.4rem}
+.admin-shell .sub{color:var(--ink-soft);font-size:.92rem;margin-bottom:1.8rem}
+.kv{display:grid;grid-template-columns:160px 1fr;gap:.4rem .8rem;font-size:.92rem;margin:1.1rem 0}
+.kv dt{font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint);align-self:center}
+.kv dd{color:var(--ink)}
+.code-pill{
+  font-family:'Cinzel',serif;letter-spacing:3px;font-weight:600;font-size:1.05rem;color:var(--accent);
+  border:1px dashed color-mix(in srgb,var(--accent) 50%,transparent);border-radius:var(--r);
+  padding:.45rem .9rem;display:inline-flex;align-items:center;gap:.8rem;
+}
+.code-pill button{border:none;background:none;cursor:pointer;color:var(--ink-faint);font-size:.8rem;font-family:'DM Sans',sans-serif;letter-spacing:1px}
+.code-pill button:hover{color:var(--accent)}
+.admin-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.4rem}
+.btn-quiet{border:1px solid var(--line);background:none;color:var(--ink-soft);border-radius:var(--r-sm);padding:.8rem 1.4rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem}
+.btn-quiet:hover{border-color:var(--accent);color:var(--accent)}
+.empty{border:1px dashed var(--line);border-radius:var(--r);padding:2rem;text-align:center;color:var(--ink-faint);font-size:.92rem}
+.err{display:none;font-size:.85rem;border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:var(--r);padding:.7rem 1rem;margin-bottom:1.1rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<nav class="nav" data-live="off">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <img class="mark" src="assets/logo.svg" alt="The Mentorine School mark">
+      <span class="wm">
+        <span class="wm-the">THE</span>
+        <span class="wm-name">MENTORINE</span>
+        <span class="wm-school">SCHOOL</span>
+        <span class="wm-sub">BY ONA SERVICES</span>
+      </span>
+    </a>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="theme-btn" aria-label="Toggle theme">◐</button>
+      <a class="nav-cta" href="index.html">← Site</a>
+    </div>
+  </div>
+</nav>
+
+<div class="admin-shell">
+  <!-- ADMIN LOGIN -->
+  <div id="adminLogin">
+    <div class="kicker">Admin</div>
+    <h1>Administrator <em class="ac">login</em>.</h1>
+    <p class="sub">For school staff only — manage student registrations, issue unique access codes, and reset progress.</p>
+    <div class="err" id="adminErr">Incorrect admin passcode.</div>
+    <div class="card" style="max-width:420px">
+      <form id="adminForm" novalidate>
+        <div class="field">
+          <label for="aPass">Admin passcode</label>
+          <input type="password" id="aPass" required placeholder="••••••••••">
+        </div>
+        <button class="btn" type="submit" style="width:100%;justify-content:center">Enter admin panel <span class="arr">→</span></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" style="display:none">
+    <div class="kicker">Admin · Student Access</div>
+    <h1>Student <em class="ac">registrations</em>.</h1>
+    <p class="sub">Issue the access code to the student once payment is confirmed — it unlocks their training portal.</p>
+    <div id="studentBox"></div>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+MS.initTheme();
+
+/* Change this passcode before deploying. Demo only — move admin auth to a real backend in production. */
+var ADMIN_PASS = "ona-admin-2026";
+
+document.getElementById('adminForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if (document.getElementById('aPass').value === ADMIN_PASS) {
+    sessionStorage.setItem('ms_admin', '1');
+    showPanel();
+  } else document.getElementById('adminErr').style.display = 'block';
+});
+
+function showPanel(){
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  render();
+}
+
+function render(){
+  var box = document.getElementById('studentBox');
+  var s = MS.getStudent();
+  if (!s) {
+    box.innerHTML = '<div class="empty">No student registrations on this device yet.<br>Registrations appear here as soon as a student signs up on the landing page.</div>';
+    return;
+  }
+  var track = MS.findTrack(s.course);
+  var syl = MS.getSyllabus(s.course);
+  var prog = MS.getProgress(s.course);
+  var total = syl ? syl.modules.length : 0;
+  var done = Object.keys(prog).filter(function(k){return prog[k];}).length;
+  var pct = total ? Math.min(100, Math.round(done/total*100)) : 0;
+
+  box.innerHTML =
+    '<div class="card">' +
+      '<dl class="kv">' +
+        '<dt>Student</dt><dd>' + s.name + '</dd>' +
+        '<dt>Email</dt><dd>' + s.email + '</dd>' +
+        '<dt>Course</dt><dd>' + (track ? track.name : s.course) + '</dd>' +
+        '<dt>Plan</dt><dd>' + s.tier + '</dd>' +
+        '<dt>Registered</dt><dd>' + new Date(s.registeredAt).toLocaleString() + '</dd>' +
+        '<dt>Access code</dt><dd><span class="code-pill"><span id="codeTxt">' + s.accessCode + '</span>' +
+          '<button type="button" id="copyCode">COPY</button></span></dd>' +
+        '<dt>Code status</dt><dd>' + (s.codeVerified
+            ? '<span class="badge open">● Verified — portal unlocked</span>'
+            : '<span class="badge locked">Awaiting student entry</span>') + '</dd>' +
+        '<dt>Progress</dt><dd>' + pct + '% · ' + done + ' of ' + total + ' modules</dd>' +
+      '</dl>' +
+      '<div class="admin-actions">' +
+        '<button class="btn-quiet" id="resetProg">Reset progress</button>' +
+        '<button class="btn-quiet" id="revokeCode">Revoke code access</button>' +
+        '<button class="btn-quiet" id="deleteStudent">Delete registration</button>' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById('copyCode').onclick = function(){
+    navigator.clipboard && navigator.clipboard.writeText(s.accessCode);
+    this.textContent = 'COPIED ✓'; var b=this; setTimeout(function(){ b.textContent='COPY'; }, 1500);
+  };
+  document.getElementById('resetProg').onclick = function(){
+    if (confirm('Reset all progress for this student?')) { s.progress = {}; persist(s); }
+  };
+  document.getElementById('revokeCode').onclick = function(){
+    if (confirm('Revoke training-portal access? The student will need to re-enter the code.')) {
+      s.codeVerified = false; persist(s);
+    }
+  };
+  document.getElementById('deleteStudent').onclick = function(){
+    if (confirm('Delete this registration entirely?')) {
+      localStorage.removeItem('ms_student'); sessionStorage.removeItem('ms_session'); render();
+    }
+  };
+}
+function persist(s){ localStorage.setItem('ms_student', JSON.stringify(s)); render(); }
+
+if (sessionStorage.getItem('ms_admin') === '1') showPanel();
+</script>
+</body>
+</html>

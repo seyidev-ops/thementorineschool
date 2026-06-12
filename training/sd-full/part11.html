@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part 11 — DevOps: Docker, CI/CD, Cloud · Mentorine School</title>
+<script>/* theme bootstrap: system default, no flash */
+(function(){var m=localStorage.getItem("ms_theme")||"system";
+var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
+document.documentElement.setAttribute("data-theme",r);})();</script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Mentorine brand override — green accent, house fonts, stacked wordmark */
+:root{--accent:#0D8C4F;--accent-h:#0A6F3F;--brand-navy:#305D85;
+  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans','Segoe UI',Calibri,sans-serif;}
+[data-theme="night"]{--accent:#2FB36B;--accent-h:#4CC684;--brand-navy:#8FB3D4;}
+.brand{display:flex;align-items:center;gap:.6rem}
+.brand .mark{height:42px;width:auto;display:block}
+.wm{display:flex;flex-direction:column;line-height:1.12;font-family:'Cinzel',serif}
+.wm-the{font-size:.45rem;font-weight:600;letter-spacing:4px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-name{font-size:.86rem;font-weight:700;letter-spacing:1.6px;color:var(--brand-navy)}
+.wm-school{font-size:.62rem;font-weight:600;letter-spacing:3.2px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
+</style>
+<meta name="description" content="Software Development (Full) by Mentorine School — a complete 24-week, hands-on curriculum from zero to professional developer.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Part 11 — DevOps: Docker, CI/CD, Cloud · Mentorine School">
+<meta property="og:description" content="From zero to professional in 24 weeks — 15 parts, terminal to cloud, with real projects and a full capstone.">
+<meta property="og:image" content="https://mentorineschool.com/softwaredevelopment/assets/og-thumbnail.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+/* ============================================================
+   The Complete JavaScript & HTML Developer Training Guide
+   Warm editorial minimalist — gold house style (#0D8C4F)
+   ============================================================ */
+:root{
+  --paper:#F7F5F0; --paper-2:#F0EDE5; --card:#FFFFFF;
+  --ink:#0A0A0A; --ink-soft:#5A5A5A; --ink-faint:#8A8378;
+  --accent:#0D8C4F; --accent-h:#0A6F3F;
+  --line:rgba(10,10,10,.12); --line-soft:rgba(10,10,10,.07);
+  --code-bg:#1B1814; --code-ink:#F2EEE6; --code-soft:#ADA79B;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:'Segoe UI',Calibri,'Helvetica Neue',Arial,sans-serif;
+  --mono:Consolas,'SF Mono',Menlo,monospace;
+}
+html[data-theme="night"]{
+  --paper:#14120F; --paper-2:#1B1814; --card:#1B1814;
+  --ink:#F2EEE6; --ink-soft:#ADA79B; --ink-faint:#6E685D;
+  --accent:#2FB36B; --accent-h:#4CC684;
+  --line:rgba(242,238,230,.14); --line-soft:rgba(242,238,230,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:1.0rem;line-height:1.7;
+  background-image:radial-gradient(var(--line-soft) 1px,transparent 1px);
+  background-size:22px 22px;background-attachment:fixed;
+}
+a{color:inherit}
+::selection{background:var(--accent);color:#fff}
+
+/* ---------- Header ---------- */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{max-width:1000px;margin:0 auto;padding:.85rem 1.4rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-family:var(--serif);font-weight:700;font-size:1.02rem;
+  text-decoration:none;letter-spacing:-.2px;white-space:nowrap}
+.brand .amp{color:var(--accent);font-style:italic}
+.nav-right{display:flex;align-items:center;gap:1.1rem}
+.nav-link{font-size:.86rem;font-weight:600;letter-spacing:.4px;
+  text-decoration:none;color:var(--ink-soft)}
+.nav-link:hover{color:var(--accent-h)}
+.theme-btn{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
+  border-radius:100px;width:34px;height:34px;cursor:pointer;font-size:.95rem;line-height:1}
+.theme-btn:hover{color:var(--accent-h);border-color:var(--accent)}
+
+/* ---------- Shared column ---------- */
+.col{max-width:760px;margin:0 auto;padding:0 1.4rem}
+.wide{max-width:1000px;margin:0 auto;padding:0 1.4rem}
+
+/* ---------- Kicker ---------- */
+.kicker{font-family:var(--sans);font-weight:600;font-size:.74rem;
+  letter-spacing:2.6px;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:.7rem;margin:2.4rem 0 .8rem}
+.kicker::before{content:"";display:inline-block;width:26px;height:1px;background:var(--accent)}
+
+/* ---------- Part hero ---------- */
+.part-hero{padding:clamp(2.6rem,7vw,4.6rem) 0 1.4rem;border-bottom:1px solid var(--line-soft);margin-bottom:2.2rem}
+.part-hero .kicker{margin-top:0}
+.part-hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.08;letter-spacing:-.8px;margin:0 0 1rem}
+.anchor-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1.6rem}
+.anchor-row a{font-size:.78rem;font-weight:600;text-decoration:none;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;padding:.32rem .85rem;background:var(--card);
+  transition:border-color .25s,color .25s}
+.anchor-row a:hover{border-color:var(--accent);color:var(--accent-h)}
+
+/* ---------- Article content ---------- */
+article p{margin:0 0 1.05rem;color:var(--ink-soft);max-width:64ch}
+article p strong{color:var(--ink)}
+article h2{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:-.3px;
+  color:var(--ink);margin:2.8rem 0 1rem;padding-bottom:.45rem;
+  border-bottom:2px solid var(--accent);scroll-margin-top:84px;max-width:64ch}
+article h3{font-family:var(--serif);font-weight:700;font-size:1.18rem;
+  color:var(--ink);margin:2rem 0 .7rem}
+article h4{font-weight:700;font-size:1rem;color:var(--ink);margin:1.5rem 0 .5rem}
+article ul,article ol{margin:0 0 1.2rem;padding-left:1.4rem;color:var(--ink-soft);max-width:62ch}
+article li{margin-bottom:.45rem}
+article li::marker{color:var(--accent);font-weight:600}
+article em{color:var(--ink-faint)}
+.soft{color:var(--ink-faint)}
+.accent{color:var(--accent)}
+
+/* Inline code */
+article p code,article li code,td code{
+  font-family:var(--mono);font-size:.86em;color:var(--ink);
+  background:var(--paper-2);border:1px solid var(--line-soft);
+  border-radius:4px;padding:.08em .38em;white-space:nowrap}
+html[data-theme="night"] article p code,
+html[data-theme="night"] article li code{color:var(--ink)}
+
+/* Code blocks — dark surface, the standing exception */
+article pre{
+  background:var(--code-bg);color:var(--code-ink);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1.05rem 1.2rem;margin:0 0 1.4rem;overflow-x:auto;
+  font-family:var(--mono);font-size:.83rem;line-height:1.55}
+article pre code{background:none;border:none;padding:0;color:inherit;white-space:pre}
+.file-label{display:inline-flex;align-items:center;gap:.55rem;margin:.4rem 0 .45rem}
+.file-label .fl-tag{font-size:.66rem;font-weight:700;letter-spacing:2px;color:var(--accent)}
+.file-label code{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--ink-soft);
+  background:none;border:none;padding:0}
+.file-label + pre{margin-top:0}
+
+/* Callout */
+.callout{background:var(--card);border:1px solid var(--line-soft);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1rem 1.2rem;margin:1.4rem 0 1.6rem}
+.callout .co-label{font-size:.7rem;font-weight:700;letter-spacing:2.2px;color:var(--accent);margin-bottom:.35rem}
+.callout p{margin:0;font-size:.95rem}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;margin:.4rem 0 1.6rem;border:1px solid var(--line-soft);
+  border-radius:8px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+th{background:var(--ink);color:var(--paper);text-align:left;font-weight:600;
+  font-size:.78rem;letter-spacing:.6px;padding:.65rem .85rem}
+html[data-theme="night"] th{background:var(--paper-2);color:var(--ink)}
+td{padding:.6rem .85rem;border-top:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
+
+/* ---------- Pagination ---------- */
+.pager{display:flex;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--line-soft);margin-top:3.4rem;padding:1.6rem 0 0}
+.pager a{flex:1;text-decoration:none;border:1px solid var(--line);border-radius:8px;
+  background:var(--card);padding:.95rem 1.15rem;transition:border-color .25s}
+.pager a:hover{border-color:var(--accent)}
+.pager .dir{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:.25rem}
+.pager .pt{font-family:var(--serif);font-weight:700;font-size:.98rem;color:var(--ink)}
+.pager a.next{text-align:right}
+.pager .ghost{visibility:hidden}
+
+/* ---------- Landing ---------- */
+.hero{padding:clamp(4rem,11vw,7.5rem) 0 clamp(2.5rem,6vw,4rem);text-align:left}
+.hero .kicker{margin-top:0}
+.hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(2.5rem,7vw,4.4rem);line-height:1.04;letter-spacing:-1.5px;margin:0 0 1.3rem;max-width:16ch}
+.hero h1 .em{font-style:italic;color:var(--accent)}
+.hero .sub{font-size:1.07rem;color:var(--ink-soft);max-width:54ch;margin-bottom:2.2rem}
+.cta-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  background:var(--ink);color:var(--paper);font-weight:600;font-size:.95rem;
+  padding:1rem 2.2rem;border-radius:2px;transition:background .25s}
+.btn-primary .arr{transition:transform .25s}
+.btn-primary:hover{background:var(--accent-h)}
+.btn-primary:hover .arr{transform:translateX(4px)}
+html[data-theme="night"] .btn-primary{background:var(--ink);color:var(--paper)}
+.link-quiet{font-size:.92rem;color:var(--ink-faint);text-decoration:underline;text-underline-offset:4px}
+.link-quiet:hover{color:var(--accent-h)}
+
+.stat-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);margin:1.6rem 0 0}
+.stat{padding:1.4rem 1rem;text-align:center;border-left:1px solid var(--line-soft)}
+.stat:first-child{border-left:none}
+.stat .n{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,3.5vw,2.2rem);
+  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.stat .l{font-size:.7rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-faint);margin-top:.3rem}
+
+.section{padding:clamp(3rem,8vw,5.5rem) 0 0}
+.section-head{font-family:var(--serif);font-weight:700;font-size:clamp(1.6rem,4vw,2.2rem);
+  letter-spacing:-.6px;margin:0 0 .7rem}
+.section-sub{color:var(--ink-soft);max-width:58ch;margin-bottom:2.2rem}
+
+.parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem}
+.part-card{display:block;text-decoration:none;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:8px;padding:1.5rem 1.5rem 1.3rem;
+  transition:border-color .25s}
+.part-card:hover{border-color:var(--accent)}
+.part-card .pc-kicker{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:.55rem}
+.part-card h3{font-family:var(--serif);font-weight:700;font-size:1.16rem;letter-spacing:-.2px;color:var(--ink);margin:0 0 .5rem}
+.part-card p{font-size:.88rem;color:var(--ink-soft);margin:0 0 .9rem;line-height:1.55}
+.part-card .pc-mile{font-size:.78rem;color:var(--ink-faint);border-top:1px solid var(--line-soft);padding-top:.7rem}
+.part-card .pc-mile strong{color:var(--ink-soft);font-weight:600}
+
+.proj-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
+.proj{background:var(--card);border:1px solid var(--line-soft);border-radius:8px;
+  padding:.85rem 1.05rem;font-size:.86rem;color:var(--ink-soft);display:flex;gap:.6rem;align-items:baseline}
+.proj .dot{color:var(--accent);font-weight:700}
+
+.cta-band{margin:clamp(3.5rem,9vw,6rem) 0 0;border-top:1px solid var(--line);
+  padding:clamp(2.6rem,7vw,4.5rem) 0}
+.cta-band h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,4.5vw,2.5rem);
+  letter-spacing:-.6px;margin:0 0 .8rem;max-width:22ch}
+.cta-band p{color:var(--ink-soft);max-width:52ch;margin-bottom:2rem}
+
+/* ---------- Footer ---------- */
+footer.site{border-top:1px solid var(--line-soft);margin-top:4rem;padding:2.2rem 0 2.8rem}
+footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.82rem;color:var(--ink-faint)}
+.bm{font-weight:700;color:var(--ink)}
+.bm .bm-i{font-style:italic;color:var(--accent);margin-left:-0.08em}
+
+@media (max-width:640px){
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:none}
+  .pager{flex-direction:column}
+  .pager a.next{text-align:left}
+  .pager .ghost{display:none}
+}
+
+/* ---------- Auth (register/login) ---------- */
+.auth-wrap{max-width:430px;margin:clamp(3rem,9vw,6rem) auto 4rem;padding:0 1.4rem}
+.auth-card{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:2rem 1.8rem}
+.auth-tabs{display:flex;gap:.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line-soft)}
+.auth-tabs button{flex:1;background:none;border:0;border-bottom:2px solid transparent;
+  font:600 .92rem var(--sans);color:var(--ink-faint);padding:.7rem 0;cursor:pointer}
+.auth-tabs button.active{color:var(--ink);border-bottom-color:var(--accent)}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.74rem;font-weight:700;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:.35rem}
+.field input{width:100%;padding:.8rem .9rem;border:1px solid var(--line);border-radius:6px;
+  background:var(--paper);color:var(--ink);font:1rem var(--sans)}
+.field input:focus{outline:none;border-color:var(--accent)}
+.auth-btn{width:100%;border:0;border-radius:2px;background:var(--ink);color:var(--paper);
+  font:600 .98rem var(--sans);padding:.95rem;cursor:pointer;margin-top:.4rem}
+.auth-btn:hover{background:var(--accent-h)}
+.auth-msg{font-size:.85rem;margin-top:.8rem;min-height:1.2em}
+.auth-msg.err{color:#A04B4B}.auth-msg.ok{color:var(--accent-h)}
+.auth-note{font-size:.78rem;color:var(--ink-faint);text-align:center;margin-top:1.2rem}
+.welcome-chip{font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);
+  border-radius:100px;padding:.3rem .85rem;background:var(--card);white-space:nowrap}
+.welcome-chip b{color:var(--accent-h)}
+
+</style>
+
+
+</head>
+<body>
+
+<header class="site" data-live="off">
+  <nav class="nav">
+    <a class="brand" href="../../index.html" style="text-decoration:none">
+      <img class="mark" src="../../assets/logo.svg" alt="The Mentorine School mark">
+      <span class="wm">
+        <span class="wm-the">THE</span>
+        <span class="wm-name">MENTORINE</span>
+        <span class="wm-school">SCHOOL</span>
+        <span class="wm-sub">BY ONA SERVICES</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+    </div>
+  </nav>
+</header>
+
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 11 · Weeks 19–20</div>
+    <h1>DevOps: Docker, CI/CD &amp; Shipping to the Cloud</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#11-1-what-devops-means">What DevOps Means</a><a href="#11-2-environment-variables-the-first-professional-habit">Environment Variables: The First Professional Habit</a><a href="#11-3-docker-your-app-in-a-box-practical">Docker: Your App in a Box (Practical)</a><a href="#11-4-ci-cd-robots-that-test-every-push-practical">CI/CD: Robots That Test Every Push (Practical)</a><a href="#11-5-deploying-for-real-practical">Deploying for Real (Practical)</a><a href="#11-6-checkpoint">Checkpoint</a></div>
+  </div>
+  <article>
+
+<p><span class="soft"><em>Estimated duration: Weeks 19–20.</em></span></p>
+<h2 id="11-1-what-devops-means">11.1  What DevOps Means</h2>
+<p>Development is writing software; Operations is running it for real users. DevOps is the discipline (and toolset) that connects them: packaging your app so it runs anywhere, testing it automatically on every change, and deploying it to servers without drama. A junior developer who can deploy is worth two who cannot.</p>
+<h2 id="11-2-environment-variables-the-first-professional-habit">11.2  Environment Variables: The First Professional Habit</h2>
+<p>Secrets (database passwords, API keys) and per-environment settings (which port?) must never be written in code or committed to Git. They live in environment variables, supplied from outside the program:</p>
+<
+p
+r
+e
+>
+<
+c
+o
+d
+e
+>
+/
+/
+ 
+I
+n
+ 
+y
+o
+u
+r
+ 
+s
+e
+r
+v
+e
+r
+.
+j
+s
+ 
+—
+ 
+r
+e
+a
+d
+ 
+f
+r
+o
+m
+ 
+t
+h
+e
+ 
+e
+n
+v
+i
+r
+o
+n
+m
+e
+n
+t
+,
+ 
+w
+i
+t
+h
+ 
+a
+ 
+f
+a
+l
+l
+b
+a
+c
+k
+:
+
+
+c
+o
+n
+s
+t
+ 
+P
+O
+R
+T
+ 
+=
+ 
+p
+r
+o
+c
+e
+s
+s
+.
+e
+n
+v
+.
+P
+O
+R
+T
+ 
+|
+|
+ 
+3
+0
+0
+0
+;
+
+
+a
+p
+p
+.
+l
+i
+s
+t
+e
+n
+(
+P
+O
+R
+T
+,
+ 
+(
+)
+ 
+=
+&
+g
+t
+;
+ 
+c
+o
+n
+s
+o
+l
+e
+.
+l
+o
+g
+(
+&
+q
+u
+o
+t
+;
+R
+u
+n
+n
+i
+n
+g
+ 
+o
+n
+ 
+p
+o
+r
+t
+ 
+&
+q
+u
+o
+t
+;
+ 
++
+ 
+P
+O
+R
+T
+)
+)
+;
+<
+/
+c
+o
+d
+e
+>
+<
+/
+p
+r
+e
+>
+<p>Locally, put values in a file named <code>.env</code> (e.g. <code>PORT=4000</code>), load it with Node's built-in flag <code>node --env-file=.env server.js</code>, and add <code>.env</code> to a <code>.gitignore</code> file so Git never uploads it. Every hosting platform sets these variables for you in production — your code reads them the same way everywhere.</p>
+<h2 id="11-3-docker-your-app-in-a-box-practical">11.3  Docker: Your App in a Box (Practical)</h2>
+<p>&quot;It works on my machine&quot; is the oldest failure in software. Docker packages your app with its exact runtime — Node version, dependencies, OS libraries — into an image that runs identically on any computer. Install Docker Desktop from docker.com, then add this file to your Part 8/9 API project:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-backend/Dockerfile</code></div>
+<
+p
+r
+e
+>
+<
+c
+o
+d
+e
+>
+#
+ 
+S
+t
+a
+r
+t
+ 
+f
+r
+o
+m
+ 
+a
+n
+ 
+o
+f
+f
+i
+c
+i
+a
+l
+ 
+i
+m
+a
+g
+e
+ 
+t
+h
+a
+t
+ 
+a
+l
+r
+e
+a
+d
+y
+ 
+c
+o
+n
+t
+a
+i
+n
+s
+ 
+N
+o
+d
+e
+
+
+F
+R
+O
+M
+ 
+n
+o
+d
+e
+:
+2
+2
+-
+s
+l
+i
+m
+
+
+
+
+#
+ 
+W
+o
+r
+k
+ 
+i
+n
+s
+i
+d
+e
+ 
+/
+a
+p
+p
+ 
+i
+n
+ 
+t
+h
+e
+ 
+c
+o
+n
+t
+a
+i
+n
+e
+r
+
+
+W
+O
+R
+K
+D
+I
+R
+ 
+/
+a
+p
+p
+
+
+
+
+#
+ 
+C
+o
+p
+y
+ 
+d
+e
+p
+e
+n
+d
+e
+n
+c
+y
+ 
+m
+a
+n
+i
+f
+e
+s
+t
+s
+ 
+f
+i
+r
+s
+t
+ 
+(
+c
+a
+c
+h
+e
+s
+ 
+i
+n
+s
+t
+a
+l
+l
+s
+ 
+b
+e
+t
+w
+e
+e
+n
+ 
+b
+u
+i
+l
+d
+s
+)
+
+
+C
+O
+P
+Y
+ 
+p
+a
+c
+k
+a
+g
+e
+*
+.
+j
+s
+o
+n
+ 
+.
+/
+
+
+R
+U
+N
+ 
+n
+p
+m
+ 
+i
+n
+s
+t
+a
+l
+l
+ 
+-
+-
+o
+m
+i
+t
+=
+d
+e
+v
+
+
+
+
+#
+ 
+C
+o
+p
+y
+ 
+t
+h
+e
+ 
+r
+e
+s
+t
+ 
+o
+f
+ 
+t
+h
+e
+ 
+s
+o
+u
+r
+c
+e
+ 
+c
+o
+d
+e
+
+
+C
+O
+P
+Y
+ 
+.
+ 
+.
+
+
+
+
+#
+ 
+D
+o
+c
+u
+m
+e
+n
+t
+ 
+t
+h
+e
+ 
+p
+o
+r
+t
+ 
+a
+n
+d
+ 
+d
+e
+f
+i
+n
+e
+ 
+h
+o
+w
+ 
+t
+o
+ 
+s
+t
+a
+r
+t
+
+
+E
+X
+P
+O
+S
+E
+ 
+3
+0
+0
+0
+
+
+C
+M
+D
+ 
+[
+&
+q
+u
+o
+t
+;
+n
+o
+d
+e
+&
+q
+u
+o
+t
+;
+,
+ 
+&
+q
+u
+o
+t
+;
+s
+e
+r
+v
+e
+r
+.
+j
+s
+&
+q
+u
+o
+t
+;
+]
+<
+/
+c
+o
+d
+e
+>
+<
+/
+p
+r
+e
+>
+<p>Build the image and run it as a container:</p>
+<
+p
+r
+e
+>
+<
+c
+o
+d
+e
+>
+d
+o
+c
+k
+e
+r
+ 
+b
+u
+i
+l
+d
+ 
+-
+t
+ 
+s
+t
+u
+d
+e
+n
+t
+s
+-
+a
+p
+i
+ 
+.
+
+
+d
+o
+c
+k
+e
+r
+ 
+r
+u
+n
+ 
+-
+p
+ 
+3
+0
+0
+0
+:
+3
+0
+0
+0
+ 
+s
+t
+u
+d
+e
+n
+t
+s
+-
+a
+p
+i
+
+
+#
+ 
+-
+p
+ 
+3
+0
+0
+0
+:
+3
+0
+0
+0
+ 
+c
+o
+n
+n
+e
+c
+t
+s
+ 
+y
+o
+u
+r
+ 
+m
+a
+c
+h
+i
+n
+e
+'
+s
+ 
+p
+o
+r
+t
+ 
+3
+0
+0
+0
+ 
+t
+o
+ 
+t
+h
+e
+ 
+c
+o
+n
+t
+a
+i
+n
+e
+r
+'
+s
+<
+/
+c
+o
+d
+e
+>
+<
+/
+p
+r
+e
+>
+<p>Visit <code>http://localhost:3000/api/students</code> — your API is running inside a sealed box. That same image runs unchanged on a teammate's laptop or a cloud server. Useful commands: <code>docker ps</code> (running containers), <code>docker stop &lt;id&gt;</code>, <code>docker images</code>.</p>
+<h2 id="11-4-ci-cd-robots-that-test-every-push-practical">11.4  CI/CD: Robots That Test Every Push (Practical)</h2>
+<p>Continuous Integration runs your tests automatically on every git push; Continuous Deployment ships automatically when they pass. GitHub Actions does both, free. In any repo with tests, create this exact file path:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>.github/workflows/ci.yml</code></div>
+<
+p
+r
+e
+>
+<
+c
+o
+d
+e
+>
+n
+a
+m
+e
+:
+ 
+C
+I
+
+
+o
+n
+:
+ 
+[
+p
+u
+s
+h
+,
+ 
+p
+u
+l
+l
+_
+r
+e
+q
+u
+e
+s
+t
+]
+
+
+
+
+j
+o
+b
+s
+:
+
+
+ 
+ 
+t
+e
+s
+t
+:
+
+
+ 
+ 
+ 
+ 
+r
+u
+n
+s
+-
+o
+n
+:
+ 
+u
+b
+u
+n
+t
+u
+-
+l
+a
+t
+e
+s
+t
+
+
+ 
+ 
+ 
+ 
+s
+t
+e
+p
+s
+:
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+-
+ 
+u
+s
+e
+s
+:
+ 
+a
+c
+t
+i
+o
+n
+s
+/
+c
+h
+e
+c
+k
+o
+u
+t
+@
+v
+4
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+#
+ 
+d
+o
+w
+n
+l
+o
+a
+d
+ 
+t
+h
+e
+ 
+r
+e
+p
+o
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+-
+ 
+u
+s
+e
+s
+:
+ 
+a
+c
+t
+i
+o
+n
+s
+/
+s
+e
+t
+u
+p
+-
+n
+o
+d
+e
+@
+v
+4
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+#
+ 
+i
+n
+s
+t
+a
+l
+l
+ 
+N
+o
+d
+e
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+w
+i
+t
+h
+:
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+n
+o
+d
+e
+-
+v
+e
+r
+s
+i
+o
+n
+:
+ 
+2
+2
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+-
+ 
+r
+u
+n
+:
+ 
+n
+p
+m
+ 
+i
+n
+s
+t
+a
+l
+l
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+-
+ 
+r
+u
+n
+:
+ 
+n
+o
+d
+e
+ 
+-
+-
+t
+e
+s
+t
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+#
+ 
+r
+u
+n
+ 
+y
+o
+u
+r
+ 
+P
+a
+r
+t
+ 
+1
+0
+ 
+t
+e
+s
+t
+s
+<
+/
+c
+o
+d
+e
+>
+<
+/
+p
+r
+e
+>
+<p>Commit, push, then open the Actions tab on GitHub: a robot just cloned your code on a fresh Ubuntu machine and ran your tests. Break a test, push again, and watch the red X appear — that X has saved every professional team from shipping a bug on a Friday evening.</p>
+<h2 id="11-5-deploying-for-real-practical">11.5  Deploying for Real (Practical)</h2>
+<h3>Static sites (HTML/CSS/JS, React builds) — Netlify</h3>
+<ol><li>Sign up at netlify.com with your GitHub account, click &quot;Add new site&quot; → &quot;Import an existing project&quot;, and pick your repo.</li><li>For a React (Vite) project set Build command: npm run build and Publish directory: dist. For plain HTML, no build command at all.</li><li>Deploy. Every future git push redeploys automatically — that is CD working for you.</li></ol>
+<h3>Backends (Node/Express APIs) — Render</h3>
+<ol><li>Sign up at render.com with GitHub, click New → Web Service, and pick your API repo.</li><li>Build command: npm install. Start command: node server.js. Choose the free tier.</li><li>Render sets the PORT environment variable — your 11.2 code already reads it, so it just works. Add any secrets in the Environment tab, never in code.</li></ol>
+<div class="callout"><div class="co-label">REALITY CHECK</div><p>Free-tier backends sleep when idle and take ~30 seconds to wake on the first request. That is normal and fine for portfolio projects — mention it in your README so reviewers expect it.</p></div>
+<h2 id="11-6-checkpoint">11.6  Checkpoint</h2>
+<ol><li>Your Part 6 React app is live on Netlify with a public URL.</li><li>Your students API runs in Docker locally AND is deployed on Render.</li><li>A GitHub Actions workflow runs your tests on every push, and you have seen it fail and fixed it.</li></ol>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>You can ship. From idea to a URL strangers can visit — the complete loop. Everything you build now goes live by default.</p></div>
+  </article>
+  
+<nav class="pager" data-live="off">
+  <a href="part10.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 10 · Testing & Debugging</span></a>
+  <a class="next" href="part12.html"><span class="dir">NEXT →</span><span class="pt">Part 12 · Cross-Language Integration</span></a>
+</nav>
+</main>
+
+<footer class="site">
+  <div class="col">
+    <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
+    <div>From zero to professional in 24 weeks · &copy; 2026</div>
+  </div>
+</footer>
+
+
+
+<script src="../../assets/app.js"></script>
+<script>MS.initTheme();</script>
+<script src="../../assets/gate.js"></script>
+<script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
+<script src="../../assets/liveliness.js" defer></script>
+</body>
+</html>

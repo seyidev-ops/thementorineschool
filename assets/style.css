@@ -8,6 +8,7 @@
   --ink:#1A1814; --ink-soft:#57524A; --ink-faint:#8A8378;
   --accent:#0D8C4F; --accent-h:#0A6F3F;
   --line:rgba(26,24,20,0.12); --line-soft:rgba(26,24,20,0.07);
+  --brand-navy:#305D85;
   --r-sm:2px; --r:8px; --r-pill:100px;
 }
 html[data-theme="night"]{
@@ -15,6 +16,7 @@ html[data-theme="night"]{
   --ink:#F2EEE6; --ink-soft:#ADA79B; --ink-faint:#6E685D;
   --accent:#2FB36B; --accent-h:#4CC684;
   --line:rgba(242,238,230,0.14); --line-soft:rgba(242,238,230,0.07);
+  --brand-navy:#8FB3D4;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -55,12 +57,17 @@ img{max-width:100%}
   display:flex;align-items:center;justify-content:space-between;gap:1rem;
 }
 .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none}
-.brand .mark{height:36px;width:auto;display:block}
-.wm{display:flex;flex-direction:column;line-height:1.18;font-family:'Cinzel',serif}
-.wm-top{font-size:.8rem;font-weight:600;letter-spacing:1.5px;color:var(--ink);white-space:nowrap}
-.wm-top em{font-style:normal;color:var(--accent)}
-.wm-sub{font-size:.5rem;font-weight:400;letter-spacing:3.5px;color:var(--ink-faint)}
-@media(max-width:420px){.wm-top{font-size:.7rem}.wm-sub{display:none}}
+.brand .mark{height:44px;width:auto;display:block}
+.wm{display:flex;flex-direction:column;line-height:1.12;font-family:'Cinzel',serif}
+.wm-the{font-size:.46rem;font-weight:600;letter-spacing:4px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-name{font-size:.88rem;font-weight:700;letter-spacing:1.6px;color:var(--brand-navy)}
+.wm-school{font-size:.63rem;font-weight:600;letter-spacing:3.2px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
+[data-theme="night"] .wm-the,[data-theme="night"] .wm-school{
+  background:linear-gradient(135deg,#8FD468,#2FB36B);-webkit-background-clip:text;background-clip:text}
+@media(max-width:420px){.wm-name{font-size:.74rem}.wm-sub{display:none}}
 .nav-links{display:flex;align-items:center;gap:1.5rem;font-size:.86rem;font-weight:400}
 .nav-links a{text-decoration:none;color:var(--ink-soft)}
 .nav-links a:hover{color:var(--accent)}

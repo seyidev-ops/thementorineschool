@@ -9,7 +9,7 @@
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="assets/icon-192.png">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0D8C4F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,8 +64,10 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
     <a class="brand" href="index.html">
       <img class="mark" src="assets/logo.svg" alt="The Mentorine School mark">
       <span class="wm">
-        <span class="wm-top"><em>The</em> Mentorine <em>School</em></span>
-        <span class="wm-sub">BY ONA</span>
+        <span class="wm-the">THE</span>
+        <span class="wm-name">MENTORINE</span>
+        <span class="wm-school">SCHOOL</span>
+        <span class="wm-sub">BY ONA SERVICES</span>
       </span>
     </a>
     <div class="nav-links" id="navLinks">
@@ -74,7 +76,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <a href="index.html#pricing">Pricing</a>
     </div>
     <div style="display:flex;align-items:center;gap:.6rem">
-      <button class="theme-btn" aria-label="Toggle theme">☾</button>
+      <button class="theme-btn" aria-label="Toggle theme">◐</button>
       <a class="nav-cta" href="#" id="logoutBtn">Log out</a>
       <button class="menu-btn" aria-label="Menu">☰</button>
     </div>
@@ -135,7 +137,11 @@ else {
   document.getElementById('dashMeta').innerHTML =
     '<span class="badge open">● Course unlocked</span>' +
     (track ? '<span class="badge">'+track.courses+'</span><span class="badge">'+track.duration+'</span>' : '') +
-    '<a class="badge" style="text-decoration:none" href="syllabus.html?course='+student.course+'">View full syllabus</a>';
+    '<a class="badge" style="text-decoration:none" href="syllabus.html?course='+student.course+'">View full syllabus</a>' +
+    (track && track.training
+      ? '<a class="badge open" style="text-decoration:none" href="access.html?course='+student.course+'">'+
+        (student.codeVerified ? '▸ Open training portal' : '🔑 Enter access code → training portal')+'</a>'
+      : '');
 
   /* ---- lessons with progress ---- */
   var lessonsEl = document.getElementById('lessons');
