@@ -19,6 +19,7 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `access.html` | Unique access-code gate — verifies the student's code before opening their training portal |
 | `admin.html` | Admin login — view registrations, copy/issue access codes, revoke portal access, reset progress (default passcode `ona-admin-2026`, change before deploying) |
 | `training/sd-full/` | Full training portal for **Software Development — Full Program**: 15 part pages (Part 0–14, terminal → React → Python → Node → databases → DevOps → MentorLink LMS capstone) rethemed to Mentorine green, gated by login + access code, with automatic progress mapping |
+| `training/frontend/` | Full training portal for **Front-end Web Developer**: 12 part pages (Part 0–9 + two appendices — HTML, CSS, JavaScript, the DOM, async, tooling, React, integration, professional practice) generated from the official Word training guide, same gate + progress system |
 
 ## Key behaviours
 
@@ -26,7 +27,8 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 - **One student → one unique course.** Registration unlocks exactly the chosen track; the dashboard opens straight to it.
 - **Unique access codes.** Registration generates a one-per-student code (`MS-XXXX-XXXX`). Admissions issues it after payment via the admin panel; the student enters it once on `access.html` to open the training portal. Admins can revoke access at any time.
 - **Progress mapping.** Visiting a training part records it automatically; the training index paints ✓ ticks and a progress bar over the curriculum map, mirrored on the student dashboard and visible to admins.
-- **Real curricula.** Front-end Web Developer, JavaScript Developer, and both Software Development tracks carry their full extracted curricula from the official training guides.
+- **Real curricula.** Front-end Web Developer, JavaScript Developer, and both Software Development tracks carry their full extracted curricula from the official training guides; Front-end and SD-Full also ship complete in-site training portals.
+- **WhatsApp admissions chat.** The floating ✆ button opens four quick questions (registration/payment, track choice, access code, installments); choosing one copies it and opens the admissions WhatsApp line (`wa.me/message/OF4HWNSJM6ZTK1`).
 - **Theme toggle with system default.** Cycles **system → day → night** (`◐ / ☀ / ☾`); "system" follows the OS `prefers-color-scheme` live, and a no-flash bootstrap snippet applies the theme before first paint.
 - **SVG brand mark.** `assets/logo.svg` is a vector trace of the shield with transparent negative space, so it blends on both day and night surfaces. The wordmark is typeset in **Cinzel** (the Trajan-style serif of the logo).
 - **Quiet motion.** The Liveliness Layer (`assets/liveliness.js`) adds scroll reveals and micro-interactions without touching the design, honouring `prefers-reduced-motion`.
@@ -44,7 +46,8 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 ├── README.md
 ├── access.html
 ├── admin.html
-├── training/sd-full/   # gated training portal (index + part0–14)
+├── training/sd-full/   # gated portal — Software Development Full (index + part0–14)
+├── training/frontend/  # gated portal — Front-end Web Developer (index + part0–11)
 └── assets/
     ├── style.css        # design tokens + components (day/night)
     ├── app.js           # course catalogue, syllabi, auth, theme
@@ -66,11 +69,10 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v3` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v4` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 
-- Replace the `#` href on the floating **✆ chat chip** (all four pages) with the real WhatsApp admissions link.
 - Change the **admin passcode** in `admin.html` (`ADMIN_PASS`).
 - Authentication is a **localStorage demo** (single student per browser, plain-text password, client-side only). Swap `assets/app.js`'s `register/login` functions for a real backend before charging students.
 - Pricing, tiers, tracks, and FAQ content all live in `index.html` and `assets/app.js` (`CATALOGUE` / `SYLLABI`) for easy editing.

@@ -18,7 +18,8 @@ window.MS = (function () {
           blurb: "The complete JavaScript + HTML developer training — from your first web page to a deployed full-stack capstone." },
         { slug: "javascript-developer", name: "JavaScript Developer", courses: "10 parts + appendices", duration: "16 weeks",
           blurb: "Master the language of the web end to end — fundamentals, the DOM, async, Node.js, databases and a full-stack capstone." },
-        { slug: "frontend-developer",  name: "Front-end Web Developer", courses: "12 courses", duration: "8–10 weeks" },
+        { slug: "frontend-developer",  name: "Front-end Web Developer", courses: "12 guided parts", duration: "16 weeks", featured: true, training: "training/frontend/index.html",
+          blurb: "HTML, CSS, JavaScript, professional tooling and React — full training pages with copy-and-paste practicals and a deployed capstone." },
         { slug: "backend-developer",   name: "Back-end Web Developer", courses: "15 courses", duration: "10–12 weeks" },
         { slug: "fullstack-developer", name: "Full-stack Developer", courses: "18 courses", duration: "12–16 weeks" },
         { slug: "mobile-developer",    name: "Mobile App Developer (iOS/Android)", courses: "12 courses", duration: "10–14 weeks" },
@@ -149,7 +150,18 @@ window.MS = (function () {
     "frontend-developer": {
       title: "Front-end Web Developer",
       subtitle: "The complete front-end training — HTML, CSS, JavaScript, modern tooling and React, in 16 weeks.",
-      roadmap: null,
+      training: "training/frontend/index.html",
+      roadmap: [
+        ["Weeks 1–2","Part 1 · HTML","Structure of every web page; semantic markup; forms, tables, media","Profile page + registration form"],
+        ["Weeks 2–4","Part 2 · CSS","Box model, Flexbox, Grid, responsive design","Mobile-friendly portfolio site"],
+        ["Weeks 4–6","Part 3 · JavaScript Core","Variables, logic, loops, functions, arrays, objects","Number-guessing game; tip calculator"],
+        ["Weeks 6–8","Part 4 · The DOM","Interactivity, events, forms, localStorage","To-Do app; quiz app"],
+        ["Weeks 8–9","Part 5 · Modern & Async JS","ES6+, promises, async/await, fetch, public APIs","Weather app; GitHub finder"],
+        ["Weeks 9–10","Part 6 · Professional Tooling","Git/GitHub, npm, Vite, Tailwind CSS","Portfolio rebuilt with modern tooling"],
+        ["Weeks 10–13","Part 7 · React","Components, props, state, hooks, routing","Remote Job Finder app (capstone)"],
+        ["Weeks 13–14","Part 8 · Integration","Node, Python, headless CMS, payments","React powered by real APIs"],
+        ["Weeks 14–16","Part 9 · Professional Practice","Debugging, performance, deployment, job hunt","Live portfolio + deployed capstone"]
+      ],
       modules: [
         { title: "Part 0 \u2014 Start Here: How This Guide Works",
           items: ["0.1  Who This Guide Is For", "0.2  The Golden Rules of Learning to Code", "0.3  The 16-Week Fast-Track Roadmap", "0.4  Setting Up Your Developer Workstation", "0.5  How Each Lesson Is Structured"] },
@@ -380,6 +392,48 @@ window.MS = (function () {
     });
   }
 
+  /* ---------- WhatsApp admissions chat (four quick questions) ---------- */
+  var WA_LINK = "https://wa.me/message/OF4HWNSJM6ZTK1";
+  var WA_QUESTIONS = [
+    "I want to register for a course — what are the payment details?",
+    "Can you help me choose the right career track for me?",
+    "I have paid — please send my unique access code.",
+    "Do you offer payment plans or installments?"
+  ];
+  function initChat() {
+    var chip = document.querySelector(".chip-float");
+    if (!chip) return;
+    chip.setAttribute("href", WA_LINK);
+    chip.setAttribute("target", "_blank");
+    chip.setAttribute("rel", "noopener");
+    var pop = document.createElement("div");
+    pop.setAttribute("style",
+      "position:fixed;bottom:5.6rem;right:1.4rem;z-index:61;width:min(320px,calc(100vw - 2.8rem));" +
+      "background:var(--card);border:1px solid var(--line);border-radius:12px;" +
+      "box-shadow:0 14px 40px rgba(0,0,0,.16);padding:1rem;display:none;font-family:'DM Sans',sans-serif;");
+    pop.innerHTML =
+      '<div style="font-size:.68rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;' +
+      'color:var(--ink-faint);margin-bottom:.6rem">Chat with admissions</div>' +
+      WA_QUESTIONS.map(function (q) {
+        return '<a href="' + WA_LINK + '" target="_blank" rel="noopener" data-q="' + q.replace(/"/g, "&quot;") + '" style="display:block;' +
+          'padding:.65rem .8rem;margin-bottom:.45rem;border:1px solid var(--line-soft);border-radius:8px;' +
+          'font-size:.86rem;font-weight:300;color:var(--ink);text-decoration:none;line-height:1.4">' + q + "</a>";
+      }).join("") +
+      '<div style="font-size:.7rem;color:var(--ink-faint)">Your question is copied — paste it when WhatsApp opens.</div>';
+    document.body.appendChild(pop);
+    pop.addEventListener("click", function (e) {
+      var a = e.target.closest("a[data-q]");
+      if (a && navigator.clipboard) { try { navigator.clipboard.writeText(a.getAttribute("data-q")); } catch (er) {} }
+    });
+    chip.addEventListener("click", function (e) {
+      e.preventDefault();
+      pop.style.display = pop.style.display === "none" ? "block" : "none";
+    });
+    document.addEventListener("click", function (e) {
+      if (!pop.contains(e.target) && !chip.contains(e.target)) pop.style.display = "none";
+    });
+  }
+
   /* ---------- PWA ---------- */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
@@ -391,6 +445,6 @@ window.MS = (function () {
     CATALOGUE: CATALOGUE, allTracks: allTracks, findTrack: findTrack, getSyllabus: getSyllabus,
     register: register, login: login, logout: logout, session: session, verifyCode: verifyCode,
     getStudent: getStudent, isUnlocked: isUnlocked,
-    setProgress: setProgress, getProgress: getProgress, initTheme: initTheme
+    setProgress: setProgress, getProgress: getProgress, initTheme: initTheme, initChat: initChat
   };
 })();

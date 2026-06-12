@@ -7,8 +7,9 @@
    Include AFTER assets/app.js on every training page.
    ============================================================ */
 (function () {
-  var COURSE = "software-development-full";          // course this folder belongs to
-  var HOME = "../../";                                // path back to site root
+  var CFG = window.MS_GATE || {};
+  var COURSE = CFG.course || "software-development-full"; // course this folder belongs to
+  var HOME = CFG.home || "../../";                        // path back to site root
 
   var student = window.MS && MS.session();
 
