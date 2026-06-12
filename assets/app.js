@@ -16,8 +16,8 @@ window.MS = (function () {
           blurb: "The flagship zero-to-professional program: terminal to React, Python, Node, databases, DevOps and the MentorLink LMS capstone — with full training pages inside." },
         { slug: "software-development", name: "Software Development — Core (JS + HTML)", courses: "Full guided curriculum", duration: "16 weeks", featured: true,
           blurb: "The complete JavaScript + HTML developer training — from your first web page to a deployed full-stack capstone." },
-        { slug: "javascript-developer", name: "JavaScript Developer", courses: "10 parts + appendices", duration: "16 weeks",
-          blurb: "Master the language of the web end to end — fundamentals, the DOM, async, Node.js, databases and a full-stack capstone." },
+        { slug: "javascript-developer", name: "JavaScript Developer", courses: "12 guided parts", duration: "16 weeks", featured: true, training: "training/javascript/index.html",
+          blurb: "Master the language of the web end to end — fundamentals, the DOM, async, Node.js, databases and a full-stack capstone, with full training pages inside." },
         { slug: "frontend-developer",  name: "Front-end Web Developer", courses: "12 guided parts", duration: "16 weeks", featured: true, training: "training/frontend/index.html",
           blurb: "HTML, CSS, JavaScript, professional tooling and React — full training pages with copy-and-paste practicals and a deployed capstone." },
         { slug: "backend-developer",   name: "Back-end Web Developer", courses: "12 guided parts", duration: "16 weeks", featured: true, training: "training/backend/index.html",
@@ -235,7 +235,18 @@ window.MS = (function () {
     "javascript-developer": {
       title: "JavaScript Developer",
       subtitle: "The complete JavaScript developer training — fundamentals to full-stack capstone, in 16 weeks.",
-      roadmap: null,
+      training: "training/javascript/index.html",
+      roadmap: [
+        ["Weeks 1–2","Part 1 · HTML","Structure of every web page; semantic markup; forms, tables, media","Profile page + registration form"],
+        ["Weeks 2–3","Part 2 · CSS","Box model, Flexbox, Grid, responsive design","Styled, mobile-friendly profile site"],
+        ["Weeks 3–6","Part 3 · JavaScript Core","Variables, logic, loops, functions, arrays, objects","Number-guessing game; expense tracker"],
+        ["Weeks 6–8","Part 4 · The DOM","Interactivity, events, forms, localStorage","To-Do app, calculator, quiz app"],
+        ["Weeks 8–10","Part 5 · Modern & Async JS","ES6+, promises, async/await, fetch, public APIs","Weather app; GitHub profile finder"],
+        ["Weeks 10–12","Part 6 · Node.js & Express","Servers, npm, REST APIs, JSON","Remote Job Board API"],
+        ["Weeks 12–14","Part 7 · Databases + Capstone","SQL, CRUD, front end meets back end","Full-stack Remote Job Board"],
+        ["Weeks 14–15","Part 8 · Cross-Language Integration","JS + Python, JS + PHP, JS + SQL, WebAssembly","JS front end on a Python API"],
+        ["Weeks 15–16","Part 9 · Professional Practice","Git/GitHub, debugging, deployment, job hunt","Live portfolio + deployed capstone"]
+      ],
       modules: [
         { title: "Part 0 \u2014 Start Here: How This Guide Works",
           items: ["0.1  Who This Guide Is For", "0.2  The Golden Rules of Learning to Code", "0.3  The 16-Week Fast-Track Roadmap", "0.4  Setting Up Your Developer Workstation", "0.5  How Each Lesson Is Structured"] },

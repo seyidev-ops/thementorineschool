@@ -20,6 +20,7 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `admin.html` | Admin login — view registrations, copy/issue access codes, revoke portal access, reset progress (default passcode `ona-admin-2026`, change before deploying) |
 | `training/sd-full/` | Full training portal for **Software Development — Full Program**: 15 part pages (Part 0–14, terminal → React → Python → Node → databases → DevOps → MentorLink LMS capstone) rethemed to Mentorine green, gated by login + access code, with automatic progress mapping |
 | `training/frontend/` | Full training portal for **Front-end Web Developer**: 12 part pages (Part 0–9 + two appendices — HTML, CSS, JavaScript, the DOM, async, tooling, React, integration, professional practice) generated from the official Word training guide, same gate + progress system |
+| `training/javascript/` | Full training portal for **JavaScript Developer**: 12 part pages (Part 0–9 + two appendices — HTML, CSS, JS fundamentals, the DOM, async, Node & Express, databases & the full-stack capstone, cross-language integration, professional practice) generated from the official Word training guide |
 | `training/backend/` | Full training portal for **Back-end Web Developer**: 12 part pages (Part 0–9 + two appendices — terminal & HTTP, JavaScript core, Node, Express & REST, SQL, MongoDB, auth & security, integration with Python/Paystack/email/webhooks, professional practice and the NaijaStore capstone). Authored as an original guide; the matching Word document is `Back-End-Web-Developer-Training-Guide.docx` |
 
 ## Key behaviours
@@ -28,7 +29,7 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 - **One student → one unique course.** Registration unlocks exactly the chosen track; the dashboard opens straight to it.
 - **Unique access codes.** Registration generates a one-per-student code (`MS-XXXX-XXXX`). Admissions issues it after payment via the admin panel; the student enters it once on `access.html` to open the training portal. Admins can revoke access at any time.
 - **Progress mapping.** Visiting a training part records it automatically; the training index paints ✓ ticks and a progress bar over the curriculum map, mirrored on the student dashboard and visible to admins.
-- **Real curricula.** Front-end, Back-end, JavaScript Developer and both Software Development tracks carry their full curricula from the official training guides; Front-end, Back-end and SD-Full also ship complete in-site training portals.
+- **Real curricula.** Front-end, Back-end, JavaScript Developer and both Software Development tracks carry their full curricula from the official training guides; Front-end, Back-end, JavaScript and SD-Full all ship complete in-site training portals.
 - **Copyright.** Every page carries the footer notice: © 2026 Mentorine School by Ona Services Ltd. All rights reserved.
 - **WhatsApp admissions chat.** The floating ✆ button opens four quick questions (registration/payment, track choice, access code, installments); choosing one copies it and opens the admissions WhatsApp line (`wa.me/message/OF4HWNSJM6ZTK1`).
 - **Theme toggle with system default.** Cycles **system → day → night** (`◐ / ☀ / ☾`); "system" follows the OS `prefers-color-scheme` live, and a no-flash bootstrap snippet applies the theme before first paint.
@@ -50,6 +51,7 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 ├── admin.html
 ├── training/sd-full/   # gated portal — Software Development Full (index + part0–14)
 ├── training/frontend/  # gated portal — Front-end Web Developer (index + part0–11)
+├── training/javascript/# gated portal — JavaScript Developer (index + part0–11)
 ├── training/backend/   # gated portal — Back-end Web Developer (index + part0–11)
 └── assets/
     ├── style.css        # design tokens + components (day/night)
@@ -72,7 +74,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v5` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v6` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 

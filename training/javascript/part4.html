@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>The DOM — JavaScript Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,137 +274,254 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">back-end developer</span> in 16 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">PART 4 · WEEKS 6–8</div>
+    <h1>The DOM: Making Web Pages Come Alive</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#4-1-what-is-the-dom">4.1  What Is the DOM?</a><a href="#4-2-selecting-and-changing-elements">4.2  Selecting and Changing Elements</a><a href="#4-3-events-responding-to-the-user">4.3  Events: Responding to the User</a><a href="#4-4-project-the-to-do-list-every-developer-s-rite-of-passage">4.4  Project: The To-Do List (Every Developer’s Rite of Passage)</a><a href="#4-5-localstorage-remembering-data-after-the-tab-closes">4.5  localStorage: Remembering Data After the Tab Closes</a><a href="#4-6-project-a-working-calculator">4.6  Project: A Working Calculator</a><a href="#4-7-checkpoint-project-the-quiz-app">4.7  Checkpoint Project: The Quiz App</a></div>
   </div>
-
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+  <article>
+<p><em>Estimated duration: Weeks 6–8 (12–14 days).</em></p>
+<h2 id="4-1-what-is-the-dom">4.1  What Is the DOM?</h2>
+<p>When the browser loads your HTML, it builds a live, in-memory model of the page called the Document Object Model (DOM) — a family tree where every tag is a node JavaScript can find, read, change, create, or delete. This is the moment HTML, CSS, and JavaScript finally meet: HTML provides the elements, CSS the appearance, and JavaScript reaches into the DOM to change both in response to the user.</p>
+<h2 id="4-2-selecting-and-changing-elements">4.2  Selecting and Changing Elements</h2>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-dom/dom-basics.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;DOM Basics&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 id="headline"&gt;Original Headline&lt;/h1&gt;
+  &lt;p class="note"&gt;First note&lt;/p&gt;
+  &lt;p class="note"&gt;Second note&lt;/p&gt;
+  &lt;button id="magicBtn"&gt;Click Me&lt;/button&gt;
+  &lt;script&gt;
+    // SELECTING — querySelector uses the same syntax as CSS selectors
+    const headline = document.querySelector("#headline");  // by id
+    const firstNote = document.querySelector(".note");     // first match
+    const allNotes = document.querySelectorAll(".note");   // ALL matches
+    // READING &amp; CHANGING content
+    console.log(headline.textContent);          // "Original Headline"
+    headline.textContent = "JavaScript Was Here";
+    // CHANGING style and classes
+    headline.style.color = "#C8A04B";
+    firstNote.classList.add("highlight");       // add a CSS class
+    firstNote.classList.toggle("highlight");    // add if absent, remove if present
+    // LOOPING over a selection
+    allNotes.forEach((note, i) =&gt; {
+      note.textContent = `Note number ${i + 1}, rewritten by JS`;
+    });
+    // CREATING new elements
+    const badge = document.createElement("p");
+    badge.textContent = "I was created entirely by JavaScript.";
+    document.body.appendChild(badge);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<div class="callout"><div class="co-label">GOLDEN RULE</div><p></p></div>
+<p>The &lt;script&gt; tag goes at the BOTTOM of &lt;body&gt; (or use the defer attribute). JavaScript cannot select an element that the browser has not drawn yet — scripts placed in &lt;head&gt; without defer find an empty page and fail silently.</p>
+<h2 id="4-3-events-responding-to-the-user">4.3  Events: Responding to the User</h2>
+<p>An event is anything that happens: a click, a keypress, typing in a box, submitting a form, scrolling. You attach a listener — a function that runs when the event fires.</p>
+<pre><code>const btn = document.querySelector("#magicBtn");
+// addEventListener(eventName, functionToRun)
+btn.addEventListener("click", () =&gt; {
+  alert("You clicked the button!");
+});
+// Reading what the user types, live
+const input = document.querySelector("#searchBox");
+input.addEventListener("input", (event) =&gt; {
+  console.log("Current text:", event.target.value);
+});
+// Handling a form submission properly
+const form = document.querySelector("#myForm");
+form.addEventListener("submit", (event) =&gt; {
+  event.preventDefault();   // STOP the page from reloading — crucial!
+  console.log("Form submitted, page did not reload.");
+});</code></pre>
+<p>The <code>event</code> object handed to your listener describes what happened; <code>event.target</code> is the element it happened to. The most common events: <code>click, input, change, submit, keydown, mouseover, load</code>.</p>
+<h2 id="4-4-project-the-to-do-list-every-developer-s-rite-of-passage">4.4  Project: The To-Do List (Every Developer’s Rite of Passage)</h2>
+<p>This single file combines everything so far: HTML structure, CSS styling, DOM selection, events, arrays of objects, and rendering. Type or paste it, run it, then study the comments until every line makes sense.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-dom/todo.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My Tasks&lt;/title&gt;
+  &lt;style&gt;
+    body { font-family: Arial, sans-serif; max-width: 480px;
+           margin: 40px auto; padding: 0 16px; }
+    h1 { font-family: Georgia, serif; }
+    form { display: flex; gap: 8px; }
+    input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 10px 16px; border: none; border-radius: 6px;
+             background: #0A0A0A; color: #fff; cursor: pointer; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; justify-content: space-between; align-items: center;
+         padding: 10px; border-bottom: 1px solid #eee; }
+    .done { text-decoration: line-through; color: #999; }
+    .delete { background: #c0392b; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;My Tasks&lt;/h1&gt;
+  &lt;form id="taskForm"&gt;
+    &lt;input type="text" id="taskInput" placeholder="What needs doing?" required&gt;
+    &lt;button type="submit"&gt;Add&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;ul id="taskList"&gt;&lt;/ul&gt;
+  &lt;p id="counter"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    // ----- STATE: the single source of truth -----
+    let tasks = [];   // each task: { id, text, done }
+    // ----- ELEMENT REFERENCES -----
+    const form = document.querySelector("#taskForm");
+    const input = document.querySelector("#taskInput");
+    const list = document.querySelector("#taskList");
+    const counter = document.querySelector("#counter");
+    // ----- RENDER: redraw the list from the tasks array -----
+    function render() {
+      list.innerHTML = "";   // wipe and rebuild — simple and reliable
+      tasks.forEach(task =&gt; {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        span.textContent = task.text;
+        if (task.done) span.classList.add("done");
+        // Clicking the text toggles done
+        span.addEventListener("click", () =&gt; toggleTask(task.id));
+        const del = document.createElement("button");
+        del.textContent = "✕";
+        del.classList.add("delete");
+        del.addEventListener("click", () =&gt; deleteTask(task.id));
+        li.appendChild(span);
+        li.appendChild(del);
+        list.appendChild(li);
+      });
+      const remaining = tasks.filter(t =&gt; !t.done).length;
+      counter.textContent = `${remaining} task(s) remaining`;
+    }
+    // ----- ACTIONS: change state, then re-render -----
+    function addTask(text) {
+      tasks.push({ id: Date.now(), text, done: false });
+      render();
+    }
+    function toggleTask(id) {
+      tasks = tasks.map(t =&gt; t.id === id ? { ...t, done: !t.done } : t);
+      render();
+    }
+    function deleteTask(id) {
+      tasks = tasks.filter(t =&gt; t.id !== id);
+      render();
+    }
+    // ----- EVENTS -----
+    form.addEventListener("submit", (e) =&gt; {
+      e.preventDefault();
+      addTask(input.value.trim());
+      input.value = "";
+      input.focus();
+    });
+    render();   // initial draw
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><strong>THE PROFESSIONAL PATTERN YOU JUST LEARNED</strong></p>
+<p>State → Render → Actions → Events. Keep your data in one place (the array), have one function that redraws the screen from that data, and have every user action change the data then call render. This exact pattern is the heart of React, Vue, and every modern framework. You just built it from scratch.</p>
+<h2 id="4-5-localstorage-remembering-data-after-the-tab-closes">4.5  localStorage: Remembering Data After the Tab Closes</h2>
+<p>Right now your to-do list forgets everything on refresh. <code>localStorage</code> is a small permanent store inside the browser. It only stores text, so we convert with <code>JSON.stringify</code> (object → text) and <code>JSON.parse</code> (text → object).</p>
+<pre><code>// Add these two upgrades to your to-do app:
+// 1. Load saved tasks when the page opens (replace: let tasks = [];)
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+// 2. Save inside render(), so every change is persisted
+function render() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  // ...rest of render stays the same
+}</code></pre>
+<p>Refresh the page. Your tasks survive. You have just implemented data persistence — a real software engineering concept.</p>
+<h2 id="4-6-project-a-working-calculator">4.6  Project: A Working Calculator</h2>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part4-dom/calculator.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Calculator&lt;/title&gt;
+  &lt;style&gt;
+    body { display: flex; justify-content: center; padding-top: 60px;
+           background: #f4f4f4; font-family: Arial; }
+    .calc { background: #0A0A0A; padding: 20px; border-radius: 16px; }
+    #screen { width: 100%; height: 56px; font-size: 28px; text-align: right;
+              border: none; border-radius: 8px; margin-bottom: 12px;
+              padding: 0 12px; box-sizing: border-box; }
+    .keys { display: grid; grid-template-columns: repeat(4, 64px); gap: 8px; }
+    .keys button { height: 56px; font-size: 20px; border: none;
+                   border-radius: 8px; cursor: pointer; }
+    .op { background: #C8A04B; color: white; }
+    .eq { background: #2e7d32; color: white; grid-column: span 2; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="calc"&gt;
+    &lt;input id="screen" disabled&gt;
+    &lt;div class="keys" id="keys"&gt;
+      &lt;button&gt;7&lt;/button&gt;&lt;button&gt;8&lt;/button&gt;&lt;button&gt;9&lt;/button&gt;&lt;button class="op"&gt;/&lt;/button&gt;
+      &lt;button&gt;4&lt;/button&gt;&lt;button&gt;5&lt;/button&gt;&lt;button&gt;6&lt;/button&gt;&lt;button class="op"&gt;*&lt;/button&gt;
+      &lt;button&gt;1&lt;/button&gt;&lt;button&gt;2&lt;/button&gt;&lt;button&gt;3&lt;/button&gt;&lt;button class="op"&gt;-&lt;/button&gt;
+      &lt;button&gt;0&lt;/button&gt;&lt;button&gt;.&lt;/button&gt;&lt;button class="op"&gt;+&lt;/button&gt;&lt;button id="clear"&gt;C&lt;/button&gt;
+      &lt;button class="eq" id="equals"&gt;=&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    const screen = document.querySelector("#screen");
+    const keys = document.querySelector("#keys");
+    // Event delegation: ONE listener on the parent handles all buttons
+    keys.addEventListener("click", (e) =&gt; {
+      if (e.target.tagName !== "BUTTON") return;
+      const key = e.target.textContent;
+      if (e.target.id === "clear") {
+        screen.value = "";
+      } else if (e.target.id === "equals") {
+        calculate();
+      } else {
+        screen.value += key;
+      }
+    });
+    function calculate() {
+      try {
+        // Function() safely evaluates the arithmetic expression string
+        const result = Function('"use strict"; return (' + screen.value + ')')();
+        screen.value = Number.isFinite(result) ? result : "Error";
+      } catch {
+        screen.value = "Error";
+      }
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><strong>New technique — event delegation: </strong>instead of 17 listeners on 17 buttons, one listener on the container inspects <code>e.target</code> to see which child was clicked. Essential for lists where items are created dynamically.</p>
+<h2 id="4-7-checkpoint-project-the-quiz-app">4.7  Checkpoint Project: The Quiz App</h2>
+<p>Build this one with less hand-holding. Requirements:</p>
+<p>Store at least five questions as an array of objects: { question, options (array of 4), correctIndex }.</p>
+<p>Show one question at a time with its four options as buttons.</p>
+<p>Clicking an option shows green/red feedback, updates the score, and moves to the next question after one second (hint: setTimeout(fn, 1000)).</p>
+<p>At the end, show the score, a message based on performance (use if/else), and a Restart button.</p>
+<p>Stretch goal: save the best score in localStorage and display "Best: X".</p>
+<p><strong>MILESTONE REACHED</strong></p>
+<p>You can now build interactive browser applications with persistent data. Many self-taught developers get hired with little more than what you now know — but we are going much further.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part3.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 3 · JavaScript Fundamentals</span></a>
+  <a class="next" href="part5.html"><span class="dir">NEXT →</span><span class="pt">Part 5 · Modern &amp; Async JS</span></a>
+</nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -413,7 +530,7 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

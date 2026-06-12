@@ -1,271 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="day">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>The Mentorine School by Ona — Career &amp; Skill Development Program</title>
+<meta name="description" content="Your gateway to a future-ready remote career. Career roadmaps, curated courses, community and certificates — The Mentorine School by Ona Services.">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:title" content="The Mentorine School by Ona — Career & Skill Development Program">
+<meta property="og:description" content="Your gateway to a future-ready remote career. 40+ career tracks, four learning pillars, verified certificates.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="assets/og-image.png">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0D8C4F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 <style>
-/* Mentorine brand override — green accent, house fonts, stacked wordmark */
-:root{--accent:#0D8C4F;--accent-h:#0A6F3F;--brand-navy:#305D85;
-  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans','Segoe UI',Calibri,sans-serif;}
-[data-theme="night"]{--accent:#2FB36B;--accent-h:#4CC684;--brand-navy:#8FB3D4;}
-.brand{display:flex;align-items:center;gap:.6rem}
-.brand .mark{height:42px;width:auto;display:block}
-.wm{display:flex;flex-direction:column;line-height:1.12;font-family:'Cinzel',serif}
-.wm-the{font-size:.45rem;font-weight:600;letter-spacing:4px;
-  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
-.wm-name{font-size:.86rem;font-weight:700;letter-spacing:1.6px;color:var(--brand-navy)}
-.wm-school{font-size:.62rem;font-weight:600;letter-spacing:3.2px;
-  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
-.wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
+/* ---- page-specific ---- */
+.hero{padding:clamp(3.4rem,9vw,6.5rem) 0 clamp(2.6rem,6vw,4rem)}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);max-width:18ch}
+.hero p.lede{color:var(--ink-soft);max-width:58ch;margin:1.4rem 0 2.2rem;font-size:1.05rem}
+.hero-actions{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+
+.stats{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:clamp(2.4rem,6vw,3.6rem)}
+.stat{flex:1;padding:1.3rem 1rem;text-align:center}
+.stat + .stat{border-left:1px solid var(--line-soft)}
+.stat b{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.4rem,3.5vw,2rem);display:block;font-variant-numeric:tabular-nums}
+.stat span{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem}
+.pillar h3{font-size:1.15rem;margin-bottom:.5rem}
+.pillar .num{font-family:'Fraunces',serif;color:var(--accent);font-size:.95rem;display:block;margin-bottom:.6rem}
+.pillar p{font-size:.9rem;color:var(--ink-soft)}
+
+/* catalogue */
+.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.cat-tab{
+  border:1px solid var(--line);background:none;color:var(--ink-soft);cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:400;
+  padding:.45rem 1.05rem;border-radius:var(--r-pill);transition:.2s;
+}
+.cat-tab.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tracks{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem}
+.track{display:flex;flex-direction:column;gap:.8rem}
+.track.featured{border-color:color-mix(in srgb, var(--accent) 45%, transparent)}
+.track-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem}
+.track h3{font-size:1.12rem;letter-spacing:-.3px}
+.track .meta{font-size:.8rem;color:var(--ink-faint)}
+.track .blurb{font-size:.88rem;color:var(--ink-soft)}
+.track-actions{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:.8rem;border-top:1px solid var(--line-soft)}
+.lock{font-size:.95rem}
+
+/* register */
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,5vw,3.4rem);align-items:start}
+@media(max-width:820px){.reg-grid{grid-template-columns:1fr}}
+.reg-points{list-style:none}
+.reg-points li{padding:.55rem 0;border-bottom:1px solid var(--line-soft);font-size:.93rem;color:var(--ink-soft)}
+.reg-points li::before{content:"—";color:var(--accent);margin-right:.7rem}
+.reg-success{display:none;text-align:center;padding:2.2rem 1.4rem}
+.reg-success h3{font-size:1.5rem;margin-bottom:.6rem}
+.reg-success p{color:var(--ink-soft);font-size:.92rem;margin-bottom:1.4rem}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+.tier{display:flex;flex-direction:column;gap:.4rem}
+.tier .dur{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.tier .price{font-family:'Fraunces',serif;font-size:2rem;font-weight:500;font-variant-numeric:tabular-nums}
+.tier .was{color:var(--ink-faint);text-decoration:line-through;font-size:.85rem;font-family:'DM Sans',sans-serif;font-weight:300;margin-left:.5rem}
+.tier .for{font-size:.88rem;color:var(--ink-soft);margin:.5rem 0 1.1rem}
+.tier.hl{border-color:color-mix(in srgb, var(--accent) 50%, transparent)}
+.tier .pick{margin-top:auto}
+.standalone{margin-top:1rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+.standalone p{font-size:.9rem;color:var(--ink-soft);max-width:52ch}
+
+/* faq */
+.faq details{border-bottom:1px solid var(--line-soft);padding:1rem 0}
+.faq summary{cursor:pointer;font-weight:400;font-size:1rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+.faq summary::after{content:"+";color:var(--accent);font-family:'Fraunces',serif}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--ink-soft);font-size:.92rem;margin-top:.6rem;max-width:64ch}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
-<style>
-/* ============================================================
-   The Complete JavaScript & HTML Developer Training Guide
-   Warm editorial minimalist — gold house style (#0D8C4F)
-   ============================================================ */
-:root{
-  --paper:#F7F5F0; --paper-2:#F0EDE5; --card:#FFFFFF;
-  --ink:#0A0A0A; --ink-soft:#5A5A5A; --ink-faint:#8A8378;
-  --accent:#0D8C4F; --accent-h:#0A6F3F;
-  --line:rgba(10,10,10,.12); --line-soft:rgba(10,10,10,.07);
-  --code-bg:#1B1814; --code-ink:#F2EEE6; --code-soft:#ADA79B;
-  --serif:Georgia,'Times New Roman',serif;
-  --sans:'Segoe UI',Calibri,'Helvetica Neue',Arial,sans-serif;
-  --mono:Consolas,'SF Mono',Menlo,monospace;
-}
-html[data-theme="night"]{
-  --paper:#14120F; --paper-2:#1B1814; --card:#1B1814;
-  --ink:#F2EEE6; --ink-soft:#ADA79B; --ink-faint:#6E685D;
-  --accent:#2FB36B; --accent-h:#4CC684;
-  --line:rgba(242,238,230,.14); --line-soft:rgba(242,238,230,.07);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  background:var(--paper);color:var(--ink);
-  font-family:var(--sans);font-weight:400;font-size:1.0rem;line-height:1.7;
-  background-image:radial-gradient(var(--line-soft) 1px,transparent 1px);
-  background-size:22px 22px;background-attachment:fixed;
-}
-a{color:inherit}
-::selection{background:var(--accent);color:#fff}
-
-/* ---------- Header ---------- */
-header.site{
-  position:sticky;top:0;z-index:50;
-  background:color-mix(in srgb,var(--paper) 88%,transparent);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line-soft);
-}
-.nav{max-width:1000px;margin:0 auto;padding:.85rem 1.4rem;
-  display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.brand{font-family:var(--serif);font-weight:700;font-size:1.02rem;
-  text-decoration:none;letter-spacing:-.2px;white-space:nowrap}
-.brand .amp{color:var(--accent);font-style:italic}
-.nav-right{display:flex;align-items:center;gap:1.1rem}
-.nav-link{font-size:.86rem;font-weight:600;letter-spacing:.4px;
-  text-decoration:none;color:var(--ink-soft)}
-.nav-link:hover{color:var(--accent-h)}
-.theme-btn{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
-  border-radius:100px;width:34px;height:34px;cursor:pointer;font-size:.95rem;line-height:1}
-.theme-btn:hover{color:var(--accent-h);border-color:var(--accent)}
-
-/* ---------- Shared column ---------- */
-.col{max-width:760px;margin:0 auto;padding:0 1.4rem}
-.wide{max-width:1000px;margin:0 auto;padding:0 1.4rem}
-
-/* ---------- Kicker ---------- */
-.kicker{font-family:var(--sans);font-weight:600;font-size:.74rem;
-  letter-spacing:2.6px;text-transform:uppercase;color:var(--accent);
-  display:flex;align-items:center;gap:.7rem;margin:2.4rem 0 .8rem}
-.kicker::before{content:"";display:inline-block;width:26px;height:1px;background:var(--accent)}
-
-/* ---------- Part hero ---------- */
-.part-hero{padding:clamp(2.6rem,7vw,4.6rem) 0 1.4rem;border-bottom:1px solid var(--line-soft);margin-bottom:2.2rem}
-.part-hero .kicker{margin-top:0}
-.part-hero h1{font-family:var(--serif);font-weight:700;
-  font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.08;letter-spacing:-.8px;margin:0 0 1rem}
-.anchor-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1.6rem}
-.anchor-row a{font-size:.78rem;font-weight:600;text-decoration:none;color:var(--ink-soft);
-  border:1px solid var(--line);border-radius:100px;padding:.32rem .85rem;background:var(--card);
-  transition:border-color .25s,color .25s}
-.anchor-row a:hover{border-color:var(--accent);color:var(--accent-h)}
-
-/* ---------- Article content ---------- */
-article p{margin:0 0 1.05rem;color:var(--ink-soft);max-width:64ch}
-article p strong{color:var(--ink)}
-article h2{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:-.3px;
-  color:var(--ink);margin:2.8rem 0 1rem;padding-bottom:.45rem;
-  border-bottom:2px solid var(--accent);scroll-margin-top:84px;max-width:64ch}
-article h3{font-family:var(--serif);font-weight:700;font-size:1.18rem;
-  color:var(--ink);margin:2rem 0 .7rem}
-article h4{font-weight:700;font-size:1rem;color:var(--ink);margin:1.5rem 0 .5rem}
-article ul,article ol{margin:0 0 1.2rem;padding-left:1.4rem;color:var(--ink-soft);max-width:62ch}
-article li{margin-bottom:.45rem}
-article li::marker{color:var(--accent);font-weight:600}
-article em{color:var(--ink-faint)}
-.soft{color:var(--ink-faint)}
-.accent{color:var(--accent)}
-
-/* Inline code */
-article p code,article li code,td code{
-  font-family:var(--mono);font-size:.86em;color:var(--ink);
-  background:var(--paper-2);border:1px solid var(--line-soft);
-  border-radius:4px;padding:.08em .38em;white-space:nowrap}
-html[data-theme="night"] article p code,
-html[data-theme="night"] article li code{color:var(--ink)}
-
-/* Code blocks — dark surface, the standing exception */
-article pre{
-  background:var(--code-bg);color:var(--code-ink);
-  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
-  padding:1.05rem 1.2rem;margin:0 0 1.4rem;overflow-x:auto;
-  font-family:var(--mono);font-size:.83rem;line-height:1.55}
-article pre code{background:none;border:none;padding:0;color:inherit;white-space:pre}
-.file-label{display:inline-flex;align-items:center;gap:.55rem;margin:.4rem 0 .45rem}
-.file-label .fl-tag{font-size:.66rem;font-weight:700;letter-spacing:2px;color:var(--accent)}
-.file-label code{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--ink-soft);
-  background:none;border:none;padding:0}
-.file-label + pre{margin-top:0}
-
-/* Callout */
-.callout{background:var(--card);border:1px solid var(--line-soft);
-  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
-  padding:1rem 1.2rem;margin:1.4rem 0 1.6rem}
-.callout .co-label{font-size:.7rem;font-weight:700;letter-spacing:2.2px;color:var(--accent);margin-bottom:.35rem}
-.callout p{margin:0;font-size:.95rem}
-
-/* Tables */
-.tbl-wrap{overflow-x:auto;margin:.4rem 0 1.6rem;border:1px solid var(--line-soft);
-  border-radius:8px;background:var(--card)}
-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
-th{background:var(--ink);color:var(--paper);text-align:left;font-weight:600;
-  font-size:.78rem;letter-spacing:.6px;padding:.65rem .85rem}
-html[data-theme="night"] th{background:var(--paper-2);color:var(--ink)}
-td{padding:.6rem .85rem;border-top:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
-
-/* ---------- Pagination ---------- */
-.pager{display:flex;justify-content:space-between;gap:1rem;
-  border-top:1px solid var(--line-soft);margin-top:3.4rem;padding:1.6rem 0 0}
-.pager a{flex:1;text-decoration:none;border:1px solid var(--line);border-radius:8px;
-  background:var(--card);padding:.95rem 1.15rem;transition:border-color .25s}
-.pager a:hover{border-color:var(--accent)}
-.pager .dir{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:.25rem}
-.pager .pt{font-family:var(--serif);font-weight:700;font-size:.98rem;color:var(--ink)}
-.pager a.next{text-align:right}
-.pager .ghost{visibility:hidden}
-
-/* ---------- Landing ---------- */
-.hero{padding:clamp(4rem,11vw,7.5rem) 0 clamp(2.5rem,6vw,4rem);text-align:left}
-.hero .kicker{margin-top:0}
-.hero h1{font-family:var(--serif);font-weight:700;
-  font-size:clamp(2.5rem,7vw,4.4rem);line-height:1.04;letter-spacing:-1.5px;margin:0 0 1.3rem;max-width:16ch}
-.hero h1 .em{font-style:italic;color:var(--accent)}
-.hero .sub{font-size:1.07rem;color:var(--ink-soft);max-width:54ch;margin-bottom:2.2rem}
-.cta-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
-.btn-primary{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
-  background:var(--ink);color:var(--paper);font-weight:600;font-size:.95rem;
-  padding:1rem 2.2rem;border-radius:2px;transition:background .25s}
-.btn-primary .arr{transition:transform .25s}
-.btn-primary:hover{background:var(--accent-h)}
-.btn-primary:hover .arr{transform:translateX(4px)}
-html[data-theme="night"] .btn-primary{background:var(--ink);color:var(--paper)}
-.link-quiet{font-size:.92rem;color:var(--ink-faint);text-decoration:underline;text-underline-offset:4px}
-.link-quiet:hover{color:var(--accent-h)}
-
-.stat-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  display:grid;grid-template-columns:repeat(4,1fr);margin:1.6rem 0 0}
-.stat{padding:1.4rem 1rem;text-align:center;border-left:1px solid var(--line-soft)}
-.stat:first-child{border-left:none}
-.stat .n{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,3.5vw,2.2rem);
-  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
-.stat .l{font-size:.7rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-faint);margin-top:.3rem}
-
-.section{padding:clamp(3rem,8vw,5.5rem) 0 0}
-.section-head{font-family:var(--serif);font-weight:700;font-size:clamp(1.6rem,4vw,2.2rem);
-  letter-spacing:-.6px;margin:0 0 .7rem}
-.section-sub{color:var(--ink-soft);max-width:58ch;margin-bottom:2.2rem}
-
-.parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem}
-.part-card{display:block;text-decoration:none;background:var(--card);
-  border:1px solid var(--line-soft);border-radius:8px;padding:1.5rem 1.5rem 1.3rem;
-  transition:border-color .25s}
-.part-card:hover{border-color:var(--accent)}
-.part-card .pc-kicker{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:.55rem}
-.part-card h3{font-family:var(--serif);font-weight:700;font-size:1.16rem;letter-spacing:-.2px;color:var(--ink);margin:0 0 .5rem}
-.part-card p{font-size:.88rem;color:var(--ink-soft);margin:0 0 .9rem;line-height:1.55}
-.part-card .pc-mile{font-size:.78rem;color:var(--ink-faint);border-top:1px solid var(--line-soft);padding-top:.7rem}
-.part-card .pc-mile strong{color:var(--ink-soft);font-weight:600}
-
-.proj-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
-.proj{background:var(--card);border:1px solid var(--line-soft);border-radius:8px;
-  padding:.85rem 1.05rem;font-size:.86rem;color:var(--ink-soft);display:flex;gap:.6rem;align-items:baseline}
-.proj .dot{color:var(--accent);font-weight:700}
-
-.cta-band{margin:clamp(3.5rem,9vw,6rem) 0 0;border-top:1px solid var(--line);
-  padding:clamp(2.6rem,7vw,4.5rem) 0}
-.cta-band h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,4.5vw,2.5rem);
-  letter-spacing:-.6px;margin:0 0 .8rem;max-width:22ch}
-.cta-band p{color:var(--ink-soft);max-width:52ch;margin-bottom:2rem}
-
-/* ---------- Footer ---------- */
-footer.site{border-top:1px solid var(--line-soft);margin-top:4rem;padding:2.2rem 0 2.8rem}
-footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-  font-size:.82rem;color:var(--ink-faint)}
-.bm{font-weight:700;color:var(--ink)}
-.bm .bm-i{font-style:italic;color:var(--accent);margin-left:-0.08em}
-
-@media (max-width:640px){
-  .stat-strip{grid-template-columns:repeat(2,1fr)}
-  .stat:nth-child(3){border-left:none}
-  .pager{flex-direction:column}
-  .pager a.next{text-align:left}
-  .pager .ghost{display:none}
-}
-
-/* ---------- Auth (register/login) ---------- */
-.auth-wrap{max-width:430px;margin:clamp(3rem,9vw,6rem) auto 4rem;padding:0 1.4rem}
-.auth-card{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:2rem 1.8rem}
-.auth-tabs{display:flex;gap:.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line-soft)}
-.auth-tabs button{flex:1;background:none;border:0;border-bottom:2px solid transparent;
-  font:600 .92rem var(--sans);color:var(--ink-faint);padding:.7rem 0;cursor:pointer}
-.auth-tabs button.active{color:var(--ink);border-bottom-color:var(--accent)}
-.field{margin-bottom:1rem}
-.field label{display:block;font-size:.74rem;font-weight:700;letter-spacing:1.4px;
-  text-transform:uppercase;color:var(--ink-faint);margin-bottom:.35rem}
-.field input{width:100%;padding:.8rem .9rem;border:1px solid var(--line);border-radius:6px;
-  background:var(--paper);color:var(--ink);font:1rem var(--sans)}
-.field input:focus{outline:none;border-color:var(--accent)}
-.auth-btn{width:100%;border:0;border-radius:2px;background:var(--ink);color:var(--paper);
-  font:600 .98rem var(--sans);padding:.95rem;cursor:pointer;margin-top:.4rem}
-.auth-btn:hover{background:var(--accent-h)}
-.auth-msg{font-size:.85rem;margin-top:.8rem;min-height:1.2em}
-.auth-msg.err{color:#A04B4B}.auth-msg.ok{color:var(--accent-h)}
-.auth-note{font-size:.78rem;color:var(--ink-faint);text-align:center;margin-top:1.2rem}
-.welcome-chip{font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);
-  border-radius:100px;padding:.3rem .85rem;background:var(--card);white-space:nowrap}
-.welcome-chip b{color:var(--accent-h)}
-
-</style>
-
-
+<script>
+  window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900, stagger: 90 };
+</script>
 </head>
 <body>
 
-<header class="site" data-live="off">
-  <nav class="nav">
-    <a class="brand" href="../../index.html" style="text-decoration:none">
-      <img class="mark" src="../../assets/logo.svg" alt="The Mentorine School mark">
+<nav class="nav" data-live="off">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <img class="mark" src="assets/logo.svg" alt="The Mentorine School mark">
       <span class="wm">
         <span class="wm-the">THE</span>
         <span class="wm-name">MENTORINE</span>
@@ -273,149 +104,303 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
         <span class="wm-sub">BY ONA SERVICES</span>
       </span>
     </a>
-    <div class="nav-right">
-      
-      
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#courses">Courses</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#register">Register</a>
     </div>
-  </nav>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="theme-btn" aria-label="Toggle theme">◐</button>
+      <a class="nav-cta" id="loginCta" href="login.html">Student Login</a>
+      <button class="menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Courses, Skills, and Career Development</div>
+    <h1>Your gateway to a <em class="ac">future-ready</em> remote career.</h1>
+    <p class="lede">A comprehensive career development ecosystem preparing you for high-demand roles that thrive in remote, hybrid, or onsite environments — whether you're a beginner, a professional seeking promotion, or an entrepreneur scaling your business.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#register">Register for a track <span class="arr">→</span></a>
+      <a class="link-quiet" href="#courses">Browse the courses</a>
+    </div>
+    <div class="stats" data-live="stagger">
+      <div class="stat"><b>40+</b><span>Career Tracks</span></div>
+      <div class="stat"><b>4</b><span>Learning Pillars</span></div>
+      <div class="stat"><b>100%</b><span>Remote-Friendly</span></div>
+      <div class="stat"><b>1</b><span>Verified Certificate</span></div>
+    </div>
+  </div>
 </header>
 
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
+<!-- HOW IT WORKS / FOUR PILLARS -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">How It Works</div>
+      <h2>Pick a track. Unlock an <em class="ac">ecosystem</em>.</h2>
+      <p>Select your desired career path or skill below. Upon registration, you receive instant access to a structured ecosystem built on four pillars.</p>
+    </div>
+    <div class="pillars" data-live="stagger">
+      <div class="card pillar">
+        <span class="num">01</span>
+        <h3>Career Roadmap</h3>
+        <p>A visual, step-by-step timeline tailored to your track — milestones for weeks 1, 4, 8 and beyond, skill trees, and the exact portfolio projects employers want to see.</p>
       </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
+      <div class="card pillar">
+        <span class="num">02</span>
+        <h3>Curated Courses</h3>
+        <p>Hands-on, project-based curriculum in a hybrid format: self-paced videos plus weekly live sessions, taught by C-suite executives and senior engineers.</p>
+      </div>
+      <div class="card pillar">
+        <span class="num">03</span>
+        <h3>Community</h3>
+        <p>You are never alone. 24/7 Slack/Discord networking with your cohort, weekly mentorship AMAs, and monthly hackathons with prizes.</p>
+      </div>
+      <div class="card pillar">
+        <span class="num">04</span>
+        <h3>Certificates</h3>
+        <p>Micro-credential badges per module, a verified completion certificate issued by Ona, and a capstone showcase before a panel of hiring partners.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
+<!-- COURSES -->
+<section class="section" id="courses" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Career &amp; Skill Tracks</div>
+      <h2>Remote-friendly careers, <em class="ac">structured</em> end to end.</h2>
+      <p>Every track includes the four pillars plus a Career Path Document and curated course set. Courses unlock when you register — but every syllabus is open. Look before you leap.</p>
+    </div>
+    <div class="cat-tabs" id="catTabs" data-live="off"></div>
+    <div class="tracks" id="trackGrid" data-live="off"></div>
+    <p style="margin-top:1.6rem;font-size:.88rem;color:var(--ink-faint)">Additional tracks are available — contact our admissions team for a personalised consultation.</p>
   </div>
+</section>
 
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
+<!-- REGISTRATION -->
+<section class="section" id="register">
+  <div class="wrap">
+    <div class="reg-grid">
+      <div>
+        <div class="kicker">Registration</div>
+        <h2 style="font-size:clamp(1.8rem,4.5vw,2.5rem)">Secure your spot in the <em class="ac">upcoming cohort</em>.</h2>
+        <p style="color:var(--ink-soft);margin:1rem 0 1.4rem;max-width:50ch">Register once and your chosen course unlocks instantly in your student dashboard. Every tier includes:</p>
+        <ul class="reg-points" data-live="stagger">
+          <li>Full access to your chosen Career Roadmap</li>
+          <li>All courses and course materials</li>
+          <li>Community access for the duration of your enrollment</li>
+          <li>One verified certificate upon completion</li>
+          <li>Alumni network access after graduation</li>
+        </ul>
+      </div>
+      <div class="card" id="regCard">
+        <form id="regForm" novalidate>
+          <div class="field">
+            <label for="rName">Full name</label>
+            <input type="text" id="rName" required placeholder="Your full name">
+          </div>
+          <div class="field">
+            <label for="rEmail">Email</label>
+            <input type="email" id="rEmail" required placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="rPass">Create password</label>
+            <input type="password" id="rPass" required minlength="4" placeholder="••••••••">
+          </div>
+          <div class="field">
+            <label for="rCourse">Choose your course track</label>
+            <select id="rCourse" required></select>
+          </div>
+          <div class="field">
+            <label for="rTier">Duration plan</label>
+            <select id="rTier" required>
+              <option value="3 Months — ₦250,000">3 Months — ₦250,000 (The Accelerator)</option>
+              <option value="6 Months — ₦500,000">6 Months — ₦500,000 (The Career Switcher)</option>
+              <option value="1 Year — ₦700,000">1 Year — ₦700,000 (The Mastery Path)</option>
+              <option value="Standalone — ₦150,000">Standalone — ₦150,000 (Document + Courses, 30 days)</option>
+            </select>
+          </div>
+          <button class="btn" type="submit" style="width:100%;justify-content:center">Register &amp; unlock my course <span class="arr">→</span></button>
+          <p style="font-size:.78rem;color:var(--ink-faint);margin-top:.9rem">After registering, chat with admissions for payment details to confirm your cohort seat.</p>
+        </form>
+        <div class="reg-success" id="regSuccess">
+          <div class="kicker" style="justify-content:center">Registered</div>
+          <h3>Welcome aboard<span id="regName"></span>.</h3>
+          <p>Your course is now unlocked in your student dashboard. Chat with admissions for payment details â once confirmed, you’ll receive your <strong>unique access code</strong> to open the training portal.</p>
+          <a class="btn" href="dashboard.html">Go to my dashboard <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
   </div>
-</main>
+</section>
 
-<footer class="site">
-  <div class="col">
-    <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
-    <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Registration Tiers &amp; Investment</div>
+      <h2>Flexible plans, <em class="ac">introductory</em> pricing.</h2>
+      <p>Choose the duration that matches your learning pace and career goals. Act fast — this promotional pricing closes soon.</p>
+    </div>
+    <div class="tiers" data-live="stagger">
+      <div class="card tier">
+        <span class="dur">3 Months</span>
+        <span class="price">₦250,000<span class="was">₦300,000</span></span>
+        <p class="for"><strong>The Accelerator.</strong> Ideal for upskilling in a specific tool or mastering a niche skill quickly.</p>
+        <a class="link-quiet pick" href="#register">Choose this plan</a>
+      </div>
+      <div class="card tier hl">
+        <span class="dur">6 Months</span>
+        <span class="price">₦500,000<span class="was">₦600,000</span></span>
+        <p class="for"><strong>The Career Switcher.</strong> Perfect for pivoting to a new industry, with time for portfolio building.</p>
+        <a class="btn pick" href="#register" style="justify-content:center">Choose this plan <span class="arr">→</span></a>
+      </div>
+      <div class="card tier">
+        <span class="dur">1 Year</span>
+        <span class="price">₦700,000<span class="was">₦1,000,000</span></span>
+        <p class="for"><strong>The Mastery Path.</strong> Best for beginners starting from zero or professionals aiming for senior-level competency.</p>
+        <a class="link-quiet pick" href="#register">Choose this plan</a>
+      </div>
+    </div>
+    <div class="card standalone">
+      <p><strong>Standalone option — ₦150,000 / career track (30 days).</strong> Prefer your own pace? Get the Career Path Document and all curated courses for one track, self-study format — no community access or certificate.</p>
+      <a class="link-quiet" href="#register">Register standalone</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <div class="kicker">Frequently Asked Questions</div>
+      <h2>Before you <em class="ac">enrol</em>.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Can I switch my career track after registering?</summary>
+        <p>Yes. Within the first 14 days of registration, you may switch to a different track at no extra cost, provided there is space in the new cohort.</p>
+      </details>
+      <details>
+        <summary>Is there a payment plan?</summary>
+        <p>Yes. For the 6-month and 1-year tiers, we offer a two-installment plan. Please contact our admissions team for details.</p>
+      </details>
+      <details>
+        <summary>Do I get a certificate on the 3-month program?</summary>
+        <p>Absolutely. Every tier includes a verified certificate of completion, provided you meet the capstone project requirements.</p>
+      </details>
+      <details>
+        <summary>What if I miss a live session?</summary>
+        <p>All live sessions are recorded and uploaded to your student dashboard within 24 hours. You learn at your own pace while still being part of the community.</p>
+      </details>
+      <details>
+        <summary>What's the difference between the tiered program and the standalone package?</summary>
+        <p>The tiered program includes live mentorship, community access, certificates, and a structured cohort schedule. The standalone package gives you the Career Path Document and all courses for self-directed study.</p>
+      </details>
+      <details>
+        <summary>Are these tracks truly remote-friendly?</summary>
+        <p>Yes. Every track listed was selected because remote work is standard in that industry, and the curriculum includes tools and workflows designed for distributed teams.</p>
+      </details>
+      <details>
+        <summary>How do I register?</summary>
+        <p>Fill the registration form above to unlock your course, then click the chat button to reach admissions for payment details.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" data-live="off">
+  <div class="wrap">
+    <span>Mentorine School by Ona Services — building the workforce of tomorrow, today.<br>© 2026 Mentorine School by Ona Services Ltd. All rights reserved.</span>
+    <span>Terms and conditions apply. Prices subject to change after the promotional period. · <a class="link-quiet" href="admin.html">Admin</a></span>
   </div>
 </footer>
 
+<a class="chip-float" href="#" id="waChip" data-live="off" aria-label="Chat with admissions" title="Chat with admissions">✆</a>
 
+<script src="assets/app.js"></script>
+<script>
+MS.initTheme(); MS.initChat();
 
-<script src="../../assets/app.js"></script>
-<script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
-<script src="../../assets/gate.js"></script>
-<script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
-<script src="../../assets/liveliness.js" defer></script>
+/* ---- catalogue render ---- */
+var tabs = document.getElementById('catTabs');
+var grid = document.getElementById('trackGrid');
+var active = 'tech';
+
+function lockState(slug){
+  return MS.isUnlocked(slug)
+    ? '<span class="badge open">● Unlocked</span>'
+    : '<span class="badge locked"><span class="lock">🔒</span> Locked</span>';
+}
+function renderTabs(){
+  tabs.innerHTML = MS.CATALOGUE.map(function(c){
+    return '<button class="cat-tab'+(c.id===active?' active':'')+'" data-cat="'+c.id+'">'+c.label+'</button>';
+  }).join('');
+}
+function renderGrid(){
+  var cat = MS.CATALOGUE.find(function(c){return c.id===active;});
+  grid.innerHTML = cat.tracks.map(function(t){
+    var unlocked = MS.isUnlocked(t.slug);
+    return '<article class="card track'+(t.featured?' featured':'')+'">'+
+      '<div class="track-top"><h3>'+t.name+'</h3>'+lockState(t.slug)+'</div>'+
+      '<div class="meta">'+t.courses+' · '+t.duration+'</div>'+
+      (t.blurb?'<p class="blurb">'+t.blurb+'</p>':'')+
+      '<div class="track-actions">'+
+        '<a class="link-quiet" href="syllabus.html?course='+t.slug+'">View syllabus</a>'+
+        (unlocked
+          ? '<a class="link-quiet" style="color:var(--accent)" href="dashboard.html">Continue →</a>'
+          : '<a class="link-quiet" href="#register" data-pick="'+t.slug+'">Register to unlock</a>')+
+      '</div></article>';
+  }).join('');
+  if (window.Liveliness) window.Liveliness.refresh();
+}
+tabs.addEventListener('click', function(e){
+  var b = e.target.closest('.cat-tab'); if(!b) return;
+  active = b.dataset.cat; renderTabs(); renderGrid();
+});
+grid.addEventListener('click', function(e){
+  var a = e.target.closest('[data-pick]'); if(!a) return;
+  document.getElementById('rCourse').value = a.dataset.pick;
+});
+renderTabs(); renderGrid();
+
+/* ---- registration form ---- */
+var sel = document.getElementById('rCourse');
+sel.innerHTML = MS.CATALOGUE.map(function(c){
+  return '<optgroup label="'+c.label+'">'+
+    c.tracks.map(function(t){return '<option value="'+t.slug+'">'+t.name+'</option>';}).join('')+
+  '</optgroup>';
+}).join('');
+
+document.getElementById('regForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('rName').value.trim();
+  var email = document.getElementById('rEmail').value.trim();
+  var pass = document.getElementById('rPass').value;
+  if(!name || !email || pass.length < 4){ alert('Please complete all fields (password: 4+ characters).'); return; }
+  MS.register({ name:name, email:email, pass:pass, course:sel.value, tier:document.getElementById('rTier').value });
+  document.getElementById('regForm').style.display='none';
+  document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
+  document.getElementById('regSuccess').style.display='block';
+  renderGrid();
+  document.getElementById('loginCta').textContent = 'My Dashboard';
+  document.getElementById('loginCta').href = 'dashboard.html';
+});
+
+/* logged-in nav state */
+if (MS.session()){
+  var cta = document.getElementById('loginCta');
+  cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+}
+</script>
+<script src="assets/liveliness.js" defer></script>
 </body>
 </html>

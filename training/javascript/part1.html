@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML — JavaScript Developer · The Mentorine School</title>
+<script>/* theme bootstrap: system default, no flash */
+(function(){var m=localStorage.getItem("ms_theme")||"system";
+var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
+document.documentElement.setAttribute("data-theme",r);})();</script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Mentorine brand override — green accent, house fonts, stacked wordmark */
+:root{--accent:#0D8C4F;--accent-h:#0A6F3F;--brand-navy:#305D85;
+  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans','Segoe UI',Calibri,sans-serif;}
+[data-theme="night"]{--accent:#2FB36B;--accent-h:#4CC684;--brand-navy:#8FB3D4;}
+.brand{display:flex;align-items:center;gap:.6rem}
+.brand .mark{height:42px;width:auto;display:block}
+.wm{display:flex;flex-direction:column;line-height:1.12;font-family:'Cinzel',serif}
+.wm-the{font-size:.45rem;font-weight:600;letter-spacing:4px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-name{font-size:.86rem;font-weight:700;letter-spacing:1.6px;color:var(--brand-navy)}
+.wm-school{font-size:.62rem;font-weight:600;letter-spacing:3.2px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
+</style>
+
+<style>
+/* ============================================================
+   The Complete JavaScript & HTML Developer Training Guide
+   Warm editorial minimalist — gold house style (#0D8C4F)
+   ============================================================ */
+:root{
+  --paper:#F7F5F0; --paper-2:#F0EDE5; --card:#FFFFFF;
+  --ink:#0A0A0A; --ink-soft:#5A5A5A; --ink-faint:#8A8378;
+  --accent:#0D8C4F; --accent-h:#0A6F3F;
+  --line:rgba(10,10,10,.12); --line-soft:rgba(10,10,10,.07);
+  --code-bg:#1B1814; --code-ink:#F2EEE6; --code-soft:#ADA79B;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:'Segoe UI',Calibri,'Helvetica Neue',Arial,sans-serif;
+  --mono:Consolas,'SF Mono',Menlo,monospace;
+}
+html[data-theme="night"]{
+  --paper:#14120F; --paper-2:#1B1814; --card:#1B1814;
+  --ink:#F2EEE6; --ink-soft:#ADA79B; --ink-faint:#6E685D;
+  --accent:#2FB36B; --accent-h:#4CC684;
+  --line:rgba(242,238,230,.14); --line-soft:rgba(242,238,230,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:1.0rem;line-height:1.7;
+  background-image:radial-gradient(var(--line-soft) 1px,transparent 1px);
+  background-size:22px 22px;background-attachment:fixed;
+}
+a{color:inherit}
+::selection{background:var(--accent);color:#fff}
+
+/* ---------- Header ---------- */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{max-width:1000px;margin:0 auto;padding:.85rem 1.4rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-family:var(--serif);font-weight:700;font-size:1.02rem;
+  text-decoration:none;letter-spacing:-.2px;white-space:nowrap}
+.brand .amp{color:var(--accent);font-style:italic}
+.nav-right{display:flex;align-items:center;gap:1.1rem}
+.nav-link{font-size:.86rem;font-weight:600;letter-spacing:.4px;
+  text-decoration:none;color:var(--ink-soft)}
+.nav-link:hover{color:var(--accent-h)}
+.theme-btn{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
+  border-radius:100px;width:34px;height:34px;cursor:pointer;font-size:.95rem;line-height:1}
+.theme-btn:hover{color:var(--accent-h);border-color:var(--accent)}
+
+/* ---------- Shared column ---------- */
+.col{max-width:760px;margin:0 auto;padding:0 1.4rem}
+.wide{max-width:1000px;margin:0 auto;padding:0 1.4rem}
+
+/* ---------- Kicker ---------- */
+.kicker{font-family:var(--sans);font-weight:600;font-size:.74rem;
+  letter-spacing:2.6px;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:.7rem;margin:2.4rem 0 .8rem}
+.kicker::before{content:"";display:inline-block;width:26px;height:1px;background:var(--accent)}
+
+/* ---------- Part hero ---------- */
+.part-hero{padding:clamp(2.6rem,7vw,4.6rem) 0 1.4rem;border-bottom:1px solid var(--line-soft);margin-bottom:2.2rem}
+.part-hero .kicker{margin-top:0}
+.part-hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.08;letter-spacing:-.8px;margin:0 0 1rem}
+.anchor-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1.6rem}
+.anchor-row a{font-size:.78rem;font-weight:600;text-decoration:none;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;padding:.32rem .85rem;background:var(--card);
+  transition:border-color .25s,color .25s}
+.anchor-row a:hover{border-color:var(--accent);color:var(--accent-h)}
+
+/* ---------- Article content ---------- */
+article p{margin:0 0 1.05rem;color:var(--ink-soft);max-width:64ch}
+article p strong{color:var(--ink)}
+article h2{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:-.3px;
+  color:var(--ink);margin:2.8rem 0 1rem;padding-bottom:.45rem;
+  border-bottom:2px solid var(--accent);scroll-margin-top:84px;max-width:64ch}
+article h3{font-family:var(--serif);font-weight:700;font-size:1.18rem;
+  color:var(--ink);margin:2rem 0 .7rem}
+article h4{font-weight:700;font-size:1rem;color:var(--ink);margin:1.5rem 0 .5rem}
+article ul,article ol{margin:0 0 1.2rem;padding-left:1.4rem;color:var(--ink-soft);max-width:62ch}
+article li{margin-bottom:.45rem}
+article li::marker{color:var(--accent);font-weight:600}
+article em{color:var(--ink-faint)}
+.soft{color:var(--ink-faint)}
+.accent{color:var(--accent)}
+
+/* Inline code */
+article p code,article li code,td code{
+  font-family:var(--mono);font-size:.86em;color:var(--ink);
+  background:var(--paper-2);border:1px solid var(--line-soft);
+  border-radius:4px;padding:.08em .38em;white-space:nowrap}
+html[data-theme="night"] article p code,
+html[data-theme="night"] article li code{color:var(--ink)}
+
+/* Code blocks — dark surface, the standing exception */
+article pre{
+  background:var(--code-bg);color:var(--code-ink);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1.05rem 1.2rem;margin:0 0 1.4rem;overflow-x:auto;
+  font-family:var(--mono);font-size:.83rem;line-height:1.55}
+article pre code{background:none;border:none;padding:0;color:inherit;white-space:pre}
+.file-label{display:inline-flex;align-items:center;gap:.55rem;margin:.4rem 0 .45rem}
+.file-label .fl-tag{font-size:.66rem;font-weight:700;letter-spacing:2px;color:var(--accent)}
+.file-label code{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--ink-soft);
+  background:none;border:none;padding:0}
+.file-label + pre{margin-top:0}
+
+/* Callout */
+.callout{background:var(--card);border:1px solid var(--line-soft);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1rem 1.2rem;margin:1.4rem 0 1.6rem}
+.callout .co-label{font-size:.7rem;font-weight:700;letter-spacing:2.2px;color:var(--accent);margin-bottom:.35rem}
+.callout p{margin:0;font-size:.95rem}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;margin:.4rem 0 1.6rem;border:1px solid var(--line-soft);
+  border-radius:8px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+th{background:var(--ink);color:var(--paper);text-align:left;font-weight:600;
+  font-size:.78rem;letter-spacing:.6px;padding:.65rem .85rem}
+html[data-theme="night"] th{background:var(--paper-2);color:var(--ink)}
+td{padding:.6rem .85rem;border-top:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
+
+/* ---------- Pagination ---------- */
+.pager{display:flex;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--line-soft);margin-top:3.4rem;padding:1.6rem 0 0}
+.pager a{flex:1;text-decoration:none;border:1px solid var(--line);border-radius:8px;
+  background:var(--card);padding:.95rem 1.15rem;transition:border-color .25s}
+.pager a:hover{border-color:var(--accent)}
+.pager .dir{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:.25rem}
+.pager .pt{font-family:var(--serif);font-weight:700;font-size:.98rem;color:var(--ink)}
+.pager a.next{text-align:right}
+.pager .ghost{visibility:hidden}
+
+/* ---------- Landing ---------- */
+.hero{padding:clamp(4rem,11vw,7.5rem) 0 clamp(2.5rem,6vw,4rem);text-align:left}
+.hero .kicker{margin-top:0}
+.hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(2.5rem,7vw,4.4rem);line-height:1.04;letter-spacing:-1.5px;margin:0 0 1.3rem;max-width:16ch}
+.hero h1 .em{font-style:italic;color:var(--accent)}
+.hero .sub{font-size:1.07rem;color:var(--ink-soft);max-width:54ch;margin-bottom:2.2rem}
+.cta-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  background:var(--ink);color:var(--paper);font-weight:600;font-size:.95rem;
+  padding:1rem 2.2rem;border-radius:2px;transition:background .25s}
+.btn-primary .arr{transition:transform .25s}
+.btn-primary:hover{background:var(--accent-h)}
+.btn-primary:hover .arr{transform:translateX(4px)}
+html[data-theme="night"] .btn-primary{background:var(--ink);color:var(--paper)}
+.link-quiet{font-size:.92rem;color:var(--ink-faint);text-decoration:underline;text-underline-offset:4px}
+.link-quiet:hover{color:var(--accent-h)}
+
+.stat-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);margin:1.6rem 0 0}
+.stat{padding:1.4rem 1rem;text-align:center;border-left:1px solid var(--line-soft)}
+.stat:first-child{border-left:none}
+.stat .n{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,3.5vw,2.2rem);
+  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.stat .l{font-size:.7rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-faint);margin-top:.3rem}
+
+.section{padding:clamp(3rem,8vw,5.5rem) 0 0}
+.section-head{font-family:var(--serif);font-weight:700;font-size:clamp(1.6rem,4vw,2.2rem);
+  letter-spacing:-.6px;margin:0 0 .7rem}
+.section-sub{color:var(--ink-soft);max-width:58ch;margin-bottom:2.2rem}
+
+.parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem}
+.part-card{display:block;text-decoration:none;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:8px;padding:1.5rem 1.5rem 1.3rem;
+  transition:border-color .25s}
+.part-card:hover{border-color:var(--accent)}
+.part-card .pc-kicker{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:.55rem}
+.part-card h3{font-family:var(--serif);font-weight:700;font-size:1.16rem;letter-spacing:-.2px;color:var(--ink);margin:0 0 .5rem}
+.part-card p{font-size:.88rem;color:var(--ink-soft);margin:0 0 .9rem;line-height:1.55}
+.part-card .pc-mile{font-size:.78rem;color:var(--ink-faint);border-top:1px solid var(--line-soft);padding-top:.7rem}
+.part-card .pc-mile strong{color:var(--ink-soft);font-weight:600}
+
+.proj-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
+.proj{background:var(--card);border:1px solid var(--line-soft);border-radius:8px;
+  padding:.85rem 1.05rem;font-size:.86rem;color:var(--ink-soft);display:flex;gap:.6rem;align-items:baseline}
+.proj .dot{color:var(--accent);font-weight:700}
+
+.cta-band{margin:clamp(3.5rem,9vw,6rem) 0 0;border-top:1px solid var(--line);
+  padding:clamp(2.6rem,7vw,4.5rem) 0}
+.cta-band h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,4.5vw,2.5rem);
+  letter-spacing:-.6px;margin:0 0 .8rem;max-width:22ch}
+.cta-band p{color:var(--ink-soft);max-width:52ch;margin-bottom:2rem}
+
+/* ---------- Footer ---------- */
+footer.site{border-top:1px solid var(--line-soft);margin-top:4rem;padding:2.2rem 0 2.8rem}
+footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.82rem;color:var(--ink-faint)}
+.bm{font-weight:700;color:var(--ink)}
+.bm .bm-i{font-style:italic;color:var(--accent);margin-left:-0.08em}
+
+@media (max-width:640px){
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:none}
+  .pager{flex-direction:column}
+  .pager a.next{text-align:left}
+  .pager .ghost{display:none}
+}
+
+/* ---------- Auth (register/login) ---------- */
+.auth-wrap{max-width:430px;margin:clamp(3rem,9vw,6rem) auto 4rem;padding:0 1.4rem}
+.auth-card{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:2rem 1.8rem}
+.auth-tabs{display:flex;gap:.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line-soft)}
+.auth-tabs button{flex:1;background:none;border:0;border-bottom:2px solid transparent;
+  font:600 .92rem var(--sans);color:var(--ink-faint);padding:.7rem 0;cursor:pointer}
+.auth-tabs button.active{color:var(--ink);border-bottom-color:var(--accent)}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.74rem;font-weight:700;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:.35rem}
+.field input{width:100%;padding:.8rem .9rem;border:1px solid var(--line);border-radius:6px;
+  background:var(--paper);color:var(--ink);font:1rem var(--sans)}
+.field input:focus{outline:none;border-color:var(--accent)}
+.auth-btn{width:100%;border:0;border-radius:2px;background:var(--ink);color:var(--paper);
+  font:600 .98rem var(--sans);padding:.95rem;cursor:pointer;margin-top:.4rem}
+.auth-btn:hover{background:var(--accent-h)}
+.auth-msg{font-size:.85rem;margin-top:.8rem;min-height:1.2em}
+.auth-msg.err{color:#A04B4B}.auth-msg.ok{color:var(--accent-h)}
+.auth-note{font-size:.78rem;color:var(--ink-faint);text-align:center;margin-top:1.2rem}
+.welcome-chip{font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);
+  border-radius:100px;padding:.3rem .85rem;background:var(--card);white-space:nowrap}
+.welcome-chip b{color:var(--accent-h)}
+
+</style>
+
+
+</head>
+<body>
+
+<header class="site" data-live="off">
+  <nav class="nav">
+    <a class="brand" href="../../index.html" style="text-decoration:none">
+      <img class="mark" src="../../assets/logo.svg" alt="The Mentorine School mark">
+      <span class="wm">
+        <span class="wm-the">THE</span>
+        <span class="wm-name">MENTORINE</span>
+        <span class="wm-school">SCHOOL</span>
+        <span class="wm-sub">BY ONA SERVICES</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+    </div>
+  </nav>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">PART 1 · WEEKS 1–2</div>
+    <h1>HTML: The Skeleton of Every Web Page</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#1-1-what-is-html">1.1  What Is HTML?</a><a href="#1-2-your-first-web-page-practical">1.2  Your First Web Page (Practical)</a><a href="#1-3-the-essential-tags-your-daily-vocabulary">1.3  The Essential Tags (Your Daily Vocabulary)</a><a href="#1-4-attributes-giving-tags-extra-information">1.4  Attributes: Giving Tags Extra Information</a><a href="#1-5-semantic-html-writing-pages-that-mean-something">1.5  Semantic HTML: Writing Pages That Mean Something</a><a href="#1-6-forms-collecting-information-from-users">1.6  Forms: Collecting Information From Users</a><a href="#1-7-tables-and-media">1.7  Tables and Media</a><a href="#1-8-checkpoint-project-your-personal-profile-page">1.8  Checkpoint Project: Your Personal Profile Page</a></div>
+  </div>
+  <article>
+<p><em>Estimated duration: Weeks 1–2 (10–14 days).</em></p>
+<h2 id="1-1-what-is-html">1.1  What Is HTML?</h2>
+<p>HTML stands for HyperText Markup Language. It is not a programming language — it is a markup language, which means it describes structure, not behaviour. Think of building a house: HTML is the skeleton and walls, CSS (Part 2) is the paint and decoration, and JavaScript (Part 3 onwards) is the electricity and plumbing that makes things actually work.</p>
+<p>Every web page you have ever visited — Google, Facebook, your bank — is built on HTML. When your browser loads a page, it reads an HTML file and draws what it describes.</p>
+<h2 id="1-2-your-first-web-page-practical">1.2  Your First Web Page (Practical)</h2>
+<p>In VS Code, right-click the <code>part1-html</code> folder and choose New File. Name it <code>index.html</code> — exactly that, all lowercase.</p>
+<p>Copy and paste the code below into the file, then press Ctrl+S (Cmd+S on Mac) to save.</p>
+<p>Right-click anywhere inside the file and choose "Open with Live Server". Your browser opens with your first web page.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/index.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My First Web Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World! I am becoming a software developer.&lt;/h1&gt;
+  &lt;p&gt;This is my very first web page, built with my own hands.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3>Line-by-Line Breakdown</h3>
+<p><code>&lt;!DOCTYPE html&gt;</code> — tells the browser "this is a modern HTML5 document". Always the first line.</p>
+<p><code>&lt;html lang="en"&gt;</code> — the root container of everything. <code>lang="en"</code> tells screen readers and search engines the page is in English.</p>
+<p><code>&lt;head&gt;</code> — information ABOUT the page (title, character set). Nothing here is visible on the page itself.</p>
+<p><code>&lt;meta name="viewport" ...&gt;</code> — makes the page display properly on phones. Include it in every page you ever build.</p>
+<p><code>&lt;title&gt;</code> — the text shown in the browser tab.</p>
+<p><code>&lt;body&gt;</code> — everything visible lives here.</p>
+<p><code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> — a top-level heading and a paragraph.</p>
+<p><strong>THE ANATOMY OF A TAG</strong></p>
+<p>Most HTML elements have an opening tag &lt;p&gt;, content, and a closing tag &lt;/p&gt; with a forward slash. The browser reads &lt;p&gt;Hello&lt;/p&gt; as "this is a paragraph containing the word Hello". Forgetting a closing tag is the number one beginner bug.</p>
+<h2 id="1-3-the-essential-tags-your-daily-vocabulary">1.3  The Essential Tags (Your Daily Vocabulary)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Tag</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+<tr><td>&lt;h1&gt; to &lt;h6&gt;</td><td>Headings, biggest to smallest. One &lt;h1&gt; per page.</td><td>&lt;h2&gt;About Me&lt;/h2&gt;</td></tr>
+<tr><td>&lt;p&gt;</td><td>Paragraph of text</td><td>&lt;p&gt;I live in Abuja.&lt;/p&gt;</td></tr>
+<tr><td>&lt;a&gt;</td><td>Link (anchor) to another page</td><td>&lt;a href="https://google.com"&gt;Search&lt;/a&gt;</td></tr>
+<tr><td>&lt;img&gt;</td><td>Image (self-closing, no end tag)</td><td>&lt;img src="me.jpg" alt="My photo"&gt;</td></tr>
+<tr><td>&lt;ul&gt; / &lt;ol&gt; / &lt;li&gt;</td><td>Unordered (bullet) / ordered (numbered) lists and list items</td><td>&lt;ul&gt;&lt;li&gt;Rice&lt;/li&gt;&lt;li&gt;Beans&lt;/li&gt;&lt;/ul&gt;</td></tr>
+<tr><td>&lt;div&gt;</td><td>Generic container box for grouping</td><td>&lt;div class="card"&gt;...&lt;/div&gt;</td></tr>
+<tr><td>&lt;span&gt;</td><td>Generic inline container inside text</td><td>&lt;span class="highlight"&gt;key&lt;/span&gt;</td></tr>
+<tr><td>&lt;strong&gt; / &lt;em&gt;</td><td>Important (bold) / emphasised (italic) text</td><td>&lt;strong&gt;Warning&lt;/strong&gt;</td></tr>
+<tr><td>&lt;br&gt; / &lt;hr&gt;</td><td>Line break / horizontal divider line</td><td>&lt;hr&gt;</td></tr>
+<tr><td>&lt;button&gt;</td><td>Clickable button</td><td>&lt;button&gt;Submit&lt;/button&gt;</td></tr>
+</tbody></table></div>
+<h3>Practical: A Page Using Every Essential Tag</h3>
+<p>Create a new file <code>tags-practice.html</code> in the same folder, paste this, save, and open with Live Server:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/tags-practice.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Tag Practice&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;The Developer's Cookbook&lt;/h1&gt;
+  &lt;p&gt;Welcome to my collection of &lt;strong&gt;simple recipes&lt;/strong&gt; for busy coders.&lt;/p&gt;
+  &lt;hr&gt;
+  &lt;h2&gt;Jollof Rice Essentials&lt;/h2&gt;
+  &lt;p&gt;You will need the following &lt;em&gt;core ingredients&lt;/em&gt;:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Long-grain rice&lt;/li&gt;
+    &lt;li&gt;Tomatoes and peppers&lt;/li&gt;
+    &lt;li&gt;Onions and seasoning&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h2&gt;Steps&lt;/h2&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Blend tomatoes, peppers and onions.&lt;/li&gt;
+    &lt;li&gt;Fry the blend in oil until it thickens.&lt;/li&gt;
+    &lt;li&gt;Add rice and stock, then cook on low heat.&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;h2&gt;Learn More&lt;/h2&gt;
+  &lt;p&gt;Read the full guide on
+    &lt;a href="https://www.allrecipes.com" target="_blank"&gt;AllRecipes&lt;/a&gt;.
+  &lt;/p&gt;
+  &lt;button&gt;Save This Recipe&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Add a third recipe section with its own heading, an image using <code>&lt;img src="https://picsum.photos/400/200" alt="Food photo"&gt;</code>, and a numbered list of at least four steps. Note: <code>target="_blank"</code> makes a link open in a new tab.</p></div>
+<h2 id="1-4-attributes-giving-tags-extra-information">1.4  Attributes: Giving Tags Extra Information</h2>
+<p>Attributes live inside the opening tag and follow the pattern <code>name="value"</code>. You have already used several: <code>href</code> tells a link where to go, <code>src</code> tells an image where its file is, and <code>alt</code> provides text if the image fails to load (and for visually impaired users). Two attributes are so important they get their own introduction:</p>
+<p><code>id="something"</code> — a unique name for ONE element on a page. Like a national ID number — no two elements may share it. JavaScript will use ids constantly.</p>
+<p><code>class="something"</code> — a reusable label that MANY elements can share. Like a uniform — everyone in class "card" can be styled the same way by CSS.</p>
+<h2 id="1-5-semantic-html-writing-pages-that-mean-something">1.5  Semantic HTML: Writing Pages That Mean Something</h2>
+<p>You could build an entire site out of <code>&lt;div&gt;</code> boxes, but professionals use semantic tags — tags whose names describe their purpose. Search engines rank semantic pages higher, screen readers navigate them better, and other developers understand them faster.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Semantic Tag</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>&lt;header&gt;</td><td>Top section of a page or article — logo, title, navigation</td></tr>
+<tr><td>&lt;nav&gt;</td><td>Navigation links</td></tr>
+<tr><td>&lt;main&gt;</td><td>The unique main content of the page (one per page)</td></tr>
+<tr><td>&lt;section&gt;</td><td>A themed grouping of content, usually with a heading</td></tr>
+<tr><td>&lt;article&gt;</td><td>Self-contained content: a blog post, a job listing, a product card</td></tr>
+<tr><td>&lt;aside&gt;</td><td>Side content: related links, adverts, author bio</td></tr>
+<tr><td>&lt;footer&gt;</td><td>Bottom of page: copyright, contact, social links</td></tr>
+</tbody></table></div>
+<h2 id="1-6-forms-collecting-information-from-users">1.6  Forms: Collecting Information From Users</h2>
+<p>Forms are how the web collects data — logins, registrations, searches, payments. Master them now; every project from Part 4 onwards uses them.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/form-practice.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Form Practice&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Workshop Registration&lt;/h1&gt;
+  &lt;form&gt;
+    &lt;label for="fullname"&gt;Full Name&lt;/label&gt;&lt;br&gt;
+    &lt;input type="text" id="fullname" name="fullname"
+           placeholder="e.g. Adaeze Okafor" required&gt;&lt;br&gt;&lt;br&gt;
+    &lt;label for="email"&gt;Email Address&lt;/label&gt;&lt;br&gt;
+    &lt;input type="email" id="email" name="email" required&gt;&lt;br&gt;&lt;br&gt;
+    &lt;label for="phone"&gt;Phone Number&lt;/label&gt;&lt;br&gt;
+    &lt;input type="tel" id="phone" name="phone"&gt;&lt;br&gt;&lt;br&gt;
+    &lt;label for="track"&gt;Choose a Track&lt;/label&gt;&lt;br&gt;
+    &lt;select id="track" name="track"&gt;
+      &lt;option value="frontend"&gt;Front-End Development&lt;/option&gt;
+      &lt;option value="backend"&gt;Back-End Development&lt;/option&gt;
+      &lt;option value="fullstack"&gt;Full-Stack Development&lt;/option&gt;
+    &lt;/select&gt;&lt;br&gt;&lt;br&gt;
+    &lt;p&gt;Experience level:&lt;/p&gt;
+    &lt;input type="radio" id="beginner" name="level" value="beginner" checked&gt;
+    &lt;label for="beginner"&gt;Beginner&lt;/label&gt;&lt;br&gt;
+    &lt;input type="radio" id="intermediate" name="level" value="intermediate"&gt;
+    &lt;label for="intermediate"&gt;Intermediate&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+    &lt;input type="checkbox" id="newsletter" name="newsletter"&gt;
+    &lt;label for="newsletter"&gt;Send me the weekly newsletter&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+    &lt;label for="goals"&gt;Your learning goals&lt;/label&gt;&lt;br&gt;
+    &lt;textarea id="goals" name="goals" rows="4" cols="40"
+              placeholder="Tell us what you want to achieve..."&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+    &lt;button type="submit"&gt;Register Now&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3>Key Points</h3>
+<p><code>&lt;label for="x"&gt;</code> connects to the input whose <code>id</code> is x — clicking the label focuses the input. Always pair them.</p>
+<p><code>type="email"</code> and <code>required</code> give you free validation: the browser refuses to submit an empty or malformed email.</p>
+<p>Radio buttons sharing the same <code>name</code> form a group where only one can be selected.</p>
+<p>Common input types: <code>text, email, password, number, tel, date, checkbox, radio, file, color, range</code>. Try swapping types and watch the browser change behaviour.</p>
+<h2 id="1-7-tables-and-media">1.7  Tables and Media</h2>
+<p>Tables display rows and columns of data (never use them for page layout — that is CSS’s job).</p>
+<pre><code>&lt;table border="1"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Skill&lt;/th&gt;
+      &lt;th&gt;Level&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;HTML&lt;/td&gt;
+      &lt;td&gt;Learning&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JavaScript&lt;/td&gt;
+      &lt;td&gt;Next up&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;!-- Video and audio --&gt;
+&lt;video src="demo.mp4" controls width="400"&gt;&lt;/video&gt;
+&lt;audio src="podcast.mp3" controls&gt;&lt;/audio&gt;
+&lt;!-- Embed a YouTube video --&gt;
+&lt;iframe width="560" height="315"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="YouTube video" allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
+<p><code>&lt;tr&gt;</code> is a table row, <code>&lt;th&gt;</code> a header cell, <code>&lt;td&gt;</code> a data cell. The <code>&lt;!-- ... --&gt;</code> syntax is an HTML comment — notes for humans that the browser ignores.</p>
+<h2 id="1-8-checkpoint-project-your-personal-profile-page">1.8  Checkpoint Project: Your Personal Profile Page</h2>
+<p>This is your first real-world deliverable — the seed of the portfolio you will deploy in Part 9. Build it entirely yourself, using the template below as a starting skeleton.</p>
+<h3>Requirements</h3>
+<p>A header with your name and a navigation bar linking to each section (hint: &lt;a href="#about"&gt; jumps to the element with id="about").</p>
+<p>An About section with your photo, a short bio, and a list of your goals.</p>
+<p>A Skills section using a table: skill name, level, and learning status.</p>
+<p>A Projects section with at least two &lt;article&gt; cards (use placeholder text for now — you will fill these with real projects soon).</p>
+<p>A Contact section with a working form: name, email, message, submit button.</p>
+<p>A footer with the current year and links to your social profiles.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/profile.html (starter skeleton)</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Your Name — Software Developer&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Your Name&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;a href="#about"&gt;About&lt;/a&gt; |
+      &lt;a href="#skills"&gt;Skills&lt;/a&gt; |
+      &lt;a href="#projects"&gt;Projects&lt;/a&gt; |
+      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;section id="about"&gt;
+      &lt;h2&gt;About Me&lt;/h2&gt;
+      &lt;img src="https://picsum.photos/200" alt="Profile photo"&gt;
+      &lt;p&gt;Write 2–3 sentences about who you are and where you are going.&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;section id="skills"&gt;
+      &lt;h2&gt;Skills&lt;/h2&gt;
+      &lt;!-- Build your skills table here --&gt;
+    &lt;/section&gt;
+    &lt;section id="projects"&gt;
+      &lt;h2&gt;Projects&lt;/h2&gt;
+      &lt;article&gt;
+        &lt;h3&gt;Project One&lt;/h3&gt;
+        &lt;p&gt;Short description.&lt;/p&gt;
+      &lt;/article&gt;
+      &lt;!-- Add a second article --&gt;
+    &lt;/section&gt;
+    &lt;section id="contact"&gt;
+      &lt;h2&gt;Contact Me&lt;/h2&gt;
+      &lt;!-- Build your contact form here --&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 Your Name. Built with my own hands.&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><strong>MILESTONE REACHED</strong></p>
+<p>You can now structure any web page. It looks plain — that is exactly right. Structure first, beauty second. Part 2 makes it beautiful.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part0.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 0 · Start Here</span></a>
+  <a class="next" href="part2.html"><span class="dir">NEXT →</span><span class="pt">Part 2 · CSS</span></a>
+</nav>
+</main>
+
+<footer class="site">
+  <div class="col">
+    <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
+    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
+  </div>
+</footer>
+
+
+
+<script src="../../assets/app.js"></script>
+<script>MS.initTheme();</script>
+<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script src="../../assets/gate.js"></script>
+<script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
+<script src="../../assets/liveliness.js" defer></script>
+</body>
+</html>

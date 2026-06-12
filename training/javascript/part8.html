@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Cross-Language Integration — JavaScript Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,137 +274,154 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">back-end developer</span> in 16 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">PART 8 · WEEKS 14–15</div>
+    <h1>Integrating JavaScript With Other Languages</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#8-1-how-languages-actually-talk-to-each-other">8.1  How Languages Actually Talk to Each Other</a><a href="#8-2-javascript-python-the-power-couple">8.2  JavaScript + Python: The Power Couple</a><a href="#8-3-javascript-php-working-with-the-classic-web">8.3  JavaScript + PHP: Working With the Classic Web</a><a href="#8-4-javascript-sql-a-deeper-look">8.4  JavaScript + SQL: A Deeper Look</a><a href="#8-5-javascript-compiled-languages-webassembly">8.5  JavaScript + Compiled Languages: WebAssembly</a><a href="#8-6-checkpoint-project-the-polyglot-dashboard">8.6  Checkpoint Project: The Polyglot Dashboard</a></div>
   </div>
-
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+  <article>
+<p><em>Estimated duration: Weeks 14–15 (7–10 days).</em></p>
+<h2 id="8-1-how-languages-actually-talk-to-each-other">8.1  How Languages Actually Talk to Each Other</h2>
+<p>Real-world systems are polyglot: a JavaScript front end, a Python machine-learning service, a SQL database, perhaps a legacy PHP system — all cooperating. The secret is that languages rarely call each other directly. Instead, they communicate through neutral channels that every language understands:</p>
+<p><strong>HTTP + JSON APIs </strong>— by far the most common bridge. Any language can run a web server; any language can fetch JSON. Your JavaScript already speaks this fluently.</p>
+<p><strong>Embedded query languages </strong>— SQL lives as strings inside your JavaScript (you did this in Part 7).</p>
+<p><strong>Child processes </strong>— Node can launch a Python or shell script directly and read its output.</p>
+<p><strong>WebAssembly </strong>— compiled languages like C, C++ and Rust can run inside the browser, called from JavaScript.</p>
+<h2 id="8-2-javascript-python-the-power-couple">8.2  JavaScript + Python: The Power Couple</h2>
+<p>Python dominates data analysis and AI; JavaScript dominates interfaces. Together they cover most modern software. Install Python from python.org (tick "Add to PATH" on Windows), then build a Python API that your JavaScript front end consumes.</p>
+<h3>Step 1 — A Python API With FastAPI</h3>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/analytics.py</code></div>
+<pre><code># Install once:  pip install fastapi uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from statistics import mean, median
+app = FastAPI()
+# CORS: explicitly allow browser pages from other origins to call us
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+@app.get("/api/hello")
+def hello():
+    return {"message": "Hello from Python!", "language": "Python 3"}
+@app.post("/api/analyze")
+def analyze(payload: dict):
+    numbers = payload.get("numbers", [])
+    if not numbers:
+        return {"error": "Send a 'numbers' array"}
+    return {
+        "count": len(numbers),
+        "total": sum(numbers),
+        "average": round(mean(numbers), 2),
+        "median": median(numbers),
+        "max": max(numbers),
+        "min": min(numbers),
+    }
+# Run with:  uvicorn analytics:app --port 8000</code></pre>
+<h3>Step 2 — A JavaScript Front End That Calls Python</h3>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/dashboard.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;&lt;title&gt;JS ↔ Python Dashboard&lt;/title&gt;
+  &lt;style&gt;
+    body { font-family: Arial; max-width: 520px; margin: 40px auto; }
+    textarea { width: 100%; height: 70px; }
+    pre { background: #f3f0e9; padding: 16px; border-radius: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Sales Analyzer&lt;/h1&gt;
+  &lt;p&gt;JavaScript interface · Python brain&lt;/p&gt;
+  &lt;textarea id="data"&gt;12000, 45000, 30000, 8000, 52000, 31000&lt;/textarea&gt;&lt;br&gt;
+  &lt;button id="run"&gt;Analyze with Python&lt;/button&gt;
+  &lt;pre id="out"&gt;Results appear here…&lt;/pre&gt;
+  &lt;script&gt;
+    document.querySelector("#run").addEventListener("click", async () =&gt; {
+      const numbers = document.querySelector("#data").value
+        .split(",").map(n =&gt; Number(n.trim())).filter(n =&gt; !isNaN(n));
+      const res = await fetch("http://localhost:8000/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ numbers }),
+      });
+      const stats = await res.json();
+      document.querySelector("#out").textContent =
+        JSON.stringify(stats, null, 2);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Start Python with <code>uvicorn analytics:app --port 8000</code>, open the HTML with Live Server, click the button — and watch two languages cooperate across an HTTP boundary. This exact architecture (JS interface, Python computation) powers countless AI products today.</p>
+<p><strong>WHAT IS CORS?</strong></p>
+<p>Browsers block pages from calling servers on a different origin (domain/port) unless that server explicitly permits it — a security feature called Cross-Origin Resource Sharing. The Python middleware above grants permission. When your fetch mysteriously fails with a CORS error in the console, this is what is happening.</p>
+<h3>Bonus: Node Launching Python Directly (No Server Needed)</h3>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/run-python.js</code></div>
+<pre><code>import { execFile } from "node:child_process";
+// Suppose script.py prints a result; Node captures it:
+execFile("python", ["script.py", "42"], (error, stdout) =&gt; {
+  if (error) return console.error("Python failed:", error.message);
+  console.log("Python said:", stdout.trim());
+});</code></pre>
+<h2 id="8-3-javascript-php-working-with-the-classic-web">8.3  JavaScript + PHP: Working With the Classic Web</h2>
+<p>PHP still runs a vast share of the web (WordPress alone is over 40% of all sites). Knowing how JavaScript talks to PHP makes you valuable for maintaining and modernising existing businesses’ sites. The bridge is identical: PHP produces JSON, JavaScript fetches it.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/api.php</code></div>
+<pre><code>&lt;?php
+// Install PHP, then run:  php -S localhost:9000
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
+$products = [
+  ["id" =&gt; 1, "name" =&gt; "Ankara Notebook", "price" =&gt; 3500],
+  ["id" =&gt; 2, "name" =&gt; "Dev Mug",         "price" =&gt; 5000],
+];
+echo json_encode($products);
+?&gt;
+// JavaScript side — exactly the same fetch you already know:
+const res = await fetch("http://localhost:9000/api.php");
+const products = await res.json();
+products.forEach(p =&gt; console.log(p.name, "₦" + p.price));</code></pre>
+<p><strong>THE BIG INSIGHT</strong></p>
+<p>Notice your JavaScript did not change at all between Python and PHP. Once a back end speaks JSON over HTTP, your front-end skills work against ANY language — Java, C#, Go, Ruby, Rust. You learned one bridge and unlocked them all.</p>
+<h2 id="8-4-javascript-sql-a-deeper-look">8.4  JavaScript + SQL: A Deeper Look</h2>
+<p>You already integrate SQL daily since Part 7 — SQL statements are strings embedded in JavaScript, executed by a database engine. Two professional rules to carry forever:</p>
+<p>Always use parameterised queries (<code>?</code> placeholders). Building SQL by gluing user input into strings enables SQL injection — the attack behind many famous data breaches. <code>db.prepare("...WHERE id = ?").get(userInput)</code> is safe; string concatenation is not.</p>
+<p>In bigger projects, consider an ORM (Object-Relational Mapper) like Prisma, which lets you write <code>prisma.job.findMany()</code> instead of raw SQL. Learn raw SQL first — ORMs make sense only once you know what they are hiding.</p>
+<h2 id="8-5-javascript-compiled-languages-webassembly">8.5  JavaScript + Compiled Languages: WebAssembly</h2>
+<p>WebAssembly (WASM) lets code written in C, C++, Rust or Go run inside the browser at near-native speed, with JavaScript as the conductor. Figma (C++), Photoshop on the web, and many games use it. As a junior you mainly need the concept: heavy computation can be compiled to WASM, and JavaScript loads and calls it like this:</p>
+<pre><code>// Conceptual example: loading a compiled WASM module
+const { instance } = await WebAssembly.instantiateStreaming(
+  fetch("math-engine.wasm")
+);
+// Call a function written originally in Rust or C:
+console.log(instance.exports.fibonacci(40));</code></pre>
+<p>When an interviewer asks "how would you handle CPU-heavy work in the browser?", the professional answer is: a Web Worker for parallelism, WebAssembly for raw speed, or push it to a server-side service — and you now understand all three options.</p>
+<h2 id="8-6-checkpoint-project-the-polyglot-dashboard">8.6  Checkpoint Project: The Polyglot Dashboard</h2>
+<p>Combine the part: build one HTML/JS dashboard page with three panels, each fed by a different backend you have built:</p>
+<p>Panel 1 — Jobs: fetched from your Node/Express + SQLite capstone API (Part 7).</p>
+<p>Panel 2 — Statistics: salary list sent to your Python FastAPI analyzer; display average, median, max.</p>
+<p>Panel 3 — Products: fetched from your PHP endpoint.</p>
+<p>Each panel must show a loading state and handle its server being offline with a friendly error message.</p>
+<p><strong>MILESTONE REACHED</strong></p>
+<p>You can now design systems where multiple languages cooperate — the literal definition of a full-stack engineer’s daily reality.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part7.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 7 · Databases &amp; Capstone</span></a>
+  <a class="next" href="part9.html"><span class="dir">NEXT →</span><span class="pt">Part 9 · Professional Practice</span></a>
+</nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -413,7 +430,7 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

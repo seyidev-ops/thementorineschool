@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Fundamentals — JavaScript Developer · The Mentorine School</title>
+<script>/* theme bootstrap: system default, no flash */
+(function(){var m=localStorage.getItem("ms_theme")||"system";
+var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
+document.documentElement.setAttribute("data-theme",r);})();</script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Mentorine brand override — green accent, house fonts, stacked wordmark */
+:root{--accent:#0D8C4F;--accent-h:#0A6F3F;--brand-navy:#305D85;
+  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans','Segoe UI',Calibri,sans-serif;}
+[data-theme="night"]{--accent:#2FB36B;--accent-h:#4CC684;--brand-navy:#8FB3D4;}
+.brand{display:flex;align-items:center;gap:.6rem}
+.brand .mark{height:42px;width:auto;display:block}
+.wm{display:flex;flex-direction:column;line-height:1.12;font-family:'Cinzel',serif}
+.wm-the{font-size:.45rem;font-weight:600;letter-spacing:4px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-name{font-size:.86rem;font-weight:700;letter-spacing:1.6px;color:var(--brand-navy)}
+.wm-school{font-size:.62rem;font-weight:600;letter-spacing:3.2px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
+</style>
+
+<style>
+/* ============================================================
+   The Complete JavaScript & HTML Developer Training Guide
+   Warm editorial minimalist — gold house style (#0D8C4F)
+   ============================================================ */
+:root{
+  --paper:#F7F5F0; --paper-2:#F0EDE5; --card:#FFFFFF;
+  --ink:#0A0A0A; --ink-soft:#5A5A5A; --ink-faint:#8A8378;
+  --accent:#0D8C4F; --accent-h:#0A6F3F;
+  --line:rgba(10,10,10,.12); --line-soft:rgba(10,10,10,.07);
+  --code-bg:#1B1814; --code-ink:#F2EEE6; --code-soft:#ADA79B;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:'Segoe UI',Calibri,'Helvetica Neue',Arial,sans-serif;
+  --mono:Consolas,'SF Mono',Menlo,monospace;
+}
+html[data-theme="night"]{
+  --paper:#14120F; --paper-2:#1B1814; --card:#1B1814;
+  --ink:#F2EEE6; --ink-soft:#ADA79B; --ink-faint:#6E685D;
+  --accent:#2FB36B; --accent-h:#4CC684;
+  --line:rgba(242,238,230,.14); --line-soft:rgba(242,238,230,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:1.0rem;line-height:1.7;
+  background-image:radial-gradient(var(--line-soft) 1px,transparent 1px);
+  background-size:22px 22px;background-attachment:fixed;
+}
+a{color:inherit}
+::selection{background:var(--accent);color:#fff}
+
+/* ---------- Header ---------- */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{max-width:1000px;margin:0 auto;padding:.85rem 1.4rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-family:var(--serif);font-weight:700;font-size:1.02rem;
+  text-decoration:none;letter-spacing:-.2px;white-space:nowrap}
+.brand .amp{color:var(--accent);font-style:italic}
+.nav-right{display:flex;align-items:center;gap:1.1rem}
+.nav-link{font-size:.86rem;font-weight:600;letter-spacing:.4px;
+  text-decoration:none;color:var(--ink-soft)}
+.nav-link:hover{color:var(--accent-h)}
+.theme-btn{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
+  border-radius:100px;width:34px;height:34px;cursor:pointer;font-size:.95rem;line-height:1}
+.theme-btn:hover{color:var(--accent-h);border-color:var(--accent)}
+
+/* ---------- Shared column ---------- */
+.col{max-width:760px;margin:0 auto;padding:0 1.4rem}
+.wide{max-width:1000px;margin:0 auto;padding:0 1.4rem}
+
+/* ---------- Kicker ---------- */
+.kicker{font-family:var(--sans);font-weight:600;font-size:.74rem;
+  letter-spacing:2.6px;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:.7rem;margin:2.4rem 0 .8rem}
+.kicker::before{content:"";display:inline-block;width:26px;height:1px;background:var(--accent)}
+
+/* ---------- Part hero ---------- */
+.part-hero{padding:clamp(2.6rem,7vw,4.6rem) 0 1.4rem;border-bottom:1px solid var(--line-soft);margin-bottom:2.2rem}
+.part-hero .kicker{margin-top:0}
+.part-hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.08;letter-spacing:-.8px;margin:0 0 1rem}
+.anchor-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1.6rem}
+.anchor-row a{font-size:.78rem;font-weight:600;text-decoration:none;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;padding:.32rem .85rem;background:var(--card);
+  transition:border-color .25s,color .25s}
+.anchor-row a:hover{border-color:var(--accent);color:var(--accent-h)}
+
+/* ---------- Article content ---------- */
+article p{margin:0 0 1.05rem;color:var(--ink-soft);max-width:64ch}
+article p strong{color:var(--ink)}
+article h2{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:-.3px;
+  color:var(--ink);margin:2.8rem 0 1rem;padding-bottom:.45rem;
+  border-bottom:2px solid var(--accent);scroll-margin-top:84px;max-width:64ch}
+article h3{font-family:var(--serif);font-weight:700;font-size:1.18rem;
+  color:var(--ink);margin:2rem 0 .7rem}
+article h4{font-weight:700;font-size:1rem;color:var(--ink);margin:1.5rem 0 .5rem}
+article ul,article ol{margin:0 0 1.2rem;padding-left:1.4rem;color:var(--ink-soft);max-width:62ch}
+article li{margin-bottom:.45rem}
+article li::marker{color:var(--accent);font-weight:600}
+article em{color:var(--ink-faint)}
+.soft{color:var(--ink-faint)}
+.accent{color:var(--accent)}
+
+/* Inline code */
+article p code,article li code,td code{
+  font-family:var(--mono);font-size:.86em;color:var(--ink);
+  background:var(--paper-2);border:1px solid var(--line-soft);
+  border-radius:4px;padding:.08em .38em;white-space:nowrap}
+html[data-theme="night"] article p code,
+html[data-theme="night"] article li code{color:var(--ink)}
+
+/* Code blocks — dark surface, the standing exception */
+article pre{
+  background:var(--code-bg);color:var(--code-ink);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1.05rem 1.2rem;margin:0 0 1.4rem;overflow-x:auto;
+  font-family:var(--mono);font-size:.83rem;line-height:1.55}
+article pre code{background:none;border:none;padding:0;color:inherit;white-space:pre}
+.file-label{display:inline-flex;align-items:center;gap:.55rem;margin:.4rem 0 .45rem}
+.file-label .fl-tag{font-size:.66rem;font-weight:700;letter-spacing:2px;color:var(--accent)}
+.file-label code{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--ink-soft);
+  background:none;border:none;padding:0}
+.file-label + pre{margin-top:0}
+
+/* Callout */
+.callout{background:var(--card);border:1px solid var(--line-soft);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1rem 1.2rem;margin:1.4rem 0 1.6rem}
+.callout .co-label{font-size:.7rem;font-weight:700;letter-spacing:2.2px;color:var(--accent);margin-bottom:.35rem}
+.callout p{margin:0;font-size:.95rem}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;margin:.4rem 0 1.6rem;border:1px solid var(--line-soft);
+  border-radius:8px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+th{background:var(--ink);color:var(--paper);text-align:left;font-weight:600;
+  font-size:.78rem;letter-spacing:.6px;padding:.65rem .85rem}
+html[data-theme="night"] th{background:var(--paper-2);color:var(--ink)}
+td{padding:.6rem .85rem;border-top:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
+
+/* ---------- Pagination ---------- */
+.pager{display:flex;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--line-soft);margin-top:3.4rem;padding:1.6rem 0 0}
+.pager a{flex:1;text-decoration:none;border:1px solid var(--line);border-radius:8px;
+  background:var(--card);padding:.95rem 1.15rem;transition:border-color .25s}
+.pager a:hover{border-color:var(--accent)}
+.pager .dir{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:.25rem}
+.pager .pt{font-family:var(--serif);font-weight:700;font-size:.98rem;color:var(--ink)}
+.pager a.next{text-align:right}
+.pager .ghost{visibility:hidden}
+
+/* ---------- Landing ---------- */
+.hero{padding:clamp(4rem,11vw,7.5rem) 0 clamp(2.5rem,6vw,4rem);text-align:left}
+.hero .kicker{margin-top:0}
+.hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(2.5rem,7vw,4.4rem);line-height:1.04;letter-spacing:-1.5px;margin:0 0 1.3rem;max-width:16ch}
+.hero h1 .em{font-style:italic;color:var(--accent)}
+.hero .sub{font-size:1.07rem;color:var(--ink-soft);max-width:54ch;margin-bottom:2.2rem}
+.cta-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  background:var(--ink);color:var(--paper);font-weight:600;font-size:.95rem;
+  padding:1rem 2.2rem;border-radius:2px;transition:background .25s}
+.btn-primary .arr{transition:transform .25s}
+.btn-primary:hover{background:var(--accent-h)}
+.btn-primary:hover .arr{transform:translateX(4px)}
+html[data-theme="night"] .btn-primary{background:var(--ink);color:var(--paper)}
+.link-quiet{font-size:.92rem;color:var(--ink-faint);text-decoration:underline;text-underline-offset:4px}
+.link-quiet:hover{color:var(--accent-h)}
+
+.stat-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);margin:1.6rem 0 0}
+.stat{padding:1.4rem 1rem;text-align:center;border-left:1px solid var(--line-soft)}
+.stat:first-child{border-left:none}
+.stat .n{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,3.5vw,2.2rem);
+  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.stat .l{font-size:.7rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-faint);margin-top:.3rem}
+
+.section{padding:clamp(3rem,8vw,5.5rem) 0 0}
+.section-head{font-family:var(--serif);font-weight:700;font-size:clamp(1.6rem,4vw,2.2rem);
+  letter-spacing:-.6px;margin:0 0 .7rem}
+.section-sub{color:var(--ink-soft);max-width:58ch;margin-bottom:2.2rem}
+
+.parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem}
+.part-card{display:block;text-decoration:none;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:8px;padding:1.5rem 1.5rem 1.3rem;
+  transition:border-color .25s}
+.part-card:hover{border-color:var(--accent)}
+.part-card .pc-kicker{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:.55rem}
+.part-card h3{font-family:var(--serif);font-weight:700;font-size:1.16rem;letter-spacing:-.2px;color:var(--ink);margin:0 0 .5rem}
+.part-card p{font-size:.88rem;color:var(--ink-soft);margin:0 0 .9rem;line-height:1.55}
+.part-card .pc-mile{font-size:.78rem;color:var(--ink-faint);border-top:1px solid var(--line-soft);padding-top:.7rem}
+.part-card .pc-mile strong{color:var(--ink-soft);font-weight:600}
+
+.proj-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
+.proj{background:var(--card);border:1px solid var(--line-soft);border-radius:8px;
+  padding:.85rem 1.05rem;font-size:.86rem;color:var(--ink-soft);display:flex;gap:.6rem;align-items:baseline}
+.proj .dot{color:var(--accent);font-weight:700}
+
+.cta-band{margin:clamp(3.5rem,9vw,6rem) 0 0;border-top:1px solid var(--line);
+  padding:clamp(2.6rem,7vw,4.5rem) 0}
+.cta-band h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,4.5vw,2.5rem);
+  letter-spacing:-.6px;margin:0 0 .8rem;max-width:22ch}
+.cta-band p{color:var(--ink-soft);max-width:52ch;margin-bottom:2rem}
+
+/* ---------- Footer ---------- */
+footer.site{border-top:1px solid var(--line-soft);margin-top:4rem;padding:2.2rem 0 2.8rem}
+footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.82rem;color:var(--ink-faint)}
+.bm{font-weight:700;color:var(--ink)}
+.bm .bm-i{font-style:italic;color:var(--accent);margin-left:-0.08em}
+
+@media (max-width:640px){
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:none}
+  .pager{flex-direction:column}
+  .pager a.next{text-align:left}
+  .pager .ghost{display:none}
+}
+
+/* ---------- Auth (register/login) ---------- */
+.auth-wrap{max-width:430px;margin:clamp(3rem,9vw,6rem) auto 4rem;padding:0 1.4rem}
+.auth-card{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:2rem 1.8rem}
+.auth-tabs{display:flex;gap:.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line-soft)}
+.auth-tabs button{flex:1;background:none;border:0;border-bottom:2px solid transparent;
+  font:600 .92rem var(--sans);color:var(--ink-faint);padding:.7rem 0;cursor:pointer}
+.auth-tabs button.active{color:var(--ink);border-bottom-color:var(--accent)}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.74rem;font-weight:700;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:.35rem}
+.field input{width:100%;padding:.8rem .9rem;border:1px solid var(--line);border-radius:6px;
+  background:var(--paper);color:var(--ink);font:1rem var(--sans)}
+.field input:focus{outline:none;border-color:var(--accent)}
+.auth-btn{width:100%;border:0;border-radius:2px;background:var(--ink);color:var(--paper);
+  font:600 .98rem var(--sans);padding:.95rem;cursor:pointer;margin-top:.4rem}
+.auth-btn:hover{background:var(--accent-h)}
+.auth-msg{font-size:.85rem;margin-top:.8rem;min-height:1.2em}
+.auth-msg.err{color:#A04B4B}.auth-msg.ok{color:var(--accent-h)}
+.auth-note{font-size:.78rem;color:var(--ink-faint);text-align:center;margin-top:1.2rem}
+.welcome-chip{font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);
+  border-radius:100px;padding:.3rem .85rem;background:var(--card);white-space:nowrap}
+.welcome-chip b{color:var(--accent-h)}
+
+</style>
+
+
+</head>
+<body>
+
+<header class="site" data-live="off">
+  <nav class="nav">
+    <a class="brand" href="../../index.html" style="text-decoration:none">
+      <img class="mark" src="../../assets/logo.svg" alt="The Mentorine School mark">
+      <span class="wm">
+        <span class="wm-the">THE</span>
+        <span class="wm-name">MENTORINE</span>
+        <span class="wm-school">SCHOOL</span>
+        <span class="wm-sub">BY ONA SERVICES</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+    </div>
+  </nav>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">PART 3 · WEEKS 3–6</div>
+    <h1>JavaScript Fundamentals: Learning to Think Like a Programmer</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#3-1-what-is-javascript-and-where-does-it-run">3.1  What Is JavaScript, and Where Does It Run?</a><a href="#3-2-variables-the-computer-s-memory">3.2  Variables: The Computer’s Memory</a><a href="#3-3-operators-doing-things-with-values">3.3  Operators: Doing Things With Values</a><a href="#3-4-conditionals-teaching-the-computer-to-decide">3.4  Conditionals: Teaching the Computer to Decide</a><a href="#3-5-loops-doing-things-repeatedly">3.5  Loops: Doing Things Repeatedly</a><a href="#3-6-functions-reusable-machines">3.6  Functions: Reusable Machines</a><a href="#3-7-arrays-ordered-lists-of-anything">3.7  Arrays: Ordered Lists of Anything</a><a href="#3-8-objects-describing-real-world-things">3.8  Objects: Describing Real-World Things</a></div>
+  </div>
+  <article>
+<p><em>Estimated duration: Weeks 3–6 (18–24 days). This is the heart of the course. Do not rush it.</em></p>
+<h2 id="3-1-what-is-javascript-and-where-does-it-run">3.1  What Is JavaScript, and Where Does It Run?</h2>
+<p>JavaScript (JS) is a true programming language: it makes decisions, repeats actions, remembers things, and responds to events. It is the only language every web browser understands natively, and thanks to Node.js it also runs on servers — which is why JavaScript developers can build entire applications, front to back, with one language. It is consistently the most in-demand language in remote job listings worldwide.</p>
+<h3>Two Ways to Run JavaScript (Practical)</h3>
+<p><strong>Way 1 — The browser console: </strong>open Chrome, press F12, click the "Console" tab, type the line below, and press Enter:</p>
+<pre><code>console.log("Hello from the console!");</code></pre>
+<p><strong>Way 2 — Node.js in the terminal: </strong>create a file <code>part3-js/hello.js</code> containing that same line, then in the terminal run:</p>
+<pre><code>cd part3-js
+node hello.js</code></pre>
+<p><code>console.log()</code> prints things to the screen. It is your flashlight for the entire journey — when in doubt, log it out. For browser practicals in this part, use this HTML wrapper and put your JS between the <code>&lt;script&gt;</code> tags:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-js/playground.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;JS Playground&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Open the console (F12) to see output&lt;/h1&gt;
+  &lt;script&gt;
+    // Your JavaScript goes here
+    console.log("Playground ready");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h2 id="3-2-variables-the-computer-s-memory">3.2  Variables: The Computer’s Memory</h2>
+<p>A variable is a labelled box where you store a value to use later. Modern JavaScript gives you two keywords:</p>
+<p><code>let</code> — a box whose contents can change later.</p>
+<p><code>const</code> — a box that is sealed after you fill it (constant). Professionals default to const and only use let when the value genuinely changes.</p>
+<pre><code>const myName = "Adaeze";     // text (a "string") — note the quotes
+let age = 24;                 // a number — no quotes
+let isLearning = true;        // true/false (a "boolean")
+let salary;                   // declared but empty: undefined
+console.log(myName);          // Adaeze
+console.log("Age:", age);     // Age: 24
+age = 25;                     // allowed: let can change
+// myName = "Bola";           // ERROR: const cannot be reassigned
+// Joining text with values: template literals (backtick quotes)
+console.log(`My name is ${myName} and I am ${age} years old.`);</code></pre>
+<p><strong>NAMING RULES</strong></p>
+<p>Variable names use camelCase (firstName, totalPrice), cannot start with a number, cannot contain spaces, and should describe their contents. monthlySalary is professional; x is not.</p>
+<h3>The Core Data Types</h3>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Type</th><th>What It Is</th><th>Example</th></tr></thead><tbody>
+<tr><td>String</td><td>Text, wrapped in quotes or backticks</td><td>"Lagos", 'remote job', `Hi ${name}`</td></tr>
+<tr><td>Number</td><td>Integers and decimals alike</td><td>42, 3.14, -250000</td></tr>
+<tr><td>Boolean</td><td>true or false — the basis of all decisions</td><td>true, false</td></tr>
+<tr><td>Undefined</td><td>Declared but not yet given a value</td><td>let x;</td></tr>
+<tr><td>Null</td><td>Deliberately empty — "nothing, on purpose"</td><td>let winner = null;</td></tr>
+<tr><td>Array</td><td>An ordered list of values</td><td>[10, 20, 30]</td></tr>
+<tr><td>Object</td><td>A collection of labelled values</td><td>{ name: "Ada", age: 24 }</td></tr>
+</tbody></table></div>
+<h2 id="3-3-operators-doing-things-with-values">3.3  Operators: Doing Things With Values</h2>
+<pre><code>// Arithmetic
+console.log(10 + 3);   // 13
+console.log(10 - 3);   // 7
+console.log(10 * 3);   // 30
+console.log(10 / 3);   // 3.333...
+console.log(10 % 3);   // 1  (remainder — surprisingly useful)
+console.log(2 ** 5);   // 32 (2 to the power of 5)
+// Shorthand
+let score = 10;
+score += 5;            // same as score = score + 5  → 15
+score++;               // add 1                       → 16
+// Comparison (result is always true or false)
+console.log(5 &gt; 3);          // true
+console.log(5 &gt;= 5);         // true
+console.log(5 === 5);        // true  (equal in value AND type)
+console.log(5 === "5");      // false (number vs string)
+console.log(5 !== 4);        // true  (not equal)
+// Logical
+console.log(true &amp;&amp; false);  // false — AND: both must be true
+console.log(true || false);  // true  — OR: at least one true
+console.log(!true);          // false — NOT: flips the value</code></pre>
+<p><strong>CRITICAL RULE</strong></p>
+<p>Always compare with === (triple equals), never == (double). Double equals performs sneaky type conversion (5 == "5" is true!) and causes bugs that take hours to find. A single = is assignment, not comparison at all.</p>
+<h2 id="3-4-conditionals-teaching-the-computer-to-decide">3.4  Conditionals: Teaching the Computer to Decide</h2>
+<pre><code>const hour = 14;
+if (hour &lt; 12) {
+  console.log("Good morning!");
+} else if (hour &lt; 17) {
+  console.log("Good afternoon!");
+} else {
+  console.log("Good evening!");
+}
+// Real-world example: grading
+const examScore = 73;
+let grade;
+if (examScore &gt;= 70)      grade = "A";
+else if (examScore &gt;= 60) grade = "B";
+else if (examScore &gt;= 50) grade = "C";
+else                      grade = "F";
+console.log(`Score ${examScore} = Grade ${grade}`);
+// The ternary operator: a one-line if/else
+const access = age &gt;= 18 ? "granted" : "denied";
+// switch: cleaner when checking one value against many options
+const day = "Saturday";
+switch (day) {
+  case "Saturday":
+  case "Sunday":
+    console.log("Weekend! Time for a side project.");
+    break;
+  default:
+    console.log("Workday. Code for 90 minutes anyway.");
+}</code></pre>
+<h3>Hands-On Practical: The ATM Simulator</h3>
+<p>Create <code>part3-js/atm.js</code> and run it with <code>node atm.js</code>. Then complete the Try This challenge.</p>
+<pre><code>const balance = 50000;       // Naira
+const withdrawal = 65000;
+const dailyLimit = 100000;
+if (withdrawal &gt; balance) {
+  console.log("Insufficient funds. Your balance is ₦" + balance);
+} else if (withdrawal &gt; dailyLimit) {
+  console.log("Amount exceeds your daily limit of ₦" + dailyLimit);
+} else {
+  const newBalance = balance - withdrawal;
+  console.log(`Success! Dispensing ₦${withdrawal}. New balance: ₦${newBalance}`);
+}</code></pre>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Add a rule that rejects withdrawals that are not multiples of 500 (hint: use the % operator), and a rule that warns when the remaining balance would fall below ₦1,000.</p></div>
+<h2 id="3-5-loops-doing-things-repeatedly">3.5  Loops: Doing Things Repeatedly</h2>
+<p>Computers exist to repeat boring work flawlessly. Loops are how you command repetition.</p>
+<pre><code>// for loop: when you know how many times
+for (let i = 1; i &lt;= 5; i++) {
+  console.log("Push-up number " + i);
+}
+// Reads as: start i at 1; keep going while i &lt;= 5; add 1 each round.
+// while loop: when you repeat until a condition changes
+let savings = 0;
+let week = 0;
+while (savings &lt; 100000) {
+  week++;
+  savings += 12500;     // save ₦12,500 per week
+}
+console.log(`Goal reached in ${week} weeks.`);
+// Looping over an array (you will do this daily as a developer)
+const skills = ["HTML", "CSS", "JavaScript"];
+for (const skill of skills) {
+  console.log("I am learning " + skill);
+}
+// break stops a loop early; continue skips one round
+for (let n = 1; n &lt;= 10; n++) {
+  if (n === 4) continue;   // skip 4
+  if (n === 8) break;      // stop completely at 8
+  console.log(n);          // prints 1 2 3 5 6 7
+}</code></pre>
+<h3>Hands-On Practical: The Multiplication Master</h3>
+<pre><code>// Prints the full 12 times table using a loop inside a loop
+for (let a = 1; a &lt;= 12; a++) {
+  let row = "";
+  for (let b = 1; b &lt;= 12; b++) {
+    row += (a * b) + "\t";   // \t is a tab character
+  }
+  console.log(row);
+}</code></pre>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Write a loop that prints every number from 1 to 100, but prints "Fizz" for multiples of 3, "Buzz" for multiples of 5, and "FizzBuzz" for multiples of both. This is a genuine question asked in real job interviews.</p></div>
+<h2 id="3-6-functions-reusable-machines">3.6  Functions: Reusable Machines</h2>
+<p>A function is a named block of code you write once and run as many times as you like. Functions take inputs (parameters), do work, and hand back an output (return value). They are the single most important building block in all of programming.</p>
+<pre><code>// Defining a function
+function greet(name) {
+  return "Welcome aboard, " + name + "!";
+}
+// Calling (using) it
+console.log(greet("Chidi"));    // Welcome aboard, Chidi!
+console.log(greet("Funke"));    // Welcome aboard, Funke!
+// Multiple parameters and real logic
+function calculatePay(hourlyRate, hours) {
+  const gross = hourlyRate * hours;
+  const tax = gross * 0.075;        // 7.5% tax
+  return gross - tax;
+}
+console.log(calculatePay(5000, 40));  // 185000
+// Default parameter values
+function brew(drink = "coffee") {
+  return "Brewing " + drink;
+}
+console.log(brew());          // Brewing coffee
+console.log(brew("tea"));     // Brewing tea
+// Arrow functions: the modern, shorter syntax (you will see these everywhere)
+const add = (a, b) =&gt; a + b;
+const square = n =&gt; n * n;
+console.log(add(3, 4), square(5));   // 7 25</code></pre>
+<p><strong>MENTAL MODEL</strong></p>
+<p>Think of a function as a blender: ingredients go in (parameters), the machine does its work (the body), a smoothie comes out (the return value). return immediately ends the function and hands back the result — code after return never runs.</p>
+<h2 id="3-7-arrays-ordered-lists-of-anything">3.7  Arrays: Ordered Lists of Anything</h2>
+<pre><code>const jobs = ["Frontend Dev", "Backend Dev", "Data Analyst"];
+console.log(jobs[0]);          // "Frontend Dev" — counting starts at ZERO
+console.log(jobs.length);      // 3
+jobs.push("DevOps Engineer");  // add to the end
+jobs.unshift("Intern");        // add to the beginning
+const last = jobs.pop();       // remove and return the last item
+console.log(jobs.includes("Data Analyst"));  // true
+console.log(jobs.indexOf("Backend Dev"));    // 2
+// The Big Three array methods — learn these cold:
+const prices = [1000, 2500, 4000, 800];
+// map: transform every item → new array
+const withVAT = prices.map(p =&gt; p * 1.075);
+// filter: keep only items that pass a test → new array
+const affordable = prices.filter(p =&gt; p &lt; 3000);
+// reduce: boil everything down to one value
+const total = prices.reduce((sum, p) =&gt; sum + p, 0);
+console.log(withVAT);     // [1075, 2687.5, 4300, 860]
+console.log(affordable);  // [1000, 2500, 800]
+console.log(total);       // 8300
+// Sorting (numbers need a compare function)
+const sorted = [...prices].sort((a, b) =&gt; a - b);  // [800,1000,2500,4000]</code></pre>
+<h2 id="3-8-objects-describing-real-world-things">3.8  Objects: Describing Real-World Things</h2>
+<p>An array answers "what is in the list?"; an object answers "what are this thing’s properties?". Almost every piece of data you will ever receive from a server arrives as objects.</p>
+<pre><code>const job = {
+  title: "Junior Frontend Developer",
+  company: "RemoteFirst Ltd",
+  salary: 250000,
+  isRemote: true,
+  skills: ["HTML", "CSS", "JavaScript"],
+  // Objects can contain functions, called "methods"
+  describe: function () {
+    return `${this.title} at ${this.company}`;
+  }
+};
+// Reading values — two equivalent ways
+console.log(job.title);          // dot notation (preferred)
+console.log(job["salary"]);      // bracket notation
+// Changing and adding
+job.salary = 300000;
+job.location = "Anywhere";
+console.log(job.describe());     // Junior Frontend Developer at RemoteFirst Ltd
+// Arrays of objects: THE most common data shape in real work
+const applicants = [
+  { name: "Ada",  score: 85 },
+  { name: "Bayo", score: 62 },
+  { name: "Chi",  score: 91 },
+];
+const passed = applicants.filter(a =&gt; a.score &gt;= 70);
+const names = passed.map(a =&gt; a.name);
+console.log(names);              // ["Ada", "Chi"]</code></pre>
+<p><code>this</code> inside a method refers to the object the method belongs to — "this very object". You will meet it again in Part 4.</p>
+<h2 id="3-9-checkpoint-project-1-the-number-guessing-game">3.9  Checkpoint Project 1: The Number-Guessing Game</h2>
+<p>Your first complete program with logic, loops, functions, and randomness. Save as <code>part3-js/guess.html</code> and open with Live Server. (It uses the browser’s simple <code>prompt()</code> pop-up so we can focus purely on logic — Part 4 replaces pop-ups with real interfaces.)</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-js/guess.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;Guess the Number&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Guess the Number (1–100)&lt;/h1&gt;
+  &lt;p&gt;Check the console for your game history.&lt;/p&gt;
+  &lt;script&gt;
+    // Math.random() gives 0–0.999...; scale it to 1–100
+    const secret = Math.floor(Math.random() * 100) + 1;
+    const maxAttempts = 7;
+    let attempts = 0;
+    let won = false;
+    while (attempts &lt; maxAttempts &amp;&amp; !won) {
+      const input = prompt(`Attempt ${attempts + 1} of ${maxAttempts}. Your guess?`);
+      const guess = Number(input);          // convert text → number
+      attempts++;
+      if (Number.isNaN(guess)) {
+        alert("That is not a number. Try again!");
+        attempts--;                          // don't punish typos
+      } else if (guess === secret) {
+        alert(`Correct! You won in ${attempts} attempts.`);
+        won = true;
+      } else if (guess &lt; secret) {
+        alert("Too low. Go higher.");
+      } else {
+        alert("Too high. Go lower.");
+      }
+      console.log(`Attempt ${attempts}: guessed ${guess}`);
+    }
+    if (!won) alert(`Out of attempts! The number was ${secret}.`);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h2 id="3-10-checkpoint-project-2-console-expense-tracker">3.10  Checkpoint Project 2: Console Expense Tracker</h2>
+<p>Run with <code>node expenses.js</code>. This project mirrors exactly how real applications model data: an array of objects plus functions that operate on it.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part3-js/expenses.js</code></div>
+<pre><code>const expenses = [];
+function addExpense(description, amount, category) {
+  expenses.push({
+    id: expenses.length + 1,
+    description,
+    amount,
+    category,
+    date: new Date().toLocaleDateString(),
+  });
+}
+function totalSpent() {
+  return expenses.reduce((sum, e) =&gt; sum + e.amount, 0);
+}
+function totalByCategory(category) {
+  return expenses
+    .filter(e =&gt; e.category === category)
+    .reduce((sum, e) =&gt; sum + e.amount, 0);
+}
+function printReport() {
+  console.log("=== EXPENSE REPORT ===");
+  for (const e of expenses) {
+    console.log(`#${e.id} [${e.category}] ${e.description}: ₦${e.amount}`);
+  }
+  console.log("Total spent: ₦" + totalSpent());
+}
+// --- Use the tracker ---
+addExpense("Internet data", 5000, "utilities");
+addExpense("Lunch", 2500, "food");
+addExpense("Transport to meetup", 1500, "transport");
+addExpense("Suya", 3000, "food");
+printReport();
+console.log("Food total: ₦" + totalByCategory("food"));</code></pre>
+<p><strong>Try This (your final Part 3 exam): </strong>Add three functions: <code>removeExpense(id)</code> (hint: filter), <code>biggestExpense()</code> (hint: reduce or sort), and <code>averageExpense()</code>. If you can build these without looking anything up, you have genuinely internalised JavaScript fundamentals.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part2.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 2 · CSS</span></a>
+  <a class="next" href="part4.html"><span class="dir">NEXT →</span><span class="pt">Part 4 · The DOM</span></a>
+</nav>
+</main>
+
+<footer class="site">
+  <div class="col">
+    <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
+    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
+  </div>
+</footer>
+
+
+
+<script src="../../assets/app.js"></script>
+<script>MS.initTheme();</script>
+<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script src="../../assets/gate.js"></script>
+<script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
+<script src="../../assets/liveliness.js" defer></script>
+</body>
+</html>

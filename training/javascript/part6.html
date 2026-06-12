@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Node.js &amp; Express — JavaScript Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,137 +274,142 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">back-end developer</span> in 16 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">PART 6 · WEEKS 10–12</div>
+    <h1>Node.js &amp; Express: Building the Back End</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#6-1-front-end-vs-back-end-the-full-picture">6.1  Front End vs Back End: The Full Picture</a><a href="#6-2-npm-the-world-s-largest-code-library">6.2  npm: The World’s Largest Code Library</a><a href="#6-3-your-first-web-server-practical">6.3  Your First Web Server (Practical)</a><a href="#6-4-rest-apis-the-grammar-of-the-web">6.4  REST APIs: The Grammar of the Web</a><a href="#6-5-project-the-remote-job-board-api">6.5  Project: The Remote Job Board API</a><a href="#6-6-serving-your-front-end-from-your-back-end">6.6  Serving Your Front End From Your Back End</a></div>
   </div>
-
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+  <article>
+<p><em>Estimated duration: Weeks 10–12 (12–14 days).</em></p>
+<h2 id="6-1-front-end-vs-back-end-the-full-picture">6.1  Front End vs Back End: The Full Picture</h2>
+<p>Everything so far ran in the browser — the front end, the part users see. The back end is the program running on a server somewhere that the front end talks to: it owns the database, enforces the rules, protects the secrets, and answers requests. In Part 5 you consumed other people’s APIs; in this part you build your own. Node.js makes this possible in JavaScript — the same language, new superpowers: reading files, opening network ports, talking to databases.</p>
+<h2 id="6-2-npm-the-world-s-largest-code-library">6.2  npm: The World’s Largest Code Library</h2>
+<p>npm (Node Package Manager) gives you instant access to over two million free packages — pre-built solutions to almost every problem. Initialise a project, then install what you need:</p>
+<pre><code>cd part6-node
+npm init -y                 # creates package.json (your project's ID card)
+npm install express         # installs the Express web framework</code></pre>
+<p><code>package.json</code> records your project’s name and its dependencies — the packages it needs.</p>
+<p><code>node_modules/</code> is where installed packages live. Never edit it, never email it; anyone can rebuild it by running <code>npm install</code>.</p>
+<p>Open <code>package.json</code> and add <code>"type": "module"</code> at the top level so you can use modern import/export syntax in Node.</p>
+<h2 id="6-3-your-first-web-server-practical">6.3  Your First Web Server (Practical)</h2>
+<p>Express is the most widely used Node framework — minimal, battle-tested, and the standard line on junior job descriptions.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part6-node/server.js</code></div>
+<pre><code>import express from "express";
+const app = express();
+const PORT = 3000;
+// A "route": WHEN someone visits this path, run this function
+app.get("/", (req, res) =&gt; {
+  res.send("&lt;h1&gt;My server is alive!&lt;/h1&gt;");
+});
+app.get("/about", (req, res) =&gt; {
+  res.send("This server was built by a future professional developer.");
+});
+// A route that returns JSON — congratulations, this is an API
+app.get("/api/status", (req, res) =&gt; {
+  res.json({ status: "ok", time: new Date().toISOString() });
+});
+app.listen(PORT, () =&gt; {
+  console.log(`Server running at http://localhost:${PORT}`);
+});</code></pre>
+<p>Run <code>node server.js</code>, then visit <code>http://localhost:3000</code> in your browser. <code>localhost</code> means "this computer"; <code>3000</code> is the port — a numbered door into your machine. <code>req</code> (request) carries everything about the incoming visit; <code>res</code> (response) is your reply. Press Ctrl+C in the terminal to stop the server; restart it after every code change (or run <code>node --watch server.js</code> to auto-restart).</p>
+<h2 id="6-4-rest-apis-the-grammar-of-the-web">6.4  REST APIs: The Grammar of the Web</h2>
+<p>A REST API maps the four things you do with data — Create, Read, Update, Delete (CRUD) — onto four HTTP methods. Every modern app speaks this grammar:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>HTTP Method</th><th>CRUD Action</th><th>Example Route</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>GET</td><td>Read</td><td>GET /api/jobs</td><td>Give me all jobs</td></tr>
+<tr><td>GET</td><td>Read one</td><td>GET /api/jobs/3</td><td>Give me job number 3</td></tr>
+<tr><td>POST</td><td>Create</td><td>POST /api/jobs</td><td>Here is a new job — store it</td></tr>
+<tr><td>PUT</td><td>Update</td><td>PUT /api/jobs/3</td><td>Replace job 3 with this version</td></tr>
+<tr><td>DELETE</td><td>Delete</td><td>DELETE /api/jobs/3</td><td>Remove job 3</td></tr>
+</tbody></table></div>
+<h2 id="6-5-project-the-remote-job-board-api">6.5  Project: The Remote Job Board API</h2>
+<p>A complete CRUD API for managing remote job listings — a real-world product foundation. Data lives in memory for now; Part 7 adds a database.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part6-node/jobs-api.js</code></div>
+<pre><code>import express from "express";
+const app = express();
+app.use(express.json());   // teach Express to read JSON request bodies
+// ----- IN-MEMORY DATA (the database arrives in Part 7) -----
+let jobs = [
+  { id: 1, title: "Frontend Developer", company: "RemoteFirst",
+    salary: 250000, type: "full-time" },
+  { id: 2, title: "Virtual Assistant", company: "GlobalDesk",
+    salary: 150000, type: "part-time" },
+];
+let nextId = 3;
+// READ all (with optional filtering: /api/jobs?type=full-time)
+app.get("/api/jobs", (req, res) =&gt; {
+  const { type } = req.query;
+  const result = type ? jobs.filter(j =&gt; j.type === type) : jobs;
+  res.json(result);
+});
+// READ one
+app.get("/api/jobs/:id", (req, res) =&gt; {
+  const job = jobs.find(j =&gt; j.id === Number(req.params.id));
+  if (!job) return res.status(404).json({ error: "Job not found" });
+  res.json(job);
+});
+// CREATE
+app.post("/api/jobs", (req, res) =&gt; {
+  const { title, company, salary, type } = req.body;
+  if (!title || !company) {
+    return res.status(400).json({ error: "title and company are required" });
+  }
+  const job = { id: nextId++, title, company,
+                salary: salary ?? 0, type: type ?? "full-time" };
+  jobs.push(job);
+  res.status(201).json(job);   // 201 = "Created"
+});
+// UPDATE
+app.put("/api/jobs/:id", (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const index = jobs.findIndex(j =&gt; j.id === id);
+  if (index === -1) return res.status(404).json({ error: "Job not found" });
+  jobs[index] = { ...jobs[index], ...req.body, id };
+  res.json(jobs[index]);
+});
+// DELETE
+app.delete("/api/jobs/:id", (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const before = jobs.length;
+  jobs = jobs.filter(j =&gt; j.id !== id);
+  if (jobs.length === before) {
+    return res.status(404).json({ error: "Job not found" });
+  }
+  res.status(204).end();   // 204 = "Done, nothing to say"
+});
+app.listen(3000, () =&gt; console.log("Job API on http://localhost:3000"));</code></pre>
+<h3>Testing Your API Like a Professional</h3>
+<p>Browsers only easily send GET requests. Test the others with <code>curl</code> in a second terminal window (keep the server running in the first):</p>
+<pre><code># READ all jobs
+curl http://localhost:3000/api/jobs
+# CREATE a job (POST with a JSON body)
+curl -X POST http://localhost:3000/api/jobs -H "Content-Type: application/json" -d "{\"title\":\"Backend Developer\",\"company\":\"NaijaTech\",\"salary\":400000}"
+# UPDATE job 1
+curl -X PUT http://localhost:3000/api/jobs/1 -H "Content-Type: application/json" -d "{\"salary\":300000}"
+# DELETE job 2
+curl -X DELETE http://localhost:3000/api/jobs/2</code></pre>
+<p><strong>STATUS CODES YOU MUST KNOW</strong></p>
+<p>200 OK · 201 Created · 204 No Content · 400 Bad Request (their fault) · 401 Unauthorized · 404 Not Found · 500 Server Error (your fault). Returning the right code is a mark of professionalism. For more comfortable testing, install the free Postman app or the Thunder Client extension in VS Code.</p>
+<h2 id="6-6-serving-your-front-end-from-your-back-end">6.6  Serving Your Front End From Your Back End</h2>
+<p>One line lets Express serve your HTML/CSS/JS files: create a folder named <code>public</code>, put a front end inside, and add <code>app.use(express.static("public"));</code> near the top of your server. Now <code>http://localhost:3000</code> serves your page AND your API — one app, front to back. This is the architecture of the Part 7 capstone.</p>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Add a route <code>GET /api/jobs/stats</code> returning <code>{ total, averageSalary, byType }</code> computed with filter and reduce. Careful: define it BEFORE the <code>/api/jobs/:id</code> route, or Express will think "stats" is an id — your first real routing lesson.</p></div>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part5.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 5 · Modern &amp; Async JS</span></a>
+  <a class="next" href="part7.html"><span class="dir">NEXT →</span><span class="pt">Part 7 · Databases &amp; Capstone</span></a>
+</nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -413,7 +418,7 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

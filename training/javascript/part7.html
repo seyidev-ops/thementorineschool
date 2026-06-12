@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Databases &amp; Capstone — JavaScript Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,137 +274,244 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">back-end developer</span> in 16 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">PART 7 · WEEKS 12–14</div>
+    <h1>Databases &amp; the Full-Stack Capstone</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-databases">7.1  Why Databases?</a><a href="#7-2-sql-in-one-sitting-practical">7.2  SQL in One Sitting (Practical)</a><a href="#7-3-the-capstone-remote-job-board-a-complete-full-stack-application">7.3  THE CAPSTONE: Remote Job Board — A Complete Full-Stack Application</a></div>
   </div>
-
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+  <article>
+<p><em>Estimated duration: Weeks 12–14 (12–14 days).</em></p>
+<h2 id="7-1-why-databases">7.1  Why Databases?</h2>
+<p>Your Part 6 API loses everything when the server restarts, because data lived in a variable in memory. A database is a program built purely to store, organise, search, and protect data permanently. The dominant family is relational databases, which store data in tables (like disciplined spreadsheets) and speak a language called SQL — Structured Query Language. SQL has been a core developer skill for fifty years and appears in virtually every backend job description.</p>
+<p>We will use <strong>SQLite</strong>: a complete, real SQL database that lives in a single file — zero installation, zero configuration, and the same SQL skills transfer directly to PostgreSQL and MySQL in production jobs.</p>
+<h2 id="7-2-sql-in-one-sitting-practical">7.2  SQL in One Sitting (Practical)</h2>
+<p>Node ships with SQLite support built in (Node 22+, via <code>node:sqlite</code>). Create this file in a new <code>part7-capstone</code> folder and run it with <code>node sql-practice.js</code>:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/sql-practice.js</code></div>
+<pre><code>import { DatabaseSync } from "node:sqlite";
+const db = new DatabaseSync("practice.db");   // creates the file if absent
+// CREATE TABLE: define the shape of your data
+db.exec(`
+  CREATE TABLE IF NOT EXISTS jobs (
+    id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    title   TEXT NOT NULL,
+    company TEXT NOT NULL,
+    salary  INTEGER DEFAULT 0,
+    type    TEXT DEFAULT 'full-time'
+  )
+`);
+// INSERT: add rows. The ? placeholders prevent SQL injection attacks —
+// NEVER glue user input directly into a SQL string.
+const insert = db.prepare(
+  "INSERT INTO jobs (title, company, salary, type) VALUES (?, ?, ?, ?)"
+);
+insert.run("Frontend Developer", "RemoteFirst", 250000, "full-time");
+insert.run("Data Analyst", "InsightCo", 350000, "full-time");
+insert.run("Virtual Assistant", "GlobalDesk", 150000, "part-time");
+// SELECT: read rows
+const all = db.prepare("SELECT * FROM jobs").all();
+console.log("All jobs:", all);
+const wellPaid = db.prepare(
+  "SELECT title, salary FROM jobs WHERE salary &gt;= ? ORDER BY salary DESC"
+).all(200000);
+console.log("₦200k+:", wellPaid);
+// UPDATE and DELETE
+db.prepare("UPDATE jobs SET salary = ? WHERE id = ?").run(280000, 1);
+db.prepare("DELETE FROM jobs WHERE id = ?").run(3);
+// Aggregate functions
+const stats = db.prepare(
+  "SELECT COUNT(*) AS total, AVG(salary) AS avgSalary FROM jobs"
+).get();
+console.log(stats);</code></pre>
+<div class="tbl-wrap"><table>
+<thead><tr><th>SQL Command</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>CREATE TABLE</td><td>Define a new table and its columns</td></tr>
+<tr><td>INSERT INTO ... VALUES</td><td>Add a row</td></tr>
+<tr><td>SELECT ... FROM ... WHERE</td><td>Read rows matching a condition</td></tr>
+<tr><td>UPDATE ... SET ... WHERE</td><td>Change matching rows (never forget WHERE!)</td></tr>
+<tr><td>DELETE FROM ... WHERE</td><td>Remove matching rows (never forget WHERE!)</td></tr>
+<tr><td>ORDER BY / LIMIT</td><td>Sort results / cap how many return</td></tr>
+<tr><td>COUNT, AVG, SUM, MAX, MIN</td><td>Calculations across rows</td></tr>
+</tbody></table></div>
+<h2 id="7-3-the-capstone-remote-job-board-a-complete-full-stack-application">7.3  THE CAPSTONE: Remote Job Board — A Complete Full-Stack Application</h2>
+<p>This is the project that goes at the top of your CV. It combines every single skill from Parts 1–7: semantic HTML, styled responsive CSS, DOM manipulation, fetch, async/await, an Express REST API, and a SQL database. Build it in three files inside part7-capstone.</p>
+<h3>Step 1 — The Server With a Real Database</h3>
+<p>Run <code>npm init -y</code> then <code>npm install express</code> in the folder, add <code>"type": "module"</code> to package.json, and create:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/server.js</code></div>
+<pre><code>import express from "express";
+import { DatabaseSync } from "node:sqlite";
+const app = express();
+const db = new DatabaseSync("jobboard.db");
+db.exec(`
+  CREATE TABLE IF NOT EXISTS jobs (
+    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    title     TEXT NOT NULL,
+    company   TEXT NOT NULL,
+    salary    INTEGER DEFAULT 0,
+    type      TEXT DEFAULT 'full-time',
+    createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+  )
+`);
+app.use(express.json());
+app.use(express.static("public"));   // serves the front end
+// READ all (optional ?type= and ?search= filters)
+app.get("/api/jobs", (req, res) =&gt; {
+  const { type, search } = req.query;
+  let sql = "SELECT * FROM jobs WHERE 1=1";
+  const params = [];
+  if (type)   { sql += " AND type = ?";                 params.push(type); }
+  if (search) { sql += " AND (title LIKE ? OR company LIKE ?)";
+                params.push(`%${search}%`, `%${search}%`); }
+  sql += " ORDER BY createdAt DESC";
+  res.json(db.prepare(sql).all(...params));
+});
+// CREATE
+app.post("/api/jobs", (req, res) =&gt; {
+  const { title, company, salary, type } = req.body;
+  if (!title?.trim() || !company?.trim()) {
+    return res.status(400).json({ error: "title and company are required" });
+  }
+  const info = db.prepare(
+    "INSERT INTO jobs (title, company, salary, type) VALUES (?, ?, ?, ?)"
+  ).run(title.trim(), company.trim(), Number(salary) || 0, type || "full-time");
+  const job = db.prepare("SELECT * FROM jobs WHERE id = ?")
+               .get(info.lastInsertRowid);
+  res.status(201).json(job);
+});
+// DELETE
+app.delete("/api/jobs/:id", (req, res) =&gt; {
+  const info = db.prepare("DELETE FROM jobs WHERE id = ?")
+                .run(Number(req.params.id));
+  if (info.changes === 0) return res.status(404).json({ error: "Not found" });
+  res.status(204).end();
+});
+app.listen(3000, () =&gt;
+  console.log("Job Board running at http://localhost:3000"));</code></pre>
+<h3>Step 2 — The Front End</h3>
+<p>Create a <code>public</code> folder containing:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/public/index.html</code></div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Remote Job Board&lt;/title&gt;
+  &lt;style&gt;
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; max-width: 720px;
+           margin: 0 auto; padding: 24px 16px; background: #faf9f6; }
+    h1 { font-family: Georgia, serif; }
+    h1 span { color: #C8A04B; }
+    .panel { background: #fff; border: 1px solid #e5e0d5;
+             border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    input, select { padding: 10px; border: 1px solid #ccc;
+                    border-radius: 6px; margin: 4px 0; width: 100%; }
+    button { padding: 10px 18px; background: #0A0A0A; color: #fff;
+             border: none; border-radius: 6px; cursor: pointer; }
+    .job { display: flex; justify-content: space-between;
+           align-items: center; padding: 14px 0; border-bottom: 1px solid #eee; }
+    .salary { color: #C8A04B; font-weight: bold; }
+    .badge { font-size: 12px; background: #f0ebe0; padding: 2px 10px;
+             border-radius: 999px; }
+    .del { background: transparent; color: #c0392b; font-size: 18px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Remote&lt;span&gt;JobBoard&lt;/span&gt;&lt;/h1&gt;
+  &lt;div class="panel"&gt;
+    &lt;h2&gt;Post a Job&lt;/h2&gt;
+    &lt;form id="jobForm"&gt;
+      &lt;input id="title" placeholder="Job title" required&gt;
+      &lt;input id="company" placeholder="Company" required&gt;
+      &lt;input id="salary" type="number" placeholder="Monthly salary (₦)"&gt;
+      &lt;select id="type"&gt;
+        &lt;option value="full-time"&gt;Full-time&lt;/option&gt;
+        &lt;option value="part-time"&gt;Part-time&lt;/option&gt;
+        &lt;option value="contract"&gt;Contract&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;button&gt;Post Job&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;div class="panel"&gt;
+    &lt;input id="search" placeholder="Search jobs or companies…"&gt;
+    &lt;div id="jobList"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/public/app.js</code></div>
+<pre><code>const form = document.querySelector("#jobForm");
+const list = document.querySelector("#jobList");
+const search = document.querySelector("#search");
+async function loadJobs() {
+  const q = search.value.trim();
+  const url = "/api/jobs" + (q ? "?search=" + encodeURIComponent(q) : "");
+  const res = await fetch(url);
+  const jobs = await res.json();
+  list.innerHTML = jobs.length === 0
+    ? "&lt;p&gt;No jobs found. Post the first one!&lt;/p&gt;"
+    : "";
+  jobs.forEach(job =&gt; {
+    const row = document.createElement("div");
+    row.className = "job";
+    row.innerHTML = `
+      &lt;div&gt;
+        &lt;strong&gt;${job.title}&lt;/strong&gt; · ${job.company}
+        &lt;span class="badge"&gt;${job.type}&lt;/span&gt;&lt;br&gt;
+        &lt;span class="salary"&gt;₦${Number(job.salary).toLocaleString()}/mo&lt;/span&gt;
+      &lt;/div&gt;`;
+    const del = document.createElement("button");
+    del.className = "del";
+    del.textContent = "✕";
+    del.addEventListener("click", async () =&gt; {
+      await fetch("/api/jobs/" + job.id, { method: "DELETE" });
+      loadJobs();
+    });
+    row.appendChild(del);
+    list.appendChild(row);
+  });
+}
+form.addEventListener("submit", async (e) =&gt; {
+  e.preventDefault();
+  const body = {
+    title:   document.querySelector("#title").value,
+    company: document.querySelector("#company").value,
+    salary:  document.querySelector("#salary").value,
+    type:    document.querySelector("#type").value,
+  };
+  const res = await fetch("/api/jobs", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (res.ok) { form.reset(); loadJobs(); }
+  else { alert((await res.json()).error); }
+});
+search.addEventListener("input", loadJobs);
+loadJobs();</code></pre>
+<p>Run <code>node server.js</code> and open <code>http://localhost:3000</code>. Post jobs, search live, delete entries — then restart the server and watch your data survive. <strong>You have built a full-stack application with a database.</strong></p>
+<h3>Capstone Upgrade Challenges (do at least two)</h3>
+<p>Add an "Apply" button per job that records applications in a second table (applications: id, jobId, applicantName, email).</p>
+<p>Add an edit feature using the PUT method.</p>
+<p>Add filter buttons (All / Full-time / Part-time / Contract) that use the ?type= query parameter.</p>
+<p>Add server-side validation: salary must be a positive number; title at most 80 characters.</p>
+<p>Add a simple admin password: POST and DELETE require a header "x-admin-key" that the server checks.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Node.js &amp; Express</span></a>
+  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Cross-Language Integration</span></a>
+</nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>Back-End Web Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript Developer · zero to professional in 16 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -413,7 +520,7 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"backend-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>
