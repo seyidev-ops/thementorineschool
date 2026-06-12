@@ -17,12 +17,14 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `login.html` | Student login — routes each student straight to their registered course |
 | `dashboard.html` | Learner portal — the student's unique course unlocked with module-by-module progress tracking; all other tracks shown locked with open syllabus links |
 | `access.html` | Unique access-code gate — verifies the student's code before opening their training portal |
-| `admin.html` | Admin login — view registrations, copy/issue access codes, revoke portal access, reset progress (default passcode `ona-admin-2026`, change before deploying) |
+| `admin.html` | Admin login — view registrations, copy/issue access codes, revoke portal access, reset progress (passcode set in `admin.html`) |
 | `training/sd-full/` | Full training portal for **Software Development — Full Program**: 15 part pages (Part 0–14, terminal → React → Python → Node → databases → DevOps → MentorLink LMS capstone) rethemed to Mentorine green, gated by login + access code, with automatic progress mapping |
 | `training/frontend/` | Full training portal for **Front-end Web Developer**: 12 part pages (Part 0–9 + two appendices — HTML, CSS, JavaScript, the DOM, async, tooling, React, integration, professional practice) generated from the official Word training guide, same gate + progress system |
 | `training/javascript/` | Full training portal for **JavaScript Developer**: 12 part pages (Part 0–9 + two appendices — HTML, CSS, JS fundamentals, the DOM, async, Node & Express, databases & the full-stack capstone, cross-language integration, professional practice) generated from the official Word training guide |
 | `training/fullstack/` | Full training portal for **Full-stack Developer**: 12 part pages building MentorMarket end to end — storefront, API, database, React, auth across the stack, dual deployment. Original guide; Word document: `Full-Stack-Developer-Training-Guide.docx` |
 | `training/mobile/` | Full training portal for **Mobile App Developer (iOS/Android)**: 12 part pages with React Native + Expo — first app on your own phone, screens, navigation, device powers, live data, auth, EAS builds and the CampusMart capstone. Original guide; Word document: `Mobile-App-Developer-Training-Guide.docx` |
+| `training/dataanalyst/` | Full training portal for **Data Analyst** (recommended 8–12 weeks): sharp questions, spreadsheets, SQL, pandas, cleaning, visualization, Looker dashboards and the NaijaSales capstone. Word document: `Data-Analyst-Training-Guide.docx` |
+| `training/datascientist/` | Full training portal for **Data Scientist** (recommended 14–18 weeks): Python, NumPy/pandas, EDA, honest statistics, machine learning with scikit-learn, model serving via FastAPI and the ChurnGuard capstone. Word document: `Data-Scientist-Training-Guide.docx` |
 | `training/backend/` | Full training portal for **Back-end Web Developer**: 12 part pages (Part 0–9 + two appendices — terminal & HTTP, JavaScript core, Node, Express & REST, SQL, MongoDB, auth & security, integration with Python/Paystack/email/webhooks, professional practice and the NaijaStore capstone). Authored as an original guide; the matching Word document is `Back-End-Web-Developer-Training-Guide.docx` |
 
 ## Key behaviours
@@ -31,7 +33,7 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 - **One student → one unique course.** Registration unlocks exactly the chosen track; the dashboard opens straight to it.
 - **Unique access codes.** Registration generates a one-per-student code (`MS-XXXX-XXXX`). Admissions issues it after payment via the admin panel; the student enters it once on `access.html` to open the training portal. Admins can revoke access at any time.
 - **Progress mapping.** Visiting a training part records it automatically; the training index paints ✓ ticks and a progress bar over the curriculum map, mirrored on the student dashboard and visible to admins.
-- **Real curricula.** Front-end, Back-end, JavaScript Developer and both Software Development tracks carry their full curricula from the official training guides; Front-end, Back-end, JavaScript, Full-stack, Mobile and SD-Full all ship complete in-site training portals — six gated portals, 80 training pages.
+- **Real curricula.** Front-end, Back-end, JavaScript Developer and both Software Development tracks carry their full curricula from the official training guides; Front-end, Back-end, JavaScript, Full-stack, Mobile and SD-Full all ship complete in-site training portals — eight gated portals, 106 training pages.
 - **Durations are recommendations.** Every course displays its *recommended completion window* (e.g. Full-stack 12–16 weeks, Mobile 10–14 weeks), not a fixed length — study plans pace the content, but checkpoints, not the calendar, measure completion. New courses follow the same convention.
 - **Copyright.** Every page carries the footer notice: © 2026 Mentorine School by Ona Services Ltd. All rights reserved.
 - **WhatsApp admissions chat.** The floating ✆ button opens four quick questions (registration/payment, track choice, access code, installments); choosing one copies it and opens the admissions WhatsApp line (`wa.me/message/OF4HWNSJM6ZTK1`).
@@ -58,6 +60,8 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 ├── training/backend/   # gated portal — Back-end Web Developer (index + part0–11)
 ├── training/fullstack/ # gated portal — Full-stack Developer (index + part0–11)
 ├── training/mobile/    # gated portal — Mobile App Developer (index + part0–11)
+├── training/dataanalyst/   # gated portal — Data Analyst (index + part0–11)
+├── training/datascientist/ # gated portal — Data Scientist (index + part0–11)
 └── assets/
     ├── style.css        # design tokens + components (day/night)
     ├── app.js           # course catalogue, syllabi, auth, theme
@@ -79,7 +83,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v8` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v9` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 

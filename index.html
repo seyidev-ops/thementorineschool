@@ -86,6 +86,22 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .faq summary::after{content:"+";color:var(--accent);font-family:'Fraunces',serif}
 .faq details[open] summary::after{content:"–"}
 .faq p{color:var(--ink-soft);font-size:.92rem;margin-top:.6rem;max-width:64ch}
+
+/* grand footer */
+.footer-grand{border-top:1px solid var(--line-soft);margin-top:clamp(3rem,8vw,5rem);padding:clamp(2.6rem,7vw,4rem) 0 7rem;text-align:center}
+.fg-mark{height:64px;width:auto;margin-bottom:1rem}
+.fg-name{font-family:'Cinzel',serif;font-size:clamp(1.1rem,3.4vw,1.6rem);font-weight:600;letter-spacing:4px}
+.fg-name b{color:var(--brand-navy);font-weight:700}
+.fg-name span{background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="night"] .fg-name span{background:linear-gradient(135deg,#8FD468,#2FB36B);-webkit-background-clip:text;background-clip:text}
+.fg-by{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:4px;color:var(--ink-faint);margin-top:.3rem}
+.fg-tag{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(1rem,2.8vw,1.25rem);color:var(--ink-soft);margin:1.2rem 0 2rem}
+.footer-grand .hairline{max-width:520px;margin:0 auto 1.6rem}
+.fg-row{display:flex;flex-direction:column;gap:1rem;align-items:center}
+.fg-links{display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center;font-size:.85rem}
+.fg-links a{text-decoration:none;color:var(--ink-soft)}
+.fg-links a:hover{color:var(--accent)}
+.fg-copy{font-size:.78rem;color:var(--ink-faint)}
 </style>
 <script>
   window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900, stagger: 90 };
@@ -185,6 +201,81 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Registration Tiers &amp; Investment</div>
+      <h2>Flexible plans, <em class="ac">introductory</em> pricing.</h2>
+      <p>Choose the duration that matches your learning pace and career goals. Act fast — this promotional pricing closes soon.</p>
+    </div>
+    <div class="tiers" data-live="stagger">
+      <div class="card tier">
+        <span class="dur">3 Months</span>
+        <span class="price">₦250,000<span class="was">₦300,000</span></span>
+        <p class="for"><strong>The Accelerator.</strong> Ideal for upskilling in a specific tool or mastering a niche skill quickly.</p>
+        <a class="link-quiet pick" href="#register">Choose this plan</a>
+      </div>
+      <div class="card tier hl">
+        <span class="dur">6 Months</span>
+        <span class="price">₦500,000<span class="was">₦600,000</span></span>
+        <p class="for"><strong>The Career Switcher.</strong> Perfect for pivoting to a new industry, with time for portfolio building.</p>
+        <a class="btn pick" href="#register" style="justify-content:center">Choose this plan <span class="arr">→</span></a>
+      </div>
+      <div class="card tier">
+        <span class="dur">1 Year</span>
+        <span class="price">₦700,000<span class="was">₦1,000,000</span></span>
+        <p class="for"><strong>The Mastery Path.</strong> Best for beginners starting from zero or professionals aiming for senior-level competency.</p>
+        <a class="link-quiet pick" href="#register">Choose this plan</a>
+      </div>
+    </div>
+    <div class="card standalone">
+      <p><strong>Standalone option — ₦150,000 / career track (30 days).</strong> Prefer your own pace? Get the Career Path Document and all curated courses for one track, self-study format — no community access or certificate.</p>
+      <a class="link-quiet" href="#register">Register standalone</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--paper-2)">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <div class="kicker">Frequently Asked Questions</div>
+      <h2>Before you <em class="ac">enrol</em>.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Can I switch my career track after registering?</summary>
+        <p>Yes. Within the first 14 days of registration, you may switch to a different track at no extra cost, provided there is space in the new cohort.</p>
+      </details>
+      <details>
+        <summary>Is there a payment plan?</summary>
+        <p>Yes. For the 6-month and 1-year tiers, we offer a two-installment plan. Please contact our admissions team for details.</p>
+      </details>
+      <details>
+        <summary>Do I get a certificate on the 3-month program?</summary>
+        <p>Absolutely. Every tier includes a verified certificate of completion, provided you meet the capstone project requirements.</p>
+      </details>
+      <details>
+        <summary>What if I miss a live session?</summary>
+        <p>All live sessions are recorded and uploaded to your student dashboard within 24 hours. You learn at your own pace while still being part of the community.</p>
+      </details>
+      <details>
+        <summary>What's the difference between the tiered program and the standalone package?</summary>
+        <p>The tiered program includes live mentorship, community access, certificates, and a structured cohort schedule. The standalone package gives you the Career Path Document and all courses for self-directed study.</p>
+      </details>
+      <details>
+        <summary>Are these tracks truly remote-friendly?</summary>
+        <p>Yes. Every track listed was selected because remote work is standard in that industry, and the curriculum includes tools and workflows designed for distributed teams.</p>
+      </details>
+      <details>
+        <summary>How do I register?</summary>
+        <p>Fill the registration form above to unlock your course, then click the chat button to reach admissions for payment details.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- REGISTRATION -->
 <section class="section" id="register">
   <div class="wrap">
@@ -242,85 +333,27 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="section" id="pricing" style="background:var(--paper-2)">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="kicker">Registration Tiers &amp; Investment</div>
-      <h2>Flexible plans, <em class="ac">introductory</em> pricing.</h2>
-      <p>Choose the duration that matches your learning pace and career goals. Act fast — this promotional pricing closes soon.</p>
-    </div>
-    <div class="tiers" data-live="stagger">
-      <div class="card tier">
-        <span class="dur">3 Months</span>
-        <span class="price">₦250,000<span class="was">₦300,000</span></span>
-        <p class="for"><strong>The Accelerator.</strong> Ideal for upskilling in a specific tool or mastering a niche skill quickly.</p>
-        <a class="link-quiet pick" href="#register">Choose this plan</a>
-      </div>
-      <div class="card tier hl">
-        <span class="dur">6 Months</span>
-        <span class="price">₦500,000<span class="was">₦600,000</span></span>
-        <p class="for"><strong>The Career Switcher.</strong> Perfect for pivoting to a new industry, with time for portfolio building.</p>
-        <a class="btn pick" href="#register" style="justify-content:center">Choose this plan <span class="arr">→</span></a>
-      </div>
-      <div class="card tier">
-        <span class="dur">1 Year</span>
-        <span class="price">₦700,000<span class="was">₦1,000,000</span></span>
-        <p class="for"><strong>The Mastery Path.</strong> Best for beginners starting from zero or professionals aiming for senior-level competency.</p>
-        <a class="link-quiet pick" href="#register">Choose this plan</a>
-      </div>
-    </div>
-    <div class="card standalone">
-      <p><strong>Standalone option — ₦150,000 / career track (30 days).</strong> Prefer your own pace? Get the Career Path Document and all curated courses for one track, self-study format — no community access or certificate.</p>
-      <a class="link-quiet" href="#register">Register standalone</a>
-    </div>
-  </div>
-</section>
 
-<!-- FAQ -->
-<section class="section" id="faq">
-  <div class="wrap narrow">
-    <div class="section-head">
-      <div class="kicker">Frequently Asked Questions</div>
-      <h2>Before you <em class="ac">enrol</em>.</h2>
-    </div>
-    <div class="faq">
-      <details>
-        <summary>Can I switch my career track after registering?</summary>
-        <p>Yes. Within the first 14 days of registration, you may switch to a different track at no extra cost, provided there is space in the new cohort.</p>
-      </details>
-      <details>
-        <summary>Is there a payment plan?</summary>
-        <p>Yes. For the 6-month and 1-year tiers, we offer a two-installment plan. Please contact our admissions team for details.</p>
-      </details>
-      <details>
-        <summary>Do I get a certificate on the 3-month program?</summary>
-        <p>Absolutely. Every tier includes a verified certificate of completion, provided you meet the capstone project requirements.</p>
-      </details>
-      <details>
-        <summary>What if I miss a live session?</summary>
-        <p>All live sessions are recorded and uploaded to your student dashboard within 24 hours. You learn at your own pace while still being part of the community.</p>
-      </details>
-      <details>
-        <summary>What's the difference between the tiered program and the standalone package?</summary>
-        <p>The tiered program includes live mentorship, community access, certificates, and a structured cohort schedule. The standalone package gives you the Career Path Document and all courses for self-directed study.</p>
-      </details>
-      <details>
-        <summary>Are these tracks truly remote-friendly?</summary>
-        <p>Yes. Every track listed was selected because remote work is standard in that industry, and the curriculum includes tools and workflows designed for distributed teams.</p>
-      </details>
-      <details>
-        <summary>How do I register?</summary>
-        <p>Fill the registration form above to unlock your course, then click the chat button to reach admissions for payment details.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<footer class="footer" data-live="off">
+<footer class="footer-grand" data-live="off">
   <div class="wrap">
-    <span>Mentorine School by Ona Services — building the workforce of tomorrow, today.<br>© 2026 Mentorine School by Ona Services Ltd. All rights reserved.</span>
-    <span>Terms and conditions apply. Prices subject to change after the promotional period. · <a class="link-quiet" href="admin.html">Admin</a></span>
+    <div class="fg-top">
+      <img class="fg-mark" src="assets/logo.svg" alt="The Mentorine School mark">
+      <div class="fg-name">THE <b>MENTORINE</b> <span>SCHOOL</span></div>
+      <div class="fg-by">BY ONA SERVICES</div>
+      <p class="fg-tag">Building tomorrow’s workforce, today.</p>
+    </div>
+    <hr class="hairline">
+    <div class="fg-row">
+      <nav class="fg-links">
+        <a href="#courses">Courses</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#register">Register</a>
+        <a href="login.html">Student Login</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+      <span class="fg-copy">© 2026 Mentorine School by Ona Services Ltd. All rights reserved.</span>
+    </div>
   </div>
 </footer>
 
