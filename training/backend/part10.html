@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Cheat Sheets — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,66 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 10 · REFERENCE</div>
+    <h1>Quick-Reference Cheat Sheets</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#a-1-http-status-codes-you-will-actually-use">A.1 HTTP Status Codes You Will Actually Use</a><a href="#a-2-sql-on-one-page">A.2 SQL on One Page</a><a href="#a-3-express-patterns-on-one-page">A.3 Express Patterns on One Page</a><a href="#a-4-terminal-git-on-one-page">A.4 Terminal &amp; Git on One Page</a></div>
   </div>
-
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+  <article>
+<h2 id="a-1-http-status-codes-you-will-actually-use">A.1 HTTP Status Codes You Will Actually Use</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Code</th><th>Name</th><th>Use it when</th></tr></thead><tbody>
+<tr><td>200</td><td>OK</td><td>Successful read or update</td></tr>
+<tr><td>201</td><td>Created</td><td>POST made a new resource</td></tr>
+<tr><td>204</td><td>No Content</td><td>Successful delete; nothing to return</td></tr>
+<tr><td>400</td><td>Bad Request</td><td>Validation failed — say what's wrong</td></tr>
+<tr><td>401</td><td>Unauthorized</td><td>No/invalid token — who are you?</td></tr>
+<tr><td>403</td><td>Forbidden</td><td>Valid user, insufficient rights</td></tr>
+<tr><td>404</td><td>Not Found</td><td>Resource or route doesn't exist</td></tr>
+<tr><td>409</td><td>Conflict</td><td>Duplicate email, version clash</td></tr>
+<tr><td>429</td><td>Too Many Requests</td><td>Rate limit tripped</td></tr>
+<tr><td>500</td><td>Internal Server Error</td><td>Your bug — log it, apologise blandly</td></tr>
+</tbody></table></div>
+<h2 id="a-2-sql-on-one-page">A.2 SQL on One Page</h2>
+<pre><code>CREATE TABLE t (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL);
+INSERT INTO t (name) VALUES (?);
+SELECT * FROM t WHERE id = ?;
+SELECT col FROM t WHERE x &gt; ? ORDER BY col DESC LIMIT 10;
+UPDATE t SET name = ? WHERE id = ?;
+DELETE FROM t WHERE id = ?;
+SELECT a.*, b.col FROM a JOIN b ON b.a_id = a.id;
+-- Aggregates: COUNT(*), SUM(col), AVG(col), GROUP BY col</code></pre>
+<h2 id="a-3-express-patterns-on-one-page">A.3 Express Patterns on One Page</h2>
+<pre><code>app.use(express.json());
+app.get("/things", handler);            // list
+app.get("/things/:id", handler);        // read   -&gt; req.params.id
+app.post("/things", handler);           // create -&gt; req.body, res.status(201)
+app.put("/things/:id", handler);        // update
+app.delete("/things/:id", handler);     // res.status(204).end()
+// query strings: /things?done=true     -&gt; req.query.done
+// middleware: (req, res, next) =&gt; { ...; next(); }
+// guard:      app.get("/private", requireAuth, handler)
+// 404 catch-all, then (err, req, res, next) handler — always last</code></pre>
+<h2 id="a-4-terminal-git-on-one-page">A.4 Terminal &amp; Git on One Page</h2>
+<pre><code>pwd / ls / cd &lt;dir&gt; / cd ..          # where am I, what's here, move
+mkdir &lt;dir&gt; / touch &lt;file&gt; / rm &lt;x&gt;  # create and delete
+cat &lt;file&gt;                            # print a file
+node file.js / node --watch file.js  # run / auto-restart
+npm init -y / npm install &lt;pkg&gt;      # project / dependency
+git status / git add . / git commit -m "msg" / git push
+curl -i URL                           # request with status+headers
+curl -X POST URL -H "Content-Type: application/json" -d '{...}'</code></pre>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part9.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 9 · Professional Practice</span></a>
+  <a class="next" href="part11.html"><span class="dir">NEXT →</span><span class="pt">Part 11 · 16-Week Plan</span></a>
+</nav>
 </main>
 
 <footer class="site">

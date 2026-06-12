@@ -20,7 +20,8 @@ window.MS = (function () {
           blurb: "Master the language of the web end to end — fundamentals, the DOM, async, Node.js, databases and a full-stack capstone." },
         { slug: "frontend-developer",  name: "Front-end Web Developer", courses: "12 guided parts", duration: "16 weeks", featured: true, training: "training/frontend/index.html",
           blurb: "HTML, CSS, JavaScript, professional tooling and React — full training pages with copy-and-paste practicals and a deployed capstone." },
-        { slug: "backend-developer",   name: "Back-end Web Developer", courses: "15 courses", duration: "10–12 weeks" },
+        { slug: "backend-developer",   name: "Back-end Web Developer", courses: "12 guided parts", duration: "16 weeks", featured: true, training: "training/backend/index.html",
+          blurb: "Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone — full training pages with copy-and-paste practicals." },
         { slug: "fullstack-developer", name: "Full-stack Developer", courses: "18 courses", duration: "12–16 weeks" },
         { slug: "mobile-developer",    name: "Mobile App Developer (iOS/Android)", courses: "12 courses", duration: "10–14 weeks" },
         { slug: "data-analyst",        name: "Data Analyst", courses: "10 courses", duration: "8–12 weeks" },
@@ -93,6 +94,48 @@ window.MS = (function () {
      Software Development syllabus is extracted directly from the
      JavaScript-HTML Developer Training Guide (Parts 0–9 + appendices). */
   const SYLLABI = {
+    "backend-developer": {
+      title: "Back-end Web Developer",
+      subtitle: "The complete back-end training — Node, Express, SQL, MongoDB, security and payments, in 16 weeks.",
+      training: "training/backend/index.html",
+      roadmap: [
+        ["Week 1", "Part 1 \u00b7 Terminal & HTTP", "Command line, how requests travel, status codes, curl", "You can speak raw HTTP"],
+        ["Weeks 2\u20134", "Part 2 \u00b7 JavaScript Core", "Variables, logic, loops, functions, data shapes, async", "Bank-account simulator CLI"],
+        ["Weeks 4\u20135", "Part 3 \u00b7 Node.js", "Modules, npm, file system, environment variables", "Notes CLI with real persistence"],
+        ["Weeks 5\u20137", "Part 4 \u00b7 Express & REST", "Routing, middleware, CRUD, validation, status codes", "Task Manager API, fully tested"],
+        ["Weeks 7\u20139", "Part 5 \u00b7 SQL", "SQLite, CRUD, JOINs, parameterized queries", "Task Manager persists forever"],
+        ["Weeks 9\u201310", "Part 6 \u00b7 MongoDB", "Documents, Mongoose, SQL vs NoSQL judgement", "Product catalogue on Atlas"],
+        ["Weeks 10\u201312", "Part 7 \u00b7 Auth & Security", "bcrypt, JWT, protected routes, OWASP, CORS", "Secure multi-user Task API"],
+        ["Weeks 12\u201314", "Part 8 \u00b7 Integration", "Python FastAPI, Paystack, email, webhooks", "Polyglot pipeline with payments"],
+        ["Weeks 14\u201316", "Part 9 \u00b7 Professional Practice", "Testing, Docker, CI/CD, deployment, capstone", "NaijaStore API live on Render"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 Who This Guide Is For \u2014 and What You Will Become", "0.2 The Golden Rules of Learning Back-End Development", "0.3 The 16-Week Fast-Track Roadmap", "0.4 Set Up Your Workstation (Practical)", "0.5 How Every Lesson Is Structured"] },
+        { title: "Part 1 \u2014 The Terminal, HTTP & How the Web Actually Works",
+          items: ["1.1 Why Back-End Developers Live in the Terminal", "1.2 The Ten Commands You Will Use Forever (Practical)", "1.3 What Actually Happens When You Visit a URL", "1.4 The Anatomy of HTTP \u2014 Requests, Responses, Status Codes", "1.5 Speak HTTP Yourself with curl (Practical)", "1.6 Checkpoint: Narrate a Request Out Loud"] },
+        { title: "Part 2 \u2014 JavaScript for the Back End: Thinking in Logic and Data",
+          items: ["2.1 Why JavaScript on the Server?", "2.2 Variables: The Computer's Labelled Boxes", "2.3 Conditionals: Teaching the Computer to Decide", "2.4 Loops: Doing Things Ten Thousand Times", "2.5 Functions: Reusable Machines", "2.6 Arrays and Objects: The Data Shapes of Every API", "2.7 Asynchronous JavaScript: The Restaurant Kitchen", "2.8 Checkpoint Project: The Bank Account Simulator"] },
+        { title: "Part 3 \u2014 Node.js Deep Dive: Your JavaScript Engine Room",
+          items: ["3.1 What Node.js Actually Is", "3.2 Modules: Splitting Code Across Files", "3.3 npm: The World's Largest Code Library", "3.4 The File System: Node's Superpower", "3.5 Environment Variables: Secrets Stay Out of Code", "3.6 Checkpoint Project: The Notes CLI"] },
+        { title: "Part 4 \u2014 Express & REST APIs: Your First Real Back End",
+          items: ["4.1 A Web Server in Eleven Lines", "4.2 Routing: Different Paths, Different Answers", "4.3 Middleware: The Airport Security Line", "4.4 Full CRUD: The Task Manager API (Practical)", "4.5 Validation and Error Handling Like a Professional", "4.6 Checkpoint Project: Task Manager API, Documented"] },
+        { title: "Part 5 \u2014 Databases I: SQL, the Language of Structured Data",
+          items: ["5.1 Why Files Break and Databases Don't", "5.2 SQL in One Sitting (Practical)", "5.3 The Question Marks: Parameterized Queries vs SQL Injection", "5.4 Relationships and JOINs: Where SQL Earns Its Keep", "5.5 Checkpoint Project: The Task API Persists Forever"] },
+        { title: "Part 6 \u2014 Databases II: MongoDB and Choosing the Right Store",
+          items: ["6.1 Documents Instead of Tables", "6.2 A Free Cloud Database with Atlas (Practical)", "6.3 Mongoose: Models, Validation, CRUD (Practical)", "6.4 SQL or NoSQL? The Decision Professionals Make", "6.5 Checkpoint Project: Catalogue Service"] },
+        { title: "Part 7 \u2014 Authentication & Security: Guarding the Door",
+          items: ["7.1 Security Is a Feature, Not a Garnish", "7.2 Passwords: Hash, Never Store (Practical)", "7.3 JWT: The Nightclub Wristband", "7.4 The Secure User System (Practical)", "7.5 The OWASP Hall of Shame: Mistakes You Will Never Make", "7.6 Checkpoint Project: The Secure Task API"] },
+        { title: "Part 8 \u2014 Integration: Other Languages, Payments & the Outside World",
+          items: ["8.1 HTTP Is the Lingua Franca", "8.2 A Python Microservice, Consumed from Node (Practical)", "8.3 Payments with Paystack (Practical)", "8.4 Webhooks: When the Internet Calls You Back", "8.5 Email and File Uploads in Ten Minutes", "8.6 Checkpoint Project: The Polyglot Pipeline"] },
+        { title: "Part 9 \u2014 Professional Practice: Testing, Deployment & the Capstone",
+          items: ["9.1 Automated Testing: Your Robot Quality Inspector", "9.2 Git & GitHub: The Professional Workflow", "9.3 Docker in Twenty Minutes", "9.4 CI/CD: Robots That Test Every Push", "9.5 Deployment: Your API on the Real Internet (Practical)", "9.6 THE CAPSTONE: NaijaStore API", "9.7 The Job Hunt: Turning the Capstone into Offers"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 HTTP Status Codes You Will Actually Use", "A.2 SQL on One Page", "A.3 Express Patterns on One Page", "A.4 Terminal & Git on One Page"] },
+        { title: "Appendix B \u2014 The 16-Week Daily Study Plan",
+          items: ["B.1 How to Use This Plan"] }
+      ]
+    },
     "software-development-full": {
       title: "Software Development — Full Program",
       subtitle: "The flagship 24-week zero-to-professional curriculum, with complete training pages for every part.",

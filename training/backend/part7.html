@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Auth &amp; Security — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,122 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 7 · WEEKS 10–12</div>
+    <h1>Authentication &amp; Security: Guarding the Door</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#7-1-security-is-a-feature-not-a-garnish">7.1 Security Is a Feature, Not a Garnish</a><a href="#7-2-passwords-hash-never-store-practical">7.2 Passwords: Hash, Never Store (Practical)</a><a href="#7-3-jwt-the-nightclub-wristband">7.3 JWT: The Nightclub Wristband</a><a href="#7-4-the-secure-user-system-practical">7.4 The Secure User System (Practical)</a><a href="#7-5-the-owasp-hall-of-shame-mistakes-you-will-never-make">7.5 The OWASP Hall of Shame: Mistakes You Will Never Make</a><a href="#7-6-checkpoint-project-the-secure-task-api">7.6 Checkpoint Project: The Secure Task API</a></div>
   </div>
+  <article>
+<h2 id="7-1-security-is-a-feature-not-a-garnish">7.1 Security Is a Feature, Not a Garnish</h2>
+<p>Everything you have built so far trusts everyone completely — anyone can read, edit or delete anything. Real systems must answer two questions on every request: <strong>Who are you?</strong> (<em>authentication</em>) and <strong>What are you allowed to do?</strong> (<em>authorization</em>). This part installs both, plus the defensive habits that keep you off the news.</p>
+<h2 id="7-2-passwords-hash-never-store-practical">7.2 Passwords: Hash, Never Store (Practical)</h2>
+<p>Storing a password is malpractice — databases leak, and leaked plaintext passwords destroy users who reuse them everywhere. Instead you store a <strong>hash</strong>: a one-way fingerprint computed by <code>bcrypt</code>, deliberately slow to compute so brute-force attacks become economically absurd. At login, you hash what the user typed and compare fingerprints.</p>
+<pre><code>cd backend-journey/part7-auth
+npm init -y &amp;&amp; npm install express bcrypt jsonwebtoken dotenv
+# add "type": "module" to package.json</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-auth/hash-demo.js</code></div>
+<pre><code>import bcrypt from "bcrypt";
 
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
+const password = "mentorine2026";
+const hash = await bcrypt.hash(password, 10);   // 10 = cost factor
+console.log("Stored in DB:", hash);
 
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
+console.log("Right password:", await bcrypt.compare("mentorine2026", hash)); // true
+console.log("Wrong password:", await bcrypt.compare("password123", hash));   // false</code></pre>
+<p>Run it twice — the hash differs each time (bcrypt salts automatically), yet <code>compare</code> still works. Magic, formally verified.</p>
+<h2 id="7-3-jwt-the-nightclub-wristband">7.3 JWT: The Nightclub Wristband</h2>
+<p>HTTP has no memory — every request arrives as a stranger. A <strong>JSON Web Token</strong> fixes this like a club wristband: at login (showing ID once), the server signs a token containing who you are and hands it over; every later request presents the wristband in a header; the server verifies the <em>signature</em> — no database lookup needed — and trusts the contents. Tamper with the token and the signature breaks.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-auth/jwt-demo.js</code></div>
+<pre><code>import "dotenv/config";
+import jwt from "jsonwebtoken";
 
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+// .env: JWT_SECRET=use-a-long-random-string-here
+const token = jwt.sign(
+  { userId: 42, name: "Ada" },
+  process.env.JWT_SECRET,
+  { expiresIn: "2h" }
+);
+console.log("Wristband:", token);
+
+const decoded = jwt.verify(token, process.env.JWT_SECRET);
+console.log("Verified wearer:", decoded);</code></pre>
+<div class="callout"><div class="co-label">COMMON MISTAKE</div><p>JWTs are signed, NOT encrypted — anyone can read the payload at jwt.io. Never put passwords or secrets inside one. The signature proves authenticity, not secrecy.</p></div>
+<h2 id="7-4-the-secure-user-system-practical">7.4 The Secure User System (Practical)</h2>
+<p>Now assemble register, login, and a <strong>protected route</strong> guarded by middleware — the airport security training from Part 4 paying off:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part7-auth/server.js</code></div>
+<pre><code>import "dotenv/config";
+import express from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const app = express();
+app.use(express.json());
+const users = [];   // swap for SQLite/Mongo using Parts 5–6 — upgrade challenge
+
+app.post("/auth/register", async (req, res) =&gt; {
+  const { email, password } = req.body;
+  if (!email || !password || password.length &lt; 8)
+    return res.status(400).json({ error: "Valid email and 8+ char password required" });
+  if (users.find(u =&gt; u.email === email))
+    return res.status(409).json({ error: "Email already registered" });
+  users.push({ id: users.length + 1, email, passwordHash: await bcrypt.hash(password, 10) });
+  res.status(201).json({ message: "Registered. Please log in." });
+});
+
+app.post("/auth/login", async (req, res) =&gt; {
+  const user = users.find(u =&gt; u.email === req.body.email);
+  const ok = user &amp;&amp; await bcrypt.compare(req.body.password || "", user.passwordHash);
+  if (!ok) return res.status(401).json({ error: "Invalid credentials" });   // never say which part failed
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "2h" });
+  res.json({ token });
+});
+
+// The guard: verifies the wristband, attaches the wearer to req
+const requireAuth = (req, res, next) =&gt; {
+  const header = req.headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+  if (!token) return res.status(401).json({ error: "Token required" });
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch {
+    return res.status(401).json({ error: "Invalid or expired token" });
+  }
+};
+
+app.get("/me/tasks", requireAuth, (req, res) =&gt; {
+  res.json({ message: `Private tasks for user #${req.user.userId}` });
+});
+
+app.listen(4000, () =&gt; console.log("Auth server on :4000"));</code></pre>
+<p>Walk the whole journey with curl — register, log in, copy the token, and present the wristband:</p>
+<pre><code>curl -X POST http://localhost:4000/auth/register -H "Content-Type: application/json" -d '{"email":"ada@x.com","password":"longpassword"}'
+curl -X POST http://localhost:4000/auth/login -H "Content-Type: application/json" -d '{"email":"ada@x.com","password":"longpassword"}'
+curl http://localhost:4000/me/tasks -H "Authorization: Bearer PASTE_TOKEN_HERE"
+curl -i http://localhost:4000/me/tasks    # no wristband -&gt; 401</code></pre>
+<h2 id="7-5-the-owasp-hall-of-shame-mistakes-you-will-never-make">7.5 The OWASP Hall of Shame: Mistakes You Will Never Make</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Vulnerability</th><th>The mistake</th><th>Your defence (already learned)</th></tr></thead><tbody>
+<tr><td>SQL Injection</td><td>Gluing input into queries</td><td>Parameterized ? queries — Part 5</td></tr>
+<tr><td>Leaked secrets</td><td>Keys committed to GitHub</td><td>Everything secret lives in .env — Part 3</td></tr>
+<tr><td>Plaintext passwords</td><td>Storing what users typed</td><td>bcrypt hash + compare — Part 7</td></tr>
+<tr><td>Information leakage</td><td>Stack traces sent to clients</td><td>Central error handler, log privately — Part 4</td></tr>
+<tr><td>Broken access control</td><td>Trusting the client's claims</td><td>requireAuth middleware + checking ownership server-side</td></tr>
+</tbody></table></div>
+<p>Two more guards every public API wears: <strong>CORS</strong> (<code>npm install cors</code> — declares which websites may call you) and <strong>rate limiting</strong> (<code>npm install express-rate-limit</code> — caps requests per visitor so brute-forcers and accidental loops can't drown you). Both are two-line middleware; add them to the checkpoint.</p>
+<h2 id="7-6-checkpoint-project-the-secure-task-api">7.6 Checkpoint Project: The Secure Task API</h2>
+<p>Merge everything: take your persistent Task API from Part 5, add the auth system, give the tasks table a <code>user_id</code> column, and make every task route both <code>requireAuth</code>-protected <em>and</em> ownership-checked — users see and touch only their own rows (<code>WHERE user_id = ?</code>). Add CORS and a rate limiter on <code>/auth/login</code> (try 5 attempts per minute). When two different registered users each maintain private task lists on the same server, you have built what most tutorials never reach: a genuinely multi-user, secured back end.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · MongoDB &amp; NoSQL</span></a>
+  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Integration</span></a>
+</nav>
 </main>
 
 <footer class="site">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>SQL Databases — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,127 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 5 · WEEKS 7–9</div>
+    <h1>Databases I: SQL, the Language of Structured Data</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#5-1-why-files-break-and-databases-don-t">5.1 Why Files Break and Databases Don't</a><a href="#5-2-sql-in-one-sitting-practical">5.2 SQL in One Sitting (Practical)</a><a href="#5-3-the-question-marks-parameterized-queries-vs-sql-injection">5.3 The Question Marks: Parameterized Queries vs SQL Injection</a><a href="#5-4-relationships-and-joins-where-sql-earns-its-keep">5.4 Relationships and JOINs: Where SQL Earns Its Keep</a><a href="#5-5-checkpoint-project-the-task-api-persists-forever">5.5 Checkpoint Project: The Task API Persists Forever</a></div>
   </div>
+  <article>
+<h2 id="5-1-why-files-break-and-databases-don-t">5.1 Why Files Break and Databases Don't</h2>
+<p>Your <code>tasks.json</code> upgrade exposed the problem: two requests writing the file at the same moment corrupt it; finding one record means reading everything; there are no rules stopping bad data. A <strong>database</strong> is a program whose entire job is storing data <em>safely, quickly, and with rules</em> — handling thousands of simultaneous writers without breaking a sweat.</p>
+<p><strong>SQL</strong> (Structured Query Language) databases — PostgreSQL, MySQL, SQLite — store data in tables with strict columns, like rigorous spreadsheets that enforce their own integrity. We learn with <strong>SQLite</strong>: a complete, genuinely production-grade SQL database that lives in a single file and needs zero installation.</p>
+<pre><code>cd backend-journey/part5-sql
+npm init -y &amp;&amp; npm install better-sqlite3
+# add "type": "module" to package.json</code></pre>
+<h2 id="5-2-sql-in-one-sitting-practical">5.2 SQL in One Sitting (Practical)</h2>
+<p>SQL reads almost like English. Four statements are 90% of daily work — <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code> — plus <code>CREATE TABLE</code> to define structure once. Run this and study every line of output:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part5-sql/learn-sql.js</code></div>
+<pre><code>import Database from "better-sqlite3";
+const db = new Database("school.db");      // creates the file if absent
 
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
+db.exec(`
+  CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    course TEXT NOT NULL,
+    fee_paid INTEGER DEFAULT 0
+  )
+`);
 
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
+// CREATE
+db.prepare("INSERT INTO students (name, course, fee_paid) VALUES (?, ?, ?)")
+  .run("Ada Obi", "backend", 250000);
+db.prepare("INSERT INTO students (name, course) VALUES (?, ?)")
+  .run("Femi Ade", "frontend");
 
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+// READ
+const all = db.prepare("SELECT * FROM students").all();
+console.log("All students:", all);
+
+const paid = db.prepare("SELECT name, fee_paid FROM students WHERE fee_paid &gt; ?").all(0);
+console.log("Paid students:", paid);
+
+// UPDATE
+db.prepare("UPDATE students SET fee_paid = ? WHERE name = ?").run(150000, "Femi Ade");
+
+// DELETE
+// db.prepare("DELETE FROM students WHERE id = ?").run(2);
+
+console.log("After update:", db.prepare("SELECT * FROM students").all());</code></pre>
+<p><code>PRIMARY KEY AUTOINCREMENT</code> hands out unique IDs automatically; <code>NOT NULL</code> refuses incomplete rows — the database enforcing rules <em>for</em> you, exactly what JSON files never did.</p>
+<h2 id="5-3-the-question-marks-parameterized-queries-vs-sql-injection">5.3 The Question Marks: Parameterized Queries vs SQL Injection</h2>
+<p>Notice the <code>?</code> placeholders. The catastrophic alternative is gluing user input into SQL with template strings — and it is the most famous security hole in software history. If a user types their “name” as <code>'; DROP TABLE students; --</code>, a glued query executes it <em>as SQL</em> and your table vanishes. Parameterized queries make this categorically impossible: the database treats parameters as <strong>pure data, never as commands</strong>.</p>
+<div class="callout"><div class="co-label">WARNING</div><p>Rule with zero exceptions, today and forever: user input NEVER touches a query string. Always ?, always .run(value) / .all(value). Interviewers ask about this; production incidents are made of forgetting it.</p></div>
+<h2 id="5-4-relationships-and-joins-where-sql-earns-its-keep">5.4 Relationships and JOINs: Where SQL Earns Its Keep</h2>
+<p>Real data relates: students <em>enrol in</em> courses, orders <em>belong to</em> customers. SQL models this with a <strong>foreign key</strong> — a column holding another table's ID — and reunites the pieces at read time with <code>JOIN</code>:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part5-sql/learn-joins.js</code></div>
+<pre><code>import Database from "better-sqlite3";
+const db = new Database("school.db");
+
+db.exec(`
+  CREATE TABLE IF NOT EXISTS enrollments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER NOT NULL REFERENCES students(id),
+    course_title TEXT NOT NULL,
+    enrolled_on TEXT DEFAULT CURRENT_TIMESTAMP
+  )
+`);
+
+db.prepare("INSERT INTO enrollments (student_id, course_title) VALUES (?, ?)")
+  .run(1, "Back-End Web Developer");
+
+const report = db.prepare(`
+  SELECT students.name, enrollments.course_title, enrollments.enrolled_on
+  FROM enrollments
+  JOIN students ON students.id = enrollments.student_id
+`).all();
+
+console.log(report);</code></pre>
+<p>Read the JOIN aloud: <em>“from enrollments, attach the matching students row where the IDs agree.”</em> Two narrow tables, one rich answer — this is the move that separates database users from database understanders.</p>
+<h2 id="5-5-checkpoint-project-the-task-api-persists-forever">5.5 Checkpoint Project: The Task API Persists Forever</h2>
+<p>Return to your Part 4 Task Manager and replace the in-memory array with SQLite. Same endpoints, same responses — different engine room. The full pattern for two routes; you complete the rest:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part5-sql/server.js</code></div>
+<pre><code>import express from "express";
+import Database from "better-sqlite3";
+
+const db = new Database("tasks.db");
+db.exec(`CREATE TABLE IF NOT EXISTS tasks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  done INTEGER DEFAULT 0
+)`);
+
+const app = express();
+app.use(express.json());
+
+app.get("/tasks", (req, res) =&gt; {
+  res.json(db.prepare("SELECT * FROM tasks").all());
+});
+
+app.post("/tasks", (req, res) =&gt; {
+  const { title } = req.body;
+  if (!title || !title.trim()) return res.status(400).json({ error: "title is required" });
+  const info = db.prepare("INSERT INTO tasks (title) VALUES (?)").run(title.trim());
+  res.status(201).json(db.prepare("SELECT * FROM tasks WHERE id = ?").get(info.lastInsertRowid));
+});
+
+// YOUR TURN: GET /tasks/:id, PUT /tasks/:id, DELETE /tasks/:id
+// using db.prepare(...).get(...) and .run(...) with ? placeholders
+
+app.listen(4000, () =&gt; console.log("Persistent Task API on :4000"));</code></pre>
+<p>The proof of the milestone: create three tasks with curl, press <code>Ctrl+C</code>, restart the server, list tasks. <strong>They are still there.</strong> Your software now has a memory that survives — the moment back ends become real.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Upgrade challenges: add a created_at column with DEFAULT CURRENT_TIMESTAMP; add GET /tasks?done=true filtering in SQL with WHERE done = ?; deliberately attempt an injection against your own API and watch parameterization shrug it off.</p></div>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part4.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 4 · Express &amp; REST</span></a>
+  <a class="next" href="part6.html"><span class="dir">NEXT →</span><span class="pt">Part 6 · MongoDB &amp; NoSQL</span></a>
+</nav>
 </main>
 
 <footer class="site">

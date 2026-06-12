@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>16-Week Plan — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,45 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 11 · STUDY PLAN</div>
+    <h1>The 16-Week Daily Study Plan</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#b-1-how-to-use-this-plan">B.1 How to Use This Plan</a></div>
   </div>
-
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+  <article>
+<h2 id="b-1-how-to-use-this-plan">B.1 How to Use This Plan</h2>
+<p>Budget <strong>2 hours on weekdays, 3–4 on Saturdays, Sundays off</strong>. Each week lists its focus and the proof-of-done. Falling behind is normal — protect the <em>order</em>, never skip a checkpoint, and remember the only failed week is one with zero hours in it.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Week</th><th>Focus</th><th>Proof of done</th></tr></thead><tbody>
+<tr><td>1</td><td>Part 1: terminal drills daily; curl conversations</td><td>You narrate a request aloud, fluently</td></tr>
+<tr><td>2</td><td>Part 2: variables, conditionals, loops</td><td>ATM logic runs; you broke it on purpose</td></tr>
+<tr><td>3</td><td>Part 2: functions, arrays, objects</td><td>map/filter/reduce used without looking up</td></tr>
+<tr><td>4</td><td>Part 2 async + Part 3 modules/npm</td><td>Bank simulator done; first npm project</td></tr>
+<tr><td>5</td><td>Part 3: files, .env + Part 4 first server</td><td>Notes CLI works; server answers curl</td></tr>
+<tr><td>6</td><td>Part 4: routing, middleware, CRUD</td><td>Task API full CRUD with honest 4xx errors</td></tr>
+<tr><td>7</td><td>Part 4 polish + Part 5 SQL basics</td><td>Validation everywhere; first tables queried</td></tr>
+<tr><td>8</td><td>Part 5: JOINs, parameterized queries</td><td>JOIN report runs; injection attempt fails</td></tr>
+<tr><td>9</td><td>Part 5 checkpoint + Part 6 Atlas</td><td>Tasks survive restart; cluster connected</td></tr>
+<tr><td>10</td><td>Part 6: Mongoose CRUD + catalogue</td><td>Catalogue service filters via query params</td></tr>
+<tr><td>11</td><td>Part 7: bcrypt, JWT, protected routes</td><td>Register/login/guard walk-through with curl</td></tr>
+<tr><td>12</td><td>Part 7 checkpoint</td><td>Two users, private task lists, rate-limited login</td></tr>
+<tr><td>13</td><td>Part 8: Python service + Node client</td><td>Two-language /report endpoint works</td></tr>
+<tr><td>14</td><td>Part 8: Paystack, webhook, email</td><td>Test payment verified; receipt delivered</td></tr>
+<tr><td>15</td><td>Part 9: tests, Git, Docker, CI</td><td>Green Actions badge on the repo</td></tr>
+<tr><td>16</td><td>Part 9: NaijaStore build + deploy</td><td>Live URL a stranger can shop against</td></tr>
+</tbody></table></div>
+<p>Week 17 is not on the plan because it belongs to the job hunt — and to whatever you build next. Welcome to the profession, developer.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part10.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 10 · Cheat Sheets</span></a>
+  <a class="next" href="index.html"><span class="dir">FINISH →</span><span class="pt">Back to curriculum</span></a>
+</nav>
 </main>
 
 <footer class="site">

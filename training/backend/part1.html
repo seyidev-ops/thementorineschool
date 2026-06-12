@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Terminal &amp; HTTP — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,90 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 1 · WEEK 1</div>
+    <h1>The Terminal, HTTP &amp; How the Web Actually Works</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#1-1-why-back-end-developers-live-in-the-terminal">1.1 Why Back-End Developers Live in the Terminal</a><a href="#1-2-the-ten-commands-you-will-use-forever-practical">1.2 The Ten Commands You Will Use Forever (Practical)</a><a href="#1-3-what-actually-happens-when-you-visit-a-url">1.3 What Actually Happens When You Visit a URL</a><a href="#1-4-the-anatomy-of-http-requests-responses-status-codes">1.4 The Anatomy of HTTP — Requests, Responses, Status Codes</a><a href="#1-5-speak-http-yourself-with-curl-practical">1.5 Speak HTTP Yourself with curl (Practical)</a><a href="#1-6-checkpoint-narrate-a-request-out-loud">1.6 Checkpoint: Narrate a Request Out Loud</a></div>
   </div>
+  <article>
+<h2 id="1-1-why-back-end-developers-live-in-the-terminal">1.1 Why Back-End Developers Live in the Terminal</h2>
+<p>Servers do not have screens, mice, or buttons. A real production server is a computer in a data centre in Frankfurt or Virginia that you will only ever touch through text commands. The terminal is not a relic — it is the <strong>native language of servers</strong>, and back-end developers speak it daily: starting services, reading logs, deploying code, inspecting databases.</p>
+<p>The good news: you need about ten commands to be productive, and you will use them so often they become reflexes within a week.</p>
+<h2 id="1-2-the-ten-commands-you-will-use-forever-practical">1.2 The Ten Commands You Will Use Forever (Practical)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Command</th><th>What it does</th><th>Example</th></tr></thead><tbody>
+<tr><td>pwd</td><td>Print where you are</td><td>pwd</td></tr>
+<tr><td>ls</td><td>List files here (dir on Windows CMD)</td><td>ls</td></tr>
+<tr><td>cd</td><td>Change directory</td><td>cd part1-http</td></tr>
+<tr><td>cd ..</td><td>Go up one level</td><td>cd ..</td></tr>
+<tr><td>mkdir</td><td>Make a folder</td><td>mkdir logs</td></tr>
+<tr><td>touch</td><td>Create an empty file</td><td>touch notes.txt</td></tr>
+<tr><td>cat</td><td>Print a file's contents</td><td>cat notes.txt</td></tr>
+<tr><td>cp / mv</td><td>Copy / move-rename</td><td>mv notes.txt ideas.txt</td></tr>
+<tr><td>rm</td><td>Delete (no recycle bin — careful)</td><td>rm ideas.txt</td></tr>
+<tr><td>clear</td><td>Clean the screen</td><td>clear</td></tr>
+</tbody></table></div>
+<p>Drill them now. From your <code>backend-journey</code> folder:</p>
+<pre><code>cd part1-http
+mkdir practice
+cd practice
+touch server-notes.txt
+ls
+cd ..
+rm -r practice
+ls</code></pre>
+<div class="callout"><div class="co-label">COMMON MISTAKE</div><p>If the terminal says “No such file or directory”, you are almost certainly <em>standing in the wrong folder</em>. Run <code>pwd</code> first, always. Location is everything in the terminal.</p></div>
+<h2 id="1-3-what-actually-happens-when-you-visit-a-url">1.3 What Actually Happens When You Visit a URL</h2>
+<p>Type <code>mentorineschool.com</code> into a browser and press Enter. In roughly 200 milliseconds, this happens: <strong>(1) DNS lookup</strong> — your computer asks a phone-book service “what is the IP address for this name?” and gets back something like <code>76.76.21.21</code>. <strong>(2) Connection</strong> — your browser opens a TCP connection to that address, like dialling a phone number. <strong>(3) Request</strong> — the browser sends a small, structured text message: an <em>HTTP request</em>. <strong>(4) The server thinks</strong> — code (soon, <em>your</em> code) reads the request, maybe queries a database, and builds an answer. <strong>(5) Response</strong> — the server sends back an <em>HTTP response</em>: a status code, some headers, and a body. <strong>(6) Render</strong> — the browser draws what it received.</p>
+<p>Steps 4 and 5 are your new profession. Everything in this guide — Express, databases, authentication, payments — is just increasingly sophisticated ways of <em>answering requests</em>.</p>
+<h2 id="1-4-the-anatomy-of-http-requests-responses-status-codes">1.4 The Anatomy of HTTP — Requests, Responses, Status Codes</h2>
+<p>An HTTP request has three parts: a <strong>request line</strong> (<code>GET /products HTTP/1.1</code> — the verb, the path, the protocol), <strong>headers</strong> (metadata, like <code>Content-Type: application/json</code>), and an optional <strong>body</strong> (the data you are sending, used with POST and PUT). The verbs you will use constantly:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Verb</th><th>Meaning</th><th>Everyday analogy</th></tr></thead><tbody>
+<tr><td>GET</td><td>Read data</td><td>Asking a librarian for a book</td></tr>
+<tr><td>POST</td><td>Create new data</td><td>Submitting a new form</td></tr>
+<tr><td>PUT / PATCH</td><td>Update existing data</td><td>Correcting your address on file</td></tr>
+<tr><td>DELETE</td><td>Remove data</td><td>Cancelling a subscription</td></tr>
+</tbody></table></div>
+<p>The response begins with a <strong>status code</strong> — three digits that summarise the outcome. Memorise the families now; specific codes come naturally with use:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Family</th><th>Meaning</th><th>Codes you will meet constantly</th></tr></thead><tbody>
+<tr><td>2xx</td><td>Success</td><td>200 OK, 201 Created, 204 No Content</td></tr>
+<tr><td>3xx</td><td>Redirection</td><td>301 Moved Permanently, 304 Not Modified</td></tr>
+<tr><td>4xx</td><td>Client made a mistake</td><td>400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found</td></tr>
+<tr><td>5xx</td><td>Server made a mistake</td><td>500 Internal Server Error, 503 Service Unavailable</td></tr>
+</tbody></table></div>
+<div class="callout"><div class="co-label">GOLDEN RULE</div><p>4xx means <em>they</em> sent something wrong; 5xx means <em>you</em> wrote something wrong. Production back-end work is a lifelong campaign to turn 5xx errors into helpful 4xx messages.</p></div>
+<h2 id="1-5-speak-http-yourself-with-curl-practical">1.5 Speak HTTP Yourself with curl (Practical)</h2>
+<p><code>curl</code> sends HTTP requests from your terminal — no browser, no interface, just you talking to servers directly. Run each of these and <em>read the output slowly</em>:</p>
+<pre><code># 1. A simple GET — fetch a fake to-do item
+curl https://jsonplaceholder.typicode.com/todos/1
 
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
+# 2. See the full conversation: status line + headers (-i)
+curl -i https://jsonplaceholder.typicode.com/todos/1
 
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
+# 3. POST — create something, sending a JSON body
+curl -X POST https://jsonplaceholder.typicode.com/posts \
+  -H "Content-Type: application/json" \
+  -d '{"title":"My first POST","body":"Sent from my own terminal","userId":1}'
 
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+# 4. Trigger a 404 on purpose and read it
+curl -i https://jsonplaceholder.typicode.com/todos/99999999</code></pre>
+<p>In example 3, <code>-X POST</code> chooses the verb, <code>-H</code> adds a header telling the server “the body is JSON”, and <code>-d</code> carries the body itself. The server answers with <code>201 Created</code> and echoes your new resource back — exactly what your own APIs will do from Part 4 onward.</p>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Change example 3's verb to PUT and the URL to /posts/1. You just performed an update. Now run example 4 with -i and find the status code in the very first line of output.</p></div>
+<h2 id="1-6-checkpoint-narrate-a-request-out-loud">1.6 Checkpoint: Narrate a Request Out Loud</h2>
+<p>No code for this checkpoint — something harder. Open a terminal and run <code>curl -i https://api.github.com/users/torvalds</code>. Then explain <em>out loud, to an empty chair</em>: what verb was used, what path was requested, what status family came back, what two headers mean, and what the body contains. If you can narrate a request, you understand the web better than most people who have “coded” for a year. Welcome to the back end.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part0.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 0 · Start Here</span></a>
+  <a class="next" href="part2.html"><span class="dir">NEXT →</span><span class="pt">Part 2 · JavaScript Core</span></a>
+</nav>
 </main>
 
 <footer class="site">

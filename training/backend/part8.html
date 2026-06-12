@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Integration — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,103 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 8 · WEEKS 12–14</div>
+    <h1>Integration: Other Languages, Payments &amp; the Outside World</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#8-1-http-is-the-lingua-franca">8.1 HTTP Is the Lingua Franca</a><a href="#8-2-a-python-microservice-consumed-from-node-practical">8.2 A Python Microservice, Consumed from Node (Practical)</a><a href="#8-3-payments-with-paystack-practical">8.3 Payments with Paystack (Practical)</a><a href="#8-4-webhooks-when-the-internet-calls-you-back">8.4 Webhooks: When the Internet Calls You Back</a><a href="#8-5-email-and-file-uploads-in-ten-minutes">8.5 Email and File Uploads in Ten Minutes</a><a href="#8-6-checkpoint-project-the-polyglot-pipeline">8.6 Checkpoint Project: The Polyglot Pipeline</a></div>
   </div>
+  <article>
+<h2 id="8-1-http-is-the-lingua-franca">8.1 HTTP Is the Lingua Franca</h2>
+<p>How does a Node API use a Python machine-learning model? How does Paystack tell your server a payment cleared? The same answer: <strong>services talk HTTP to each other</strong>, exactly the protocol you mastered in Part 1. A “microservice architecture” is simply several small servers being curl-style clients of one another. You already own every skill this part requires — now point them outward.</p>
+<h2 id="8-2-a-python-microservice-consumed-from-node-practical">8.2 A Python Microservice, Consumed from Node (Practical)</h2>
+<p>Python dominates data work; Node dominates API work; professionals wire them together. Install Python from <code>python.org</code> if needed, then build a tiny analytics service with <strong>FastAPI</strong>:</p>
+<pre><code>cd backend-journey/part8-integration
+pip install fastapi uvicorn</code></pre>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/analytics.py</code></div>
+<pre><code>from fastapi import FastAPI
 
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
+app = FastAPI()
 
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
+@app.get("/stats")
+def stats(amounts: str):
+    nums = [float(x) for x in amounts.split(",") if x.strip()]
+    if not nums:
+        return {"error": "no numbers"}
+    return {
+        "count": len(nums),
+        "total": sum(nums),
+        "average": round(sum(nums) / len(nums), 2),
+        "max": max(nums),
+    }</code></pre>
+<pre><code>uvicorn analytics:app --port 8000</code></pre>
+<p>Now a Node server that <em>calls</em> Python with the built-in <code>fetch</code> — your API composing another API:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/node-client.js</code></div>
+<pre><code>import express from "express";
+const app = express();
 
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+app.get("/report", async (req, res) =&gt; {
+  const sales = [250000, 150000, 700000, 250000];
+  const response = await fetch(`http://localhost:8000/stats?amounts=${sales.join(",")}`);
+  const stats = await response.json();
+  res.json({ source: "python-analytics", stats });
+});
+
+app.listen(4000, () =&gt; console.log("Node on :4000, consuming Python on :8000"));</code></pre>
+<p>Two terminals, two languages, one product: <code>curl http://localhost:4000/report</code>. (Alternative for scripts rather than services: Node's <code>child_process.execFile("python3", ["script.py"])</code> runs Python directly and captures its output — handy for one-off jobs like PDF generation.)</p>
+<h2 id="8-3-payments-with-paystack-practical">8.3 Payments with Paystack (Practical)</h2>
+<p>Money is the most real-world integration there is. Paystack (the Nigerian standard, free test mode) follows the universal payment pattern: <strong>(1) initialize</strong> a transaction server-side with your <em>secret key</em> — never the browser — receiving a checkout URL; <strong>(2) the customer pays</strong> on Paystack's secure page; <strong>(3) verify</strong> server-side before delivering value. Create a free account at <code>paystack.com</code>, copy your <em>test</em> secret key into <code>.env</code> as <code>PAYSTACK_SECRET</code>, then:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/payments.js</code></div>
+<pre><code>import "dotenv/config";
+import express from "express";
+const app = express();
+app.use(express.json());
+
+const PAYSTACK = "https://api.paystack.co";
+const headers = {
+  Authorization: `Bearer ${process.env.PAYSTACK_SECRET}`,
+  "Content-Type": "application/json"
+};
+
+// Step 1: initialize
+app.post("/pay", async (req, res) =&gt; {
+  const { email, amountNaira } = req.body;
+  const response = await fetch(`${PAYSTACK}/transaction/initialize`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ email, amount: amountNaira * 100 })   // kobo!
+  });
+  const data = await response.json();
+  res.json({ checkout: data.data.authorization_url, reference: data.data.reference });
+});
+
+// Step 3: verify before delivering anything of value
+app.get("/pay/verify/:reference", async (req, res) =&gt; {
+  const response = await fetch(`${PAYSTACK}/transaction/verify/${req.params.reference}`, { headers });
+  const data = await response.json();
+  const paid = data.data &amp;&amp; data.data.status === "success";
+  res.json({ paid, amount: paid ? data.data.amount / 100 : 0 });
+});
+
+app.listen(4000, () =&gt; console.log("Payments demo on :4000"));</code></pre>
+<p>POST to <code>/pay</code> with your own email and <code>amountNaira: 500</code>, open the checkout URL, pay with Paystack's test card (<code>4084 0840 8408 4081</code>, any future date, CVV 408), then hit <code>/pay/verify/...</code> and watch <code>paid: true</code> come back. You have moved (test) money with your own code.</p>
+<div class="callout"><div class="co-label">GOLDEN RULE</div><p>Trust only your server-side verify call. Never mark an order paid because the browser said so — browsers belong to customers, and some customers lie.</p></div>
+<h2 id="8-4-webhooks-when-the-internet-calls-you-back">8.4 Webhooks: When the Internet Calls You Back</h2>
+<p>Verification by polling works, but production systems prefer <strong>webhooks</strong>: Paystack POSTs to <em>your</em> URL the instant a payment settles — the roles reverse and your API becomes the one receiving calls. A webhook endpoint is just a route: <code>app.post("/webhooks/paystack", ...)</code> that reads the event and updates your database. Two professional rules: respond <code>200</code> immediately (do slow work after responding), and <strong>verify the signature header</strong> (<code>x-paystack-signature</code>, an HMAC of the body with your secret) so pranksters cannot fake “payment received” calls. The same pattern powers GitHub pushes, WhatsApp messages and Stripe events — learn it once, integrate everything.</p>
+<h2 id="8-5-email-and-file-uploads-in-ten-minutes">8.5 Email and File Uploads in Ten Minutes</h2>
+<p>Two integrations every product eventually needs. <strong>Email:</strong> <code>npm install nodemailer</code>, point it at any SMTP service (Gmail app-password for learning; Resend/Brevo in production) and <code>transporter.sendMail({ to, subject, html })</code> — your Part 9 capstone sends order receipts this way. <strong>Uploads:</strong> <code>npm install multer</code>, add <code>upload.single("photo")</code> middleware to a route, and <code>req.file</code> appears with the stored file's details. Both are documented to death; the skill is recognising <em>they are just middleware and async calls</em> — shapes you already own.</p>
+<h2 id="8-6-checkpoint-project-the-polyglot-pipeline">8.6 Checkpoint Project: The Polyglot Pipeline</h2>
+<p>Wire one flow end-to-end: <code>POST /orders</code> (Node, JWT-protected) accepts an order → initializes a Paystack test payment → on verify, stores the order (SQLite) → calls the Python service to recompute sales stats → emails a receipt. Five technologies, one request chain, every link individually testable with curl. Draw the flow on paper first — architecture is a drawing skill before it is a typing skill. This pipeline <em>is</em> the spine of your capstone.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part7.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 7 · Auth &amp; Security</span></a>
+  <a class="next" href="part9.html"><span class="dir">NEXT →</span><span class="pt">Part 9 · Professional Practice</span></a>
+</nav>
 </main>
 
 <footer class="site">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Professional Practice — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,110 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 9 · WEEKS 14–16</div>
+    <h1>Professional Practice: Testing, Deployment &amp; the Capstone</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#9-1-automated-testing-your-robot-quality-inspector">9.1 Automated Testing: Your Robot Quality Inspector</a><a href="#9-2-git-github-the-professional-workflow">9.2 Git &amp; GitHub: The Professional Workflow</a><a href="#9-3-docker-in-twenty-minutes">9.3 Docker in Twenty Minutes</a><a href="#9-4-ci-cd-robots-that-test-every-push">9.4 CI/CD: Robots That Test Every Push</a><a href="#9-5-deployment-your-api-on-the-real-internet-practical">9.5 Deployment: Your API on the Real Internet (Practical)</a><a href="#9-6-the-capstone-naijastore-api">9.6 THE CAPSTONE: NaijaStore API</a><a href="#9-7-the-job-hunt-turning-the-capstone-into-offers">9.7 The Job Hunt: Turning the Capstone into Offers</a></div>
   </div>
+  <article>
+<h2 id="9-1-automated-testing-your-robot-quality-inspector">9.1 Automated Testing: Your Robot Quality Inspector</h2>
+<p>Professionals do not re-curl every endpoint after every change — they write tests once and let the machine re-check forever. Node ships a test runner in the box (<code>node:test</code>), and the pattern is simply: arrange, act, assert.</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part9-capstone/tests/fees.test.js</code></div>
+<pre><code>import { test } from "node:test";
+import assert from "node:assert";
+import { calculateFee } from "../fees.js";
 
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
+test("fee is 1.5% of small amounts", () =&gt; {
+  assert.strictEqual(calculateFee(100000), 1500);
+});
 
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
+test("fee is capped at 2000", () =&gt; {
+  assert.strictEqual(calculateFee(10000000), 2000);
+});
 
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+test("fee on zero is zero", () =&gt; {
+  assert.strictEqual(calculateFee(0), 0);
+});</code></pre>
+<pre><code>node --test</code></pre>
+<p>Green ticks scroll by; break the cap in <code>fees.js</code> on purpose and watch a test catch you in milliseconds. For testing whole endpoints, the <code>supertest</code> package fires requests at your Express app in-memory — add it to the capstone as an upgrade. The professional rule of thumb: every bug you fix earns a test that would have caught it.</p>
+<h2 id="9-2-git-github-the-professional-workflow">9.2 Git &amp; GitHub: The Professional Workflow</h2>
+<p>Git records snapshots of your project; GitHub publishes them. The daily loop is four commands, and from today every checkpoint you have built goes into it:</p>
+<pre><code>cd backend-journey
+git init
+git add .
+git commit -m "Parts 1-8: terminal to payments"
+# create an empty repo on github.com, then:
+git remote add origin https://github.com/YOUR-USERNAME/backend-journey.git
+git push -u origin main</code></pre>
+<p>Commit small and often, with messages that say <em>why</em>: <code>git commit -m "Reject negative deposits (caught by Ada in review)"</code> is documentation your future self will thank you for. Your <code>.gitignore</code> from Part 3 keeps <code>node_modules/</code> and <code>.env</code> out — verify on GitHub that neither appears. <strong>A recruiter checking your profile and finding a steady green commit graph plus documented projects is the cheapest interview advantage that exists.</strong></p>
+<h2 id="9-3-docker-in-twenty-minutes">9.3 Docker in Twenty Minutes</h2>
+<p>“Works on my machine” dies here. <strong>Docker</strong> packages your app <em>with</em> its environment — Node version, dependencies, OS libraries — into an image that runs identically everywhere. One file describes the recipe:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>part9-capstone/Dockerfile</code></div>
+<pre><code>FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+EXPOSE 4000
+CMD ["node", "server.js"]</code></pre>
+<pre><code>docker build -t naijastore .
+docker run -p 4000:4000 --env-file .env naijastore</code></pre>
+<p>Read the Dockerfile top to bottom: start from a slim official Node image, copy the dependency manifests first (so Docker caches the slow <code>npm ci</code> layer), copy the code, declare the port, state the start command. That mental model — <em>layers, cached top-down</em> — is most of practical Docker.</p>
+<h2 id="9-4-ci-cd-robots-that-test-every-push">9.4 CI/CD: Robots That Test Every Push</h2>
+<p>Continuous Integration means GitHub runs your tests automatically on every push — a tireless reviewer who never lets broken code sneak in. One small file in your repo switches it on:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>.github/workflows/ci.yml</code></div>
+<pre><code>name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: node --test</code></pre>
+<p>Push it, open the <strong>Actions</strong> tab on GitHub, and watch a fresh Ubuntu machine boot, install your project and run your tests — in about a minute, for free. The green badge it earns belongs at the top of your README.</p>
+<h2 id="9-5-deployment-your-api-on-the-real-internet-practical">9.5 Deployment: Your API on the Real Internet (Practical)</h2>
+<p><strong>Render</strong> (render.com) deploys straight from GitHub on a free tier. The steps: push your project → New ▸ Web Service → connect the repo → build command <code>npm ci</code>, start command <code>node server.js</code> → add your environment variables (<code>JWT_SECRET</code>, <code>PAYSTACK_SECRET</code>, database URL) in the dashboard — the production <code>.env</code> → deploy. Two code details make any Node app deploy-ready:</p>
+<div class="file-label"><span class="fl-tag">FILE</span><code>server.js (deploy-ready details)</code></div>
+<pre><code>// 1. The platform chooses your port — accept it
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () =&gt; console.log(`Live on :${PORT}`));
+
+// 2. A health check route platforms (and you) can ping
+app.get("/health", (req, res) =&gt; res.json({ status: "ok", uptime: process.uptime() }));</code></pre>
+<p>Minutes later you hold a URL like <code>https://naijastore-api.onrender.com</code> — and the curl commands you have typed at <code>localhost</code> all week now work from any computer on Earth. Send one to a friend. Savour it. (For the database in production, Render and Railway both offer free Postgres; swapping SQLite for Postgres is a connection-string change with the <code>pg</code> package — the SQL you wrote is the same.)</p>
+<div class="callout"><div class="co-label">PRO HABIT</div><p>Add console.log lines with context ("order 123 paid, ref xyz") — on Render they stream into the Logs tab, your eyes in production. Structured logging tools come later; the habit starts now.</p></div>
+<h2 id="9-6-the-capstone-naijastore-api">9.6 THE CAPSTONE: NaijaStore API</h2>
+<p>Everything converges. <strong>NaijaStore</strong> is a complete e-commerce back end — the genre of system most companies will pay you to build and maintain. Specification:</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Area</th><th>Endpoints</th><th>Built with (the Part that trained you)</th></tr></thead><tbody>
+<tr><td>Auth</td><td>POST /auth/register, POST /auth/login</td><td>bcrypt + JWT (P7)</td></tr>
+<tr><td>Products</td><td>GET /products (+filters), POST/PUT/DELETE (admin only)</td><td>Express CRUD (P4) + SQL (P5)</td></tr>
+<tr><td>Cart</td><td>GET /cart, POST /cart/items, DELETE /cart/items/:id</td><td>Ownership-checked routes (P7)</td></tr>
+<tr><td>Orders</td><td>POST /orders (from cart), GET /orders/:id</td><td>JOINs across tables (P5)</td></tr>
+<tr><td>Payments</td><td>POST /orders/:id/pay, GET /orders/:id/verify, webhook</td><td>Paystack (P8)</td></tr>
+<tr><td>Receipts</td><td>Email on verified payment</td><td>nodemailer (P8)</td></tr>
+<tr><td>Analytics</td><td>GET /admin/stats (totals, averages)</td><td>Python FastAPI service (P8)</td></tr>
+<tr><td>Ops</td><td>/health, tests, Dockerfile, CI, deployed on Render</td><td>P9 end to end</td></tr>
+</tbody></table></div>
+<p>Build order (one to two weeks, exactly as a professional would sequence it): <strong>(1)</strong> schema on paper — users, products, cart_items, orders, order_items, with foreign keys drawn as arrows; <strong>(2)</strong> auth, tested; <strong>(3)</strong> product CRUD with an <code>is_admin</code> column gating writes; <strong>(4)</strong> cart and orders inside a SQL transaction so stock and order rows change together or not at all; <strong>(5)</strong> payments and the webhook; <strong>(6)</strong> receipts and analytics; <strong>(7)</strong> tests for the money paths at minimum; <strong>(8)</strong> Docker, CI, deploy. Commit at every step.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Done means: a stranger with only your README and a curl client can register, browse, fill a cart, pay with the test card, and receive a receipt — against your live Render URL. That stranger will eventually be an interviewer.</p></div>
+<h2 id="9-7-the-job-hunt-turning-the-capstone-into-offers">9.7 The Job Hunt: Turning the Capstone into Offers</h2>
+<p>Your portfolio is now arguments, not claims: a live API URL, a documented GitHub repo with green CI, a commit history showing sixteen weeks of steady work. Package it: a README with an architecture diagram (even hand-drawn and photographed), a Postman collection export so reviewers can click through your endpoints, and a five-line <em>“what I'd build next”</em> section showing product thinking. Target roles titled Back-End Developer (Node), API Developer, or Junior Software Engineer; in interviews, walk through NaijaStore's payment flow on a whiteboard — webhook signature verification included — and you will be discussing engineering as a peer, not auditioning as a student. The Mentorine School's career pillars (CV positioning, portfolio review, mock interviews) take it from here.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="part8.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 8 · Integration</span></a>
+  <a class="next" href="part10.html"><span class="dir">NEXT →</span><span class="pt">Part 10 · Cheat Sheets</span></a>
+</nav>
 </main>
 
 <footer class="site">

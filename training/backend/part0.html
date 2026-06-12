@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back-End Web Developer — Training Portal · The Mentorine School</title>
+<title>Start Here — Back-End Web Developer · The Mentorine School</title>
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
@@ -27,7 +27,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wm-sub{font-size:.4rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
 </style>
-<meta name="description" content="Become a back-end web developer in 16 weeks — Node, Express, SQL, MongoDB, security, payments and a deployed capstone, with copy-and-paste practicals.">
+
 <style>
 /* ============================================================
    The Complete JavaScript & HTML Developer Training Guide
@@ -274,131 +274,62 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
       </span>
     </a>
     <div class="nav-right">
-      
-      
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
     </div>
   </nav>
-</header>
-
-<main>
-  <div class="col">
-    <section class="hero">
-      <div class="kicker">Mentorine School · Back-End Web Developer</div>
-      <h1>Become a <span class="em">full-stack developer</span> in 24 weeks.</h1>
-      <p class="sub">The complete back-end curriculum — the terminal and HTTP to Node, Express, SQL and MongoDB, security, real payments and a deployed e-commerce capstone. Hands-on, copy-and-paste practicals at every step. No prior experience required.</p>
-      <div class="cta-row">
-        
-        <a class="link-quiet" href="#curriculum">See the curriculum</a>
-      </div>
-    </section>
-
-    <div class="stat-strip" data-live="stagger">
-      <div class="stat"><div class="n">24</div><div class="l">Weeks</div></div>
-      <div class="stat"><div class="n">15</div><div class="l">Parts</div></div>
-      <div class="stat"><div class="n">18+</div><div class="l">Pro tools</div></div>
-      <div class="stat"><div class="n">1</div><div class="l">Capstone product</div></div>
-    </div>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 0 · START HERE</div>
+    <h1>Start Here: How This Guide Works</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#0-1-who-this-guide-is-for-and-what-you-will-become">0.1 Who This Guide Is For — and What You Will Become</a><a href="#0-2-the-golden-rules-of-learning-back-end-development">0.2 The Golden Rules of Learning Back-End Development</a><a href="#0-3-the-16-week-fast-track-roadmap">0.3 The 16-Week Fast-Track Roadmap</a><a href="#0-4-set-up-your-workstation-practical">0.4 Set Up Your Workstation (Practical)</a><a href="#0-5-how-every-lesson-is-structured">0.5 How Every Lesson Is Structured</a></div>
   </div>
-
-  <div class="wide">
-    <section class="section" id="curriculum">
-      <div class="kicker">The curriculum</div>
-      <h2 class="section-head">Fifteen parts. One transformation.</h2>
-      <p class="section-sub">Every part explains each concept in plain English, follows it with a practical you copy, paste and run, and ends with a checkpoint project. By Part 13 you ship MentorLink — a complete learning platform with users, a database, tests and a live URL.</p>
-      <div class="parts-grid" data-live="stagger">
-            <a class="part-card" href="part0.html">
-      <div class="pc-kicker">PART 0 · START HERE</div>
-      <h3>Start Here</h3>
-      <p>Who back-end developers are, the golden rules, the 16-week roadmap, and full workstation setup.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Workstation ready</div>
-    </a>
-    <a class="part-card" href="part1.html">
-      <div class="pc-kicker">PART 1 · WEEK 1</div>
-      <h3>Terminal &amp; HTTP</h3>
-      <p>Command-line fluency, what really happens when you visit a URL, HTTP anatomy and status codes — spoken through curl.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — You can speak raw HTTP</div>
-    </a>
-    <a class="part-card" href="part2.html">
-      <div class="pc-kicker">PART 2 · WEEKS 2–4</div>
-      <h3>JavaScript Core</h3>
-      <p>Variables, decisions, loops, functions, the data shapes of every API, and asynchronous thinking — the programmer's mind, installed.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Bank-account simulator CLI</div>
-    </a>
-    <a class="part-card" href="part3.html">
-      <div class="pc-kicker">PART 3 · WEEKS 4–5</div>
-      <h3>Node.js</h3>
-      <p>Modules, npm, the file system, environment variables — the machinery every server is built from.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — A notes CLI that saves real files</div>
-    </a>
-    <a class="part-card" href="part4.html">
-      <div class="pc-kicker">PART 4 · WEEKS 5–7</div>
-      <h3>Express &amp; REST</h3>
-      <p>Routing, middleware, full CRUD, validation, honest status codes — the Task Manager API you will keep forever.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager API, fully tested</div>
-    </a>
-    <a class="part-card" href="part5.html">
-      <div class="pc-kicker">PART 5 · WEEKS 7–9</div>
-      <h3>SQL Databases</h3>
-      <p>SQLite hands-on: tables, CRUD, JOINs, and parameterized queries that make SQL injection impossible.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Task Manager persists forever</div>
-    </a>
-    <a class="part-card" href="part6.html">
-      <div class="pc-kicker">PART 6 · WEEKS 9–10</div>
-      <h3>MongoDB &amp; NoSQL</h3>
-      <p>Documents instead of tables, Mongoose models, cloud databases with Atlas — and the judgement to choose SQL or NoSQL.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Product catalogue on Atlas</div>
-    </a>
-    <a class="part-card" href="part7.html">
-      <div class="pc-kicker">PART 7 · WEEKS 10–12</div>
-      <h3>Auth &amp; Security</h3>
-      <p>bcrypt hashing, JWT wristbands, protected routes, and the OWASP mistakes you will never make.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Secure multi-user Task API</div>
-    </a>
-    <a class="part-card" href="part8.html">
-      <div class="pc-kicker">PART 8 · WEEKS 12–14</div>
-      <h3>Integration</h3>
-      <p>Python microservices from Node, child processes, Paystack payments, email, uploads, and webhooks demystified.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Polyglot pipeline with real payments</div>
-    </a>
-    <a class="part-card" href="part9.html">
-      <div class="pc-kicker">PART 9 · WEEKS 14–16</div>
-      <h3>Professional Practice</h3>
-      <p>Automated tests, Git workflow, Docker, CI/CD, a real deployment — and the NaijaStore capstone that gets you hired.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — NaijaStore API live on the internet</div>
-    </a>
-    <a class="part-card" href="part10.html">
-      <div class="pc-kicker">APPENDIX A · REFERENCE</div>
-      <h3>Cheat Sheets</h3>
-      <p>HTTP status codes, SQL, Express patterns and the terminal — each on one page.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Always open in a second tab</div>
-    </a>
-    <a class="part-card" href="part11.html">
-      <div class="pc-kicker">APPENDIX B · STUDY PLAN</div>
-      <h3>16-Week Plan</h3>
-      <p>The complete week-by-week schedule from first command to deployed capstone.</p>
-      <div class="pc-mile"><strong>Milestone</strong> — Your week-by-week schedule</div>
-    </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="kicker">The toolbox</div>
-      <h2 class="section-head">Every tool professionals actually use.</h2>
-      <p class="section-sub">Not name-dropped — installed, configured, and used in real practicals, in the order a working developer meets them.</p>
-      <div class="proj-strip" data-live="stagger"><div class="proj"><span class="dot">•</span>VS Code</div><div class="proj"><span class="dot">•</span>Terminal</div><div class="proj"><span class="dot">•</span>Git & GitHub</div><div class="proj"><span class="dot">•</span>HTML & CSS</div><div class="proj"><span class="dot">•</span>JavaScript</div><div class="proj"><span class="dot">•</span>React</div><div class="proj"><span class="dot">•</span>Python</div><div class="proj"><span class="dot">•</span>Node.js</div><div class="proj"><span class="dot">•</span>Express</div><div class="proj"><span class="dot">•</span>SQL · SQLite</div><div class="proj"><span class="dot">•</span>MongoDB (intro)</div><div class="proj"><span class="dot">•</span>FastAPI</div><div class="proj"><span class="dot">•</span>PHP (bridge)</div><div class="proj"><span class="dot">•</span>Docker</div><div class="proj"><span class="dot">•</span>GitHub Actions</div><div class="proj"><span class="dot">•</span>Netlify & Render</div><div class="proj"><span class="dot">•</span>curl</div><div class="proj"><span class="dot">•</span>node --test</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col">
-    <section class="cta-band">
-      <div class="kicker">Day one starts now</div>
-      <h2>If you can type and save a file, you have every prerequisite.</h2>
-      <p>Register free to open all fifteen parts, plus the complete Word edition of the guide for offline study. Part 0 sets up your workstation in under an hour.</p>
-      
-    </section>
-  </div>
+  <article>
+<h2 id="0-1-who-this-guide-is-for-and-what-you-will-become">0.1 Who This Guide Is For — and What You Will Become</h2>
+<p>This guide takes you from <strong>absolute zero</strong> — no coding experience whatsoever — to a job-ready <strong>back-end web developer</strong> in 16 weeks of honest, consistent work. A back-end developer builds the part of an application users never see: the servers, the APIs, the databases, the payment systems, the security. When you tap “Pay” in an app and money moves, when you log in and the system remembers you, when ten thousand people order at once and nothing breaks — that is back-end engineering.</p>
+<p>Front-end developers make software <em>look</em> right. Back-end developers make software <em>be</em> right. The work is logical, deeply in demand, pays among the best salaries in remote tech, and — unlike what you may fear — does not require advanced mathematics. It requires patience, curiosity, and typing every example in this guide with your own hands.</p>
+<div class="callout"><div class="co-label">WHY THIS MATTERS</div><p>Every company that stores data, takes payments, or has user accounts needs back-end developers. That is effectively every company on the internet.</p></div>
+<h2 id="0-2-the-golden-rules-of-learning-back-end-development">0.2 The Golden Rules of Learning Back-End Development</h2>
+<p><strong>Type it, then run it.</strong> Never copy-paste on the first encounter. Typing builds the muscle memory reading never will. After you have typed an example once, the copy-paste versions in this guide become your reference library.</p>
+<p><strong>Break things on purpose.</strong> After every working example, change something and predict what will happen. Delete a line. Misspell a variable. Send the wrong data to your API. Back-end engineering is 50% building and 50% understanding failure.</p>
+<p><strong>Code every day.</strong> One hour daily beats seven hours on Saturday. Your brain consolidates programming patterns during sleep — give it something to consolidate every night.</p>
+<p><strong>Build, don't just watch.</strong> Every part of this guide ends in a checkpoint project. Do not move on until your checkpoint runs. The projects stack: by Part 9 you will assemble them into a capstone you can show employers.</p>
+<h2 id="0-3-the-16-week-fast-track-roadmap">0.3 The 16-Week Fast-Track Roadmap</h2>
+<p>This is the fastest <em>honest</em> route from zero to employable. Each part lists the weeks it occupies and the project milestone that proves you have mastered it.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Weeks</th><th>Part</th><th>What You Master</th><th>Project Milestone</th></tr></thead><tbody>
+<tr><td>1</td><td>Part 1: Terminal, HTTP &amp; the Web</td><td>Command line, how requests travel, status codes, curl</td><td>You can speak raw HTTP to any server</td></tr>
+<tr><td>2–4</td><td>Part 2: JavaScript for the Back End</td><td>Variables, logic, loops, functions, data shapes, async</td><td>Bank-account simulator in the terminal</td></tr>
+<tr><td>4–5</td><td>Part 3: Node.js Deep Dive</td><td>Modules, npm, the file system, environment variables</td><td>A notes CLI tool that saves real files</td></tr>
+<tr><td>5–7</td><td>Part 4: Express &amp; REST APIs</td><td>Routing, middleware, CRUD, validation, status codes</td><td>Task Manager API, tested with curl and Postman</td></tr>
+<tr><td>7–9</td><td>Part 5: Databases I — SQL</td><td>SQLite, CRUD, JOINs, parameterized queries</td><td>Task Manager persists data forever</td></tr>
+<tr><td>9–10</td><td>Part 6: Databases II — MongoDB</td><td>Documents, Mongoose, SQL vs NoSQL decisions</td><td>Product catalogue service on Atlas</td></tr>
+<tr><td>10–12</td><td>Part 7: Authentication &amp; Security</td><td>bcrypt, JWT, protected routes, OWASP, CORS</td><td>Secure multi-user Task API</td></tr>
+<tr><td>12–14</td><td>Part 8: Integration</td><td>Python FastAPI, child processes, Paystack, email, webhooks</td><td>A polyglot pipeline with real payments</td></tr>
+<tr><td>14–16</td><td>Part 9: Professional Practice</td><td>Testing, Docker, CI/CD, deployment, the capstone</td><td>NaijaStore API live on the internet</td></tr>
+</tbody></table></div>
+<h2 id="0-4-set-up-your-workstation-practical">0.4 Set Up Your Workstation (Practical)</h2>
+<p>You need exactly four tools. Install them now, in this order, and back-end development becomes possible on any laptop made in the last decade — Windows, Mac, or Linux.</p>
+<p><strong>1. Node.js (LTS version).</strong> Go to <code>nodejs.org</code> and download the LTS installer. Node is the engine that runs JavaScript outside the browser — it <em>is</em> your back end. <strong>2. Visual Studio Code</strong> from <code>code.visualstudio.com</code> — your editor. <strong>3. Git</strong> from <code>git-scm.com</code> — version control, and on Windows it also gives you the excellent Git Bash terminal. <strong>4. Postman</strong> from <code>postman.com</code> (or rely on curl, which you already have) — a friendly tool for poking APIs.</p>
+<p>Now verify everything. Open your terminal (Git Bash on Windows, Terminal on Mac/Linux) and run each line. Every command should print a version number, not an error.</p>
+<pre><code>node --version
+npm --version
+git --version
+curl --version</code></pre>
+<p>Finally, create the folder where your entire journey will live:</p>
+<pre><code>mkdir backend-journey
+cd backend-journey
+mkdir part1-http part2-js part3-node part4-express part5-sql part6-mongo part7-auth part8-integration part9-capstone</code></pre>
+<div class="callout"><div class="co-label">TRY THIS</div><p>Type <code>ls</code> (or <code>dir</code> on Windows CMD) and confirm you can see all nine folders. You just used the terminal like a professional — Part 1 makes you fluent.</p></div>
+<h2 id="0-5-how-every-lesson-is-structured">0.5 How Every Lesson Is Structured</h2>
+<p>Each section follows the same rhythm: <strong>Concept</strong> — a plain-English explanation with a real-world analogy. <strong>Copy-and-Paste Practical</strong> — complete, runnable code with a FILE label telling you exactly where to save it. <strong>Line-by-Line Breakdown</strong> — what each important line does. <strong>Try This</strong> — a small modification that forces you to think. Parts end with a <strong>Checkpoint Project</strong> that proves mastery.</p>
+<p>One promise from you in return: when a checkpoint fails, you will read the error message <em>slowly, out loud, top line first</em>. Ninety percent of debugging is simply reading what the computer already told you.</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="index.html"><span class="dir">← CURRICULUM</span><span class="pt">All parts</span></a>
+  <a class="next" href="part1.html"><span class="dir">NEXT →</span><span class="pt">Part 1 · Terminal &amp; HTTP</span></a>
+</nav>
 </main>
 
 <footer class="site">
