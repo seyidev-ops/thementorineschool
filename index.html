@@ -113,6 +113,28 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 /* static course grid (tumble on hover, but no auto-scroll) */
 .tracks{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.1rem}
 @media (prefers-reduced-motion: reduce){.cm-row{animation:none}}
+
+/* nav dropdown: Career & Skill Tracks */
+.nav-dd{position:relative}
+.nav-dd-toggle{display:inline-flex;align-items:center;gap:.3rem;cursor:pointer}
+.dd-caret{font-size:.7em;transition:transform .25s}
+.nav-dd.open .dd-caret{transform:rotate(180deg)}
+.nav-dd-menu{position:absolute;top:calc(100% + .6rem);left:0;min-width:248px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:0 16px 40px rgba(10,10,10,.12);
+  padding:.4rem;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s;z-index:60}
+.nav-dd:hover .nav-dd-menu, .nav-dd.open .nav-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dd-menu a{display:block;padding:.6rem .8rem;border-radius:8px;font-size:.85rem;color:var(--ink-soft);text-decoration:none;white-space:nowrap}
+.nav-dd-menu a:hover{background:var(--paper-2);color:var(--accent)}
+.nav-dd-ai{margin-top:.3rem;border-top:1px solid var(--line-soft);padding-top:.7rem !important;color:var(--accent) !important;font-weight:500}
+.nav-dd-ai:hover{background:var(--paper-2)}
+@media(max-width:780px){
+  .nav-dd{width:100%}
+  .nav-dd-toggle{padding:.8rem clamp(1.2rem,4vw,2rem);width:100%;justify-content:space-between}
+  .nav-dd-menu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;
+    border-radius:0;padding:0 0 0 1rem;display:none;min-width:0}
+  .nav-dd.open .nav-dd-menu{display:block}
+  .nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible}
+}
 </style>
 <script>
   window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900, stagger: 90 };
@@ -132,7 +154,18 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       </span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#courses">Courses</a>
+      <div class="nav-dd" id="tracksDd">
+        <a href="#courses" class="nav-dd-toggle" aria-haspopup="true" aria-expanded="false">Career &amp; Skill Tracks <span class="dd-caret">▾</span></a>
+        <div class="nav-dd-menu" role="menu">
+          <a href="#courses" data-cat="tech" role="menuitem">Tech &amp; Development</a>
+          <a href="#courses" data-cat="design" role="menuitem">Design &amp; Creative</a>
+          <a href="#courses" data-cat="marketing" role="menuitem">Marketing &amp; Content</a>
+          <a href="#courses" data-cat="business" role="menuitem">Business &amp; Operations</a>
+          <a href="#courses" data-cat="support" role="menuitem">Support, Admin &amp; Community</a>
+          <a href="#courses" data-cat="nocode" role="menuitem">No-Code &amp; Automation</a>
+          <a href="https://aimadesimpleschool.com" target="_blank" rel="noopener" class="nav-dd-ai" role="menuitem">AI Made Simple ↗</a>
+        </div>
+      </div>
       <a href="#how">How It Works</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
@@ -356,7 +389,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
     <hr class="hairline">
     <div class="fg-row">
       <nav class="fg-links">
-        <a href="#courses">Courses</a>
+        <a href="#courses">Career &amp; Skill Tracks</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
         <a href="#register">Register</a>
@@ -412,6 +445,30 @@ tabs.addEventListener('click', function(e){
   var b = e.target.closest('.cat-tab'); if(!b) return;
   active = b.dataset.cat; renderTabs(); renderGrid();
 });
+window.MS_setCategory = function(cat){
+  if(!MS.CATALOGUE.some(function(c){return c.id===cat;})) return;
+  active = cat; renderTabs(); renderGrid();
+};
+
+// Career & Skill Tracks dropdown
+(function(){
+  var dd = document.getElementById('tracksDd');
+  if(!dd) return;
+  var toggle = dd.querySelector('.nav-dd-toggle');
+  toggle.addEventListener('click', function(e){
+    if(window.innerWidth <= 780){ e.preventDefault(); dd.classList.toggle('open'); }
+  });
+  dd.querySelectorAll('.nav-dd-menu a[data-cat]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      if(window.MS_setCategory) window.MS_setCategory(a.getAttribute('data-cat'));
+      document.getElementById('courses').scrollIntoView({behavior:'smooth'});
+      dd.classList.remove('open');
+      var nl = document.getElementById('navLinks'); if(nl) nl.classList.remove('open');
+    });
+  });
+  document.addEventListener('click', function(e){ if(!dd.contains(e.target)) dd.classList.remove('open'); });
+})();
 document.getElementById('courses').addEventListener('click', function(e){
   var a = e.target.closest('[data-pick]'); if(!a) return;
   document.getElementById('rCourse').value = a.dataset.pick;
