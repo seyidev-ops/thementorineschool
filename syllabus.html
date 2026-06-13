@@ -78,7 +78,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <a href="index.html#courses">Courses</a>
       <a href="index.html#how">How It Works</a>
       <a href="index.html#pricing">Pricing</a>
-      <a href="index.html#register">Register</a>
+      <a href="register.html">Register</a>
     </div>
     <div style="display:flex;align-items:center;gap:.6rem">
       <button class="theme-btn" aria-label="Toggle theme">◐</button>
@@ -156,7 +156,7 @@ if (!syl){
                   '<a class="btn" href="'+go+'">Continue learning <span class="arr">→</span></a>';
   } else {
     n.innerHTML = '<p><strong>The full course is locked until you register.</strong> The complete syllabus below is open — explore it, then unlock the course in one step.</p>'+
-                  '<a class="btn" href="index.html#register">Register to unlock <span class="arr">→</span></a>';
+                  '<a class="btn" href="register.html?course='+slug+'">Register to unlock <span class="arr">→</span></a>';
   }
 
   if (syl.roadmap){
@@ -173,7 +173,7 @@ if (!syl){
 
   document.getElementById('sylCta').innerHTML = unlocked
     ? '<a class="btn" href="dashboard.html">Open my dashboard <span class="arr">→</span></a><a class="link-quiet" href="index.html#courses">Browse other tracks</a>'
-    : '<a class="btn" href="index.html#register">Register for this track <span class="arr">→</span></a><a class="link-quiet" href="index.html#courses">Browse other tracks</a>';
+    : '<a class="btn" href="register.html?course='+slug+'">Register for this track <span class="arr">→</span></a><a class="link-quiet" href="index.html#courses">Browse other tracks</a>';
 }
 </script>
 <script src="assets/liveliness.js" defer></script>

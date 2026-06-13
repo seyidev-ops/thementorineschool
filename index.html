@@ -78,6 +78,24 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .tier.hl{border-color:color-mix(in srgb, var(--accent) 50%, transparent)}
 .tier .pick{margin-top:auto}
 .standalone{margin-top:1rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+.standalone .was{color:var(--ink-faint);text-decoration:line-through;font-weight:300;font-size:.9em}
+/* introductory-pricing countdown */
+.countdown{margin:1.4rem 0 .4rem;display:flex;flex-direction:column;align-items:center;gap:.55rem;text-align:center}
+.cd-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.cd-clock{display:flex;gap:.7rem}
+.cd-unit{display:flex;flex-direction:column;align-items:center;min-width:54px;
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:.55rem .4rem}
+.cd-unit b{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;font-variant-numeric:tabular-nums;color:var(--accent);line-height:1}
+.cd-unit i{font-style:normal;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-top:.3rem}
+.cd-deadline{font-size:.74rem;color:var(--ink-faint)}
+.countdown.ended .cd-clock{opacity:.5}
+/* payment / bank details */
+.pay-details{margin-top:1.4rem}
+.pay-intro{color:var(--ink-soft);margin:.5rem 0 1rem;max-width:60ch}
+.pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.pay-grid > div{display:flex;flex-direction:column;gap:.2rem;padding:.7rem .9rem;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-sm)}
+.pay-k{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.pay-v{font-size:1rem;font-weight:500;font-variant-numeric:tabular-nums}
 .standalone p{font-size:.9rem;color:var(--ink-soft);max-width:52ch}
 
 /* faq */
@@ -169,7 +187,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <a href="#how">How It Works</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
-      <a href="#register">Register</a>
+      <a href="register.html">Register</a>
     </div>
     <div style="display:flex;align-items:center;gap:.6rem">
       <button class="theme-btn" aria-label="Toggle theme">◐</button>
@@ -186,7 +204,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
     <h1>Your gateway to a <em class="ac">future-ready</em> remote career.</h1>
     <p class="lede">A comprehensive career development ecosystem preparing you for high-demand roles that thrive in remote, hybrid, or onsite environments — whether you're a beginner, a professional seeking promotion, or an entrepreneur scaling your business.</p>
     <div class="hero-actions">
-      <a class="btn" href="#register">Register for a track <span class="arr">→</span></a>
+      <a class="btn" href="register.html">Register for a track <span class="arr">→</span></a>
       <a class="link-quiet" href="#courses">Browse the courses</a>
     </div>
     <div class="stats" data-live="stagger">
@@ -251,31 +269,51 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
     <div class="section-head">
       <div class="kicker">Registration Tiers &amp; Investment</div>
       <h2>Flexible plans, <em class="ac">introductory</em> pricing.</h2>
-      <p>Choose the duration that matches your learning pace and career goals. Act fast — this promotional pricing closes soon.</p>
+      <p>Choose the duration that matches your learning pace and career goals. These are <strong>introductory prices</strong> — they revert to standard pricing (shown crossed out) when the countdown below ends.</p>
+      <div class="countdown" id="countdown" data-live="off" aria-label="Time left at introductory pricing">
+        <span class="cd-label">Introductory pricing ends in</span>
+        <div class="cd-clock">
+          <span class="cd-unit"><b id="cdD">--</b><i>days</i></span>
+          <span class="cd-unit"><b id="cdH">--</b><i>hrs</i></span>
+          <span class="cd-unit"><b id="cdM">--</b><i>min</i></span>
+          <span class="cd-unit"><b id="cdS">--</b><i>sec</i></span>
+        </div>
+        <span class="cd-deadline">Reverts 30 June 2026, 00:00 WAT</span>
+      </div>
     </div>
     <div class="tiers" data-live="stagger">
       <div class="card tier">
         <span class="dur">3 Months</span>
-        <span class="price">₦250,000<span class="was">₦300,000</span></span>
+        <span class="price">₦100,000<span class="was">₦250,000</span></span>
         <p class="for"><strong>The Accelerator.</strong> Ideal for upskilling in a specific tool or mastering a niche skill quickly.</p>
-        <a class="link-quiet pick" href="#register">Choose this plan</a>
+        <a class="link-quiet pick" href="register.html?plan=3mo">Choose this plan</a>
       </div>
       <div class="card tier hl">
         <span class="dur">6 Months</span>
-        <span class="price">₦500,000<span class="was">₦600,000</span></span>
+        <span class="price">₦300,000<span class="was">₦500,000</span></span>
         <p class="for"><strong>The Career Switcher.</strong> Perfect for pivoting to a new industry, with time for portfolio building.</p>
-        <a class="btn pick" href="#register" style="justify-content:center">Choose this plan <span class="arr">→</span></a>
+        <a class="btn pick" href="register.html?plan=6mo" style="justify-content:center">Choose this plan <span class="arr">→</span></a>
       </div>
       <div class="card tier">
         <span class="dur">1 Year</span>
-        <span class="price">₦700,000<span class="was">₦1,000,000</span></span>
+        <span class="price">₦500,000<span class="was">₦700,000</span></span>
         <p class="for"><strong>The Mastery Path.</strong> Best for beginners starting from zero or professionals aiming for senior-level competency.</p>
-        <a class="link-quiet pick" href="#register">Choose this plan</a>
+        <a class="link-quiet pick" href="register.html?plan=1yr">Choose this plan</a>
       </div>
     </div>
     <div class="card standalone">
-      <p><strong>Standalone option — ₦150,000 / career track (30 days).</strong> Prefer your own pace? Get the Career Path Document and all curated courses for one track, self-study format — no community access or certificate.</p>
-      <a class="link-quiet" href="#register">Register standalone</a>
+      <p><strong>Standalone option — ₦50,000 <span class="was">₦150,000</span> / career track (30 days).</strong> Prefer your own pace? Get the Career Path Document and all curated courses for one track, self-study format — no community access or certificate. <em>Introductory price until the countdown ends.</em></p>
+      <a class="link-quiet" href="register.html?plan=standalone">Register standalone</a>
+    </div>
+    <div class="card pay-details" id="payDetails" data-live="off">
+      <div class="kicker">How to pay &amp; get your access code</div>
+      <p class="pay-intro">After registering, make payment to the account below, then send your proof of payment to our WhatsApp line. You'll receive your <strong>unique access code</strong> to unlock your training portal.</p>
+      <div class="pay-grid">
+        <div><span class="pay-k">Account name</span><span class="pay-v">Ona Services Limited</span></div>
+        <div><span class="pay-k">Account number</span><span class="pay-v">0710642377</span></div>
+        <div><span class="pay-k">Bank</span><span class="pay-v">Guaranty Trust Bank (GTBank)</span></div>
+      </div>
+      <a class="btn" href="https://wa.me/message/OF4HWNSJM6ZTK1" target="_blank" rel="noopener" style="margin-top:1rem">Send proof of payment on WhatsApp <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -314,68 +352,13 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       </details>
       <details>
         <summary>How do I register?</summary>
-        <p>Fill the registration form above to unlock your course, then click the chat button to reach admissions for payment details.</p>
+        <p>Click <strong>Register</strong>, pick your track and plan, and your track unlocks instantly in your dashboard. Then pay to our GTBank account (Ona Services Limited, 0710642377) and send proof to our WhatsApp line to receive your unique access code.</p>
       </details>
     </div>
   </div>
 </section>
 
-<!-- REGISTRATION -->
-<section class="section" id="register">
-  <div class="wrap">
-    <div class="reg-grid">
-      <div>
-        <div class="kicker">Registration</div>
-        <h2 style="font-size:clamp(1.8rem,4.5vw,2.5rem)">Secure your spot in the <em class="ac">upcoming cohort</em>.</h2>
-        <p style="color:var(--ink-soft);margin:1rem 0 1.4rem;max-width:50ch">Register once and your chosen course unlocks instantly in your student dashboard. Every tier includes:</p>
-        <ul class="reg-points" data-live="stagger">
-          <li>Full access to your chosen Career Roadmap</li>
-          <li>All courses and course materials</li>
-          <li>Community access for the duration of your enrollment</li>
-          <li>One verified certificate upon completion</li>
-          <li>Alumni network access after graduation</li>
-        </ul>
-      </div>
-      <div class="card" id="regCard">
-        <form id="regForm" novalidate>
-          <div class="field">
-            <label for="rName">Full name</label>
-            <input type="text" id="rName" required placeholder="Your full name">
-          </div>
-          <div class="field">
-            <label for="rEmail">Email</label>
-            <input type="email" id="rEmail" required placeholder="you@example.com">
-          </div>
-          <div class="field">
-            <label for="rPass">Create password</label>
-            <input type="password" id="rPass" required minlength="4" placeholder="••••••••">
-          </div>
-          <div class="field">
-            <label for="rCourse">Choose your course track</label>
-            <select id="rCourse" required></select>
-          </div>
-          <div class="field">
-            <label for="rTier">Duration plan</label>
-            <select id="rTier" required>
-              <option value="3 Months — ₦250,000">3 Months — ₦250,000 (The Accelerator)</option>
-              <option value="6 Months — ₦500,000">6 Months — ₦500,000 (The Career Switcher)</option>
-              <option value="1 Year — ₦700,000">1 Year — ₦700,000 (The Mastery Path)</option>
-              <option value="Standalone — ₦150,000">Standalone — ₦150,000 (Document + Courses, 30 days)</option>
-            </select>
-          </div>
-          <button class="btn" type="submit" style="width:100%;justify-content:center">Register &amp; unlock my course <span class="arr">→</span></button>
-          <p style="font-size:.78rem;color:var(--ink-faint);margin-top:.9rem">After registering, chat with admissions for payment details to confirm your cohort seat.</p>
-        </form>
-        <div class="reg-success" id="regSuccess">
-          <div class="kicker" style="justify-content:center">Registered</div>
-          <h3>Welcome aboard<span id="regName"></span>.</h3>
-          <p>Your course is now unlocked in your student dashboard. Chat with admissions for payment details â once confirmed, you’ll receive your <strong>unique access code</strong> to open the training portal.</p>
-          <a class="btn" href="dashboard.html">Go to my dashboard <span class="arr">→</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 
 <footer class="footer-grand" data-live="off">
@@ -392,7 +375,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
         <a href="#courses">Career &amp; Skill Tracks</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
-        <a href="#register">Register</a>
+        <a href="register.html">Register</a>
         <a href="login.html">Student Login</a>
         <a href="admin.html">Admin</a>
       </nav>
@@ -406,6 +389,33 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <script src="assets/app.js"></script>
 <script>
 MS.initTheme(); MS.initChat();
+
+/* introductory-pricing countdown -> 30 June 2026 00:00 WAT (= 29 June 2026 23:00 UTC) */
+(function(){
+  var el = document.getElementById('countdown');
+  if(!el) return;
+  var deadline = Date.UTC(2026, 5, 29, 23, 0, 0); // months are 0-indexed: 5 = June
+  var dEl=document.getElementById('cdD'), hEl=document.getElementById('cdH'),
+      mEl=document.getElementById('cdM'), sEl=document.getElementById('cdS');
+  function pad(n){ return (n<10?'0':'')+n; }
+  function tick(){
+    var diff = deadline - Date.now();
+    if(diff <= 0){
+      dEl.textContent='00'; hEl.textContent='00'; mEl.textContent='00'; sEl.textContent='00';
+      el.classList.add('ended');
+      el.querySelector('.cd-label').textContent = 'Introductory pricing has ended';
+      clearInterval(timer);
+      return;
+    }
+    var s = Math.floor(diff/1000);
+    dEl.textContent = pad(Math.floor(s/86400));
+    hEl.textContent = pad(Math.floor((s%86400)/3600));
+    mEl.textContent = pad(Math.floor((s%3600)/60));
+    sEl.textContent = pad(s%60);
+  }
+  tick();
+  var timer = setInterval(tick, 1000);
+})();
 
 /* ---- catalogue render ---- */
 var tabs = document.getElementById('catTabs');
@@ -433,7 +443,7 @@ function cardHTML(t){
       '<a class="link-quiet" href="syllabus.html?course='+t.slug+'">View syllabus</a>'+
       (unlocked
         ? '<a class="link-quiet" style="color:var(--accent)" href="dashboard.html">Continue \u2192</a>'
-        : '<a class="link-quiet" href="#register" data-pick="'+t.slug+'">Register to unlock</a>')+
+        : '<a class="link-quiet" href="register.html?course='+t.slug+'">Register to unlock</a>')+
     '</div></article>';
 }
 function renderGrid(){
@@ -469,34 +479,7 @@ window.MS_setCategory = function(cat){
   });
   document.addEventListener('click', function(e){ if(!dd.contains(e.target)) dd.classList.remove('open'); });
 })();
-document.getElementById('courses').addEventListener('click', function(e){
-  var a = e.target.closest('[data-pick]'); if(!a) return;
-  document.getElementById('rCourse').value = a.dataset.pick;
-});
 renderTabs(); renderGrid();
-
-/* ---- registration form ---- */
-var sel = document.getElementById('rCourse');
-sel.innerHTML = MS.CATALOGUE.map(function(c){
-  return '<optgroup label="'+c.label+'">'+
-    c.tracks.map(function(t){return '<option value="'+t.slug+'">'+t.name+'</option>';}).join('')+
-  '</optgroup>';
-}).join('');
-
-document.getElementById('regForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  var name = document.getElementById('rName').value.trim();
-  var email = document.getElementById('rEmail').value.trim();
-  var pass = document.getElementById('rPass').value;
-  if(!name || !email || pass.length < 4){ alert('Please complete all fields (password: 4+ characters).'); return; }
-  MS.register({ name:name, email:email, pass:pass, course:sel.value, tier:document.getElementById('rTier').value });
-  document.getElementById('regForm').style.display='none';
-  document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
-  document.getElementById('regSuccess').style.display='block';
-  renderGrid();
-  document.getElementById('loginCta').textContent = 'My Dashboard';
-  document.getElementById('loginCta').href = 'dashboard.html';
-});
 
 /* logged-in nav state */
 if (MS.session()){

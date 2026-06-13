@@ -29,6 +29,12 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `training/remotelead/` | **Remote Team Lead** (recommended 6–10 weeks): the remote leadership shift, communication & async, trust & accountability, goals & delegation, meetings, 1:1s & coaching, feedback & hard conversations, culture & wellbeing — ending in The Remote Team Playbook. Word: `Remote-Team-Lead-Training-Guide.docx` |
 | `training/techsupport/` | **Technical Support Specialist** (recommended 6–10 weeks): technical foundations, the troubleshooting method, technical communication, issue categories, tools (incl. dev console), escalation & bug reporting, documentation — ending in The Tech Support Toolkit. Word: `Technical-Support-Specialist-Training-Guide.docx` |
 | `training/execassistant/` | **Executive Assistant (Remote)** (recommended 5–8 weeks): calendar mastery, inbox & communication, prioritisation & gatekeeping, meetings & travel, anticipation, systems & discretion, the operating rhythm — ending in The EA Command Center. Word: `Executive-Assistant-Remote-Training-Guide.docx` |
+| `training/digitalmarketer/` | **Digital Marketer** (recommended 7–10 weeks): foundations, the funnel, content & inbound, social, SEO basics, email, paid ads & economics, analytics — ending in The Growth Plan. Word: `Digital-Marketer-Training-Guide.docx` |
+| `training/contentcreator/` | **Content Creator** (recommended 8–12 weeks): mindset, niche & brand, ideas, scripting, video & visuals (phone-only), platforms & algorithms, growth, monetisation — ending in The Creator Kit. Word: `Content-Creator-Training-Guide.docx` |
+| `training/seospecialist/` | **SEO Specialist** (recommended 7–10 weeks): how search works, keyword research, intent & content, on-page, technical, off-page/authority, local, measurement — ending in The SEO Blueprint. Word: `SEO-Specialist-Training-Guide.docx` |
+| `training/socialmedia/` | **Social Media Manager** (recommended 6–9 weeks): strategy, platforms & voice, content, the calendar, engagement, growth, campaigns, analytics — ending in The Social Playbook. Word: `Social-Media-Manager-Training-Guide.docx` |
+| `training/emailmarketing/` | **Email Marketing Specialist** (recommended 5–8 weeks): list building, writing, automation, campaigns, segmentation, deliverability, analytics — ending in The Email Engine. Word: `Email-Marketing-Specialist-Training-Guide.docx` |
+| `training/copywriter/` | **Copywriter** (recommended 6–9 weeks): research, headlines, persuasion, frameworks, sales pages, multi-format copy, editing — ending in The Copy Portfolio. Word: `Copywriter-Training-Guide.docx` |
 | `training/video/` | **Video Editor** (recommended 6–10 weeks): the editor's mindset, the cut and pacing, sound design, colour grading, text and titles, social short-form, long-form storytelling and export, ending in the Lagos Eats package. Word: `Video-Editor-Training-Guide.docx` |
 | `training/threed/` | **3D Artist / Animator** (recommended 12–16 weeks): the 3D world in Blender, modelling, PBR texturing, lighting and rendering, composition, animation, rigging and production, ending in The Still Life scene. Word: `3D-Artist-Animator-Training-Guide.docx` |
 | `training/brand/` | **Brand Identity Designer** (recommended 6–8 weeks): brand strategy, naming and voice, logo systems, colour and type, imagery, applications and brand guidelines, ending in the Terra brand identity. Word: `Brand-Identity-Designer-Training-Guide.docx` |
@@ -103,7 +109,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v14` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v16` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 
