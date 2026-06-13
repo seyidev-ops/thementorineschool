@@ -23,6 +23,9 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `training/javascript/` | Full training portal for **JavaScript Developer**: 12 part pages (Part 0–9 + two appendices — HTML, CSS, JS fundamentals, the DOM, async, Node & Express, databases & the full-stack capstone, cross-language integration, professional practice) generated from the official Word training guide |
 | `training/fullstack/` | Full training portal for **Full-stack Developer**: 12 part pages building MentorMarket end to end — storefront, API, database, React, auth across the stack, dual deployment. Original guide; Word document: `Full-Stack-Developer-Training-Guide.docx` |
 | `training/mobile/` | Full training portal for **Mobile App Developer (iOS/Android)**: 12 part pages with React Native + Expo — first app on your own phone, screens, navigation, device powers, live data, auth, EAS builds and the CampusMart capstone. Original guide; Word document: `Mobile-App-Developer-Training-Guide.docx` |
+| `training/video/` | **Video Editor** (recommended 6–10 weeks): the editor's mindset, the cut and pacing, sound design, colour grading, text and titles, social short-form, long-form storytelling and export, ending in the Lagos Eats package. Word: `Video-Editor-Training-Guide.docx` |
+| `training/threed/` | **3D Artist / Animator** (recommended 12–16 weeks): the 3D world in Blender, modelling, PBR texturing, lighting and rendering, composition, animation, rigging and production, ending in The Still Life scene. Word: `3D-Artist-Animator-Training-Guide.docx` |
+| `training/brand/` | **Brand Identity Designer** (recommended 6–8 weeks): brand strategy, naming and voice, logo systems, colour and type, imagery, applications and brand guidelines, ending in the Terra brand identity. Word: `Brand-Identity-Designer-Training-Guide.docx` |
 | `training/productdesign/` | **Product Designer (UI/UX)** (recommended 10–14 weeks): design thinking, UX research, IA, visual design, Figma, design systems, prototyping and usability testing, ending in the NaijaPay case study. Word: `Product-Designer-UIUX-Training-Guide.docx` |
 | `training/graphic/` | **Graphic Designer** (recommended 10–12 weeks): principles, colour, typography, layout, logos, brand identity, marketing design and brand guidelines, ending in the Zuri Foods brand kit. Word: `Graphic-Designer-Training-Guide.docx` |
 | `training/motion/` | **Motion Graphics Designer** (recommended 8–12 weeks): design for motion, animation principles, keyframing, animated logos, kinetic type, explainers, sound and social motion, ending in the Pulse package. Word: `Motion-Graphics-Designer-Training-Guide.docx` |
@@ -94,7 +97,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v11` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v12` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 
