@@ -102,6 +102,16 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .fg-links a{text-decoration:none;color:var(--ink-soft)}
 .fg-links a:hover{color:var(--accent)}
 .fg-copy{font-size:.78rem;color:var(--ink-faint)}
+
+/* rolling track cylinders */
+.track-marquee{overflow:hidden;margin-bottom:1.1rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tm-row{display:flex;gap:1rem;width:max-content;animation:tm-roll 40s linear infinite}
+.tm-row.tm-slow{animation-duration:52s}
+.tm-row:hover{animation-play-state:paused}
+.tm-row .card.track{width:300px;flex:0 0 auto}
+@keyframes tm-roll{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.tm-hint{font-size:.74rem;color:var(--ink-faint);text-align:center;margin-top:.2rem}
+@media (prefers-reduced-motion: reduce){.tm-row{animation:none}}
 </style>
 <script>
   window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900, stagger: 90 };
@@ -196,7 +206,9 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <p>Every track includes the four pillars plus a Career Path Document and curated course set. Courses unlock when you register — but every syllabus is open. Look before you leap.</p>
     </div>
     <div class="cat-tabs" id="catTabs" data-live="off"></div>
-    <div class="tracks" id="trackGrid" data-live="off"></div>
+    <div class="track-marquee" data-live="off"><div class="tm-row" id="tmRow1"></div></div>
+    <div class="track-marquee" data-live="off"><div class="tm-row tm-slow" id="tmRow2"></div></div>
+    <p class="tm-hint">Hover any card to pause · tap a card to explore its syllabus</p>
     <p style="margin-top:1.6rem;font-size:.88rem;color:var(--ink-faint)">Additional tracks are available — contact our admissions team for a personalised consultation.</p>
   </div>
 </section>
@@ -365,7 +377,7 @@ MS.initTheme(); MS.initChat();
 
 /* ---- catalogue render ---- */
 var tabs = document.getElementById('catTabs');
-var grid = document.getElementById('trackGrid');
+
 var active = 'tech';
 
 function lockState(slug){
@@ -378,28 +390,38 @@ function renderTabs(){
     return '<button class="cat-tab'+(c.id===active?' active':'')+'" data-cat="'+c.id+'">'+c.label+'</button>';
   }).join('');
 }
+function cardHTML(t){
+  var unlocked = MS.isUnlocked(t.slug);
+  return '<article class="card track'+(t.featured?' featured':'')+'">'+
+    '<div class="track-top"><h3>'+t.name+'</h3>'+lockState(t.slug)+'</div>'+
+    '<div class="meta">'+t.courses+' \u00b7 '+t.duration+'</div>'+
+    (t.blurb?'<p class="blurb">'+t.blurb+'</p>':'')+
+    '<div class="track-actions">'+
+      '<a class="link-quiet" href="syllabus.html?course='+t.slug+'">View syllabus</a>'+
+      (unlocked
+        ? '<a class="link-quiet" style="color:var(--accent)" href="dashboard.html">Continue \u2192</a>'
+        : '<a class="link-quiet" href="#register" data-pick="'+t.slug+'">Register to unlock</a>')+
+    '</div></article>';
+}
 function renderGrid(){
   var cat = MS.CATALOGUE.find(function(c){return c.id===active;});
-  grid.innerHTML = cat.tracks.map(function(t){
-    var unlocked = MS.isUnlocked(t.slug);
-    return '<article class="card track'+(t.featured?' featured':'')+'">'+
-      '<div class="track-top"><h3>'+t.name+'</h3>'+lockState(t.slug)+'</div>'+
-      '<div class="meta">'+t.courses+' · '+t.duration+'</div>'+
-      (t.blurb?'<p class="blurb">'+t.blurb+'</p>':'')+
-      '<div class="track-actions">'+
-        '<a class="link-quiet" href="syllabus.html?course='+t.slug+'">View syllabus</a>'+
-        (unlocked
-          ? '<a class="link-quiet" style="color:var(--accent)" href="dashboard.html">Continue →</a>'
-          : '<a class="link-quiet" href="#register" data-pick="'+t.slug+'">Register to unlock</a>')+
-      '</div></article>';
-  }).join('');
-  if (window.Liveliness) window.Liveliness.refresh();
+  var rows = [document.getElementById('tmRow1'), document.getElementById('tmRow2')];
+  var half = Math.ceil(cat.tracks.length/2);
+  var sets = [cat.tracks.slice(0,half), cat.tracks.slice(half)];
+  // single-row categories: hide the second cylinder
+  rows[1].parentElement.style.display = sets[1].length ? '' : 'none';
+  sets.forEach(function(set, i){
+    if(!set.length) return;
+    var cards = set.map(cardHTML).join('');
+    rows[i].innerHTML = cards + cards;            // duplicated for a seamless loop
+    rows[i].style.animationDuration = Math.max(28, set.length*9) + 's';
+  });
 }
 tabs.addEventListener('click', function(e){
   var b = e.target.closest('.cat-tab'); if(!b) return;
   active = b.dataset.cat; renderTabs(); renderGrid();
 });
-grid.addEventListener('click', function(e){
+document.getElementById('courses').addEventListener('click', function(e){
   var a = e.target.closest('[data-pick]'); if(!a) return;
   document.getElementById('rCourse').value = a.dataset.pick;
 });

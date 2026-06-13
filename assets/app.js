@@ -30,12 +30,18 @@ window.MS = (function () {
           blurb: "Spreadsheets, SQL, Python and live dashboards with a free toolkit — ending in the NaijaSales capstone: an insight memo and dashboard, with full training pages inside." },
         { slug: "data-scientist",      name: "Data Scientist", courses: "12 guided parts", duration: "14–18 weeks", featured: true, training: "training/datascientist/index.html",
           blurb: "Python, honest statistics, machine learning and a served prediction API — ending in the ChurnGuard capstone with an executive report, with full training pages inside." },
-        { slug: "ml-engineer",         name: "Machine Learning Engineer", courses: "14 courses", duration: "14–18 weeks" },
-        { slug: "cybersecurity-analyst", name: "Cybersecurity Analyst", courses: "10 courses", duration: "10–14 weeks" },
-        { slug: "cloud-architect",     name: "Cloud Architect (AWS/Azure)", courses: "8 courses", duration: "8–12 weeks" },
-        { slug: "devops-engineer",     name: "DevOps Engineer", courses: "10 courses", duration: "10–14 weeks" },
-        { slug: "sdet",                name: "SDET (Software Dev Engineer in Test)", courses: "8 courses", duration: "8–10 weeks" },
-        { slug: "database-admin",      name: "Database Administrator", courses: "7 courses", duration: "6–10 weeks" }
+        { slug: "ml-engineer",         name: "Machine Learning Engineer", courses: "12 guided parts", duration: "14–18 weeks", featured: true, training: "training/mlengineer/index.html",
+          blurb: "Python, model evaluation, leak-free pipelines, FastAPI serving and MLOps — ending in the FraudWatch fraud-detection system with a live API, with full training pages inside." },
+        { slug: "cybersecurity-analyst", name: "Cybersecurity Analyst", courses: "12 guided parts", duration: "10–14 weeks", featured: true, training: "training/cybersecurity/index.html",
+          blurb: "Networks, threats, layered defences, log detection and incident response — ending in the SOC-in-a-Box detection lab, all on systems you own, with full training pages inside." },
+        { slug: "cloud-architect",     name: "Cloud Architect (AWS/Azure)", courses: "12 guided parts", duration: "8–12 weeks", featured: true, training: "training/cloud/index.html",
+          blurb: "Compute, VPC networking, IAM, reliability, cost engineering and Terraform — ending in the SokoCloud architecture pack, AWS-first with Azure equivalents, with full training pages inside." },
+        { slug: "devops-engineer",     name: "DevOps Engineer", courses: "12 guided parts", duration: "10–14 weeks", featured: true, training: "training/devops/index.html",
+          blurb: "Linux, Git, Docker, CI/CD, orchestration, Terraform and monitoring — ending in the ShipIt pipeline from a Git push to a running, monitored deployment, with full training pages inside." },
+        { slug: "sdet",                name: "SDET (Software Dev Engineer in Test)", courses: "12 guided parts", duration: "8–10 weeks", featured: true, training: "training/sdet/index.html",
+          blurb: "Test design, pytest, API and Playwright browser automation, CI gates and performance testing — ending in the TestGuard multi-layer suite, with full training pages inside." },
+        { slug: "database-admin",      name: "Database Administrator", courses: "12 guided parts", duration: "6–10 weeks", featured: true, training: "training/dba/index.html",
+          blurb: "SQL, schema design, transactions, indexing, security and the sacred backup-and-recovery drill — ending in the DataVault production database, PostgreSQL throughout, with full training pages inside." }
       ]
     },
     {
@@ -98,6 +104,258 @@ window.MS = (function () {
      Software Development syllabus is extracted directly from the
      JavaScript-HTML Developer Training Guide (Parts 0–9 + appendices). */
   const SYLLABI = {
+    "ml-engineer": {
+      title: "Machine Learning Engineer",
+      subtitle: "The complete ML engineering training \u2014 Python, models, pipelines, serving and MLOps. Recommended duration: 14\u201318 weeks.",
+      training: "training/mlengineer/index.html",
+      roadmap: [
+        ["Weeks 1\u20133", "Part 1 \u00b7 Python Foundations", "Logic, functions, lists, dicts", "Transaction-rules engine CLI"],
+        ["Weeks 3\u20135", "Part 2 \u00b7 NumPy & pandas", "Arrays, DataFrames, groupby", "Fraud dataset sliced and described"],
+        ["Weeks 5\u20137", "Part 3 \u00b7 ML Core", "Splits, baselines, recall vs precision", "First model beats the baseline"],
+        ["Weeks 7\u20139", "Part 4 \u00b7 Winning Models", "Forests, boosting, overfitting, CV", "Tuned model with \u00b1 bounds"],
+        ["Weeks 9\u201310", "Part 5 \u00b7 Features & Pipelines", "sklearn Pipeline, leakage audits", "Raw row in, prediction out"],
+        ["Weeks 10\u201312", "Part 6 \u00b7 Serving", "joblib, FastAPI, batch scoring", "Live /predict answering curl"],
+        ["Weeks 12\u201313", "Part 7 \u00b7 MLOps", "Experiment logs, monitoring, drift", "A model that reports its health"],
+        ["Weeks 13\u201314", "Part 8 \u00b7 Deep Learning & LLMs", "When neural nets fit; LLM APIs", "An embedding-powered feature"],
+        ["Weeks 14\u201316", "Part 9 \u00b7 Capstone & Career", "FraudWatch end-to-end", "Repo + API + monitoring + report"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What an ML Engineer Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (14\u201318 Weeks)", "0.4 Set Up Your Workstation (Practical)"] },
+        { title: "Part 1 \u2014 Python Foundations: Thinking in Code",
+          items: ["1.1 Variables, Decisions, Loops", "1.2 Functions and the Shapes of Records", "1.3 Checkpoint Project: The Rules Engine"] },
+        { title: "Part 2 \u2014 NumPy & pandas: The Workbench",
+          items: ["2.1 Generate the Course Dataset (Practical)", "2.2 Slice, Group, Describe (Practical)", "2.3 Checkpoint Project: The Dataset Brief"] },
+        { title: "Part 3 \u2014 ML Core: Honest Models From Day One",
+          items: ["3.1 The Split, the Baseline, the First Model (Practical)", "3.2 Thresholds: Where Engineering Meets Money (Practical)", "3.3 Checkpoint Project: The Threshold Memo"] },
+        { title: "Part 4 \u2014 Models That Win on Tabular Data",
+          items: ["4.1 Forests and Gradient Boosting (Practical)", "4.2 Overfitting, Caught Red-Handed (Practical)", "4.3 Checkpoint Project: The Contender Report"] },
+        { title: "Part 5 \u2014 Features & Pipelines: One Object, No Leaks",
+          items: ["5.1 Features: Where Skill Lives (Practical)", "5.2 The Pipeline: Training and Serving, Identical (Practical)", "5.3 Checkpoint Project: The Leak-Audited Pipeline"] },
+        { title: "Part 6 \u2014 Serving: The Model Gets a Phone Number",
+          items: ["6.1 The Real-Time API (Practical)", "6.2 Batch Scoring: The Morning File (Practical)", "6.3 Checkpoint Project: FraudWatch Serving"] },
+        { title: "Part 7 \u2014 MLOps: Models That Report Their Own Health",
+          items: ["7.1 Experiment Tracking, Minimum Honest Version (Practical)", "7.2 Drift: The World Moves, Models Don't (Practical)", "7.3 Checkpoint Project: The Operations Page"] },
+        { title: "Part 8 \u2014 Deep Learning & LLMs: The Honest Map",
+          items: ["8.1 When Neural Networks Earn Their Cost", "8.2 LLMs as Components: Text Becomes Features (Practical)", "8.3 Checkpoint Project: The Buy/Build/Skip Memo"] },
+        { title: "Part 9 \u2014 The Capstone & Your Career: FraudWatch, Shipped",
+          items: ["9.1 THE CAPSTONE: FraudWatch, Assembled", "9.2 The Job Hunt: An Engineer With Receipts"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 scikit-learn on One Page", "A.2 Metrics & Money on One Page", "A.3 The Production Checklist"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
+    "cybersecurity-analyst": {
+      title: "Cybersecurity Analyst",
+      subtitle: "The complete blue-team training \u2014 networks, threats, defences, detection and incident response. Recommended duration: 10\u201314 weeks.",
+      training: "training/cybersecurity/index.html",
+      roadmap: [
+        ["Weeks 1\u20132", "Part 1 \u00b7 How Networks Work", "IP, ports, DNS, TLS, packets", "A connection narrated end to end"],
+        ["Weeks 2\u20133", "Part 2 \u00b7 The Analyst's Terminal", "Shell fluency, pipes, permissions", "Five-minute shell drill passed"],
+        ["Weeks 3\u20134", "Part 3 \u00b7 Know Your Enemy", "Malware, phishing, social engineering", "A phishing email dissected"],
+        ["Weeks 4\u20136", "Part 4 \u00b7 Defences That Work", "CIA triad, auth, hardening", "Your machine hardened, with proof"],
+        ["Weeks 6\u20137", "Part 5 \u00b7 Web Attacks & OWASP", "SQLi and XSS on your own toy app", "Both performed, then patched"],
+        ["Weeks 7\u20139", "Part 6 \u00b7 Logs & Detection", "Log anatomy, a Python detector", "Detector catches the attack"],
+        ["Weeks 9\u201310", "Part 7 \u00b7 Incident Response", "NIST cycle, playbooks, evidence", "A playbook + tabletop run"],
+        ["Weeks 10\u201311", "Part 8 \u00b7 The Analyst's Toolbox", "Wireshark, MITRE ATT&CK, hashes", "An attack mapped to ATT&CK"],
+        ["Weeks 11\u201312", "Part 9 \u00b7 Capstone & Career", "SOC-in-a-Box end to end", "Detection lab + incident report"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What a Cybersecurity Analyst Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (10\u201314 Weeks)", "0.4 Set Up Your Lab (Practical)"] },
+        { title: "Part 1 \u2014 How Networks Actually Work",
+          items: ["1.1 Addresses, Ports, and the Postal System", "1.2 DNS and TLS: The Phone Book and the Sealed Envelope", "1.3 Ports In Practice (Practical)"] },
+        { title: "Part 2 \u2014 The Analyst's Terminal: Living in the Shell",
+          items: ["2.1 The Commands of the Trade (Practical)", "2.2 Permissions: The First Access Control", "2.3 Checkpoint Project: The Shell Drill"] },
+        { title: "Part 3 \u2014 Know Your Enemy: The Threat Landscape",
+          items: ["3.1 The Malware Family Album", "3.2 Phishing: Anatomy of the Hook (Practical)", "3.3 Checkpoint Project: The Threat Briefing"] },
+        { title: "Part 4 \u2014 Defences That Work: CIA, Auth & Hardening",
+          items: ["4.1 The Triad and the Layers", "4.2 Authentication: Passwords, Hashes, MFA (Practical)", "4.3 Least Privilege and the Hardening Checklist (Practical)"] },
+        { title: "Part 5 \u2014 Web Attacks: OWASP on Your Own Toy App",
+          items: ["5.1 Build the Victim (Practical)", "5.2 Attack One: SQL Injection (Practical)", "5.3 Attack Two: Cross-Site Scripting (Practical)"] },
+        { title: "Part 6 \u2014 Logs & Detection: Reading the Black Box",
+          items: ["6.1 Generate Realistic Logs (Practical)", "6.2 Triage With the Shell, Then Detect With Python (Practical)"] },
+        { title: "Part 7 \u2014 Incident Response: When the Alarm Is Real",
+          items: ["7.1 The NIST Cycle", "7.2 Write the Playbook, Then Run the Tabletop (Practical)"] },
+        { title: "Part 8 \u2014 The Analyst's Toolbox: Wireshark, ATT&CK & Scanning",
+          items: ["8.1 Wireshark: Seeing the Packets (Practical)", "8.2 MITRE ATT&CK: The Common Language (Practical)", "8.3 Vulnerability Scanning and File Hashes (Practical)"] },
+        { title: "Part 9 \u2014 Capstone & Career: SOC-in-a-Box",
+          items: ["9.1 THE CAPSTONE: SOC-in-a-Box", "9.2 The Job Hunt: Certifications and the Analyst Path"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 The Investigation Shell on One Page", "A.2 Ports, Protocols & Red Flags", "A.3 Phishing Checklist & IR Cycle"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
+    "cloud-architect": {
+      title: "Cloud Architect (AWS/Azure)",
+      subtitle: "The complete cloud architecture training \u2014 networking, security, reliability, cost and IaC. Recommended duration: 8\u201312 weeks.",
+      training: "training/cloud/index.html",
+      roadmap: [
+        ["Week 1", "Part 1 \u00b7 Fundamentals", "Service models, regions, responsibility", "Account secured, budget alarm live"],
+        ["Weeks 1\u20132", "Part 2 \u00b7 Compute", "VMs, containers, serverless", "A function answering the internet"],
+        ["Weeks 2\u20134", "Part 3 \u00b7 Networking", "VPCs, subnets, security groups, LBs", "A private network you designed"],
+        ["Weeks 4\u20135", "Part 4 \u00b7 Storage & Databases", "Object/block storage, SQL vs NoSQL", "Static site on object storage, live"],
+        ["Weeks 5\u20136", "Part 5 \u00b7 Identity & Security", "IAM, least privilege, encryption", "A least-privilege policy you wrote"],
+        ["Weeks 6\u20137", "Part 6 \u00b7 Reliability & Scale", "AZs, auto-scaling, Well-Architected", "An HA design surviving a zone loss"],
+        ["Weeks 7\u20138", "Part 7 \u00b7 Cost Engineering", "Pricing models, estimation, levers", "A capstone cost model in naira"],
+        ["Weeks 8\u20139", "Part 8 \u00b7 Infrastructure as Code", "Terraform basics, plan/apply/destroy", "Infra defined in a file, deployed"],
+        ["Weeks 9\u201310", "Part 9 \u00b7 Capstone & Career", "SokoCloud designed and partly built", "Architecture pack + cert plan"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What a Cloud Architect Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (8\u201312 Weeks)", "0.4 Set Up a SAFE Account (Practical)"] },
+        { title: "Part 1 \u2014 Cloud Fundamentals: The Mental Model",
+          items: ["1.1 Service Models: Pizza as a Service", "1.2 Regions, Zones, and the Shared-Responsibility Line", "1.3 Console and CLI (Practical)"] },
+        { title: "Part 2 \u2014 Compute: VMs, Containers & Serverless",
+          items: ["2.1 The Three Ways to Run Code", "2.2 Serverless in Five Minutes (Practical)", "2.3 Checkpoint Project: The Compute Decision"] },
+        { title: "Part 3 \u2014 Networking: Building Private Cities",
+          items: ["3.1 The VPC: Your Own Private City", "3.2 Security Groups: Per-Resource Firewalls", "3.3 NAT and Load Balancers"] },
+        { title: "Part 4 \u2014 Storage & Databases in the Cloud",
+          items: ["4.1 The Storage Types", "4.2 Host a Site on Object Storage (Practical)", "4.3 Managed Databases: SQL vs NoSQL, Cloud Edition"] },
+        { title: "Part 5 \u2014 Identity & Security: Who Can Do What",
+          items: ["5.1 IAM: The Cloud's Master Lock", "5.2 Read and Write a Policy (Practical)", "5.3 Encryption and Secrets"] },
+        { title: "Part 6 \u2014 Reliability & Scale: Designs That Don't Fall Over",
+          items: ["6.1 High Availability: Survive the Failure", "6.2 Auto-Scaling and Statelessness", "6.3 The Well-Architected Lens"] },
+        { title: "Part 7 \u2014 Cost Engineering: Architecting for the Bill",
+          items: ["7.1 Why Cost Is an Architecture Decision", "7.2 Estimate Before You Build (Practical)", "7.3 Checkpoint Project: The Cost Model"] },
+        { title: "Part 8 \u2014 Infrastructure as Code: Architecture You Can Replay",
+          items: ["8.1 Why Code Beats Clicking", "8.2 Terraform in One Sitting (Practical)"] },
+        { title: "Part 9 \u2014 Capstone & Career: SokoCloud",
+          items: ["9.1 THE CAPSTONE: SokoCloud Architecture Pack", "9.2 The Job Hunt: Certifications and the Architect Path"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 AWS \u2194 Azure Service Map", "A.2 The Architect's Design Checklist", "A.3 Safety & CLI on One Page"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
+    "devops-engineer": {
+      title: "DevOps Engineer",
+      subtitle: "The complete DevOps training \u2014 Linux, Git, Docker, CI/CD, orchestration, IaC and monitoring. Recommended duration: 10\u201314 weeks.",
+      training: "training/devops/index.html",
+      roadmap: [
+        ["Weeks 1\u20132", "Part 1 \u00b7 Linux & the Shell", "Files, processes, pipes, ssh", "Comfortable operating a server"],
+        ["Weeks 2\u20133", "Part 2 \u00b7 Git & Collaboration", "Branches, PRs, the team workflow", "A reviewed, merged pull request"],
+        ["Weeks 3\u20135", "Part 3 \u00b7 Containers (Docker)", "Images, Dockerfiles, registries", "An app containerised and shared"],
+        ["Weeks 5\u20136", "Part 4 \u00b7 CI/CD", "Automated test, build, deploy", "Green pipeline on a real repo"],
+        ["Weeks 6\u20137", "Part 5 \u00b7 Orchestration", "Compose now, Kubernetes concepts", "A multi-container app, one command"],
+        ["Weeks 7\u20138", "Part 6 \u00b7 Infrastructure as Code", "Terraform, servers from a file", "A server born from code"],
+        ["Weeks 8\u201310", "Part 7 \u00b7 Monitoring & Logging", "Metrics, the golden signals, alerts", "A dashboard + a meaningful alert"],
+        ["Weeks 10\u201311", "Part 8 \u00b7 Reliability & Security", "SRE, secrets, DevSecOps, rollback", "An incident handled by playbook"],
+        ["Weeks 11\u201312", "Part 9 \u00b7 Capstone & Career", "ShipIt pipeline end to end", "Full pipeline + portfolio"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What a DevOps Engineer Actually Does", "0.2 The Culture and the Golden Rules", "0.3 The Recommended Roadmap (10\u201314 Weeks)", "0.4 Set Up Your Toolkit (Practical)"] },
+        { title: "Part 1 \u2014 Linux & the Shell: Operating the Machine",
+          items: ["1.1 The Commands DevOps Lives In (Practical)", "1.2 Processes, Environment, and SSH"] },
+        { title: "Part 2 \u2014 Git & Collaboration: How Teams Ship Together",
+          items: ["2.1 The Daily Git Loop (Practical)", "2.2 Branches and Pull Requests: The Team Workflow"] },
+        { title: "Part 3 \u2014 Containers: Build Once, Run Anywhere",
+          items: ["3.1 Why Containers Changed Everything", "3.2 Containerise ShipIt (Practical)", "3.3 Registries: Sharing Images"] },
+        { title: "Part 4 \u2014 CI/CD: The Automated Path to Production",
+          items: ["4.1 What CI/CD Actually Is", "4.2 Your First Pipeline (Practical)", "4.3 Checkpoint Project: The Green Pipeline"] },
+        { title: "Part 5 \u2014 Orchestration: Running Many Containers",
+          items: ["5.1 Compose: The Whole App in One File (Practical)", "5.2 Kubernetes: The Concepts That Matter"] },
+        { title: "Part 6 \u2014 Infrastructure as Code: Servers From a File",
+          items: ["6.1 Why Infrastructure Belongs in Git", "6.2 Terraform in One Sitting (Practical)"] },
+        { title: "Part 7 \u2014 Monitoring & Logging: Watching It All",
+          items: ["7.1 You Can't Run What You Can't See", "7.2 Instrument and Watch ShipIt (Practical)", "7.3 Alerting Without Crying Wolf"] },
+        { title: "Part 8 \u2014 Reliability & Security: SRE and DevSecOps",
+          items: ["8.1 SRE: Reliability as an Engineering Target", "8.2 Secrets and DevSecOps (Practical)", "8.3 Incident Response, Blamelessly"] },
+        { title: "Part 9 \u2014 Capstone & Career: The ShipIt Pipeline",
+          items: ["9.1 THE CAPSTONE: ShipIt, End to End", "9.2 The Job Hunt: Certifications and the DevOps Path"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 Docker & Compose on One Page", "A.2 Git Workflow & CI on One Page", "A.3 Operating & The Golden Signals"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
+    "sdet": {
+      title: "SDET (Software Dev Engineer in Test)",
+      subtitle: "The complete SDET training \u2014 test design, pytest, API and browser automation, CI and performance. Recommended duration: 8\u201310 weeks.",
+      training: "training/sdet/index.html",
+      roadmap: [
+        ["Weeks 1\u20132", "Part 1 \u00b7 Python for Testers", "Logic, functions, the code under test", "A small app worth testing"],
+        ["Weeks 2\u20133", "Part 2 \u00b7 Testing Foundations", "Partitions, boundaries, the pyramid", "Test cases for a feature, by hand"],
+        ["Weeks 3\u20134", "Part 3 \u00b7 Unit Testing", "pytest, assertions, parametrize", "A suite that catches real bugs"],
+        ["Weeks 4\u20135", "Part 4 \u00b7 Coverage & TDD", "Coverage, mocking, test-first", "A feature built test-first"],
+        ["Weeks 5\u20136", "Part 5 \u00b7 API Testing", "status, schema, contract, negatives", "An API suite hammering endpoints"],
+        ["Weeks 6\u20137", "Part 6 \u00b7 Browser Automation", "Playwright, selectors, page objects", "A user journey tested end to end"],
+        ["Week 7", "Part 7 \u00b7 CI & Test Strategy", "Tests on every push, anti-flakiness", "Green suite in a pipeline"],
+        ["Weeks 7\u20138", "Part 8 \u00b7 Performance & Beyond", "Load testing, security, accessibility", "A load test with a verdict"],
+        ["Weeks 8\u20139", "Part 9 \u00b7 Capstone & Career", "TestGuard end to end", "Full suite + CI + portfolio"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What an SDET Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (8\u201310 Weeks)", "0.4 Set Up Your Toolkit (Practical)"] },
+        { title: "Part 1 \u2014 Python for Testers: The Code Under Test",
+          items: ["1.1 Functions, Logic, Data (Practical)", "1.2 The Shapes You'll Assert Against"] },
+        { title: "Part 2 \u2014 Testing Foundations: Thinking Like a Breaker",
+          items: ["2.1 The Tester's Mindset", "2.2 Designing Cases: Partitions and Boundaries (Practical)", "2.3 The Testing Pyramid"] },
+        { title: "Part 3 \u2014 Unit Testing: Your First Automated Net",
+          items: ["3.1 pytest: Arrange, Act, Assert (Practical)", "3.2 Parametrize: Many Cases, One Test (Practical)", "3.3 Checkpoint Project: The Unit Suite"] },
+        { title: "Part 4 \u2014 Coverage, Mocking & TDD",
+          items: ["4.1 Coverage: A Map, Not a Trophy (Practical)", "4.2 Mocking: Testing in Isolation (Practical)", "4.3 TDD: Tests First (Practical)"] },
+        { title: "Part 5 \u2014 API Testing: Hammering the Endpoints",
+          items: ["5.1 HTTP and the requests Library (Practical)", "5.2 Contract and Negative Testing"] },
+        { title: "Part 6 \u2014 Browser Automation: Testing Like a User",
+          items: ["6.1 Drive a Real Browser (Practical)", "6.2 Robust Selectors and Page Objects"] },
+        { title: "Part 7 \u2014 CI & Test Strategy: Tests on Every Push",
+          items: ["7.1 The Suite in the Pipeline (Practical)", "7.2 Flakiness: The Tester's Plague", "7.3 Checkpoint Project: The Strategy Note"] },
+        { title: "Part 8 \u2014 Performance & Beyond: The Other Qualities",
+          items: ["8.1 Load Testing: Does It Hold Up? (Practical)", "8.2 Security and Accessibility Testing"] },
+        { title: "Part 9 \u2014 Capstone & Career: TestGuard",
+          items: ["9.1 THE CAPSTONE: TestGuard", "9.2 The Job Hunt: The SDET Path"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 pytest on One Page", "A.2 API & Browser on One Page", "A.3 Test Design & The Pyramid"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
+    "database-admin": {
+      title: "Database Administrator",
+      subtitle: "The complete DBA training \u2014 SQL, schema design, transactions, indexing, security and backup/recovery. Recommended duration: 6\u201310 weeks.",
+      training: "training/dba/index.html",
+      roadmap: [
+        ["Week 1", "Part 1 \u00b7 Foundations", "Relational model, PostgreSQL, keys", "Database created, first table"],
+        ["Weeks 1\u20132", "Part 2 \u00b7 SQL That Answers", "SELECT, GROUP BY, JOINs", "Ten business questions answered"],
+        ["Weeks 2\u20133", "Part 3 \u00b7 Schema Design", "Types, constraints, normalisation", "A clean multi-table schema"],
+        ["Weeks 3\u20134", "Part 4 \u00b7 Data Integrity", "Transactions, ACID, foreign keys", "Money moved safely under failure"],
+        ["Weeks 4\u20135", "Part 5 \u00b7 Performance", "EXPLAIN, indexes, query tuning", "A slow query made fast, measured"],
+        ["Weeks 5\u20136", "Part 6 \u00b7 Security & Access", "Roles, privileges, injection defence", "A least-privilege access model"],
+        ["Weeks 6\u20137", "Part 7 \u00b7 Backup & Recovery", "Dumps, PITR, the restore drill", "A proven, tested restore"],
+        ["Week 7", "Part 8 \u00b7 Operations", "Maintenance, vacuum, replication", "A health-check routine"],
+        ["Weeks 7\u20138", "Part 9 \u00b7 Capstone & Career", "DataVault end to end", "Full database + runbook + portfolio"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What a Database Administrator Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (6\u201310 Weeks)", "0.4 Install PostgreSQL (Practical)"] },
+        { title: "Part 1 \u2014 Foundations: The Relational Model",
+          items: ["1.1 Why Tables and Relationships", "1.2 Keys: How Rows Are Identified and Linked (Practical)"] },
+        { title: "Part 2 \u2014 SQL That Answers Questions",
+          items: ["2.1 Selecting, Filtering, Sorting (Practical)", "2.2 Aggregation and JOINs (Practical)"] },
+        { title: "Part 3 \u2014 Schema Design: Building It Right",
+          items: ["3.1 Choosing Types and Constraints", "3.2 Normalisation: Store Each Fact Once"] },
+        { title: "Part 4 \u2014 Data Integrity: Transactions & ACID",
+          items: ["4.1 Transactions: All or Nothing (Practical)", "4.2 ACID and Foreign-Key Actions"] },
+        { title: "Part 5 \u2014 Performance & Indexing: Making It Fast",
+          items: ["5.1 EXPLAIN: How the Database Thinks (Practical)", "5.2 Indexes: The Cure and Its Cost (Practical)"] },
+        { title: "Part 6 \u2014 Security & Access Control",
+          items: ["6.1 Roles and Least Privilege (Practical)", "6.2 Encryption and SQL Injection Defence"] },
+        { title: "Part 7 \u2014 Backup & Recovery: The DBA's Sacred Duty",
+          items: ["7.1 Backups: The Reason DBAs Exist", "7.2 The Restore Drill (Practical)"] },
+        { title: "Part 8 \u2014 Operations & Monitoring: Keeping It Healthy",
+          items: ["8.1 Maintenance and Health Metrics (Practical)", "8.2 Replication and High Availability"] },
+        { title: "Part 9 \u2014 Capstone & Career: DataVault",
+          items: ["9.1 THE CAPSTONE: DataVault", "9.2 The Job Hunt: Certifications and the DBA Path"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 SQL on One Page", "A.2 Schema, Keys & Constraints", "A.3 Transactions, Tuning & Ops"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
     "data-analyst": {
       title: "Data Analyst",
       subtitle: "The complete analyst training \u2014 spreadsheets, SQL, Python and dashboards. Recommended duration: 8\u201312 weeks.",
@@ -661,6 +919,53 @@ window.MS = (function () {
   }
 
   /* ---------- PWA ---------- */
+  /* ---------- PWA install prompt ---------- */
+  var deferredInstall = null;
+  function installUI() {
+    if (window.matchMedia("(display-mode: standalone)").matches || navigator.standalone) return;
+    if (localStorage.getItem("ms_install_dismissed") === "1") return;
+    if (document.getElementById("msInstall")) return;
+    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (!deferredInstall && !isIOS) return;
+    var root = location.pathname.indexOf("/training/") !== -1 ? "../../" : "";
+    var bar = document.createElement("div");
+    bar.id = "msInstall";
+    bar.setAttribute("style",
+      "position:fixed;bottom:1.2rem;left:1.2rem;z-index:62;display:flex;align-items:center;gap:.7rem;" +
+      "background:var(--card, #fff);border:1px solid var(--line, #ddd);border-radius:12px;" +
+      "padding:.7rem .9rem;box-shadow:0 12px 32px rgba(0,0,0,.16);max-width:min(330px, calc(100vw - 2.4rem));" +
+      "font-family:'DM Sans',sans-serif;font-size:.84rem;color:var(--ink,#111)");
+    bar.innerHTML =
+      '<img src="' + root + 'assets/logo.svg" alt="" style="height:30px;width:auto">' +
+      (deferredInstall
+        ? '<span style="flex:1">Install <strong>The Mentorine School</strong> app</span>' +
+          '<button id="msInstallGo" style="background:#0d8c4f;color:#fff;border:none;border-radius:8px;padding:.5rem .9rem;cursor:pointer;font-weight:500">Install</button>'
+        : '<span style="flex:1">Install this app: tap <strong>Share</strong> \u2192 <strong>Add to Home Screen</strong></span>') +
+      '<button id="msInstallX" aria-label="Dismiss" style="background:none;border:none;color:inherit;opacity:.55;cursor:pointer;font-size:1rem">\u2715</button>';
+    document.body.appendChild(bar);
+    var go = document.getElementById("msInstallGo");
+    if (go) go.addEventListener("click", function () {
+      deferredInstall.prompt();
+      deferredInstall.userChoice.then(function () { bar.remove(); deferredInstall = null; });
+    });
+    document.getElementById("msInstallX").addEventListener("click", function () {
+      localStorage.setItem("ms_install_dismissed", "1");
+      bar.remove();
+    });
+  }
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredInstall = e;
+    installUI();
+  });
+  window.addEventListener("appinstalled", function () {
+    var bar = document.getElementById("msInstall");
+    if (bar) bar.remove();
+  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function(){ setTimeout(installUI, 2500); });
+  } else { setTimeout(installUI, 2500); }
+
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
       navigator.serviceWorker.register("sw.js").catch(function () {});

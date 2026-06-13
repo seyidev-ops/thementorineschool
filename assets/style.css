@@ -164,3 +164,19 @@ img{max-width:100%}
 .section-head p{color:var(--ink-soft);max-width:56ch;margin-top:.7rem}
 
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+
+/* ---- alive UX: slow tumble on contact ---- */
+.card, .pillar, .price-card, .faq-item, .step{
+  transition: transform .7s cubic-bezier(.22,.61,.36,1), box-shadow .7s;
+}
+.card:hover, .card:active, .pillar:hover, .pillar:active,
+.price-card:hover, .price-card:active, .faq-item:hover, .step:hover{
+  transform: rotate(1.3deg) translateY(-5px);
+  box-shadow: 0 16px 36px rgba(10,10,10,.09);
+}
+.btn:hover, .btn:active{ transform: translateX(6px) rotate(.8deg); }
+.cat-tab{transition:.25s, transform .6s cubic-bezier(.22,.61,.36,1)}
+.cat-tab:hover{transform:rotate(-1.2deg) translateY(-2px)}
+@media (prefers-reduced-motion: reduce){
+  .card:hover,.pillar:hover,.price-card:hover,.faq-item:hover,.step:hover,.btn:hover{transform:none}
+}
