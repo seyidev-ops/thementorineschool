@@ -107,7 +107,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <h2 style="font-size:clamp(1.6rem,4vw,2.2rem)">Locked, but the <em class="ac">syllabi</em> are open.</h2>
       <p>Every other track stays locked until you register for it — but you can study any syllabus before deciding. Track switches are free within your first 14 days.</p>
     </div>
-    <div class="other-grid" id="otherGrid"></div>
+    <div class="other-grid" id="otherGrid" data-live="off"></div>
   </section>
 </main>
 
@@ -182,6 +182,11 @@ else {
         '<a class="link-quiet" href="syllabus.html?course='+t.slug+'">View syllabus</a></div>'+
       '</article>';
     }).join('');
+  // ensure dynamically-injected track cards are visible (not stuck in pre-reveal state)
+  document.querySelectorAll('#otherGrid .card.other').forEach(function(c){
+    c.style.opacity = '1'; c.style.transform = 'none';
+  });
+  if (window.Liveliness && window.Liveliness.refresh) { try { window.Liveliness.refresh(); } catch(e){} }
 
   document.getElementById('logoutBtn').addEventListener('click', function(e){
     e.preventDefault(); MS.logout(); location.href = 'index.html';

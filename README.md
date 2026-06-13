@@ -26,6 +26,9 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `training/community/` | **Community Manager** (recommended 6–8 weeks): community foundations, strategy, onboarding, engagement, moderation, events, voice/crisis and metrics, ending in The Hub community plan. Word: `Community-Manager-Training-Guide.docx` |
 | `training/support/` | **Customer Support Specialist** (recommended 5–8 weeks): the support mindset, communication, the ticket process, channels, de-escalation, troubleshooting, efficiency and metrics, ending in the SupportDesk portfolio. Word: `Customer-Support-Specialist-Training-Guide.docx` |
 | `training/va/` | **Virtual Assistant** (recommended 5–8 weeks): the VA landscape, core admin, communication, tools, research/documents, SOPs, specialising and getting clients, ending in The VA Toolkit. Word: `Virtual-Assistant-Training-Guide.docx` |
+| `training/remotelead/` | **Remote Team Lead** (recommended 6–10 weeks): the remote leadership shift, communication & async, trust & accountability, goals & delegation, meetings, 1:1s & coaching, feedback & hard conversations, culture & wellbeing — ending in The Remote Team Playbook. Word: `Remote-Team-Lead-Training-Guide.docx` |
+| `training/techsupport/` | **Technical Support Specialist** (recommended 6–10 weeks): technical foundations, the troubleshooting method, technical communication, issue categories, tools (incl. dev console), escalation & bug reporting, documentation — ending in The Tech Support Toolkit. Word: `Technical-Support-Specialist-Training-Guide.docx` |
+| `training/execassistant/` | **Executive Assistant (Remote)** (recommended 5–8 weeks): calendar mastery, inbox & communication, prioritisation & gatekeeping, meetings & travel, anticipation, systems & discretion, the operating rhythm — ending in The EA Command Center. Word: `Executive-Assistant-Remote-Training-Guide.docx` |
 | `training/video/` | **Video Editor** (recommended 6–10 weeks): the editor's mindset, the cut and pacing, sound design, colour grading, text and titles, social short-form, long-form storytelling and export, ending in the Lagos Eats package. Word: `Video-Editor-Training-Guide.docx` |
 | `training/threed/` | **3D Artist / Animator** (recommended 12–16 weeks): the 3D world in Blender, modelling, PBR texturing, lighting and rendering, composition, animation, rigging and production, ending in The Still Life scene. Word: `3D-Artist-Animator-Training-Guide.docx` |
 | `training/brand/` | **Brand Identity Designer** (recommended 6–8 weeks): brand strategy, naming and voice, logo systems, colour and type, imagery, applications and brand guidelines, ending in the Terra brand identity. Word: `Brand-Identity-Designer-Training-Guide.docx` |
@@ -100,7 +103,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v13` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v14` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 
