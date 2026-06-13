@@ -104,14 +104,15 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .fg-copy{font-size:.78rem;color:var(--ink-faint)}
 
 /* rolling track cylinders */
-.track-marquee{overflow:hidden;margin-bottom:1.1rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.tm-row{display:flex;gap:1rem;width:max-content;animation:tm-roll 40s linear infinite}
-.tm-row.tm-slow{animation-duration:52s}
-.tm-row:hover{animation-play-state:paused}
-.tm-row .card.track{width:300px;flex:0 0 auto}
-@keyframes tm-roll{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.tm-hint{font-size:.74rem;color:var(--ink-faint);text-align:center;margin-top:.2rem}
-@media (prefers-reduced-motion: reduce){.tm-row{animation:none}}
+/* rolling CATEGORY cylinder (left -> right) */
+.cat-marquee{overflow:hidden;margin-bottom:1.8rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.cm-row{display:flex;gap:.6rem;width:max-content;animation:cm-roll 34s linear infinite}
+.cm-row:hover{animation-play-state:paused}
+.cm-row .cat-tab{flex:0 0 auto;white-space:nowrap}
+@keyframes cm-roll{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+/* static course grid (tumble on hover, but no auto-scroll) */
+.tracks{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.1rem}
+@media (prefers-reduced-motion: reduce){.cm-row{animation:none}}
 </style>
 <script>
   window.LIVELINESS = { accent: "#0D8C4F", distance: 14, duration: 900, stagger: 90 };
@@ -205,10 +206,8 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <h2>Remote-friendly careers, <em class="ac">structured</em> end to end.</h2>
       <p>Every track includes the four pillars plus a Career Path Document and curated course set. Courses unlock when you register — but every syllabus is open. Look before you leap.</p>
     </div>
-    <div class="cat-tabs" id="catTabs" data-live="off"></div>
-    <div class="track-marquee" data-live="off"><div class="tm-row" id="tmRow1"></div></div>
-    <div class="track-marquee" data-live="off"><div class="tm-row tm-slow" id="tmRow2"></div></div>
-    <p class="tm-hint">Hover any card to pause · tap a card to explore its syllabus</p>
+    <div class="cat-marquee" data-live="off"><div class="cm-row" id="catTabs"></div></div>
+    <div class="tracks" id="trackGrid" data-live="off"></div>
     <p style="margin-top:1.6rem;font-size:.88rem;color:var(--ink-faint)">Additional tracks are available — contact our admissions team for a personalised consultation.</p>
   </div>
 </section>
@@ -386,9 +385,10 @@ function lockState(slug){
     : '<span class="badge locked"><span class="lock">🔒</span> Locked</span>';
 }
 function renderTabs(){
-  tabs.innerHTML = MS.CATALOGUE.map(function(c){
+  var html = MS.CATALOGUE.map(function(c){
     return '<button class="cat-tab'+(c.id===active?' active':'')+'" data-cat="'+c.id+'">'+c.label+'</button>';
   }).join('');
+  tabs.innerHTML = html + html;        // duplicated for a seamless rolling loop
 }
 function cardHTML(t){
   var unlocked = MS.isUnlocked(t.slug);
@@ -405,17 +405,8 @@ function cardHTML(t){
 }
 function renderGrid(){
   var cat = MS.CATALOGUE.find(function(c){return c.id===active;});
-  var rows = [document.getElementById('tmRow1'), document.getElementById('tmRow2')];
-  var half = Math.ceil(cat.tracks.length/2);
-  var sets = [cat.tracks.slice(0,half), cat.tracks.slice(half)];
-  // single-row categories: hide the second cylinder
-  rows[1].parentElement.style.display = sets[1].length ? '' : 'none';
-  sets.forEach(function(set, i){
-    if(!set.length) return;
-    var cards = set.map(cardHTML).join('');
-    rows[i].innerHTML = cards + cards;            // duplicated for a seamless loop
-    rows[i].style.animationDuration = Math.max(28, set.length*9) + 's';
-  });
+  document.getElementById('trackGrid').innerHTML = cat.tracks.map(cardHTML).join('');
+  if (window.Liveliness) window.Liveliness.refresh();
 }
 tabs.addEventListener('click', function(e){
   var b = e.target.closest('.cat-tab'); if(!b) return;

@@ -23,6 +23,9 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `training/javascript/` | Full training portal for **JavaScript Developer**: 12 part pages (Part 0–9 + two appendices — HTML, CSS, JS fundamentals, the DOM, async, Node & Express, databases & the full-stack capstone, cross-language integration, professional practice) generated from the official Word training guide |
 | `training/fullstack/` | Full training portal for **Full-stack Developer**: 12 part pages building MentorMarket end to end — storefront, API, database, React, auth across the stack, dual deployment. Original guide; Word document: `Full-Stack-Developer-Training-Guide.docx` |
 | `training/mobile/` | Full training portal for **Mobile App Developer (iOS/Android)**: 12 part pages with React Native + Expo — first app on your own phone, screens, navigation, device powers, live data, auth, EAS builds and the CampusMart capstone. Original guide; Word document: `Mobile-App-Developer-Training-Guide.docx` |
+| `training/productdesign/` | **Product Designer (UI/UX)** (recommended 10–14 weeks): design thinking, UX research, IA, visual design, Figma, design systems, prototyping and usability testing, ending in the NaijaPay case study. Word: `Product-Designer-UIUX-Training-Guide.docx` |
+| `training/graphic/` | **Graphic Designer** (recommended 10–12 weeks): principles, colour, typography, layout, logos, brand identity, marketing design and brand guidelines, ending in the Zuri Foods brand kit. Word: `Graphic-Designer-Training-Guide.docx` |
+| `training/motion/` | **Motion Graphics Designer** (recommended 8–12 weeks): design for motion, animation principles, keyframing, animated logos, kinetic type, explainers, sound and social motion, ending in the Pulse package. Word: `Motion-Graphics-Designer-Training-Guide.docx` |
 | `training/mlengineer/` | **Machine Learning Engineer** (recommended 14–18 weeks): Python, model evaluation, leak-free pipelines, FastAPI serving, MLOps and drift, ending in the FraudWatch system. Word: `Machine-Learning-Engineer-Training-Guide.docx` |
 | `training/cybersecurity/` | **Cybersecurity Analyst** (recommended 10–14 weeks): networks, threats, defences, web attacks, log detection and incident response, ending in SOC-in-a-Box. Word: `Cybersecurity-Analyst-Training-Guide.docx` |
 | `training/cloud/` | **Cloud Architect (AWS/Azure)** (recommended 8–12 weeks): compute, VPC networking, IAM, reliability, cost and Terraform, ending in the SokoCloud architecture pack. Word: `Cloud-Architect-Training-Guide.docx` |
@@ -41,7 +44,7 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 - **Progress mapping.** Visiting a training part records it automatically; the training index paints ✓ ticks and a progress bar over the curriculum map, mirrored on the student dashboard and visible to admins.
 - **Real curricula.** Front-end, Back-end, JavaScript Developer and both Software Development tracks carry their full curricula from the official training guides; Front-end, Back-end, JavaScript, Full-stack, Mobile and SD-Full all ship complete in-site training portals — fourteen gated portals across the full tech catalogue.
 - **Durations are recommendations.** Every course displays its *recommended completion window* (e.g. Full-stack 12–16 weeks, Mobile 10–14 weeks), not a fixed length — study plans pace the content, but checkpoints, not the calendar, measure completion. New courses follow the same convention.
-- **Live UX.** Career & skill tracks render as two auto-rolling marquee cylinders (left→right, hover-to-pause); cards, pillars, price cards and buttons perform a slow tumble on hover/touch; all motion honours `prefers-reduced-motion`.
+- **Live UX.** The category tabs (Tech & Development, Design & Creative, …) render as a single auto-rolling marquee cylinder (left→right, hover-to-pause); the course cards sit in a static responsive grid; cards, pillars, price cards and buttons perform a slow tumble on hover/touch; all motion honours `prefers-reduced-motion`.
 - **Installable PWA.** A self-initializing install prompt (`installUI()` in app.js) appears site-wide — a native install button where the browser supports `beforeinstallprompt`, and an iOS Add-to-Home-Screen hint otherwise; dismissable, and suppressed once installed. `manifest.json` is linked on every page.
 - **Copyright.** Every page carries the footer notice: © 2026 Mentorine School by Ona Services Ltd. All rights reserved.
 - **WhatsApp admissions chat.** The floating ✆ button opens four quick questions (registration/payment, track choice, access code, installments); choosing one copies it and opens the admissions WhatsApp line (`wa.me/message/OF4HWNSJM6ZTK1`).
@@ -91,7 +94,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v10` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v11` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 
