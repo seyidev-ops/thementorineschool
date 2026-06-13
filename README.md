@@ -35,6 +35,9 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `training/socialmedia/` | **Social Media Manager** (recommended 6–9 weeks): strategy, platforms & voice, content, the calendar, engagement, growth, campaigns, analytics — ending in The Social Playbook. Word: `Social-Media-Manager-Training-Guide.docx` |
 | `training/emailmarketing/` | **Email Marketing Specialist** (recommended 5–8 weeks): list building, writing, automation, campaigns, segmentation, deliverability, analytics — ending in The Email Engine. Word: `Email-Marketing-Specialist-Training-Guide.docx` |
 | `training/copywriter/` | **Copywriter** (recommended 6–9 weeks): research, headlines, persuasion, frameworks, sales pages, multi-format copy, editing — ending in The Copy Portfolio. Word: `Copywriter-Training-Guide.docx` |
+| `training/projectmanager/` | **Project Manager** (recommended 8–12 weeks): triple constraint, charter, scope & WBS, scheduling, budget, risk, stakeholders, execution, methodologies — ending in The Project Playbook. Word: `Project-Manager-Training-Guide.docx` |
+| `training/productmanager/` | **Product Manager** (recommended 8–12 weeks): the three lenses, user research, vision & strategy, prioritisation, requirements, Agile, metrics, roadmaps — ending in The Product Kit. Word: `Product-Manager-Training-Guide.docx` |
+| `training/businessanalyst/` | **Business Analyst** (recommended 7–11 weeks): the bridge role, problem & stakeholders, elicitation, process modelling, requirements, solutions, data, validation — ending in The BA Toolkit. Word: `Business-Analyst-Training-Guide.docx` |
 | `training/video/` | **Video Editor** (recommended 6–10 weeks): the editor's mindset, the cut and pacing, sound design, colour grading, text and titles, social short-form, long-form storytelling and export, ending in the Lagos Eats package. Word: `Video-Editor-Training-Guide.docx` |
 | `training/threed/` | **3D Artist / Animator** (recommended 12–16 weeks): the 3D world in Blender, modelling, PBR texturing, lighting and rendering, composition, animation, rigging and production, ending in The Still Life scene. Word: `3D-Artist-Animator-Training-Guide.docx` |
 | `training/brand/` | **Brand Identity Designer** (recommended 6–8 weeks): brand strategy, naming and voice, logo systems, colour and type, imagery, applications and brand guidelines, ending in the Terra brand identity. Word: `Brand-Identity-Designer-Training-Guide.docx` |
@@ -109,7 +112,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v16` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v17` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 

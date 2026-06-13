@@ -77,8 +77,29 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .tier .for{font-size:.88rem;color:var(--ink-soft);margin:.5rem 0 1.1rem}
 .tier.hl{border-color:color-mix(in srgb, var(--accent) 50%, transparent)}
 .tier .pick{margin-top:auto}
-.standalone{margin-top:1rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
-.standalone .was{color:var(--ink-faint);text-decoration:line-through;font-weight:300;font-size:.9em}
+/* persuasive standalone CTA */
+.standalone-cta{margin-top:1.6rem;position:relative;border:1.5px solid var(--accent);border-radius:var(--r-lg,16px);
+  background:linear-gradient(160deg,var(--paper) 0%,var(--paper-2) 100%);overflow:hidden;box-shadow:0 18px 44px rgba(13,140,79,.10)}
+.sa-badge{position:absolute;top:0;right:0;background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;padding:.4rem .9rem;border-bottom-left-radius:12px}
+.sa-body{display:grid;grid-template-columns:1.7fr 1fr;gap:clamp(1.5rem,4vw,3rem);padding:clamp(1.6rem,4vw,2.6rem)}
+@media(max-width:760px){.sa-body{grid-template-columns:1fr;gap:1.6rem}}
+.sa-kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.sa-title{font-family:'Fraunces',serif;font-size:clamp(1.4rem,3.2vw,2rem);font-weight:500;line-height:1.15;margin:.5rem 0 .7rem}
+.sa-sub{color:var(--ink-soft);margin-bottom:1rem;max-width:52ch}
+.sa-points{list-style:none;margin:0 0 1rem;padding:0}
+.sa-points li{position:relative;padding:.35rem 0 .35rem 1.6rem;font-size:.92rem;color:var(--ink)}
+.sa-points li::before{content:"\2713";position:absolute;left:0;color:var(--accent);font-weight:700}
+.sa-fine{font-size:.78rem;color:var(--ink-faint);max-width:52ch}
+.sa-right{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:1.2rem;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);gap:.25rem}
+@media(max-width:760px){.sa-right{align-items:center;text-align:center}}
+.sa-price-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.sa-price{font-family:'Fraunces',serif;font-size:clamp(2.4rem,6vw,3.2rem);font-weight:500;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
+.sa-was{color:var(--ink-faint);text-decoration:line-through;font-size:1.05rem;font-weight:300;font-variant-numeric:tabular-nums}
+.sa-per{font-size:.82rem;color:var(--ink-soft);margin-bottom:.8rem}
+.sa-btn{width:100%;justify-content:center;margin:.2rem 0 .6rem}
+.sa-urgency{font-size:.74rem;color:var(--accent);font-weight:500}
 /* introductory-pricing countdown */
 .countdown{margin:1.4rem 0 .4rem;display:flex;flex-direction:column;align-items:center;gap:.55rem;text-align:center}
 .cd-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
@@ -96,7 +117,6 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .pay-grid > div{display:flex;flex-direction:column;gap:.2rem;padding:.7rem .9rem;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-sm)}
 .pay-k{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
 .pay-v{font-size:1rem;font-weight:500;font-variant-numeric:tabular-nums}
-.standalone p{font-size:.9rem;color:var(--ink-soft);max-width:52ch}
 
 /* faq */
 .faq details{border-bottom:1px solid var(--line-soft);padding:1rem 0}
@@ -301,9 +321,30 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
         <a class="link-quiet pick" href="register.html?plan=1yr">Choose this plan</a>
       </div>
     </div>
-    <div class="card standalone">
-      <p><strong>Standalone option — ₦50,000 <span class="was">₦150,000</span> / career track (30 days).</strong> Prefer your own pace? Get the Career Path Document and all curated courses for one track, self-study format — no community access or certificate. <em>Introductory price until the countdown ends.</em></p>
-      <a class="link-quiet" href="register.html?plan=standalone">Register standalone</a>
+    <div class="standalone-cta" id="standalone" data-live="off">
+      <div class="sa-badge">Most affordable way in &middot; 67% off</div>
+      <div class="sa-body">
+        <div class="sa-left">
+          <span class="sa-kicker">Standalone Track &middot; Self-Study</span>
+          <h3 class="sa-title">Start a whole career track for the price of a night out.</h3>
+          <p class="sa-sub">Not ready for the full programme? Get a complete Career &amp; Skill Track on your own schedule &mdash; the full Career Path Document plus every curated course for that track, yours for 30 days.</p>
+          <ul class="sa-points">
+            <li>The complete Career Path Document for your chosen track</li>
+            <li>Every curated course &amp; lesson in that track</li>
+            <li>Learn at your own pace, anytime, from anywhere</li>
+            <li>Instant access &mdash; pay, send proof, start today</li>
+          </ul>
+          <p class="sa-fine">Self-study format. Community access and the verified certificate are part of the full programme tiers above.</p>
+        </div>
+        <div class="sa-right">
+          <span class="sa-price-label">Introductory price</span>
+          <span class="sa-price">&#8358;50,000</span>
+          <span class="sa-was">&#8358;150,000</span>
+          <span class="sa-per">per track &middot; 30 days</span>
+          <a class="btn sa-btn" href="register.html?plan=standalone">Start a track for &#8358;50,000 <span class="arr">&rarr;</span></a>
+          <span class="sa-urgency">Introductory price ends with the countdown above</span>
+        </div>
+      </div>
     </div>
     <div class="card pay-details" id="payDetails" data-live="off">
       <div class="kicker">How to pay &amp; get your access code</div>
