@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Here — No-Code Developer · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Start Here — No-Code Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og-image.png">
+<script>/* theme bootstrap: system default, no flash */
+(function(){var m=localStorage.getItem("ms_theme")||"system";
+var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
+document.documentElement.setAttribute("data-theme",r);})();</script>
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og-image.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Mentorine brand override — green accent, house fonts, stacked wordmark */
+:root{--accent:#0D8C4F;--accent-h:#0A6F3F;--brand-navy:#305D85;
+  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans','Segoe UI',Calibri,sans-serif;}
+[data-theme="night"]{--accent:#2FB36B;--accent-h:#4CC684;--brand-navy:#8FB3D4;}
+.brand{display:flex;align-items:center;gap:.6rem}
+.brand .mark{height:30px;width:auto;display:block}
+.wm{display:flex;flex-direction:column;line-height:1.12;font-family:'Cinzel',serif}
+.wm-the{font-size:.34rem;font-weight:600;letter-spacing:4px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-name{font-size:.6rem;font-weight:700;letter-spacing:1.6px;color:var(--brand-navy)}
+.wm-school{font-size:.44rem;font-weight:600;letter-spacing:3.2px;
+  background:linear-gradient(135deg,#79C24C,#0B8049);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm-sub{font-size:.3rem;font-weight:400;letter-spacing:2.6px;color:var(--ink-faint);margin-top:2px}
+</style>
+
+<style>
+/* ============================================================
+   The Complete JavaScript & HTML Developer Training Guide
+   Warm editorial minimalist — gold house style (#0D8C4F)
+   ============================================================ */
+:root{
+  --paper:#F7F5F0; --paper-2:#F0EDE5; --card:#FFFFFF;
+  --ink:#0A0A0A; --ink-soft:#5A5A5A; --ink-faint:#8A8378;
+  --accent:#0D8C4F; --accent-h:#0A6F3F;
+  --line:rgba(10,10,10,.12); --line-soft:rgba(10,10,10,.07);
+  --code-bg:#1B1814; --code-ink:#F2EEE6; --code-soft:#ADA79B;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:'Segoe UI',Calibri,'Helvetica Neue',Arial,sans-serif;
+  --mono:Consolas,'SF Mono',Menlo,monospace;
+}
+html[data-theme="night"]{
+  --paper:#14120F; --paper-2:#1B1814; --card:#1B1814;
+  --ink:#F2EEE6; --ink-soft:#ADA79B; --ink-faint:#6E685D;
+  --accent:#2FB36B; --accent-h:#4CC684;
+  --line:rgba(242,238,230,.14); --line-soft:rgba(242,238,230,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:1.0rem;line-height:1.7;
+  background-image:radial-gradient(var(--line-soft) 1px,transparent 1px);
+  background-size:22px 22px;background-attachment:fixed;
+}
+a{color:inherit}
+::selection{background:var(--accent);color:#fff}
+
+/* ---------- Header ---------- */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{max-width:1000px;margin:0 auto;padding:.85rem 1.4rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-family:var(--serif);font-weight:700;font-size:1.02rem;
+  text-decoration:none;letter-spacing:-.2px;white-space:nowrap}
+.brand .amp{color:var(--accent);font-style:italic}
+.nav-right{display:flex;align-items:center;gap:1.1rem}
+.nav-link{font-size:.86rem;font-weight:600;letter-spacing:.4px;
+  text-decoration:none;color:var(--ink-soft)}
+.nav-link:hover{color:var(--accent-h)}
+.theme-btn{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
+  border-radius:100px;width:34px;height:34px;cursor:pointer;font-size:.95rem;line-height:1}
+.theme-btn:hover{color:var(--accent-h);border-color:var(--accent)}
+
+/* ---------- Shared column ---------- */
+.col{max-width:760px;margin:0 auto;padding:0 1.4rem}
+.wide{max-width:1000px;margin:0 auto;padding:0 1.4rem}
+
+/* ---------- Kicker ---------- */
+.kicker{font-family:var(--sans);font-weight:600;font-size:.74rem;
+  letter-spacing:2.6px;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:.7rem;margin:2.4rem 0 .8rem}
+.kicker::before{content:"";display:inline-block;width:26px;height:1px;background:var(--accent)}
+
+/* ---------- Part hero ---------- */
+.part-hero{padding:clamp(2.6rem,7vw,4.6rem) 0 1.4rem;border-bottom:1px solid var(--line-soft);margin-bottom:2.2rem}
+.part-hero .kicker{margin-top:0}
+.part-hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.08;letter-spacing:-.8px;margin:0 0 1rem}
+.anchor-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1.6rem}
+.anchor-row a{font-size:.78rem;font-weight:600;text-decoration:none;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;padding:.32rem .85rem;background:var(--card);
+  transition:border-color .25s,color .25s}
+.anchor-row a:hover{border-color:var(--accent);color:var(--accent-h)}
+
+/* ---------- Article content ---------- */
+article p{margin:0 0 1.05rem;color:var(--ink-soft);max-width:64ch}
+article p strong{color:var(--ink)}
+article h2{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:-.3px;
+  color:var(--ink);margin:2.8rem 0 1rem;padding-bottom:.45rem;
+  border-bottom:2px solid var(--accent);scroll-margin-top:84px;max-width:64ch}
+article h3{font-family:var(--serif);font-weight:700;font-size:1.18rem;
+  color:var(--ink);margin:2rem 0 .7rem}
+article h4{font-weight:700;font-size:1rem;color:var(--ink);margin:1.5rem 0 .5rem}
+article ul,article ol{margin:0 0 1.2rem;padding-left:1.4rem;color:var(--ink-soft);max-width:62ch}
+article li{margin-bottom:.45rem}
+article li::marker{color:var(--accent);font-weight:600}
+article em{color:var(--ink-faint)}
+.soft{color:var(--ink-faint)}
+.accent{color:var(--accent)}
+
+/* Inline code */
+article p code,article li code,td code{
+  font-family:var(--mono);font-size:.86em;color:var(--ink);
+  background:var(--paper-2);border:1px solid var(--line-soft);
+  border-radius:4px;padding:.08em .38em;white-space:nowrap}
+html[data-theme="night"] article p code,
+html[data-theme="night"] article li code{color:var(--ink)}
+
+/* Code blocks — dark surface, the standing exception */
+article pre{
+  background:var(--code-bg);color:var(--code-ink);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1.05rem 1.2rem;margin:0 0 1.4rem;overflow-x:auto;
+  font-family:var(--mono);font-size:.83rem;line-height:1.55}
+article pre code{background:none;border:none;padding:0;color:inherit;white-space:pre}
+.file-label{display:inline-flex;align-items:center;gap:.55rem;margin:.4rem 0 .45rem}
+.file-label .fl-tag{font-size:.66rem;font-weight:700;letter-spacing:2px;color:var(--accent)}
+.file-label code{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--ink-soft);
+  background:none;border:none;padding:0}
+.file-label + pre{margin-top:0}
+
+/* Callout */
+.callout{background:var(--card);border:1px solid var(--line-soft);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:1rem 1.2rem;margin:1.4rem 0 1.6rem}
+.callout .co-label{font-size:.7rem;font-weight:700;letter-spacing:2.2px;color:var(--accent);margin-bottom:.35rem}
+.callout p{margin:0;font-size:.95rem}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;margin:.4rem 0 1.6rem;border:1px solid var(--line-soft);
+  border-radius:8px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+th{background:var(--ink);color:var(--paper);text-align:left;font-weight:600;
+  font-size:.78rem;letter-spacing:.6px;padding:.65rem .85rem}
+html[data-theme="night"] th{background:var(--paper-2);color:var(--ink)}
+td{padding:.6rem .85rem;border-top:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
+
+/* ---------- Pagination ---------- */
+.pager{display:flex;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--line-soft);margin-top:3.4rem;padding:1.6rem 0 0}
+.pager a{flex:1;text-decoration:none;border:1px solid var(--line);border-radius:8px;
+  background:var(--card);padding:.95rem 1.15rem;transition:border-color .25s}
+.pager a:hover{border-color:var(--accent)}
+.pager .dir{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:.25rem}
+.pager .pt{font-family:var(--serif);font-weight:700;font-size:.98rem;color:var(--ink)}
+.pager a.next{text-align:right}
+.pager .ghost{visibility:hidden}
+
+/* ---------- Landing ---------- */
+.hero{padding:clamp(4rem,11vw,7.5rem) 0 clamp(2.5rem,6vw,4rem);text-align:left}
+.hero .kicker{margin-top:0}
+.hero h1{font-family:var(--serif);font-weight:700;
+  font-size:clamp(2.5rem,7vw,4.4rem);line-height:1.04;letter-spacing:-1.5px;margin:0 0 1.3rem;max-width:16ch}
+.hero h1 .em{font-style:italic;color:var(--accent)}
+.hero .sub{font-size:1.07rem;color:var(--ink-soft);max-width:54ch;margin-bottom:2.2rem}
+.cta-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  background:var(--ink);color:var(--paper);font-weight:600;font-size:.95rem;
+  padding:1rem 2.2rem;border-radius:2px;transition:background .25s}
+.btn-primary .arr{transition:transform .25s}
+.btn-primary:hover{background:var(--accent-h)}
+.btn-primary:hover .arr{transform:translateX(4px)}
+html[data-theme="night"] .btn-primary{background:var(--ink);color:var(--paper)}
+.link-quiet{font-size:.92rem;color:var(--ink-faint);text-decoration:underline;text-underline-offset:4px}
+.link-quiet:hover{color:var(--accent-h)}
+
+.stat-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);margin:1.6rem 0 0}
+.stat{padding:1.4rem 1rem;text-align:center;border-left:1px solid var(--line-soft)}
+.stat:first-child{border-left:none}
+.stat .n{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,3.5vw,2.2rem);
+  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.stat .l{font-size:.7rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-faint);margin-top:.3rem}
+
+.section{padding:clamp(3rem,8vw,5.5rem) 0 0}
+.section-head{font-family:var(--serif);font-weight:700;font-size:clamp(1.6rem,4vw,2.2rem);
+  letter-spacing:-.6px;margin:0 0 .7rem}
+.section-sub{color:var(--ink-soft);max-width:58ch;margin-bottom:2.2rem}
+
+.parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem}
+.part-card{display:block;text-decoration:none;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:8px;padding:1.5rem 1.5rem 1.3rem;
+  transition:border-color .25s}
+.part-card:hover{border-color:var(--accent)}
+.part-card .pc-kicker{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:.55rem}
+.part-card h3{font-family:var(--serif);font-weight:700;font-size:1.16rem;letter-spacing:-.2px;color:var(--ink);margin:0 0 .5rem}
+.part-card p{font-size:.88rem;color:var(--ink-soft);margin:0 0 .9rem;line-height:1.55}
+.part-card .pc-mile{font-size:.78rem;color:var(--ink-faint);border-top:1px solid var(--line-soft);padding-top:.7rem}
+.part-card .pc-mile strong{color:var(--ink-soft);font-weight:600}
+
+.proj-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
+.proj{background:var(--card);border:1px solid var(--line-soft);border-radius:8px;
+  padding:.85rem 1.05rem;font-size:.86rem;color:var(--ink-soft);display:flex;gap:.6rem;align-items:baseline}
+.proj .dot{color:var(--accent);font-weight:700}
+
+.cta-band{margin:clamp(3.5rem,9vw,6rem) 0 0;border-top:1px solid var(--line);
+  padding:clamp(2.6rem,7vw,4.5rem) 0}
+.cta-band h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,4.5vw,2.5rem);
+  letter-spacing:-.6px;margin:0 0 .8rem;max-width:22ch}
+.cta-band p{color:var(--ink-soft);max-width:52ch;margin-bottom:2rem}
+
+/* ---------- Footer ---------- */
+footer.site{border-top:1px solid var(--line-soft);margin-top:4rem;padding:2.2rem 0 2.8rem}
+footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.82rem;color:var(--ink-faint)}
+.bm{font-weight:700;color:var(--ink)}
+.bm .bm-i{font-style:italic;color:var(--accent);margin-left:-0.08em}
+
+@media (max-width:640px){
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:none}
+  .pager{flex-direction:column}
+  .pager a.next{text-align:left}
+  .pager .ghost{display:none}
+}
+
+/* ---------- Auth (register/login) ---------- */
+.auth-wrap{max-width:430px;margin:clamp(3rem,9vw,6rem) auto 4rem;padding:0 1.4rem}
+.auth-card{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:2rem 1.8rem}
+.auth-tabs{display:flex;gap:.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line-soft)}
+.auth-tabs button{flex:1;background:none;border:0;border-bottom:2px solid transparent;
+  font:600 .92rem var(--sans);color:var(--ink-faint);padding:.7rem 0;cursor:pointer}
+.auth-tabs button.active{color:var(--ink);border-bottom-color:var(--accent)}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.74rem;font-weight:700;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:.35rem}
+.field input{width:100%;padding:.8rem .9rem;border:1px solid var(--line);border-radius:6px;
+  background:var(--paper);color:var(--ink);font:1rem var(--sans)}
+.field input:focus{outline:none;border-color:var(--accent)}
+.auth-btn{width:100%;border:0;border-radius:2px;background:var(--ink);color:var(--paper);
+  font:600 .98rem var(--sans);padding:.95rem;cursor:pointer;margin-top:.4rem}
+.auth-btn:hover{background:var(--accent-h)}
+.auth-msg{font-size:.85rem;margin-top:.8rem;min-height:1.2em}
+.auth-msg.err{color:#A04B4B}.auth-msg.ok{color:var(--accent-h)}
+.auth-note{font-size:.78rem;color:var(--ink-faint);text-align:center;margin-top:1.2rem}
+.welcome-chip{font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);
+  border-radius:100px;padding:.3rem .85rem;background:var(--card);white-space:nowrap}
+.welcome-chip b{color:var(--accent-h)}
+
+</style>
+
+
+</head>
+<body>
+
+<header class="site" data-live="off">
+  <nav class="nav">
+    <a class="brand" href="../../index.html" style="text-decoration:none">
+      <img class="mark" src="../../assets/logo.svg" alt="The Mentorine School mark">
+      <span class="wm">
+        <span class="wm-the">THE</span>
+        <span class="wm-name">MENTORINE</span>
+        <span class="wm-school">SCHOOL</span>
+        <span class="wm-sub">BY ONA SERVICES</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="index.html">Curriculum</a>
+      <span class="welcome-chip" id="welcomeChip" hidden>Hi, <b id="welcomeName"></b></span>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+    </div>
+  </nav>
+<main class="col">
+  <div class="part-hero">
+    <div class="kicker">Part 0 · START HERE</div>
+    <h1>Start Here: How This Guide Works</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#0-1-what-a-no-code-developer-actually-does">0.1 What a No-Code Developer Actually Does</a><a href="#0-2-the-golden-rules">0.2 The Golden Rules</a><a href="#0-3-the-recommended-roadmap-6-10-weeks">0.3 The Recommended Roadmap (6–10 Weeks)</a><a href="#0-4-set-up-your-free-tools-practical">0.4 Set Up Your Free Tools (Practical)</a></div>
+  </div>
+  <article>
+<h2 id="0-1-what-a-no-code-developer-actually-does">0.1 What a No-Code Developer Actually Does</h2>
+<p>A no-code developer builds real, working web and mobile applications — with databases, user logins, payments, and complex logic — <em>without writing traditional code</em>, using powerful visual platforms like <strong>Bubble</strong> (web apps) and <strong>Adalo</strong> (mobile apps). Instead of typing code line by line, you build apps by designing visually, configuring a database point-and-click, and defining logic with visual workflows. The result is genuinely functional software — marketplaces, SaaS products, booking systems, social apps, internal tools — built dramatically <em>faster</em> and <em>cheaper</em> than traditional coding. No-code is one of the fastest-growing areas in tech because it lets founders launch startups, businesses build internal tools, and freelancers ship client apps in days or weeks instead of months. A no-code developer is a real builder of software — they just use modern visual tools to do it. It's an accessible, in-demand, highly remote-friendly, and entrepreneurial path: you can build products for clients, launch your own startup, or do both.</p>
+<p>This guide takes you from zero to job-ready in a recommended <strong>6–10 weeks</strong>, using the <em>free</em> tiers of Bubble and Adalo (full, real platforms). The capstone, <strong>The No-Code Portfolio</strong>, is two complete, working applications — a web app built in Bubble and a mobile app built in Adalo — with real databases, user authentication, core logic, and polished design, plus your build documentation. This is the exact body of work that proves you can build real apps without code and wins clients or a job.</p>
+<div class="callout"><div class="co-label">WHY THIS MATTERS</div><p>Every business needs software, but traditional development is slow and expensive — so demand for people who can build real apps fast and cheaply with no-code tools is exploding. The no-code developer can launch a startup, ship client products, or build internal tools in a fraction of the time, opening an accessible, remote-friendly, entrepreneurial career.</p></div>
+<h2 id="0-2-the-golden-rules">0.2 The Golden Rules</h2>
+<p><strong>You're still building software — think like a developer</strong> — no-code removes the syntax, not the <em>thinking</em>; databases, logic, and structure still matter and are most of the skill. <strong>Plan before you build</strong> — sketch the app, design the data, map the user flow first; building blind creates a mess. <strong>The database is the foundation</strong> — get your data structure right and everything else follows; get it wrong and you fight it forever. <strong>Build the MVP first</strong> — ship the smallest working version, then add; don't try to build everything at once. <strong>Design and UX matter</strong> — a working app that's ugly or confusing won't be used; visual platforms make good design accessible, so use it.</p>
+<h2 id="0-3-the-recommended-roadmap-6-10-weeks">0.3 The Recommended Roadmap (6–10 Weeks)</h2>
+<p>The plan paces 8 weeks; the <strong>recommended completion window is 6–10 weeks</strong>. Checkpoints, not the calendar, measure progress.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Weeks</th><th>Part</th><th>Mastery</th><th>Milestone</th></tr></thead><tbody>
+<tr><td>1</td><td>Part 1: No-Code &amp; Thinking Like a Builder</td><td>What no-code is, the platforms, the dev mindset</td><td>An app concept + plan</td></tr>
+<tr><td>1–2</td><td>Part 2: Designing the Data</td><td>Databases, data types, relationships</td><td>An app data model</td></tr>
+<tr><td>2–3</td><td>Part 3: Building the UI (Bubble)</td><td>Visual design, pages, elements, responsiveness</td><td>A web app interface</td></tr>
+<tr><td>3–4</td><td>Part 4: Logic &amp; Workflows</td><td>Workflows, actions, conditions — making it work</td><td>A working web app core</td></tr>
+<tr><td>4–5</td><td>Part 5: Users, Auth &amp; Data Operations</td><td>Sign-up/login, permissions, CRUD on data</td><td>User accounts + data flows</td></tr>
+<tr><td>5</td><td>Part 6: Mobile Apps (Adalo)</td><td>Building native mobile apps, mobile patterns</td><td>A mobile app</td></tr>
+<tr><td>5–6</td><td>Part 7: Integrations, APIs &amp; Payments</td><td>Connecting services, APIs, taking payments</td><td>An integrated, paid feature</td></tr>
+<tr><td>6–7</td><td>Part 8: Launch, Polish &amp; Going Live</td><td>Testing, polish, publishing web &amp; mobile</td><td>A live, published app</td></tr>
+<tr><td>7–8</td><td>Part 9: Capstone &amp; Career</td><td>The No-Code Portfolio, freelancing &amp; the job hunt</td><td>Two portfolio apps + a plan</td></tr>
+</tbody></table></div>
+<h2 id="0-4-set-up-your-free-tools-practical">0.4 Set Up Your Free Tools (Practical)</h2>
+<p>No-code platforms offer free tiers that are <em>full, real</em> environments — you build genuine apps from day one. <strong>(1) Bubble</strong> (bubble.io) — the most powerful no-code platform for <em>web apps</em> (databases, logic, the lot); free plan to build and learn. <strong>(2) Adalo</strong> (adalo.com) — a friendly no-code platform for <em>mobile apps</em> (iOS/Android); free plan to build. <strong>(3) Their academies:</strong> both have excellent free official tutorials — use them alongside this guide. <strong>(4) Design/assets:</strong> free icons (e.g. icon libraries), images (Unsplash), and a tool like Figma to sketch. Set up:</p>
+<pre><code>SET UP
+1. Free BUBBLE account: bubble.io (web apps — the powerful one)
+2. Free ADALO account: adalo.com (mobile apps — the friendly one)
+3. Both academies: Bubble's lessons/manual + Adalo's tutorials (use ALONGSIDE this guide)
+4. Make a Google Doc 'The No-Code Portfolio' to plan &amp; document your apps
+5. Pick a realistic app idea to build throughout — something with a database, users &amp;
+   logic (e.g. a freelancer marketplace, a booking app, a habit tracker, a simple SaaS)
+6. Note: free tiers are REAL platforms — you build genuine, working apps from day one</code></pre>
+<p>Every lesson: <strong>Concept</strong> → <strong>Hands-On</strong> (building real apps in Bubble/Adalo) → <strong>Try This</strong> → per-part <strong>Checkpoint</strong>. The work compounds into The No-Code Portfolio — two complete, working applications with real functionality — which is exactly what proves your ability to clients and employers (who hire on <em>demonstrated, working apps</em>).</p>
+  </article>
+<nav class="pager" data-live="off">
+  <a href="index.html"><span class="dir">← CURRICULUM</span><span class="pt">All parts</span></a>
+  <a class="next" href="part1.html"><span class="dir">NEXT →</span><span class="pt">Part 1 · No-Code &amp; Mindset</span></a>
+</nav>
+</main>
+
+<footer class="site">
+  <div class="col">
+    <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
+    <div>No-Code Developer · zero to job-ready in a recommended 6–10 weeks</div>
+    <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
+  </div>
+</footer>
+
+
+
+<script src="../../assets/app.js"></script>
+<script>MS.initTheme();</script>
+<script>window.MS_GATE={course:"nocode-developer",home:"../../"};</script>
+<script src="../../assets/gate.js"></script>
+<script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
+<script src="../../assets/liveliness.js" defer></script>
+</body>
+</html>
