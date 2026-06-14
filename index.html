@@ -83,7 +83,13 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .sa-badge{position:absolute;top:0;right:0;background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;
   letter-spacing:.06em;text-transform:uppercase;padding:.4rem .9rem;border-bottom-left-radius:12px}
 .sa-body{display:grid;grid-template-columns:1.7fr 1fr;gap:clamp(1.5rem,4vw,3rem);padding:clamp(1.6rem,4vw,2.6rem)}
-@media(max-width:760px){.sa-body{grid-template-columns:1fr;gap:1.6rem}}
+@media(max-width:760px){
+  .sa-body{grid-template-columns:1fr;gap:1.3rem;padding:1.5rem 1.2rem 1.4rem;padding-top:2.6rem}
+  .standalone-cta{margin-top:1.2rem}
+  .sa-badge{font-size:.62rem;padding:.35rem .7rem;letter-spacing:.04em}
+  .sa-title{font-size:1.55rem}
+  .sa-sub{font-size:.95rem}
+}
 .sa-kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
 .sa-title{font-family:'Fraunces',serif;font-size:clamp(1.4rem,3.2vw,2rem);font-weight:500;line-height:1.15;margin:.5rem 0 .7rem}
 .sa-sub{color:var(--ink-soft);margin-bottom:1rem;max-width:52ch}
@@ -93,7 +99,8 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .sa-fine{font-size:.78rem;color:var(--ink-faint);max-width:52ch}
 .sa-right{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
   padding:1.2rem;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);gap:.25rem}
-@media(max-width:760px){.sa-right{align-items:center;text-align:center}}
+@media(max-width:760px){.sa-right{align-items:center;text-align:center;padding:1.1rem}
+  .sa-price{font-size:2.7rem}}
 .sa-price-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
 .sa-price{font-family:'Fraunces',serif;font-size:clamp(2.4rem,6vw,3.2rem);font-weight:500;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
 .sa-was{color:var(--ink-faint);text-decoration:line-through;font-size:1.05rem;font-weight:300;font-variant-numeric:tabular-nums}
@@ -326,23 +333,23 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <div class="sa-body">
         <div class="sa-left">
           <span class="sa-kicker">Standalone Track &middot; Self-Study</span>
-          <h3 class="sa-title">Start a whole career track for the price of a night out.</h3>
-          <p class="sa-sub">Not ready for the full programme? Get a complete Career &amp; Skill Track on your own schedule &mdash; the full Career Path Document plus every curated course for that track, yours for 30 days.</p>
+          <h3 class="sa-title">A whole career track, your pace.</h3>
+          <p class="sa-sub">Not ready for the full programme? Get one complete track &mdash; the Career Path Document plus every course in it &mdash; for 30 days.</p>
           <ul class="sa-points">
-            <li>The complete Career Path Document for your chosen track</li>
-            <li>Every curated course &amp; lesson in that track</li>
-            <li>Learn at your own pace, anytime, from anywhere</li>
-            <li>Instant access &mdash; pay, send proof, start today</li>
+            <li>The full Career Path Document</li>
+            <li>Every course &amp; lesson in the track</li>
+            <li>Learn anytime, anywhere</li>
+            <li>Instant access &mdash; pay, send proof, start</li>
           </ul>
-          <p class="sa-fine">Self-study format. Community access and the verified certificate are part of the full programme tiers above.</p>
+          <p class="sa-fine">Self-study. Community &amp; certificate come with the full tiers above.</p>
         </div>
         <div class="sa-right">
           <span class="sa-price-label">Introductory price</span>
           <span class="sa-price">&#8358;50,000</span>
           <span class="sa-was">&#8358;150,000</span>
           <span class="sa-per">per track &middot; 30 days</span>
-          <a class="btn sa-btn" href="register.html?plan=standalone">Start a track for &#8358;50,000 <span class="arr">&rarr;</span></a>
-          <span class="sa-urgency">Introductory price ends with the countdown above</span>
+          <a class="btn sa-btn" href="register.html?plan=standalone">Start my track <span class="arr">&rarr;</span></a>
+          <span class="sa-urgency">Intro price ends with the countdown above</span>
         </div>
       </div>
     </div>
