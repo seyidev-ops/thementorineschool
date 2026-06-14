@@ -41,6 +41,9 @@ A complete, installable (PWA) static website for The Mentorine School by Ona Ser
 | `training/operationsmanager/` | **Operations Manager** (recommended 7–11 weeks): processes & workflow, Lean & efficiency, KPIs & dashboards, quality, supply & capacity, team leadership, continuous improvement — ending in The Operations Playbook. Word: `Operations-Manager-Training-Guide.docx` |
 | `training/scrummaster/` | **Scrum Master** (recommended 5–8 weeks): Agile & servant-leadership, the Scrum framework, roles, artefacts, the events, facilitation, impediments & coaching — ending in The Scrum Master Kit (PSM/CSM-ready). Word: `Scrum-Master-Training-Guide.docx` |
 | `training/healthcareanalyst/` | **Healthcare Analyst** (recommended 8–12 weeks): the domain & coding, data & privacy (HIPAA/GDPR), analysis, clinical/outcomes, operational/financial, quality & population health, reporting — ending in The Healthcare Analytics Portfolio. Word: `Healthcare-Analyst-Training-Guide.docx` |
+| `training/salesforceadmin/` | **Salesforce Administrator** (recommended 6–10 weeks): users & security, data model, UI, Flow automation, data management, reports & dashboards, Sales/Service Cloud — ending in The Admin Portfolio (CSA-aimed). Word: `Salesforce-Administrator-Training-Guide.docx` |
+| `training/nocodedeveloper/` | **No-Code Developer (Bubble/Adalo)** (recommended 6–10 weeks): the builder mindset, data design, Bubble UI & logic, users/auth, Adalo mobile, integrations & payments, launch — ending in The No-Code Portfolio (2 apps). Word: `No-Code-Developer-Training-Guide.docx` |
+| `training/automationspecialist/` | **Zapier/Make Automation Specialist** (recommended 4–6 weeks): the trigger-action model, Zapier, data & formatting, logic & branching, Make, APIs & webhooks, reliability — ending in The Automation Toolkit. Word: `Automation-Specialist-Training-Guide.docx` |
 | `training/video/` | **Video Editor** (recommended 6–10 weeks): the editor's mindset, the cut and pacing, sound design, colour grading, text and titles, social short-form, long-form storytelling and export, ending in the Lagos Eats package. Word: `Video-Editor-Training-Guide.docx` |
 | `training/threed/` | **3D Artist / Animator** (recommended 12–16 weeks): the 3D world in Blender, modelling, PBR texturing, lighting and rendering, composition, animation, rigging and production, ending in The Still Life scene. Word: `3D-Artist-Animator-Training-Guide.docx` |
 | `training/brand/` | **Brand Identity Designer** (recommended 6–8 weeks): brand strategy, naming and voice, logo systems, colour and type, imagery, applications and brand guidelines, ending in the Terra brand identity. Word: `Brand-Identity-Designer-Training-Guide.docx` |
@@ -115,7 +118,7 @@ Any static host works (GitHub Pages, Netlify, cPanel):
 
 ### ⚠️ Service worker rule
 
-On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v18` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
+On **every HTML change**, bump the cache version in `sw.js` (`mentorine-v19` → `v3` …) and deploy `sw.js` together with the HTML — otherwise returning visitors keep seeing the cached version.
 
 ## Before going live
 

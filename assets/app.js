@@ -93,7 +93,8 @@ window.MS = (function () {
           blurb: "Agile & servant-leadership, the Scrum framework (pillars & values), the team & roles, artefacts & the backlog, sprint planning, the daily scrum & facilitation, review & retrospective, and impediments, coaching & anti-patterns — ending in The Scrum Master Kit, ready for PSM/CSM, with full training pages inside." },
         { slug: "healthcare-analyst", name: "Healthcare Analyst", courses: "12 guided parts", duration: "8–12 weeks", featured: true, training: "training/healthcareanalyst/index.html",
           blurb: "Data skill + healthcare domain — the care system & coding (ICD/CPT), data & privacy (HIPAA/GDPR), analysis foundations, clinical & outcomes analysis (risk adjustment), operational & financial/claims analysis, quality metrics & population health, and reporting — ending in The Healthcare Analytics Portfolio, with full training pages inside." },
-        { slug: "salesforce-admin", name: "Salesforce Administrator", courses: "7 courses", duration: "6–10 weeks" }
+        { slug: "salesforce-admin", name: "Salesforce Administrator", courses: "12 guided parts", duration: "6–10 weeks", featured: true, training: "training/salesforceadmin/index.html",
+          blurb: "Configure & manage the world’s #1 CRM — mostly without code — users & security, the data model, UI customisation, Flow automation, data management, reports & dashboards, and Sales/Service Cloud, ending in The Admin Portfolio in a real org and aimed at the CSA certification, with full training pages inside." }
       ]
     },
     {
@@ -116,8 +117,10 @@ window.MS = (function () {
     {
       id: "nocode", label: "No-Code & Automation",
       tracks: [
-        { slug: "nocode-developer",   name: "No-Code Developer (Bubble/Adalo)", courses: "8 courses", duration: "6–10 weeks" },
-        { slug: "automation-specialist", name: "Zapier/Make Automation Specialist", courses: "5 courses", duration: "4–6 weeks" },
+        { slug: "nocode-developer",   name: "No-Code Developer (Bubble/Adalo)", courses: "12 guided parts", duration: "6–10 weeks", featured: true, training: "training/nocodedeveloper/index.html",
+          blurb: "Build real web & mobile apps without code — the developer mindset, data design, building in Bubble, logic & workflows, users & auth, mobile apps in Adalo, integrations & payments, and launch, ending in The No-Code Portfolio of two real apps, with full training pages inside." },
+        { slug: "automation-specialist", name: "Zapier/Make Automation Specialist", courses: "12 guided parts", duration: "4–6 weeks", featured: true, training: "training/automationspecialist/index.html",
+          blurb: "Make software work by itself — the trigger-action model, building in Zapier, data & formatting, logic, filters & paths, building in Make, APIs & webhooks, and reliability, ending in The Automation Toolkit of real, value-framed workflows, with full training pages inside." },
         { slug: "ai-prompt-engineer", name: "AI Prompt Engineer", courses: "4 courses", duration: "3–5 weeks" },
         { slug: "lowcode-builder",    name: "Low-Code App Builder", courses: "6 courses", duration: "6–8 weeks" }
       ]
@@ -128,6 +131,132 @@ window.MS = (function () {
      Software Development syllabus is extracted directly from the
      JavaScript-HTML Developer Training Guide (Parts 0–9 + appendices). */
   const SYLLABI = {
+    "salesforce-admin": {
+      title: "Salesforce Administrator",
+      subtitle: "The complete Salesforce Administrator training \u2014 users & security, the data model, UI customisation, Flow automation, data management, reports & dashboards, and Sales/Service Cloud. Built in a real org, aimed at the CSA certification. Recommended duration: 6\u201310 weeks.",
+      training: "training/salesforceadmin/index.html",
+      roadmap: [
+        ["Week 1", "Part 1 \u00b7 Salesforce & the Admin Role", "CRM, the platform, the admin, your free org", "A free org + orientation"],
+        ["Weeks 1\u20132", "Part 2 \u00b7 Users, Security & Access", "Users, profiles, roles, permissions, sharing", "A configured user & security model"],
+        ["Weeks 2\u20133", "Part 3 \u00b7 The Data Model", "Objects, fields, relationships, integrity", "A custom data model"],
+        ["Weeks 3\u20134", "Part 4 \u00b7 Customising the UI", "Page layouts, Lightning App Builder, apps", "A customised app & pages"],
+        ["Weeks 4\u20135", "Part 5 \u00b7 Process Automation", "Flow, automation tools, when to use what", "Automated business processes"],
+        ["Week 5", "Part 6 \u00b7 Data Management", "Import/export, cleaning, data quality", "A clean, well-managed dataset"],
+        ["Weeks 5\u20136", "Part 7 \u00b7 Reports & Dashboards", "Building reports, dashboards, insights", "Reports & a dashboard"],
+        ["Weeks 6\u20137", "Part 8 \u00b7 Sales, Service & AppExchange", "The core clouds, adding apps", "A configured sales/service process"],
+        ["Weeks 7\u20138", "Part 9 \u00b7 Capstone, CSA & Career", "The Admin Portfolio, the exam, the job hunt", "A portfolio + a CSA exam plan"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What a Salesforce Administrator Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (6\u201310 Weeks)", "0.4 Set Up Your Free Salesforce Org (Practical)"] },
+        { title: "Part 1 \u2014 Salesforce & the Admin Role",
+          items: ["1.1 CRM and Why Salesforce Dominates", "1.2 The Admin: The Platform's Owner", "1.3 A Tour of the Platform (Practical)"] },
+        { title: "Part 2 \u2014 Users, Security & Access",
+          items: ["2.1 Security Is the Admin's Core Duty", "2.2 Users, Profiles, and Permissions (Practical)", "2.3 Designing Access for a Business"] },
+        { title: "Part 3 \u2014 The Data Model",
+          items: ["3.1 The Data Model Shapes Everything", "3.2 Objects, Fields, and Relationships (Practical)", "3.3 Data Integrity by Design"] },
+        { title: "Part 4 \u2014 Customising the UI",
+          items: ["4.1 The User Experience Drives Adoption", "4.2 Page Layouts and the Lightning App Builder (Practical)", "4.3 Tailoring for Different Teams"] },
+        { title: "Part 5 \u2014 Process Automation",
+          items: ["5.1 Automate the Repetitive", "5.2 Flow: The Automation Powerhouse (Practical)", "5.3 Designing Good Automation"] },
+        { title: "Part 6 \u2014 Data Management",
+          items: ["6.1 Salesforce Is Only as Good as Its Data", "6.2 Importing, Exporting, and Cleaning (Practical)", "6.3 Data as an Ongoing Discipline"] },
+        { title: "Part 7 \u2014 Reports & Dashboards",
+          items: ["7.1 Turning Data into Insight", "7.2 Building Reports and Dashboards (Practical)", "7.3 Reporting That Drives Decisions"] },
+        { title: "Part 8 \u2014 Sales, Service & AppExchange",
+          items: ["8.1 The Core Clouds: Sales and Service", "8.2 Configuring Sales and Service Processes (Practical)", "8.3 Extending with AppExchange and Going Further"] },
+        { title: "Part 9 \u2014 Capstone, CSA Certification & Career",
+          items: ["9.1 THE CAPSTONE: The Admin Portfolio", "9.2 The CSA Certification and the Job Hunt"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 Platform & Security on One Page", "A.2 Data Model & UI on One Page", "A.3 Automation, Data & Reporting on One Page"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
+    "nocode-developer": {
+      title: "No-Code Developer (Bubble/Adalo)",
+      subtitle: "The complete no-code development training \u2014 thinking like a builder, data design, building in Bubble, logic & workflows, users & auth, mobile apps in Adalo, integrations & payments, and launch. Recommended duration: 6\u201310 weeks.",
+      training: "training/nocodedeveloper/index.html",
+      roadmap: [
+        ["Week 1", "Part 1 \u00b7 No-Code & Thinking Like a Builder", "What no-code is, the platforms, the mindset", "An app concept + plan"],
+        ["Weeks 1\u20132", "Part 2 \u00b7 Designing the Data", "Databases, data types, relationships", "An app data model"],
+        ["Weeks 2\u20133", "Part 3 \u00b7 Building the UI (Bubble)", "Visual design, pages, elements, responsive", "A web app interface"],
+        ["Weeks 3\u20134", "Part 4 \u00b7 Logic & Workflows", "Workflows, actions, conditions", "A working web app core"],
+        ["Weeks 4\u20135", "Part 5 \u00b7 Users, Auth & Data Operations", "Sign-up/login, permissions, CRUD", "User accounts + data flows"],
+        ["Week 5", "Part 6 \u00b7 Mobile Apps (Adalo)", "Building native mobile apps", "A mobile app"],
+        ["Weeks 5\u20136", "Part 7 \u00b7 Integrations, APIs & Payments", "Connecting services, APIs, payments", "An integrated, paid feature"],
+        ["Weeks 6\u20137", "Part 8 \u00b7 Launch, Polish & Going Live", "Testing, polish, publishing", "A live, published app"],
+        ["Weeks 7\u20138", "Part 9 \u00b7 Capstone & Career", "The No-Code Portfolio, freelancing & jobs", "Two portfolio apps + a plan"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What a No-Code Developer Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (6\u201310 Weeks)", "0.4 Set Up Your Free Tools (Practical)"] },
+        { title: "Part 1 \u2014 No-Code & Thinking Like a Builder",
+          items: ["1.1 What No-Code Is (and Isn't)", "1.2 The Platforms: Bubble and Adalo", "1.3 Think Like a Developer (Practical)"] },
+        { title: "Part 2 \u2014 Designing the Data",
+          items: ["2.1 The Database Is the Foundation", "2.2 Data Types, Fields, and Relationships (Practical)", "2.3 Data Design Determines Everything"] },
+        { title: "Part 3 \u2014 Building the UI (Bubble)",
+          items: ["3.1 The Interface Is the App, to the User", "3.2 Pages, Elements, and Responsiveness (Practical)", "3.3 Designing for Usability"] },
+        { title: "Part 4 \u2014 Logic & Workflows",
+          items: ["4.1 Workflows Make the App Work", "4.2 Triggers, Actions, and Conditions (Practical)", "4.3 Building Real Functionality"] },
+        { title: "Part 5 \u2014 Users, Auth & Data Operations",
+          items: ["5.1 Real Apps Have Users", "5.2 Authentication and Per-User Data (Practical)", "5.3 Security and Data Privacy in No-Code"] },
+        { title: "Part 6 \u2014 Mobile Apps (Adalo)",
+          items: ["6.1 Mobile Apps with Adalo", "6.2 Building in Adalo (Practical)", "6.3 Web vs Mobile: Choosing the Right Tool"] },
+        { title: "Part 7 \u2014 Integrations, APIs & Payments",
+          items: ["7.1 Apps Don't Live Alone", "7.2 Integrations, APIs, and Payments (Practical)", "7.3 Building Complete, Real Products"] },
+        { title: "Part 8 \u2014 Launch, Polish & Going Live",
+          items: ["8.1 From Built to Launched", "8.2 Testing, Polishing, and Publishing (Practical)", "8.3 The Launch Mindset"] },
+        { title: "Part 9 \u2014 Capstone, Portfolio & Career",
+          items: ["9.1 THE CAPSTONE: The No-Code Portfolio", "9.2 Freelancing, Startups, and the Job Hunt"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 Mindset & Data on One Page", "A.2 UI & Logic on One Page", "A.3 Users, Mobile, Integrations & Launch on One Page"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
+    "automation-specialist": {
+      title: "Zapier/Make Automation Specialist",
+      subtitle: "The complete workflow-automation training \u2014 the trigger-action model, building in Zapier, data & formatting, logic & branching, building in Make, APIs & webhooks, and reliability. Recommended duration: 4\u20136 weeks.",
+      training: "training/automationspecialist/index.html",
+      roadmap: [
+        ["Week 1", "Part 1 \u00b7 Automation & the Specialist", "What automation is, the platforms, the value", "An automation-opportunity list"],
+        ["Week 1", "Part 2 \u00b7 The Core Model", "Triggers, actions, the anatomy of a workflow", "A mapped workflow"],
+        ["Weeks 1\u20132", "Part 3 \u00b7 Building in Zapier", "Zaps, triggers, actions, first automations", "Working Zaps"],
+        ["Week 2", "Part 4 \u00b7 Data, Fields & Formatting", "Moving data, mapping, formatting", "Clean data flows"],
+        ["Weeks 2\u20133", "Part 5 \u00b7 Logic, Filters & Paths", "Conditions, filters, branching", "A smart, branching automation"],
+        ["Week 3", "Part 6 \u00b7 Building in Make", "Visual scenarios, deeper power", "A Make scenario"],
+        ["Weeks 3\u20134", "Part 7 \u00b7 APIs, Webhooks & Going Further", "Connecting anything via webhooks/APIs", "An API/webhook automation"],
+        ["Week 4", "Part 8 \u00b7 Reliability, Errors & Best Practice", "Testing, error handling, monitoring", "A robust, monitored automation"],
+        ["Weeks 4\u20135", "Part 9 \u00b7 Capstone & Career", "The Automation Toolkit, freelancing & jobs", "A toolkit + a client/job plan"]
+      ],
+      modules: [
+        { title: "Part 0 \u2014 Start Here: How This Guide Works",
+          items: ["0.1 What an Automation Specialist Actually Does", "0.2 The Golden Rules", "0.3 The Recommended Roadmap (4\u20136 Weeks)", "0.4 Set Up Your Free Tools (Practical)"] },
+        { title: "Part 1 \u2014 Automation & the Specialist",
+          items: ["1.1 Automation: Making Software Work by Itself", "1.2 The Platforms: Zapier and Make", "1.3 The Value Lens (Practical)"] },
+        { title: "Part 2 \u2014 The Core Model",
+          items: ["2.1 Trigger Then Actions: The Universal Pattern", "2.2 The Anatomy of a Workflow (Practical)", "2.3 Mapping Before Building"] },
+        { title: "Part 3 \u2014 Building in Zapier",
+          items: ["3.1 From Concept to Working Zap", "3.2 Creating Zaps Step by Step (Practical)", "3.3 Building a Library of Real Automations"] },
+        { title: "Part 4 \u2014 Data, Fields & Formatting",
+          items: ["4.1 Automation Is Really About Moving Data", "4.2 Mapping and Formatting Data (Practical)", "4.3 Data Done Right"] },
+        { title: "Part 5 \u2014 Logic, Filters & Paths",
+          items: ["5.1 Beyond Linear: Adding Logic", "5.2 Filters, Paths, and Conditions (Practical)", "5.3 Modelling Real Processes"] },
+        { title: "Part 6 \u2014 Building in Make (Advanced)",
+          items: ["6.1 When You Need More Power", "6.2 Visual Scenarios in Make (Practical)", "6.3 Choosing the Right Tool"] },
+        { title: "Part 7 \u2014 APIs, Webhooks & Going Further",
+          items: ["7.1 Connecting to Anything", "7.2 Webhooks and API Requests (Practical)", "7.3 No Limits"] },
+        { title: "Part 8 \u2014 Reliability, Errors & Best Practice",
+          items: ["8.1 Automations Run Unattended at Scale", "8.2 Testing, Errors, and Monitoring (Practical)", "8.3 Professional Automation Practice"] },
+        { title: "Part 9 \u2014 Capstone, Toolkit & Career",
+          items: ["9.1 THE CAPSTONE: The Automation Toolkit", "9.2 Freelancing and the Job Hunt"] },
+        { title: "Appendix A \u2014 Quick-Reference Cheat Sheets",
+          items: ["A.1 The Model & Zapier on One Page", "A.2 Data & Logic on One Page", "A.3 Make, APIs & Reliability on One Page"] },
+        { title: "Appendix B \u2014 The Recommended Daily Study Plan",
+          items: ["B.1 The Plan"] }
+      ]
+    },
     "operations-manager": {
       title: "Operations Manager",
       subtitle: "The complete operations management training \u2014 processes, Lean efficiency, KPIs, quality, supply & capacity, team leadership and continuous improvement. Recommended duration: 7\u201311 weeks.",

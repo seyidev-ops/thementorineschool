@@ -58,6 +58,50 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .track-actions{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:.8rem;border-top:1px solid var(--line-soft)}
 .lock{font-size:.95rem}
 
+/* field cards (home: 6 fields, each with a dropdown of its courses) */
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.field-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--paper);overflow:hidden;transition:border-color .2s}
+.field-card:hover{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.field-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+  padding:1.3rem 1.4rem .9rem;text-decoration:none;color:inherit}
+.field-card-head h3{font-size:1.2rem;letter-spacing:-.3px;margin-bottom:.3rem}
+.field-card-head .fc-count{font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--ink-faint)}
+.field-card-head .fc-go{font-family:'Fraunces',serif;color:var(--accent);white-space:nowrap;font-size:.9rem}
+.fc-toggle{display:flex;align-items:center;justify-content:space-between;gap:.8rem;width:100%;
+  background:none;border:none;border-top:1px solid var(--line-soft);cursor:pointer;
+  font-family:'DM Sans',sans-serif;color:var(--ink-soft);font-size:.82rem;padding:.7rem 1.4rem;text-align:left}
+.fc-toggle:hover{color:var(--accent)}
+.fc-toggle .fc-caret{transition:transform .25s;color:var(--accent);font-family:'Fraunces',serif}
+.field-card.open .fc-caret{transform:rotate(180deg)}
+.fc-list{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
+.field-card.open .fc-list{grid-template-rows:1fr}
+.fc-list-inner{overflow:hidden}
+.fc-list ul{list-style:none;margin:0;padding:0 1.4rem 1.1rem}
+.fc-list li{border-top:1px solid var(--line-soft)}
+.fc-list li:first-child{border-top:none}
+.fc-list a{display:flex;justify-content:space-between;gap:.8rem;align-items:baseline;
+  padding:.55rem 0;font-size:.9rem;color:var(--ink-soft);text-decoration:none;transition:color .15s}
+.fc-list a:hover{color:var(--accent)}
+.fc-list a .fc-dur{font-size:.74rem;color:var(--ink-faint);white-space:nowrap}
+.fc-list a.fc-soon{color:var(--ink-faint);pointer-events:none}
+.fc-list a .fc-tag{font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}
+
+/* trending carousel */
+.trend{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.trend-row{display:flex;gap:1rem;width:max-content;animation:trend-roll 48s linear infinite}
+.trend:hover .trend-row{animation-play-state:paused}
+@keyframes trend-roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.trend-row{animation:none;flex-wrap:nowrap;overflow-x:auto;width:auto}}
+.trend-card{flex:0 0 auto;width:280px;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--paper);padding:1.2rem 1.3rem;display:flex;flex-direction:column;gap:.5rem;text-decoration:none;color:inherit;transition:border-color .2s}
+.trend-card:hover{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.trend-card .tc-field{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent)}
+.trend-card h3{font-size:1.05rem;letter-spacing:-.3px}
+.trend-card .tc-meta{font-size:.78rem;color:var(--ink-faint);margin-top:auto}
+.trend-card .tc-go{font-family:'Fraunces',serif;color:var(--accent);font-size:.85rem}
+
 /* register */
 .reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,5vw,3.4rem);align-items:start}
 @media(max-width:820px){.reg-grid{grid-template-columns:1fr}}
@@ -202,12 +246,12 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <div class="nav-dd" id="tracksDd">
         <a href="#courses" class="nav-dd-toggle" aria-haspopup="true" aria-expanded="false">Career &amp; Skill Tracks <span class="dd-caret">▾</span></a>
         <div class="nav-dd-menu" role="menu">
-          <a href="#courses" data-cat="tech" role="menuitem">Tech &amp; Development</a>
-          <a href="#courses" data-cat="design" role="menuitem">Design &amp; Creative</a>
-          <a href="#courses" data-cat="marketing" role="menuitem">Marketing &amp; Content</a>
-          <a href="#courses" data-cat="business" role="menuitem">Business &amp; Operations</a>
-          <a href="#courses" data-cat="support" role="menuitem">Support, Admin &amp; Community</a>
-          <a href="#courses" data-cat="nocode" role="menuitem">No-Code &amp; Automation</a>
+          <a href="field.html?cat=tech" role="menuitem">Tech &amp; Development</a>
+          <a href="field.html?cat=design" role="menuitem">Design &amp; Creative</a>
+          <a href="field.html?cat=marketing" role="menuitem">Marketing &amp; Content</a>
+          <a href="field.html?cat=business" role="menuitem">Business &amp; Operations</a>
+          <a href="field.html?cat=support" role="menuitem">Support, Admin &amp; Community</a>
+          <a href="field.html?cat=nocode" role="menuitem">No-Code &amp; Automation</a>
           <a href="https://aimadesimpleschool.com" target="_blank" rel="noopener" class="nav-dd-ai" role="menuitem">AI Made Simple ↗</a>
         </div>
       </div>
@@ -227,18 +271,18 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <div class="kicker">Courses, Skills, and Career Development</div>
+    <div class="kicker">Career &amp; Skill Development</div>
     <h1>Your gateway to a <em class="ac">future-ready</em> remote career.</h1>
-    <p class="lede">A comprehensive career development ecosystem preparing you for high-demand roles that thrive in remote, hybrid, or onsite environments — whether you're a beginner, a professional seeking promotion, or an entrepreneur scaling your business.</p>
+    <p class="lede">Job-ready training for high-demand remote roles — for beginners, professionals levelling up, and founders building their own thing.</p>
     <div class="hero-actions">
       <a class="btn" href="register.html">Register for a track <span class="arr">→</span></a>
-      <a class="link-quiet" href="#courses">Browse the courses</a>
+      <a class="link-quiet" href="#courses">Browse the fields</a>
     </div>
     <div class="stats" data-live="stagger">
       <div class="stat"><b>40+</b><span>Career Tracks</span></div>
-      <div class="stat"><b>4</b><span>Learning Pillars</span></div>
+      <div class="stat"><b>6</b><span>Skill Fields</span></div>
       <div class="stat"><b>100%</b><span>Remote-Friendly</span></div>
-      <div class="stat"><b>1</b><span>Verified Certificate</span></div>
+      <div class="stat"><b>Per&nbsp;track</b><span>Certificate &amp; Capstone</span></div>
     </div>
   </div>
 </header>
@@ -249,44 +293,59 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
     <div class="section-head">
       <div class="kicker">How It Works</div>
       <h2>Pick a track. Unlock an <em class="ac">ecosystem</em>.</h2>
-      <p>Select your desired career path or skill below. Upon registration, you receive instant access to a structured ecosystem built on four pillars.</p>
+      <p>Register and get instant access to a structured ecosystem built on four pillars.</p>
     </div>
     <div class="pillars" data-live="stagger">
       <div class="card pillar">
         <span class="num">01</span>
         <h3>Career Roadmap</h3>
-        <p>A visual, step-by-step timeline tailored to your track — milestones for weeks 1, 4, 8 and beyond, skill trees, and the exact portfolio projects employers want to see.</p>
+        <p>A step-by-step timeline for your track — milestones, skills, and the portfolio projects employers want.</p>
       </div>
       <div class="card pillar">
         <span class="num">02</span>
         <h3>Curated Courses</h3>
-        <p>Hands-on, project-based curriculum in a hybrid format: self-paced videos plus weekly live sessions, taught by C-suite executives and senior engineers.</p>
+        <p>Hands-on, project-based lessons — self-paced, with live sessions led by senior practitioners.</p>
       </div>
       <div class="card pillar">
         <span class="num">03</span>
         <h3>Community</h3>
-        <p>You are never alone. 24/7 Slack/Discord networking with your cohort, weekly mentorship AMAs, and monthly hackathons with prizes.</p>
+        <p>A cohort to learn with — networking, mentorship AMAs, and monthly challenges.</p>
       </div>
       <div class="card pillar">
         <span class="num">04</span>
-        <h3>Certificates</h3>
-        <p>Micro-credential badges per module, a verified completion certificate issued by Ona, and a capstone showcase before a panel of hiring partners.</p>
+        <h3>Certificate &amp; Capstone</h3>
+        <p>Per track: module badges, a verified completion certificate, and a capstone showcase before hiring partners.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COURSES -->
+<!-- FIELDS -->
 <section class="section" id="courses" style="background:var(--paper-2)">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker">Career &amp; Skill Tracks</div>
-      <h2>Remote-friendly <em class="ac">structured</em> careers.</h2>
-      <p>Every track includes the four pillars plus a Career Path Document and curated course set. Courses unlock when you register — but every syllabus is open. Look before you leap.</p>
+      <h2>Six fields. <em class="ac">Forty-plus</em> tracks.</h2>
+      <p>Pick a field to see its tracks — every syllabus is open. Look before you leap.</p>
     </div>
-    <div class="cat-marquee" data-live="off"><div class="cm-row" id="catTabs"></div></div>
-    <div class="tracks" id="trackGrid" data-live="off"></div>
-    <p style="margin-top:1.6rem;font-size:.88rem;color:var(--ink-faint)">Additional tracks are available — contact our admissions team for a personalised consultation.</p>
+    <div class="fields" id="fieldGrid" data-live="off"></div>
+  </div>
+</section>
+
+<!-- TRENDING CAROUSEL -->
+<section class="section" id="trending">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Trending Now</div>
+      <h2>Popular <em class="ac">tracks</em> right now.</h2>
+      <p>A taste from across the fields. Hover to pause; tap any track to explore.</p>
+    </div>
+  </div>
+  <div class="trend" data-live="off" aria-label="Trending tracks">
+    <div class="trend-row" id="trendRow"></div>
+  </div>
+  <div class="wrap" style="text-align:center;margin-top:clamp(1.8rem,4vw,2.6rem)">
+    <a class="btn" href="register.html">Register for a track <span class="arr">→</span></a>
   </div>
 </section>
 
@@ -296,7 +355,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
     <div class="section-head">
       <div class="kicker">Registration Tiers &amp; Investment</div>
       <h2>Flexible plans, <em class="ac">introductory</em> pricing.</h2>
-      <p>Choose the duration that matches your learning pace and career goals. These are <strong>introductory prices</strong> — they revert to standard pricing (shown crossed out) when the countdown below ends.</p>
+      <p>Pick the duration that fits your pace. These are <strong>introductory prices</strong> — they revert to standard (crossed out) when the countdown ends.</p>
       <div class="countdown" id="countdown" data-live="off" aria-label="Time left at introductory pricing">
         <span class="cd-label">Introductory pricing ends in</span>
         <div class="cd-clock">
@@ -465,50 +524,69 @@ MS.initTheme(); MS.initChat();
   var timer = setInterval(tick, 1000);
 })();
 
-/* ---- catalogue render ---- */
-var tabs = document.getElementById('catTabs');
-
-var active = 'tech';
-
-function lockState(slug){
-  return MS.isUnlocked(slug)
-    ? '<span class="badge open">● Unlocked</span>'
-    : '<span class="badge locked"><span class="lock">🔒</span> Locked</span>';
-}
-function renderTabs(){
-  var html = MS.CATALOGUE.map(function(c){
-    return '<button class="cat-tab'+(c.id===active?' active':'')+'" data-cat="'+c.id+'">'+c.label+'</button>';
-  }).join('');
-  tabs.innerHTML = html + html;        // duplicated for a seamless rolling loop
-}
-function cardHTML(t){
-  var unlocked = MS.isUnlocked(t.slug);
-  return '<article class="card track'+(t.featured?' featured':'')+'">'+
-    '<div class="track-top"><h3>'+t.name+'</h3>'+lockState(t.slug)+'</div>'+
-    '<div class="meta">'+t.courses+' \u00b7 '+t.duration+'</div>'+
-    (t.blurb?'<p class="blurb">'+t.blurb+'</p>':'')+
-    '<div class="track-actions">'+
-      '<a class="link-quiet" href="syllabus.html?course='+t.slug+'">View syllabus</a>'+
-      (unlocked
-        ? '<a class="link-quiet" style="color:var(--accent)" href="dashboard.html">Continue \u2192</a>'
-        : '<a class="link-quiet" href="register.html?course='+t.slug+'">Register to unlock</a>')+
-    '</div></article>';
-}
-function renderGrid(){
-  var cat = MS.CATALOGUE.find(function(c){return c.id===active;});
-  document.getElementById('trackGrid').innerHTML = cat.tracks.map(cardHTML).join('');
-  if (window.Liveliness) window.Liveliness.refresh();
-}
-tabs.addEventListener('click', function(e){
-  var b = e.target.closest('.cat-tab'); if(!b) return;
-  active = b.dataset.cat; renderTabs(); renderGrid();
-});
-window.MS_setCategory = function(cat){
-  if(!MS.CATALOGUE.some(function(c){return c.id===cat;})) return;
-  active = cat; renderTabs(); renderGrid();
+/* ---- fields render (6 field cards, each with a dropdown of its courses) ---- */
+var FIELD_TAGLINE = {
+  tech: "Software, data, cloud, security & QA",
+  design: "Product, UX, graphics, motion & brand",
+  marketing: "Content, SEO, social, email & ads",
+  business: "PM, product, analysis, ops, agile & CRM",
+  support: "Support, community, VA, EA & team lead",
+  nocode: "Bubble, Adalo, Zapier, Make & Salesforce"
 };
+function fieldCardHTML(c){
+  var feat = c.tracks.filter(function(t){return t.featured;}).length;
+  var items = c.tracks.map(function(t){
+    if(t.featured){
+      return '<li><a href="field.html?cat='+c.id+'"><span>'+t.name+'</span>'+
+        '<span class="fc-dur">'+t.duration+'</span></a></li>';
+    }
+    return '<li><a class="fc-soon"><span>'+t.name+'</span><span class="fc-tag">Soon</span></a></li>';
+  }).join('');
+  return '<div class="card field-card" data-cat="'+c.id+'">'+
+    '<a class="field-card-head" href="field.html?cat='+c.id+'">'+
+      '<span><h3>'+c.label+'</h3><span class="fc-count">'+c.tracks.length+' tracks · '+(FIELD_TAGLINE[c.id]||'')+'</span></span>'+
+      '<span class="fc-go">Open →</span>'+
+    '</a>'+
+    '<button class="fc-toggle" aria-expanded="false">'+
+      '<span>See the '+c.tracks.length+' tracks</span><span class="fc-caret">▾</span>'+
+    '</button>'+
+    '<div class="fc-list"><div class="fc-list-inner"><ul>'+items+'</ul></div></div>'+
+  '</div>';
+}
+(function(){
+  var grid = document.getElementById('fieldGrid');
+  if(grid){
+    grid.innerHTML = MS.CATALOGUE.map(fieldCardHTML).join('');
+    grid.addEventListener('click', function(e){
+      var btn = e.target.closest('.fc-toggle'); if(!btn) return;
+      var card = btn.closest('.field-card');
+      var open = card.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+})();
 
-// Career & Skill Tracks dropdown
+/* ---- trending carousel (2 featured tracks per field) ---- */
+(function(){
+  var row = document.getElementById('trendRow'); if(!row) return;
+  var picks = [];
+  MS.CATALOGUE.forEach(function(c){
+    var feat = c.tracks.filter(function(t){return t.featured;}).slice(0,2);
+    feat.forEach(function(t){ picks.push({cat:c.label, t:t}); });
+  });
+  function tcard(p){
+    return '<a class="trend-card" href="syllabus.html?course='+p.t.slug+'">'+
+      '<span class="tc-field">'+p.cat+'</span>'+
+      '<h3>'+p.t.name+'</h3>'+
+      '<span class="tc-meta">'+p.t.courses+' · '+p.t.duration+'</span>'+
+      '<span class="tc-go">View syllabus →</span>'+
+    '</a>';
+  }
+  var html = picks.map(tcard).join('');
+  row.innerHTML = html + html;   // duplicated for a seamless loop
+})();
+
+/* Career & Skill Tracks dropdown (links to field pages; just toggles on mobile) */
 (function(){
   var dd = document.getElementById('tracksDd');
   if(!dd) return;
@@ -516,18 +594,8 @@ window.MS_setCategory = function(cat){
   toggle.addEventListener('click', function(e){
     if(window.innerWidth <= 780){ e.preventDefault(); dd.classList.toggle('open'); }
   });
-  dd.querySelectorAll('.nav-dd-menu a[data-cat]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      e.preventDefault();
-      if(window.MS_setCategory) window.MS_setCategory(a.getAttribute('data-cat'));
-      document.getElementById('courses').scrollIntoView({behavior:'smooth'});
-      dd.classList.remove('open');
-      var nl = document.getElementById('navLinks'); if(nl) nl.classList.remove('open');
-    });
-  });
   document.addEventListener('click', function(e){ if(!dd.contains(e.target)) dd.classList.remove('open'); });
 })();
-renderTabs(); renderGrid();
 
 /* logged-in nav state */
 if (MS.session()){

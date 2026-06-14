@@ -1,7 +1,7 @@
 /* Mentorine School service worker — bump CACHE on EVERY HTML change and deploy sw.js alongside it. */
-const CACHE = "mentorine-v18";
+const CACHE = "mentorine-v19";
 const ASSETS = [
-  "index.html",
+  "index.html", "field.html",
   "register.html", "syllabus.html", "login.html", "dashboard.html", "access.html", "admin.html",
   "assets/style.css", "assets/app.js", "assets/liveliness.js", "assets/gate.js",
   "assets/logo.svg", "assets/og-image.png", "assets/icon-192.png", "assets/icon-512.png",
