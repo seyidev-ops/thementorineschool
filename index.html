@@ -88,6 +88,8 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .fc-list a .fc-tag{font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}
 
 /* trending carousel */
+.hero-trend{margin:1.8rem 0 .4rem}
+.hero-trend-label{display:block;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;font-weight:500}
 .trend{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 .trend-row{display:flex;gap:1rem;width:max-content;animation:trend-roll 48s linear infinite}
@@ -252,6 +254,7 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
           <a href="field.html?cat=business" role="menuitem">Business &amp; Operations</a>
           <a href="field.html?cat=support" role="menuitem">Support, Admin &amp; Community</a>
           <a href="field.html?cat=nocode" role="menuitem">No-Code &amp; Automation</a>
+          <a href="field.html?cat=skills" role="menuitem">Skills</a>
           <a href="https://aimadesimpleschool.com" target="_blank" rel="noopener" class="nav-dd-ai" role="menuitem">AI Made Simple ↗</a>
         </div>
       </div>
@@ -273,6 +276,14 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   <div class="wrap">
     <div class="kicker">Career &amp; Skill Development</div>
     <h1>Your gateway to a <em class="ac">future-ready</em> remote career.</h1>
+
+    <div class="hero-trend" id="trending">
+      <span class="hero-trend-label">Trending now</span>
+      <div class="trend" data-live="off" aria-label="Trending tracks">
+        <div class="trend-row" id="trendRow"></div>
+      </div>
+    </div>
+
     <p class="lede">Job-ready training for high-demand remote roles — for beginners, professionals levelling up, and founders building their own thing.</p>
     <div class="hero-actions">
       <a class="btn" href="register.html">Register for a track <span class="arr">→</span></a>
@@ -329,23 +340,6 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <p>Pick a field to see its tracks — every syllabus is open. Look before you leap.</p>
     </div>
     <div class="fields" id="fieldGrid" data-live="off"></div>
-  </div>
-</section>
-
-<!-- TRENDING CAROUSEL -->
-<section class="section" id="trending">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="kicker">Trending Now</div>
-      <h2>Popular <em class="ac">tracks</em> right now.</h2>
-      <p>A taste from across the fields. Hover to pause; tap any track to explore.</p>
-    </div>
-  </div>
-  <div class="trend" data-live="off" aria-label="Trending tracks">
-    <div class="trend-row" id="trendRow"></div>
-  </div>
-  <div class="wrap" style="text-align:center;margin-top:clamp(1.8rem,4vw,2.6rem)">
-    <a class="btn" href="register.html">Register for a track <span class="arr">→</span></a>
   </div>
 </section>
 
