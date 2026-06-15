@@ -12,9 +12,9 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Course Syllabus — The Mentorine School by Ona Services">
 <meta property="og:description" content="Explore the full roadmap and modules for your chosen Career & Skill Track at The Mentorine School.">
-<meta property="og:image" content="assets/og-image.png">
+<meta property="og:image" content="assets/og/page-home.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="assets/og-image.png">
+<meta name="twitter:image" content="assets/og/page-home.png">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0D8C4F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,6 +146,19 @@ if (!syl){
   document.getElementById('sylSub').textContent = 'Please return to the course catalogue and choose a track.';
 } else {
   document.title = syl.title + ' — Syllabus — The Mentorine School';
+  (function setOg(){
+    function setMeta(prop, val, attr){
+      attr = attr || 'property';
+      var el = document.querySelector('meta['+attr+'="'+prop+'"]');
+      if(!el){ el=document.createElement('meta'); el.setAttribute(attr, prop); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    }
+    var img = 'assets/og/track-'+slug+'.png';
+    setMeta('og:image', img); setMeta('twitter:image', img, 'name');
+    setMeta('og:title', syl.title + ' — Syllabus · The Mentorine School');
+    var d = (track && track.blurb) ? track.blurb : (syl.subtitle || '');
+    setMeta('og:description', d); setMeta('description', d, 'name');
+  })();
   document.getElementById('sylTitle').innerHTML = syl.title;
   document.getElementById('sylSub').textContent = syl.subtitle;
 

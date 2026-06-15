@@ -12,9 +12,9 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Career & Skill Field — The Mentorine School by Ona Services">
 <meta property="og:description" content="Browse every course in this field — full briefs, syllabi and durations — at The Mentorine School.">
-<meta property="og:image" content="assets/og-image.png">
+<meta property="og:image" content="assets/og/page-home.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="assets/og-image.png">
+<meta name="twitter:image" content="assets/og/page-home.png">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0D8C4F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,6 +150,19 @@ function cardHTML(t){
   if(!category){ category = MS.CATALOGUE[0]; cat = category.id; }
 
   document.title = category.label + ' — The Mentorine School';
+  (function setOg(){
+    function setMeta(prop, val, attr){
+      attr = attr || 'property';
+      var el = document.querySelector('meta['+attr+'="'+prop+'"]');
+      if(!el){ el=document.createElement('meta'); el.setAttribute(attr, prop); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    }
+    var img = 'assets/og/cat-'+cat+'.png';
+    setMeta('og:image', img); setMeta('twitter:image', img, 'name');
+    setMeta('og:title', category.label + ' · The Mentorine School');
+    var d = (FIELD_DESC[cat] || ('Browse every track in '+category.label+' at The Mentorine School.'));
+    setMeta('og:description', d); setMeta('description', d, 'name');
+  })();
   document.getElementById('fieldTitle').textContent = category.label;
   document.getElementById('fieldDesc').textContent = FIELD_DESC[cat] || '';
   document.getElementById('fieldCount').textContent = category.tracks.length + ' tracks in this field';
