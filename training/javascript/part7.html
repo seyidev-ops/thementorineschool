@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Databases &amp; Capstone — JavaScript Developer · The Mentorine School</title>
+<title>Async &amp; APIs — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Async &amp; APIs — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,237 +294,50 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 7 · WEEKS 12–14</div>
-    <h1>Databases &amp; the Full-Stack Capstone</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#7-1-why-databases">7.1  Why Databases?</a><a href="#7-2-sql-in-one-sitting-practical">7.2  SQL in One Sitting (Practical)</a><a href="#7-3-the-capstone-remote-job-board-a-complete-full-stack-application">7.3  THE CAPSTONE: Remote Job Board — A Complete Full-Stack Application</a></div>
+    <div class="kicker">Part 7 · WEEKS 4–5</div>
+    <h1>Async JavaScript &amp; APIs</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#7-1-the-web-is-asynchronous">7.1 The Web Is Asynchronous</a><a href="#7-2-promises-async-await-and-fetch-practical">7.2 Promises, Async/Await, and Fetch (Practical)</a><a href="#7-3-building-real-dynamic-apps">7.3 Building Real, Dynamic Apps</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Weeks 12–14 (12–14 days).</em></p>
-<h2 id="7-1-why-databases">7.1  Why Databases?</h2>
-<p>Your Part 6 API loses everything when the server restarts, because data lived in a variable in memory. A database is a program built purely to store, organise, search, and protect data permanently. The dominant family is relational databases, which store data in tables (like disciplined spreadsheets) and speak a language called SQL — Structured Query Language. SQL has been a core developer skill for fifty years and appears in virtually every backend job description.</p>
-<p>We will use <strong>SQLite</strong>: a complete, real SQL database that lives in a single file — zero installation, zero configuration, and the same SQL skills transfer directly to PostgreSQL and MySQL in production jobs.</p>
-<h2 id="7-2-sql-in-one-sitting-practical">7.2  SQL in One Sitting (Practical)</h2>
-<p>Node ships with SQLite support built in (Node 22+, via <code>node:sqlite</code>). Create this file in a new <code>part7-capstone</code> folder and run it with <code>node sql-practice.js</code>:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/sql-practice.js</code></div>
-<pre><code>import { DatabaseSync } from "node:sqlite";
-const db = new DatabaseSync("practice.db");   // creates the file if absent
-// CREATE TABLE: define the shape of your data
-db.exec(`
-  CREATE TABLE IF NOT EXISTS jobs (
-    id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    title   TEXT NOT NULL,
-    company TEXT NOT NULL,
-    salary  INTEGER DEFAULT 0,
-    type    TEXT DEFAULT 'full-time'
-  )
-`);
-// INSERT: add rows. The ? placeholders prevent SQL injection attacks —
-// NEVER glue user input directly into a SQL string.
-const insert = db.prepare(
-  "INSERT INTO jobs (title, company, salary, type) VALUES (?, ?, ?, ?)"
-);
-insert.run("Frontend Developer", "RemoteFirst", 250000, "full-time");
-insert.run("Data Analyst", "InsightCo", 350000, "full-time");
-insert.run("Virtual Assistant", "GlobalDesk", 150000, "part-time");
-// SELECT: read rows
-const all = db.prepare("SELECT * FROM jobs").all();
-console.log("All jobs:", all);
-const wellPaid = db.prepare(
-  "SELECT title, salary FROM jobs WHERE salary &gt;= ? ORDER BY salary DESC"
-).all(200000);
-console.log("₦200k+:", wellPaid);
-// UPDATE and DELETE
-db.prepare("UPDATE jobs SET salary = ? WHERE id = ?").run(280000, 1);
-db.prepare("DELETE FROM jobs WHERE id = ?").run(3);
-// Aggregate functions
-const stats = db.prepare(
-  "SELECT COUNT(*) AS total, AVG(salary) AS avgSalary FROM jobs"
-).get();
-console.log(stats);</code></pre>
-<div class="tbl-wrap"><table>
-<thead><tr><th>SQL Command</th><th>Purpose</th></tr></thead><tbody>
-<tr><td>CREATE TABLE</td><td>Define a new table and its columns</td></tr>
-<tr><td>INSERT INTO ... VALUES</td><td>Add a row</td></tr>
-<tr><td>SELECT ... FROM ... WHERE</td><td>Read rows matching a condition</td></tr>
-<tr><td>UPDATE ... SET ... WHERE</td><td>Change matching rows (never forget WHERE!)</td></tr>
-<tr><td>DELETE FROM ... WHERE</td><td>Remove matching rows (never forget WHERE!)</td></tr>
-<tr><td>ORDER BY / LIMIT</td><td>Sort results / cap how many return</td></tr>
-<tr><td>COUNT, AVG, SUM, MAX, MIN</td><td>Calculations across rows</td></tr>
-</tbody></table></div>
-<h2 id="7-3-the-capstone-remote-job-board-a-complete-full-stack-application">7.3  THE CAPSTONE: Remote Job Board — A Complete Full-Stack Application</h2>
-<p>This is the project that goes at the top of your CV. It combines every single skill from Parts 1–7: semantic HTML, styled responsive CSS, DOM manipulation, fetch, async/await, an Express REST API, and a SQL database. Build it in three files inside part7-capstone.</p>
-<h3>Step 1 — The Server With a Real Database</h3>
-<p>Run <code>npm init -y</code> then <code>npm install express</code> in the folder, add <code>"type": "module"</code> to package.json, and create:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/server.js</code></div>
-<pre><code>import express from "express";
-import { DatabaseSync } from "node:sqlite";
-const app = express();
-const db = new DatabaseSync("jobboard.db");
-db.exec(`
-  CREATE TABLE IF NOT EXISTS jobs (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    title     TEXT NOT NULL,
-    company   TEXT NOT NULL,
-    salary    INTEGER DEFAULT 0,
-    type      TEXT DEFAULT 'full-time',
-    createdAt TEXT DEFAULT CURRENT_TIMESTAMP
-  )
-`);
-app.use(express.json());
-app.use(express.static("public"));   // serves the front end
-// READ all (optional ?type= and ?search= filters)
-app.get("/api/jobs", (req, res) =&gt; {
-  const { type, search } = req.query;
-  let sql = "SELECT * FROM jobs WHERE 1=1";
-  const params = [];
-  if (type)   { sql += " AND type = ?";                 params.push(type); }
-  if (search) { sql += " AND (title LIKE ? OR company LIKE ?)";
-                params.push(`%${search}%`, `%${search}%`); }
-  sql += " ORDER BY createdAt DESC";
-  res.json(db.prepare(sql).all(...params));
-});
-// CREATE
-app.post("/api/jobs", (req, res) =&gt; {
-  const { title, company, salary, type } = req.body;
-  if (!title?.trim() || !company?.trim()) {
-    return res.status(400).json({ error: "title and company are required" });
-  }
-  const info = db.prepare(
-    "INSERT INTO jobs (title, company, salary, type) VALUES (?, ?, ?, ?)"
-  ).run(title.trim(), company.trim(), Number(salary) || 0, type || "full-time");
-  const job = db.prepare("SELECT * FROM jobs WHERE id = ?")
-               .get(info.lastInsertRowid);
-  res.status(201).json(job);
-});
-// DELETE
-app.delete("/api/jobs/:id", (req, res) =&gt; {
-  const info = db.prepare("DELETE FROM jobs WHERE id = ?")
-                .run(Number(req.params.id));
-  if (info.changes === 0) return res.status(404).json({ error: "Not found" });
-  res.status(204).end();
-});
-app.listen(3000, () =&gt;
-  console.log("Job Board running at http://localhost:3000"));</code></pre>
-<h3>Step 2 — The Front End</h3>
-<p>Create a <code>public</code> folder containing:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/public/index.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Remote Job Board&lt;/title&gt;
-  &lt;style&gt;
-    * { box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; max-width: 720px;
-           margin: 0 auto; padding: 24px 16px; background: #faf9f6; }
-    h1 { font-family: Georgia, serif; }
-    h1 span { color: #C8A04B; }
-    .panel { background: #fff; border: 1px solid #e5e0d5;
-             border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-    input, select { padding: 10px; border: 1px solid #ccc;
-                    border-radius: 6px; margin: 4px 0; width: 100%; }
-    button { padding: 10px 18px; background: #0A0A0A; color: #fff;
-             border: none; border-radius: 6px; cursor: pointer; }
-    .job { display: flex; justify-content: space-between;
-           align-items: center; padding: 14px 0; border-bottom: 1px solid #eee; }
-    .salary { color: #C8A04B; font-weight: bold; }
-    .badge { font-size: 12px; background: #f0ebe0; padding: 2px 10px;
-             border-radius: 999px; }
-    .del { background: transparent; color: #c0392b; font-size: 18px; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Remote&lt;span&gt;JobBoard&lt;/span&gt;&lt;/h1&gt;
-  &lt;div class="panel"&gt;
-    &lt;h2&gt;Post a Job&lt;/h2&gt;
-    &lt;form id="jobForm"&gt;
-      &lt;input id="title" placeholder="Job title" required&gt;
-      &lt;input id="company" placeholder="Company" required&gt;
-      &lt;input id="salary" type="number" placeholder="Monthly salary (₦)"&gt;
-      &lt;select id="type"&gt;
-        &lt;option value="full-time"&gt;Full-time&lt;/option&gt;
-        &lt;option value="part-time"&gt;Part-time&lt;/option&gt;
-        &lt;option value="contract"&gt;Contract&lt;/option&gt;
-      &lt;/select&gt;
-      &lt;button&gt;Post Job&lt;/button&gt;
-    &lt;/form&gt;
-  &lt;/div&gt;
-  &lt;div class="panel"&gt;
-    &lt;input id="search" placeholder="Search jobs or companies…"&gt;
-    &lt;div id="jobList"&gt;&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;script src="app.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part7-capstone/public/app.js</code></div>
-<pre><code>const form = document.querySelector("#jobForm");
-const list = document.querySelector("#jobList");
-const search = document.querySelector("#search");
-async function loadJobs() {
-  const q = search.value.trim();
-  const url = "/api/jobs" + (q ? "?search=" + encodeURIComponent(q) : "");
-  const res = await fetch(url);
-  const jobs = await res.json();
-  list.innerHTML = jobs.length === 0
-    ? "&lt;p&gt;No jobs found. Post the first one!&lt;/p&gt;"
-    : "";
-  jobs.forEach(job =&gt; {
-    const row = document.createElement("div");
-    row.className = "job";
-    row.innerHTML = `
-      &lt;div&gt;
-        &lt;strong&gt;${job.title}&lt;/strong&gt; · ${job.company}
-        &lt;span class="badge"&gt;${job.type}&lt;/span&gt;&lt;br&gt;
-        &lt;span class="salary"&gt;₦${Number(job.salary).toLocaleString()}/mo&lt;/span&gt;
-      &lt;/div&gt;`;
-    const del = document.createElement("button");
-    del.className = "del";
-    del.textContent = "✕";
-    del.addEventListener("click", async () =&gt; {
-      await fetch("/api/jobs/" + job.id, { method: "DELETE" });
-      loadJobs();
-    });
-    row.appendChild(del);
-    list.appendChild(row);
-  });
-}
-form.addEventListener("submit", async (e) =&gt; {
-  e.preventDefault();
-  const body = {
-    title:   document.querySelector("#title").value,
-    company: document.querySelector("#company").value,
-    salary:  document.querySelector("#salary").value,
-    type:    document.querySelector("#type").value,
-  };
-  const res = await fetch("/api/jobs", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  if (res.ok) { form.reset(); loadJobs(); }
-  else { alert((await res.json()).error); }
-});
-search.addEventListener("input", loadJobs);
-loadJobs();</code></pre>
-<p>Run <code>node server.js</code> and open <code>http://localhost:3000</code>. Post jobs, search live, delete entries — then restart the server and watch your data survive. <strong>You have built a full-stack application with a database.</strong></p>
-<h3>Capstone Upgrade Challenges (do at least two)</h3>
-<p>Add an "Apply" button per job that records applications in a second table (applications: id, jobId, applicantName, email).</p>
-<p>Add an edit feature using the PUT method.</p>
-<p>Add filter buttons (All / Full-time / Part-time / Contract) that use the ?type= query parameter.</p>
-<p>Add server-side validation: salary must be a positive number; title at most 80 characters.</p>
-<p>Add a simple admin password: POST and DELETE require a header "x-admin-key" that the server checks.</p>
+<h2 id="7-1-the-web-is-asynchronous">7.1 The Web Is Asynchronous</h2>
+<p>Real web apps don't work with only local data — they <em>fetch</em> data from servers and APIs (a weather app gets live weather, a shop loads products, a social app loads posts), and this happens <strong>asynchronously</strong>: you request the data, and it arrives <em>later</em> (network requests take time). Understanding and handling <strong>async JavaScript</strong> is therefore essential for building real apps, and it's the concept beginners most often stumble on (the golden rule 'embrace async'). The key idea: when you ask for data over the network, your code can't just wait and freeze — instead it continues, and you handle the data <em>when it arrives</em>. JavaScript's modern tools for this are <strong>promises</strong> (an object representing a value that will be available later) and <strong>async/await</strong> (syntax that makes asynchronous code read almost like normal sequential code). Combined with <strong><code>fetch</code></strong> (the built-in way to request data from APIs) and <strong>JSON</strong> (the format that data comes in — which you already understand from Part 3), you can connect your apps to the vast world of web APIs and live data. Mastering async and API calls is what turns static practice apps into <em>real, dynamic applications</em>.</p>
+<h2 id="7-2-promises-async-await-and-fetch-practical">7.2 Promises, Async/Await, and Fetch (Practical)</h2>
+<pre><code>ASYNC JAVASCRIPT &amp; APIs
+  THE PROBLEM: network requests take time -&gt; the result comes LATER (asynchronously)
+  PROMISES: an object representing a future value (resolves with data, or rejects with error)
+  ASYNC / AWAIT (the modern way — reads like normal code):
+    async function loadUsers() {
+      try {
+        const response = await fetch('https://api.example.com/users');  // wait for response
+        if (!response.ok) throw new Error('Request failed: ' + response.status);
+        const users = await response.json();   // parse the JSON body (also async)
+        return users;                          // use the data (e.g. render to the DOM)
+      } catch (error) {
+        console.error('Failed to load:', error);   // handle errors!
+        // show the user a friendly error message (update the DOM)
+      }
+    }
+  FETCH: the built-in way to call APIs (GET data, or POST/PUT/DELETE with options)
+    fetch(url, { method:'POST', headers:{'Content-Type':'application/json'},
+                 body: JSON.stringify(data) })
+  THE FLOW: fetch -&gt; await response -&gt; response.json() -&gt; use the data (render it)
+  HANDLE STATES: loading (show a spinner) · success (render) · error (friendly message)
+KEY: async/await + fetch + try/catch + .json() = get live data from APIs into your app.</code></pre>
+<p><strong>Promises</strong> represent a future value (resolving with data or rejecting with an error). <strong>Async/await</strong> is the modern way to handle them: mark a function <code>async</code>, <code>await fetch(url)</code> to get the response, check <code>response.ok</code>, <code>await response.json()</code> to parse the JSON body, then use the data — all wrapped in <strong>try/catch</strong> for error handling. <strong><code>fetch</code></strong> is the built-in way to call APIs (GET data by default, or POST/PUT/DELETE with options including headers and a JSON body). The typical <strong>flow</strong>: fetch → await the response → <code>.json()</code> → use the data (render it to the DOM). And handle the <strong>states</strong> a real app has: <em>loading</em> (show a spinner), <em>success</em> (render the data), and <em>error</em> (show a friendly message). This is how your apps get live data from the wider world.</p>
+<h2 id="7-3-building-real-dynamic-apps">7.3 Building Real, Dynamic Apps</h2>
+<p>Fetching data from APIs is what lets you build <em>real, dynamic applications</em> — the kind that work with live, real-world information — and it brings your whole skill set together. Now you can build: a weather app (fetch live weather for a city), a movie or book search app (query a public API), a currency converter, a GitHub profile viewer, a news reader, a data dashboard — apps that pull real data and display it interactively. Each combines everything: <code>fetch</code> and async/await (this part) get the data, JSON and array methods (Part 3) process it, the DOM (Part 5) renders it, events and forms (Part 6) let the user request it (e.g. searching), and good async error handling (Part 8) makes it robust. This is also a crucial professional skill because <em>almost every real app talks to APIs</em> — front ends fetch from back ends (like the Node APIs from the school's Node skill), apps integrate third-party services, and data flows over the network constantly. Handling that data flow well — fetching, awaiting, parsing, rendering, and gracefully handling loading and error states — is core front-end competence. It's also exactly the pattern React apps use (fetch data, store it in state, render it). Building apps that fetch and display live data from real APIs is a major milestone: it proves you can build genuine, dynamic, real-world applications, not just static exercises — a compelling portfolio centrepiece.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Build apps that fetch live data: use async/await and fetch to call a real public API, parse the JSON, and render it to the page — handling loading and error states gracefully — e.g. a weather app, a search app querying a public API, or a data viewer. Combine it with events/forms so the user drives it. Fetching and displaying live API data proves you can build real, dynamic applications — a compelling portfolio centrepiece and exactly the pattern React uses.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Node.js &amp; Express</span></a>
-  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Cross-Language Integration</span></a>
+  <a href="part6.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 6 · Events &amp; Forms</span></a>
+  <a class="next" href="part8.html"><span class="dir">NEXT →</span><span class="pt">Part 8 · Debugging &amp; Clean Code</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -520,7 +346,7 @@ loadJobs();</code></pre>
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

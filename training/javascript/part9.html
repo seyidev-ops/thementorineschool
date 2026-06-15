@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professional Practice — JavaScript Developer · The Mentorine School</title>
+<title>Capstone &amp; Career — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Capstone &amp; Career — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,92 +294,31 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 9 · WEEKS 15–16</div>
-    <h1>Professional Practice: Git, Debugging, Deployment &amp; Getting Hired</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#9-1-git-github-the-developer-s-time-machine">9.1  Git &amp; GitHub: The Developer’s Time Machine</a><a href="#9-2-debugging-like-a-professional">9.2  Debugging Like a Professional</a><a href="#9-3-deploying-putting-your-work-on-the-real-internet">9.3  Deploying: Putting Your Work on the Real Internet</a><a href="#9-4-your-portfolio-and-the-job-hunt">9.4  Your Portfolio and the Job Hunt</a><a href="#9-5-your-daily-professional-habits-from-today">9.5  Your Daily Professional Habits, From Today</a></div>
+    <div class="kicker">Part 9 · WEEKS 6–7</div>
+    <h1>Capstone, Portfolio &amp; Career</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#9-1-the-capstone-the-javascript-portfolio">9.1 THE CAPSTONE: The JavaScript Portfolio</a><a href="#9-2-javascript-in-your-remote-career">9.2 JavaScript in Your Remote Career</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Weeks 15–16 (10–12 days).</em></p>
-<h2 id="9-1-git-github-the-developer-s-time-machine">9.1  Git &amp; GitHub: The Developer’s Time Machine</h2>
-<p>Git records snapshots ("commits") of your project so you can travel back in time, work fearlessly, and collaborate. GitHub hosts your Git projects online — and doubles as your public proof of skill. Recruiters genuinely look at it. No professional developer works without Git; it appears on essentially every job description.</p>
-<h3>One-Time Setup</h3>
-<pre><code># Install Git from https://git-scm.com (defaults are fine), then:
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"</code></pre>
-<h3>The Daily Workflow (Practical: Publish Your Capstone)</h3>
-<pre><code>cd part7-capstone
-# 1. Tell Git which files to ignore (secrets and bulk):
-echo "node_modules/" &gt; .gitignore
-echo "*.db" &gt;&gt; .gitignore
-# 2. Initialise and take your first snapshot
-git init
-git add .                          # stage everything
-git commit -m "Initial commit: full-stack job board"
-# 3. Create an empty repository named job-board on github.com,
-#    then connect and upload:
-git remote add origin https://github.com/YOUR-USERNAME/job-board.git
-git branch -M main
-git push -u origin main
-# 4. From now on, after every meaningful change:
-git add .
-git commit -m "Add search filtering to API"
-git push</code></pre>
-<p><strong>COMMIT MESSAGE DISCIPLINE</strong></p>
-<p>Write messages that complete the sentence "This commit will…": "Add salary validation", "Fix delete button bug". Your commit history becomes a professional diary that interviewers actually read.</p>
+<h2 id="9-1-the-capstone-the-javascript-portfolio">9.1 THE CAPSTONE: The JavaScript Portfolio</h2>
+<p>Bring the whole course together into a set of real, interactive web projects — the portfolio that proves you can program in JavaScript:</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>Command</th><th>What It Does</th></tr></thead><tbody>
-<tr><td>git status</td><td>Show what changed since the last commit</td></tr>
-<tr><td>git log --oneline</td><td>List your snapshot history</td></tr>
-<tr><td>git diff</td><td>Show the exact lines changed</td></tr>
-<tr><td>git checkout -b feature-x</td><td>Create a parallel timeline (branch) to experiment safely</td></tr>
-<tr><td>git merge feature-x</td><td>Bring a branch’s work into your main timeline</td></tr>
-<tr><td>git clone URL</td><td>Download any public project to learn from it</td></tr>
+<thead><tr><th>Deliverable</th><th>Contents</th><th>From</th></tr></thead><tbody>
+<tr><td>Solid fundamentals</td><td>Clean use of variables, control flow, functions</td><td>Parts 1–2</td></tr>
+<tr><td>Data manipulation</td><td>Array/object methods, working with data &amp; JSON</td><td>Part 3</td></tr>
+<tr><td>Modern, clean code</td><td>ES2015+ syntax, modules, idiomatic style</td><td>Parts 4, 8</td></tr>
+<tr><td>DOM-driven interactivity</td><td>Dynamic, data-driven page updates</td><td>Part 5</td></tr>
+<tr><td>Event &amp; form handling</td><td>Real user interaction with validation</td><td>Part 6</td></tr>
+<tr><td>A live-data app</td><td>Fetching and rendering real API data (async)</td><td>Part 7</td></tr>
+<tr><td>Robust, clean projects</td><td>Error handling, debugging, organised code</td><td>Part 8</td></tr>
+<tr><td>On GitHub</td><td>Documented, deployed projects</td><td>(Git skill)</td></tr>
 </tbody></table></div>
-<h2 id="9-2-debugging-like-a-professional">9.2  Debugging Like a Professional</h2>
-<p>Professionals are not people who write bug-free code; they are people who find bugs fast. Follow the DIRE method: Describe the error (read the message, top line first — it names the file and line number), Isolate the smallest failing piece, Replicate it reliably, then Experiment with one change at a time.</p>
-<p><strong>Console tactics: </strong><code>console.log({ variableName })</code> (braces print the name AND value), <code>console.table(arrayOfObjects)</code> for beautiful tabular output, <code>console.error()</code> for failures.</p>
-<p><strong>Breakpoints: </strong>in Chrome DevTools → Sources tab, click a line number; execution pauses there and you can inspect every variable, then step line by line. Strictly better than log-spamming for tricky bugs.</p>
-<p><strong>The rubber-duck method: </strong>explain your code, line by line, out loud, to an object on your desk. The bug routinely reveals itself mid-sentence. Every professional does this; few admit it.</p>
-<h3>The Five Errors Every Beginner Meets</h3>
-<div class="tbl-wrap"><table>
-<thead><tr><th>Error Message</th><th>Almost Always Means</th></tr></thead><tbody>
-<tr><td>Uncaught TypeError: Cannot read properties of null</td><td>Your selector found nothing — typo in the id/class, or the script ran before the HTML loaded</td></tr>
-<tr><td>ReferenceError: x is not defined</td><td>Misspelled variable name, or using it before declaring it</td></tr>
-<tr><td>SyntaxError: Unexpected token</td><td>A missing/extra bracket, parenthesis, or quote nearby</td></tr>
-<tr><td>Failed to fetch / CORS error</td><td>Server is not running, wrong URL/port, or the server has not allowed your origin (see Part 8.2)</td></tr>
-<tr><td>undefined is not a function</td><td>Calling something that is not a function — often a typo like .lenght() or calling a property</td></tr>
-</tbody></table></div>
-<h2 id="9-3-deploying-putting-your-work-on-the-real-internet">9.3  Deploying: Putting Your Work on the Real Internet</h2>
-<h3>Static Sites (Parts 1–5 projects) — Netlify, free</h3>
-<p>Push the project folder to GitHub (Section 9.1).</p>
-<p>Create a free account at netlify.com and choose "Import from GitHub".</p>
-<p>Select the repository, click Deploy. In about a minute you get a live URL like your-site.netlify.app — and every future git push redeploys automatically.</p>
-<h3>Full-Stack Apps (Parts 6–7) — Render, free tier</h3>
-<p>In package.json, add a start script: <code>"scripts": { "start": "node server.js" }</code>, and make the port flexible: <code>const PORT = process.env.PORT || 3000;</code></p>
-<p>Push to GitHub. Create a free account at render.com → New → Web Service → connect the repo.</p>
-<p>Build command: <code>npm install</code>. Start command: <code>npm start</code>. Deploy — your API and front end go live at a public URL.</p>
-<p><strong>NOTE ON FREE TIERS</strong></p>
-<p>Free services sleep after inactivity (first visit may take ~30 seconds) and a SQLite file may reset on redeploy — perfectly fine for a portfolio. Production apps graduate to a hosted PostgreSQL database, and your Part 7 SQL transfers almost unchanged.</p>
-<h2 id="9-4-your-portfolio-and-the-job-hunt">9.4  Your Portfolio and the Job Hunt</h2>
-<h3>The Portfolio That Gets Interviews</h3>
-<p><strong>Three to five deployed projects </strong>with live links AND GitHub links: your styled profile site, weather app or GitHub finder, the to-do or quiz app, and — front and centre — the full-stack Job Board capstone.</p>
-<p><strong>A README for every repository: </strong>what it does, a screenshot, the technologies used, how to run it locally, and one thing you found hard and solved. That last item is what interviewers ask about.</p>
-<p><strong>Green squares: </strong>commit code most days. A consistent GitHub activity graph quietly screams discipline.</p>
-<h3>Positioning Yourself (especially for remote roles)</h3>
-<p>CV headline: "Junior Full-Stack JavaScript Developer — HTML · CSS · JavaScript · Node.js · Express · SQL · Git". List projects above education; describe each with verbs and outcomes ("Built a full-stack job board with search, filtering and a SQLite database; deployed on Render").</p>
-<p>LinkedIn: same headline, featured section linking your live capstone, and one short post per week about what you built or learned. Documenting your journey in public attracts recruiters.</p>
-<p>Apply in volume with focus: junior/graduate front-end or full-stack JS roles, internships, and paid freelance gigs (small business sites are an underrated first income). Ten tailored applications beat a hundred generic ones.</p>
-<p>Interview preparation: re-do FizzBuzz, the array Big Three (map/filter/reduce), explain the event loop with the restaurant analogy, and be ready to walk through your capstone code line by line — because you wrote every line, you can.</p>
-<p>Keep growing: after this guide, the natural next steps are TypeScript (JavaScript with safety rails) and React (the dominant front-end framework). Your State → Render → Actions pattern from Part 4 means React will feel familiar, not foreign.</p>
-<h2 id="9-5-your-daily-professional-habits-from-today">9.5  Your Daily Professional Habits, From Today</h2>
-<p>Code 90+ minutes daily; commit and push what you build.</p>
-<p>Read error messages fully before searching for solutions.</p>
-<p>When stuck for more than 30 minutes, rubber-duck it, then search the exact error message, then ask for help with a minimal example.</p>
-<p>Rebuild one old project from memory each month — fluency comes from repetition, not exposure.</p>
-<p>Use official documentation (MDN Web Docs at developer.mozilla.org is your bible) over random blog posts.</p>
+<p>Aim for two or three genuinely interactive projects that show range: at least one that <em>fetches live API data</em> (a weather app, a search app, a data dashboard — the most impressive kind), one that's a solid interactive app (a to-do list, expense tracker, or quiz showing state, events, and DOM rendering), and ideally one that's a bit creative or personal. Make them <em>real</em> — working, reasonably polished, handling errors gracefully — and put them on <strong>GitHub</strong> (see the Git skill) with clear READMEs, ideally deployed live (e.g. GitHub Pages) so people can actually use them. Clean, modern, well-organised code is what reviewers notice. The portfolio's power is demonstrating you can <em>actually build interactive web things</em> with JavaScript — which is exactly what proves you're ready for front-end work and for the next step (React). Each project is concrete, clickable evidence of real skill.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Done means: a reviewer opens your GitHub and can <em>use</em> two or three real, interactive JavaScript projects — including one that fetches live API data — with clean modern code, dynamic DOM rendering, event/form handling, error handling, clear READMEs, and (ideally) live deployment. They see someone who can genuinely build interactive web applications in JavaScript. That reviewer is your goal.</p></div>
+<h2 id="9-2-javascript-in-your-remote-career">9.2 JavaScript in Your Remote Career</h2>
+<p>JavaScript is the foundation of an enormous range of remote tech careers, and mastering it opens many doors. The most direct is <strong>front-end development</strong> (building the interactive interfaces of websites and web apps — one of the most common and accessible entry points into tech), where JavaScript plus HTML/CSS is the core skill. From there, <strong>React</strong> (the school's React skill) is the natural next step — the dominant front-end framework, built entirely on the JavaScript you now know — and is in massive demand. With <strong>Node.js</strong> (the school's Node skill), the same language takes you into the <em>back end</em> and <strong>full-stack</strong> development (building both sides in JavaScript — a highly employable combination). JavaScript also underpins much <em>no-code/automation</em> and <em>AI tooling</em> work, and appears across countless roles. Because it's so foundational and so in-demand, 'I know JavaScript' (proven by a real portfolio) is a powerful, employable position, and the highest-leverage skill to have learned first. The field is portfolio-driven — your working, interactive projects matter more than credentials — which is exactly what this guide builds. In interviews, expect JavaScript fundamentals questions (closures, async, the DOM, array methods, <code>this</code>) and likely a coding exercise — all of which this guide prepares you for. Keep building real projects, learn React next, and consider Node for full-stack. The Mentorine School's career pillars take it from here, and JavaScript is the foundation beneath the React, Node, full-stack, and no-code tracks.</p>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part8.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 8 · Cross-Language Integration</span></a>
+  <a href="part8.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 8 · Debugging &amp; Clean Code</span></a>
   <a class="next" href="part10.html"><span class="dir">NEXT →</span><span class="pt">Part 10 · Cheat Sheets</span></a>
 </nav>
 </main>
@@ -374,7 +326,7 @@ git push</code></pre>
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -383,7 +335,7 @@ git push</code></pre>
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

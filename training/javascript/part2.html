@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSS — JavaScript Developer · The Mentorine School</title>
+<title>Control Flow &amp; Functions — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Control Flow &amp; Functions — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,123 +294,46 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 2 · WEEKS 2–3</div>
-    <h1>CSS: Making It Beautiful</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#2-1-what-is-css">2.1  What Is CSS?</a><a href="#2-2-selectors-targeting-what-you-style">2.2  Selectors: Targeting What You Style</a><a href="#2-3-the-box-model-the-most-important-idea-in-css">2.3  The Box Model: The Most Important Idea in CSS</a><a href="#2-4-flexbox-arranging-things-in-a-row-or-column">2.4  Flexbox: Arranging Things in a Row or Column</a><a href="#2-5-css-grid-two-dimensional-layouts">2.5  CSS Grid: Two-Dimensional Layouts</a><a href="#2-6-checkpoint-project-style-your-profile-page">2.6  Checkpoint Project: Style Your Profile Page</a></div>
+    <div class="kicker">Part 2 · WEEKS 1–2</div>
+    <h1>Control Flow &amp; Functions</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#2-1-decisions-and-repetition">2.1 Decisions and Repetition</a><a href="#2-2-conditionals-loops-and-functions-practical">2.2 Conditionals, Loops, and Functions (Practical)</a><a href="#2-3-functions-and-thinking-in-reusable-pieces">2.3 Functions and Thinking in Reusable Pieces</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Week 2–3 (7–10 days).</em></p>
-<h2 id="2-1-what-is-css">2.1  What Is CSS?</h2>
-<p>CSS (Cascading Style Sheets) controls how HTML looks: colours, fonts, spacing, layout, animation. A CSS rule has three parts: a selector (which elements to style), properties (what to change), and values (what to change it to).</p>
-<pre><code>/* selector { property: value; } */
-h1 {
-  color: #C8A04B;        /* gold text */
-  font-family: Georgia;  /* serif font */
-  font-size: 40px;
-}</code></pre>
-<p>Text between <code>/*</code> and <code>*/</code> is a CSS comment. Connect CSS to HTML by adding one line inside <code>&lt;head&gt;</code>: <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code>. Keeping CSS in its own file is professional practice.</p>
-<h2 id="2-2-selectors-targeting-what-you-style">2.2  Selectors: Targeting What You Style</h2>
-<div class="tbl-wrap"><table>
-<thead><tr><th>Selector</th><th>Targets</th><th>Example</th></tr></thead><tbody>
-<tr><td>p</td><td>Every &lt;p&gt; element</td><td>p { color: gray; }</td></tr>
-<tr><td>.card</td><td>Every element with class="card"</td><td>.card { padding: 16px; }</td></tr>
-<tr><td>#hero</td><td>The one element with id="hero"</td><td>#hero { background: black; }</td></tr>
-<tr><td>section p</td><td>Every &lt;p&gt; inside a &lt;section&gt;</td><td>section p { line-height: 1.6; }</td></tr>
-<tr><td>a:hover</td><td>A link while the mouse is over it</td><td>a:hover { color: gold; }</td></tr>
-<tr><td>*</td><td>Every element (use sparingly)</td><td>* { box-sizing: border-box; }</td></tr>
-</tbody></table></div>
-<h2 id="2-3-the-box-model-the-most-important-idea-in-css">2.3  The Box Model: The Most Important Idea in CSS</h2>
-<p>Every element on a page is a rectangular box made of four layers, from inside out: content (the text or image), padding (space inside the border), border (the visible edge), and margin (space outside, pushing neighbours away). When a layout looks wrong, the answer is almost always in the box model.</p>
-<pre><code>.card {
-  width: 300px;              /* content width */
-  padding: 20px;             /* breathing room inside */
-  border: 1px solid #ddd;    /* thin gray edge */
-  border-radius: 8px;        /* rounded corners */
-  margin: 16px;              /* space between cards */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);  /* soft shadow */
-}</code></pre>
-<div class="callout"><div class="co-label">PRO HABIT</div><p></p></div>
-<p>Start every stylesheet with: * { box-sizing: border-box; }  This makes padding and border count INSIDE the width you set, which is how every sane developer expects boxes to behave.</p>
-<h2 id="2-4-flexbox-arranging-things-in-a-row-or-column">2.4  Flexbox: Arranging Things in a Row or Column</h2>
-<p>Flexbox solves the historically painful problem of aligning things. Put <code>display: flex</code> on a parent, and its children line up obediently. This single practical teaches you 90% of what you will use daily:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part2-css/flexbox.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;title&gt;Flexbox Practice&lt;/title&gt;
-  &lt;style&gt;
-    .nav {
-      display: flex;
-      justify-content: space-between; /* push items apart horizontally */
-      align-items: center;            /* centre them vertically */
-      background: #0A0A0A;
-      color: white;
-      padding: 16px 32px;
-    }
-    .nav a { color: white; margin-left: 24px; text-decoration: none; }
-    .cards {
-      display: flex;
-      gap: 16px;            /* space between children */
-      flex-wrap: wrap;      /* wrap to next line on small screens */
-      padding: 32px;
-    }
-    .card {
-      flex: 1;              /* share available space equally */
-      min-width: 220px;
-      padding: 24px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;nav class="nav"&gt;
-    &lt;strong&gt;MyBrand&lt;/strong&gt;
-    &lt;div&gt;
-      &lt;a href="#"&gt;Home&lt;/a&gt;&lt;a href="#"&gt;Jobs&lt;/a&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;
-    &lt;/div&gt;
-  &lt;/nav&gt;
-  &lt;div class="cards"&gt;
-    &lt;div class="card"&gt;&lt;h3&gt;Card One&lt;/h3&gt;&lt;p&gt;Resize the window and watch me adapt.&lt;/p&gt;&lt;/div&gt;
-    &lt;div class="card"&gt;&lt;h3&gt;Card Two&lt;/h3&gt;&lt;p&gt;Flexbox shares space between us.&lt;/p&gt;&lt;/div&gt;
-    &lt;div class="card"&gt;&lt;h3&gt;Card Three&lt;/h3&gt;&lt;p&gt;gap keeps us politely apart.&lt;/p&gt;&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Change <code>justify-content</code> to <code>center</code>, then <code>flex-end</code>. Change <code>flex-direction</code> on .cards to <code>column</code>. Predict before you save.</p></div>
-<h2 id="2-5-css-grid-two-dimensional-layouts">2.5  CSS Grid: Two-Dimensional Layouts</h2>
-<p>Flexbox arranges items along one line; Grid arranges them in rows AND columns at once — perfect for photo galleries, dashboards, and job listing pages.</p>
-<pre><code>.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* three equal columns */
-  gap: 16px;
-}
-/* On phones, collapse to one column */
-@media (max-width: 600px) {
-  .gallery { grid-template-columns: 1fr; }
-}</code></pre>
-<p>That <code>@media</code> block is a media query — the foundation of responsive design. It says: "when the screen is 600 pixels wide or less, apply these rules instead." Mobile users are the majority of web traffic worldwide; every page you build must work on a phone.</p>
-<h2 id="2-6-checkpoint-project-style-your-profile-page">2.6  Checkpoint Project: Style Your Profile Page</h2>
-<p>Create <code>styles.css</code> next to your Part 1 <code>profile.html</code>, link it in the head, and meet these requirements:</p>
-<p>A dark header with flexbox navigation that stays readable on a phone.</p>
-<p>Project cards arranged with Grid: three columns on desktop, one on mobile.</p>
-<p>A consistent colour palette of no more than three colours, and at most two fonts (try Georgia for headings, Arial or system fonts for body).</p>
-<p>Styled form inputs with padding, borders, and a button that changes colour on :hover.</p>
-<p>Test on your phone: run Live Server, find your computer’s IP address, and visit it from your phone on the same Wi-Fi — or simply narrow the browser window.</p>
-<p><strong>DESIGN PRINCIPLE</strong></p>
-<p>Restraint reads as premium. Generous white space, few colours, clear hierarchy. A simple page done cleanly beats a busy page every time.</p>
+<h2 id="2-1-decisions-and-repetition">2.1 Decisions and Repetition</h2>
+<p>Programs become powerful when they can <em>make decisions</em> and <em>repeat work</em> — <strong>control flow</strong>. <strong>Conditionals</strong> (<code>if</code>/<code>else</code>, <code>switch</code>) let a program do different things based on conditions ('if the user is logged in, show the dashboard, else show login') — this is how programs respond to different situations. <strong>Loops</strong> (<code>for</code>, <code>while</code>, and the array iteration methods) let a program repeat an action ('for each item in the list, display it') — essential for working with collections of data and avoiding repetitive code. Together, conditionals and loops give your programs <em>logic</em> and <em>iteration</em>, turning a fixed sequence of statements into something that can adapt and process many things. Almost every real program is built from data (Part 1), decisions, repetition, and reusable logic (functions, next), so mastering control flow is a core building block. The skill is learning to express the logic you want — 'do this when that, repeat for each of these' — in code, which is the essence of programming.</p>
+<h2 id="2-2-conditionals-loops-and-functions-practical">2.2 Conditionals, Loops, and Functions (Practical)</h2>
+<pre><code>CONTROL FLOW &amp; FUNCTIONS
+  CONDITIONALS (decisions):
+    if (age &gt;= 18) { ... } else if (age &gt; 12) { ... } else { ... }
+    const label = age &gt;= 18 ? "adult" : "minor";   // ternary (short if/else)
+    switch (day) { case "Mon": ...; break; default: ... }
+  LOOPS (repetition):
+    for (let i = 0; i &lt; 5; i++) { ... }            // classic for loop
+    for (const item of myArray) { ... }            // for...of (loop over values — clean)
+    while (condition) { ... }                       // while
+    (and array methods like forEach/map — Part 3, often the best way)
+  FUNCTIONS (reusable, named blocks of logic):
+    function greet(name) { return `Hello, ${name}`; }   // declaration
+    const greet = (name) =&gt; `Hello, ${name}`;           // arrow function (modern)
+    greet("Ada");                                       // call it
+    · PARAMETERS (inputs) &amp; RETURN (output) · default params: (name = "friend")
+  SCOPE: variables exist where they're defined (block {} / function); inner can see outer
+KEY: conditionals decide · loops repeat · FUNCTIONS package reusable logic (inputs -&gt; return).</code></pre>
+<p><strong>Conditionals</strong>: <code>if</code>/<code>else if</code>/<code>else</code> for branching, the <em>ternary</em> (<code>condition ? a : b</code>) for short either/or, and <code>switch</code> for many cases. <strong>Loops</strong>: the classic <code>for</code>, the clean <code>for...of</code> (loop over values), <code>while</code>, and (Part 3) array methods that often replace manual loops. <strong>Functions</strong> — the heart of reusable code: a named block of logic with <em>parameters</em> (inputs) that <em>returns</em> an output, written as a declaration (<code>function greet(name) {...}</code>) or a modern <em>arrow function</em> (<code>const greet = (name) =&gt; ...</code>), and <em>called</em> by name. And <strong>scope</strong>: variables exist only where they're defined (within their block or function), with inner scopes able to see outer ones — a concept that, understood now, prevents much later confusion. Conditionals decide, loops repeat, and functions package reusable logic.</p>
+<h2 id="2-3-functions-and-thinking-in-reusable-pieces">2.3 Functions and Thinking in Reusable Pieces</h2>
+<p><strong>Functions</strong> deserve special emphasis because they're the foundation of all well-structured code — they let you package a piece of logic once and reuse it everywhere, with inputs (parameters) and an output (return value). Instead of repeating the same code, you write a function and call it; instead of one giant tangle, you break a program into named, focused functions that each do one clear thing — which makes code readable, reusable, testable, and maintainable. Learning to <em>think in functions</em> — 'what reusable operations does this program need?' and breaking problems into small functions that compose together — is a defining programming skill that carries into every language and framework. Key ideas to internalise: a function should ideally do <em>one</em> thing well, have a clear name describing what it does, take inputs and return outputs (rather than relying on hidden state), and be reusable. Understanding <strong>scope</strong> ties in here — functions create their own scope, which is part of what makes them clean, reusable units. Mastering control flow (logic and repetition) and functions (reusable, well-named units) gives you the ability to express real program logic in an organised way — and writing clear, reusable functions to solve problems demonstrates you can genuinely <em>program</em>, not just write isolated statements.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Write programs using control flow and functions: use conditionals (if/else, a ternary) and loops (for, for...of) to process data and make decisions, and — crucially — break the logic into small, well-named, reusable functions (clear inputs, clear return values, one job each). Thinking in reusable functions, with proper control flow, is a defining programming skill that carries into every language and framework.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part1.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 1 · HTML</span></a>
-  <a class="next" href="part3.html"><span class="dir">NEXT →</span><span class="pt">Part 3 · JavaScript Fundamentals</span></a>
+  <a href="part1.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 1 · Foundations</span></a>
+  <a class="next" href="part3.html"><span class="dir">NEXT →</span><span class="pt">Part 3 · Data Structures</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -406,7 +342,7 @@ h1 {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

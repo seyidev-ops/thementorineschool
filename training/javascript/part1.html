@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTML — JavaScript Developer · The Mentorine School</title>
+<title>Foundations — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Foundations — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,248 +294,46 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 1 · WEEKS 1–2</div>
-    <h1>HTML: The Skeleton of Every Web Page</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#1-1-what-is-html">1.1  What Is HTML?</a><a href="#1-2-your-first-web-page-practical">1.2  Your First Web Page (Practical)</a><a href="#1-3-the-essential-tags-your-daily-vocabulary">1.3  The Essential Tags (Your Daily Vocabulary)</a><a href="#1-4-attributes-giving-tags-extra-information">1.4  Attributes: Giving Tags Extra Information</a><a href="#1-5-semantic-html-writing-pages-that-mean-something">1.5  Semantic HTML: Writing Pages That Mean Something</a><a href="#1-6-forms-collecting-information-from-users">1.6  Forms: Collecting Information From Users</a><a href="#1-7-tables-and-media">1.7  Tables and Media</a><a href="#1-8-checkpoint-project-your-personal-profile-page">1.8  Checkpoint Project: Your Personal Profile Page</a></div>
+    <div class="kicker">Part 1 · WEEK 1</div>
+    <h1>Foundations</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#1-1-what-programming-is-in-javascript">1.1 What Programming Is, in JavaScript</a><a href="#1-2-variables-types-and-operators-practical">1.2 Variables, Types, and Operators (Practical)</a><a href="#1-3-running-javascript-and-building-habits">1.3 Running JavaScript and Building Habits</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Weeks 1–2 (10–14 days).</em></p>
-<h2 id="1-1-what-is-html">1.1  What Is HTML?</h2>
-<p>HTML stands for HyperText Markup Language. It is not a programming language — it is a markup language, which means it describes structure, not behaviour. Think of building a house: HTML is the skeleton and walls, CSS (Part 2) is the paint and decoration, and JavaScript (Part 3 onwards) is the electricity and plumbing that makes things actually work.</p>
-<p>Every web page you have ever visited — Google, Facebook, your bank — is built on HTML. When your browser loads a page, it reads an HTML file and draws what it describes.</p>
-<h2 id="1-2-your-first-web-page-practical">1.2  Your First Web Page (Practical)</h2>
-<p>In VS Code, right-click the <code>part1-html</code> folder and choose New File. Name it <code>index.html</code> — exactly that, all lowercase.</p>
-<p>Copy and paste the code below into the file, then press Ctrl+S (Cmd+S on Mac) to save.</p>
-<p>Right-click anywhere inside the file and choose "Open with Live Server". Your browser opens with your first web page.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/index.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;My First Web Page&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Hello, World! I am becoming a software developer.&lt;/h1&gt;
-  &lt;p&gt;This is my very first web page, built with my own hands.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3>Line-by-Line Breakdown</h3>
-<p><code>&lt;!DOCTYPE html&gt;</code> — tells the browser "this is a modern HTML5 document". Always the first line.</p>
-<p><code>&lt;html lang="en"&gt;</code> — the root container of everything. <code>lang="en"</code> tells screen readers and search engines the page is in English.</p>
-<p><code>&lt;head&gt;</code> — information ABOUT the page (title, character set). Nothing here is visible on the page itself.</p>
-<p><code>&lt;meta name="viewport" ...&gt;</code> — makes the page display properly on phones. Include it in every page you ever build.</p>
-<p><code>&lt;title&gt;</code> — the text shown in the browser tab.</p>
-<p><code>&lt;body&gt;</code> — everything visible lives here.</p>
-<p><code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> — a top-level heading and a paragraph.</p>
-<p><strong>THE ANATOMY OF A TAG</strong></p>
-<p>Most HTML elements have an opening tag &lt;p&gt;, content, and a closing tag &lt;/p&gt; with a forward slash. The browser reads &lt;p&gt;Hello&lt;/p&gt; as "this is a paragraph containing the word Hello". Forgetting a closing tag is the number one beginner bug.</p>
-<h2 id="1-3-the-essential-tags-your-daily-vocabulary">1.3  The Essential Tags (Your Daily Vocabulary)</h2>
-<div class="tbl-wrap"><table>
-<thead><tr><th>Tag</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
-<tr><td>&lt;h1&gt; to &lt;h6&gt;</td><td>Headings, biggest to smallest. One &lt;h1&gt; per page.</td><td>&lt;h2&gt;About Me&lt;/h2&gt;</td></tr>
-<tr><td>&lt;p&gt;</td><td>Paragraph of text</td><td>&lt;p&gt;I live in Abuja.&lt;/p&gt;</td></tr>
-<tr><td>&lt;a&gt;</td><td>Link (anchor) to another page</td><td>&lt;a href="https://google.com"&gt;Search&lt;/a&gt;</td></tr>
-<tr><td>&lt;img&gt;</td><td>Image (self-closing, no end tag)</td><td>&lt;img src="me.jpg" alt="My photo"&gt;</td></tr>
-<tr><td>&lt;ul&gt; / &lt;ol&gt; / &lt;li&gt;</td><td>Unordered (bullet) / ordered (numbered) lists and list items</td><td>&lt;ul&gt;&lt;li&gt;Rice&lt;/li&gt;&lt;li&gt;Beans&lt;/li&gt;&lt;/ul&gt;</td></tr>
-<tr><td>&lt;div&gt;</td><td>Generic container box for grouping</td><td>&lt;div class="card"&gt;...&lt;/div&gt;</td></tr>
-<tr><td>&lt;span&gt;</td><td>Generic inline container inside text</td><td>&lt;span class="highlight"&gt;key&lt;/span&gt;</td></tr>
-<tr><td>&lt;strong&gt; / &lt;em&gt;</td><td>Important (bold) / emphasised (italic) text</td><td>&lt;strong&gt;Warning&lt;/strong&gt;</td></tr>
-<tr><td>&lt;br&gt; / &lt;hr&gt;</td><td>Line break / horizontal divider line</td><td>&lt;hr&gt;</td></tr>
-<tr><td>&lt;button&gt;</td><td>Clickable button</td><td>&lt;button&gt;Submit&lt;/button&gt;</td></tr>
-</tbody></table></div>
-<h3>Practical: A Page Using Every Essential Tag</h3>
-<p>Create a new file <code>tags-practice.html</code> in the same folder, paste this, save, and open with Live Server:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/tags-practice.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Tag Practice&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;The Developer's Cookbook&lt;/h1&gt;
-  &lt;p&gt;Welcome to my collection of &lt;strong&gt;simple recipes&lt;/strong&gt; for busy coders.&lt;/p&gt;
-  &lt;hr&gt;
-  &lt;h2&gt;Jollof Rice Essentials&lt;/h2&gt;
-  &lt;p&gt;You will need the following &lt;em&gt;core ingredients&lt;/em&gt;:&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Long-grain rice&lt;/li&gt;
-    &lt;li&gt;Tomatoes and peppers&lt;/li&gt;
-    &lt;li&gt;Onions and seasoning&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;h2&gt;Steps&lt;/h2&gt;
-  &lt;ol&gt;
-    &lt;li&gt;Blend tomatoes, peppers and onions.&lt;/li&gt;
-    &lt;li&gt;Fry the blend in oil until it thickens.&lt;/li&gt;
-    &lt;li&gt;Add rice and stock, then cook on low heat.&lt;/li&gt;
-  &lt;/ol&gt;
-  &lt;h2&gt;Learn More&lt;/h2&gt;
-  &lt;p&gt;Read the full guide on
-    &lt;a href="https://www.allrecipes.com" target="_blank"&gt;AllRecipes&lt;/a&gt;.
-  &lt;/p&gt;
-  &lt;button&gt;Save This Recipe&lt;/button&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a third recipe section with its own heading, an image using <code>&lt;img src="https://picsum.photos/400/200" alt="Food photo"&gt;</code>, and a numbered list of at least four steps. Note: <code>target="_blank"</code> makes a link open in a new tab.</p></div>
-<h2 id="1-4-attributes-giving-tags-extra-information">1.4  Attributes: Giving Tags Extra Information</h2>
-<p>Attributes live inside the opening tag and follow the pattern <code>name="value"</code>. You have already used several: <code>href</code> tells a link where to go, <code>src</code> tells an image where its file is, and <code>alt</code> provides text if the image fails to load (and for visually impaired users). Two attributes are so important they get their own introduction:</p>
-<p><code>id="something"</code> — a unique name for ONE element on a page. Like a national ID number — no two elements may share it. JavaScript will use ids constantly.</p>
-<p><code>class="something"</code> — a reusable label that MANY elements can share. Like a uniform — everyone in class "card" can be styled the same way by CSS.</p>
-<h2 id="1-5-semantic-html-writing-pages-that-mean-something">1.5  Semantic HTML: Writing Pages That Mean Something</h2>
-<p>You could build an entire site out of <code>&lt;div&gt;</code> boxes, but professionals use semantic tags — tags whose names describe their purpose. Search engines rank semantic pages higher, screen readers navigate them better, and other developers understand them faster.</p>
-<div class="tbl-wrap"><table>
-<thead><tr><th>Semantic Tag</th><th>Purpose</th></tr></thead><tbody>
-<tr><td>&lt;header&gt;</td><td>Top section of a page or article — logo, title, navigation</td></tr>
-<tr><td>&lt;nav&gt;</td><td>Navigation links</td></tr>
-<tr><td>&lt;main&gt;</td><td>The unique main content of the page (one per page)</td></tr>
-<tr><td>&lt;section&gt;</td><td>A themed grouping of content, usually with a heading</td></tr>
-<tr><td>&lt;article&gt;</td><td>Self-contained content: a blog post, a job listing, a product card</td></tr>
-<tr><td>&lt;aside&gt;</td><td>Side content: related links, adverts, author bio</td></tr>
-<tr><td>&lt;footer&gt;</td><td>Bottom of page: copyright, contact, social links</td></tr>
-</tbody></table></div>
-<h2 id="1-6-forms-collecting-information-from-users">1.6  Forms: Collecting Information From Users</h2>
-<p>Forms are how the web collects data — logins, registrations, searches, payments. Master them now; every project from Part 4 onwards uses them.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/form-practice.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Form Practice&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Workshop Registration&lt;/h1&gt;
-  &lt;form&gt;
-    &lt;label for="fullname"&gt;Full Name&lt;/label&gt;&lt;br&gt;
-    &lt;input type="text" id="fullname" name="fullname"
-           placeholder="e.g. Adaeze Okafor" required&gt;&lt;br&gt;&lt;br&gt;
-    &lt;label for="email"&gt;Email Address&lt;/label&gt;&lt;br&gt;
-    &lt;input type="email" id="email" name="email" required&gt;&lt;br&gt;&lt;br&gt;
-    &lt;label for="phone"&gt;Phone Number&lt;/label&gt;&lt;br&gt;
-    &lt;input type="tel" id="phone" name="phone"&gt;&lt;br&gt;&lt;br&gt;
-    &lt;label for="track"&gt;Choose a Track&lt;/label&gt;&lt;br&gt;
-    &lt;select id="track" name="track"&gt;
-      &lt;option value="frontend"&gt;Front-End Development&lt;/option&gt;
-      &lt;option value="backend"&gt;Back-End Development&lt;/option&gt;
-      &lt;option value="fullstack"&gt;Full-Stack Development&lt;/option&gt;
-    &lt;/select&gt;&lt;br&gt;&lt;br&gt;
-    &lt;p&gt;Experience level:&lt;/p&gt;
-    &lt;input type="radio" id="beginner" name="level" value="beginner" checked&gt;
-    &lt;label for="beginner"&gt;Beginner&lt;/label&gt;&lt;br&gt;
-    &lt;input type="radio" id="intermediate" name="level" value="intermediate"&gt;
-    &lt;label for="intermediate"&gt;Intermediate&lt;/label&gt;&lt;br&gt;&lt;br&gt;
-    &lt;input type="checkbox" id="newsletter" name="newsletter"&gt;
-    &lt;label for="newsletter"&gt;Send me the weekly newsletter&lt;/label&gt;&lt;br&gt;&lt;br&gt;
-    &lt;label for="goals"&gt;Your learning goals&lt;/label&gt;&lt;br&gt;
-    &lt;textarea id="goals" name="goals" rows="4" cols="40"
-              placeholder="Tell us what you want to achieve..."&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
-    &lt;button type="submit"&gt;Register Now&lt;/button&gt;
-  &lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3>Key Points</h3>
-<p><code>&lt;label for="x"&gt;</code> connects to the input whose <code>id</code> is x — clicking the label focuses the input. Always pair them.</p>
-<p><code>type="email"</code> and <code>required</code> give you free validation: the browser refuses to submit an empty or malformed email.</p>
-<p>Radio buttons sharing the same <code>name</code> form a group where only one can be selected.</p>
-<p>Common input types: <code>text, email, password, number, tel, date, checkbox, radio, file, color, range</code>. Try swapping types and watch the browser change behaviour.</p>
-<h2 id="1-7-tables-and-media">1.7  Tables and Media</h2>
-<p>Tables display rows and columns of data (never use them for page layout — that is CSS’s job).</p>
-<pre><code>&lt;table border="1"&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Skill&lt;/th&gt;
-      &lt;th&gt;Level&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;HTML&lt;/td&gt;
-      &lt;td&gt;Learning&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;JavaScript&lt;/td&gt;
-      &lt;td&gt;Next up&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;!-- Video and audio --&gt;
-&lt;video src="demo.mp4" controls width="400"&gt;&lt;/video&gt;
-&lt;audio src="podcast.mp3" controls&gt;&lt;/audio&gt;
-&lt;!-- Embed a YouTube video --&gt;
-&lt;iframe width="560" height="315"
-  src="https://www.youtube.com/embed/VIDEO_ID"
-  title="YouTube video" allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
-<p><code>&lt;tr&gt;</code> is a table row, <code>&lt;th&gt;</code> a header cell, <code>&lt;td&gt;</code> a data cell. The <code>&lt;!-- ... --&gt;</code> syntax is an HTML comment — notes for humans that the browser ignores.</p>
-<h2 id="1-8-checkpoint-project-your-personal-profile-page">1.8  Checkpoint Project: Your Personal Profile Page</h2>
-<p>This is your first real-world deliverable — the seed of the portfolio you will deploy in Part 9. Build it entirely yourself, using the template below as a starting skeleton.</p>
-<h3>Requirements</h3>
-<p>A header with your name and a navigation bar linking to each section (hint: &lt;a href="#about"&gt; jumps to the element with id="about").</p>
-<p>An About section with your photo, a short bio, and a list of your goals.</p>
-<p>A Skills section using a table: skill name, level, and learning status.</p>
-<p>A Projects section with at least two &lt;article&gt; cards (use placeholder text for now — you will fill these with real projects soon).</p>
-<p>A Contact section with a working form: name, email, message, submit button.</p>
-<p>A footer with the current year and links to your social profiles.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part1-html/profile.html (starter skeleton)</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Your Name — Software Developer&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;header&gt;
-    &lt;h1&gt;Your Name&lt;/h1&gt;
-    &lt;nav&gt;
-      &lt;a href="#about"&gt;About&lt;/a&gt; |
-      &lt;a href="#skills"&gt;Skills&lt;/a&gt; |
-      &lt;a href="#projects"&gt;Projects&lt;/a&gt; |
-      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
-    &lt;/nav&gt;
-  &lt;/header&gt;
-  &lt;main&gt;
-    &lt;section id="about"&gt;
-      &lt;h2&gt;About Me&lt;/h2&gt;
-      &lt;img src="https://picsum.photos/200" alt="Profile photo"&gt;
-      &lt;p&gt;Write 2–3 sentences about who you are and where you are going.&lt;/p&gt;
-    &lt;/section&gt;
-    &lt;section id="skills"&gt;
-      &lt;h2&gt;Skills&lt;/h2&gt;
-      &lt;!-- Build your skills table here --&gt;
-    &lt;/section&gt;
-    &lt;section id="projects"&gt;
-      &lt;h2&gt;Projects&lt;/h2&gt;
-      &lt;article&gt;
-        &lt;h3&gt;Project One&lt;/h3&gt;
-        &lt;p&gt;Short description.&lt;/p&gt;
-      &lt;/article&gt;
-      &lt;!-- Add a second article --&gt;
-    &lt;/section&gt;
-    &lt;section id="contact"&gt;
-      &lt;h2&gt;Contact Me&lt;/h2&gt;
-      &lt;!-- Build your contact form here --&gt;
-    &lt;/section&gt;
-  &lt;/main&gt;
-  &lt;footer&gt;
-    &lt;p&gt;&amp;copy; 2026 Your Name. Built with my own hands.&lt;/p&gt;
-  &lt;/footer&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><strong>MILESTONE REACHED</strong></p>
-<p>You can now structure any web page. It looks plain — that is exactly right. Structure first, beauty second. Part 2 makes it beautiful.</p>
+<h2 id="1-1-what-programming-is-in-javascript">1.1 What Programming Is, in JavaScript</h2>
+<p>Programming is giving a computer precise, step-by-step instructions, and JavaScript is one way to write them. At the core, a program <em>stores data</em> (in variables), <em>makes decisions</em> (conditionals), <em>repeats work</em> (loops), <em>packages reusable logic</em> (functions), and <em>manipulates information</em> (data structures and operations) — and these fundamentals are the same in every language; JavaScript is just the syntax. This part builds the absolute foundations, and getting them genuinely understood (not just recognised) is what makes everything afterward possible. The most fundamental concept is the <strong>variable</strong> — a named container that holds a piece of data (a number, some text, true/false) that your program can use and change. With variables, <strong>data types</strong> (the kinds of values — numbers, strings, booleans, and more), and <strong>operators</strong> (the ways you combine and compare values), you have the raw materials of all programming. Mastering these basics solidly is essential — most beginner struggles later trace back to shaky foundations here, so this part rewards careful attention.</p>
+<h2 id="1-2-variables-types-and-operators-practical">1.2 Variables, Types, and Operators (Practical)</h2>
+<pre><code>JAVASCRIPT FOUNDATIONS
+  VARIABLES (named containers — use let &amp; const, not old var):
+    const name = "Ada";        // const = can't be reassigned (prefer it)
+    let count = 0;             // let = can be reassigned
+    count = count + 1;
+  DATA TYPES (the kinds of values):
+    · STRING: "text" or 'text' or `template ${name}`  (template literals: backticks + ${})
+    · NUMBER: 42, 3.14   · BOOLEAN: true / false
+    · null (intentionally empty) · undefined (not set yet)
+    · (objects &amp; arrays — Part 3)
+    typeof x   // check a value's type
+  OPERATORS:
+    · arithmetic: + - * / %  · assignment: = += -= ++ --
+    · comparison: === (equal, strict — USE THIS) !== &gt; &lt; &gt;= &lt;=  (avoid loose == )
+    · logical: &amp;&amp; (and)  || (or)  ! (not)
+  OUTPUT &amp; THINKING: console.log(...) to see values (your main tool while learning)
+KEY: store data in const/let, know the types, combine with operators, use === not ==.</code></pre>
+<p><strong>Variables</strong>: use <code>const</code> (can't be reassigned — prefer it) and <code>let</code> (reassignable); avoid the old <code>var</code>. <strong>Data types</strong>: strings (<code>"text"</code>, or <em>template literals</em> with backticks and <code>${}</code> for embedding values), numbers, booleans (true/false), <code>null</code> (intentionally empty), and <code>undefined</code> (not set) — with <code>typeof</code> to check. <strong>Operators</strong>: arithmetic (<code>+ - <em> / %</code>), assignment (<code>= += ++</code>), comparison (use strict <code>===</code> and <code>!==</code>, </em>not* the loose <code>==</code>), and logical (<code>&amp;&amp;</code>, <code>||</code>, <code>!</code>). And <strong><code>console.log()</code></strong> is your constant companion for seeing values while you learn. These are the raw materials of every program.</p>
+<h2 id="1-3-running-javascript-and-building-habits">1.3 Running JavaScript and Building Habits</h2>
+<p>Get JavaScript actually <em>running</em> and build good habits from day one. You can run JS two easy ways while learning: directly in the <strong>browser console</strong> (open dev tools, type code, see results instantly — perfect for experimenting with language basics), or in a <strong><code>.js</code> file linked to an HTML page</strong> (where you'll build real things). Either way, <code>console.log()</code> is how you inspect what your code is doing, and the <strong>console</strong> is also where <em>errors</em> appear — and learning to read those error messages (they tell you the type of error and often the line) is genuinely half of debugging, a skill to start building immediately. Good habits to form now: write <em>readable</em> code (clear variable names like <code>userAge</code> not <code>x</code>, consistent formatting), experiment freely (try things in the console to see what happens), and <em>understand</em> what each line does rather than copying blindly (the golden rule). Programming is learned by <em>doing</em> — typing, running, breaking, fixing — so from the very first script, write and run code yourself. With solid foundations (variables, types, operators) and the habit of running and inspecting code, you have the raw materials and the working method for everything ahead.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Write your first working scripts: declare variables with const/let, use all the main data types (string with a template literal, number, boolean), combine them with arithmetic, comparison (===), and logical operators, and use console.log to see results — running code in both the browser console and a linked .js file. Read an error message in the console. Solid foundations plus the habit of running and inspecting code are what make everything ahead possible.</p></div>
   </article>
 <nav class="pager" data-live="off">
   <a href="part0.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 0 · Start Here</span></a>
-  <a class="next" href="part2.html"><span class="dir">NEXT →</span><span class="pt">Part 2 · CSS</span></a>
+  <a class="next" href="part2.html"><span class="dir">NEXT →</span><span class="pt">Part 2 · Control Flow &amp; Functions</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -531,7 +342,7 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

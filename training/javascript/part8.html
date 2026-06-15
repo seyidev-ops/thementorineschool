@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cross-Language Integration — JavaScript Developer · The Mentorine School</title>
+<title>Debugging &amp; Clean Code — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Debugging &amp; Clean Code — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,147 +294,45 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 8 · WEEKS 14–15</div>
-    <h1>Integrating JavaScript With Other Languages</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#8-1-how-languages-actually-talk-to-each-other">8.1  How Languages Actually Talk to Each Other</a><a href="#8-2-javascript-python-the-power-couple">8.2  JavaScript + Python: The Power Couple</a><a href="#8-3-javascript-php-working-with-the-classic-web">8.3  JavaScript + PHP: Working With the Classic Web</a><a href="#8-4-javascript-sql-a-deeper-look">8.4  JavaScript + SQL: A Deeper Look</a><a href="#8-5-javascript-compiled-languages-webassembly">8.5  JavaScript + Compiled Languages: WebAssembly</a><a href="#8-6-checkpoint-project-the-polyglot-dashboard">8.6  Checkpoint Project: The Polyglot Dashboard</a></div>
+    <div class="kicker">Part 8 · WEEKS 5–6</div>
+    <h1>Errors, Debugging &amp; Clean Code</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#8-1-errors-and-debugging-are-the-job">8.1 Errors and Debugging Are the Job</a><a href="#8-2-handling-errors-and-debugging-practical">8.2 Handling Errors and Debugging (Practical)</a><a href="#8-3-writing-code-like-a-professional">8.3 Writing Code Like a Professional</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Weeks 14–15 (7–10 days).</em></p>
-<h2 id="8-1-how-languages-actually-talk-to-each-other">8.1  How Languages Actually Talk to Each Other</h2>
-<p>Real-world systems are polyglot: a JavaScript front end, a Python machine-learning service, a SQL database, perhaps a legacy PHP system — all cooperating. The secret is that languages rarely call each other directly. Instead, they communicate through neutral channels that every language understands:</p>
-<p><strong>HTTP + JSON APIs </strong>— by far the most common bridge. Any language can run a web server; any language can fetch JSON. Your JavaScript already speaks this fluently.</p>
-<p><strong>Embedded query languages </strong>— SQL lives as strings inside your JavaScript (you did this in Part 7).</p>
-<p><strong>Child processes </strong>— Node can launch a Python or shell script directly and read its output.</p>
-<p><strong>WebAssembly </strong>— compiled languages like C, C++ and Rust can run inside the browser, called from JavaScript.</p>
-<h2 id="8-2-javascript-python-the-power-couple">8.2  JavaScript + Python: The Power Couple</h2>
-<p>Python dominates data analysis and AI; JavaScript dominates interfaces. Together they cover most modern software. Install Python from python.org (tick "Add to PATH" on Windows), then build a Python API that your JavaScript front end consumes.</p>
-<h3>Step 1 — A Python API With FastAPI</h3>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/analytics.py</code></div>
-<pre><code># Install once:  pip install fastapi uvicorn
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from statistics import mean, median
-app = FastAPI()
-# CORS: explicitly allow browser pages from other origins to call us
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-@app.get("/api/hello")
-def hello():
-    return {"message": "Hello from Python!", "language": "Python 3"}
-@app.post("/api/analyze")
-def analyze(payload: dict):
-    numbers = payload.get("numbers", [])
-    if not numbers:
-        return {"error": "Send a 'numbers' array"}
-    return {
-        "count": len(numbers),
-        "total": sum(numbers),
-        "average": round(mean(numbers), 2),
-        "median": median(numbers),
-        "max": max(numbers),
-        "min": min(numbers),
-    }
-# Run with:  uvicorn analytics:app --port 8000</code></pre>
-<h3>Step 2 — A JavaScript Front End That Calls Python</h3>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/dashboard.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;&lt;title&gt;JS ↔ Python Dashboard&lt;/title&gt;
-  &lt;style&gt;
-    body { font-family: Arial; max-width: 520px; margin: 40px auto; }
-    textarea { width: 100%; height: 70px; }
-    pre { background: #f3f0e9; padding: 16px; border-radius: 8px; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Sales Analyzer&lt;/h1&gt;
-  &lt;p&gt;JavaScript interface · Python brain&lt;/p&gt;
-  &lt;textarea id="data"&gt;12000, 45000, 30000, 8000, 52000, 31000&lt;/textarea&gt;&lt;br&gt;
-  &lt;button id="run"&gt;Analyze with Python&lt;/button&gt;
-  &lt;pre id="out"&gt;Results appear here…&lt;/pre&gt;
-  &lt;script&gt;
-    document.querySelector("#run").addEventListener("click", async () =&gt; {
-      const numbers = document.querySelector("#data").value
-        .split(",").map(n =&gt; Number(n.trim())).filter(n =&gt; !isNaN(n));
-      const res = await fetch("http://localhost:8000/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ numbers }),
-      });
-      const stats = await res.json();
-      document.querySelector("#out").textContent =
-        JSON.stringify(stats, null, 2);
-    });
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>Start Python with <code>uvicorn analytics:app --port 8000</code>, open the HTML with Live Server, click the button — and watch two languages cooperate across an HTTP boundary. This exact architecture (JS interface, Python computation) powers countless AI products today.</p>
-<p><strong>WHAT IS CORS?</strong></p>
-<p>Browsers block pages from calling servers on a different origin (domain/port) unless that server explicitly permits it — a security feature called Cross-Origin Resource Sharing. The Python middleware above grants permission. When your fetch mysteriously fails with a CORS error in the console, this is what is happening.</p>
-<h3>Bonus: Node Launching Python Directly (No Server Needed)</h3>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/run-python.js</code></div>
-<pre><code>import { execFile } from "node:child_process";
-// Suppose script.py prints a result; Node captures it:
-execFile("python", ["script.py", "42"], (error, stdout) =&gt; {
-  if (error) return console.error("Python failed:", error.message);
-  console.log("Python said:", stdout.trim());
-});</code></pre>
-<h2 id="8-3-javascript-php-working-with-the-classic-web">8.3  JavaScript + PHP: Working With the Classic Web</h2>
-<p>PHP still runs a vast share of the web (WordPress alone is over 40% of all sites). Knowing how JavaScript talks to PHP makes you valuable for maintaining and modernising existing businesses’ sites. The bridge is identical: PHP produces JSON, JavaScript fetches it.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part8-integration/api.php</code></div>
-<pre><code>&lt;?php
-// Install PHP, then run:  php -S localhost:9000
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
-$products = [
-  ["id" =&gt; 1, "name" =&gt; "Ankara Notebook", "price" =&gt; 3500],
-  ["id" =&gt; 2, "name" =&gt; "Dev Mug",         "price" =&gt; 5000],
-];
-echo json_encode($products);
-?&gt;
-// JavaScript side — exactly the same fetch you already know:
-const res = await fetch("http://localhost:9000/api.php");
-const products = await res.json();
-products.forEach(p =&gt; console.log(p.name, "₦" + p.price));</code></pre>
-<p><strong>THE BIG INSIGHT</strong></p>
-<p>Notice your JavaScript did not change at all between Python and PHP. Once a back end speaks JSON over HTTP, your front-end skills work against ANY language — Java, C#, Go, Ruby, Rust. You learned one bridge and unlocked them all.</p>
-<h2 id="8-4-javascript-sql-a-deeper-look">8.4  JavaScript + SQL: A Deeper Look</h2>
-<p>You already integrate SQL daily since Part 7 — SQL statements are strings embedded in JavaScript, executed by a database engine. Two professional rules to carry forever:</p>
-<p>Always use parameterised queries (<code>?</code> placeholders). Building SQL by gluing user input into strings enables SQL injection — the attack behind many famous data breaches. <code>db.prepare("...WHERE id = ?").get(userInput)</code> is safe; string concatenation is not.</p>
-<p>In bigger projects, consider an ORM (Object-Relational Mapper) like Prisma, which lets you write <code>prisma.job.findMany()</code> instead of raw SQL. Learn raw SQL first — ORMs make sense only once you know what they are hiding.</p>
-<h2 id="8-5-javascript-compiled-languages-webassembly">8.5  JavaScript + Compiled Languages: WebAssembly</h2>
-<p>WebAssembly (WASM) lets code written in C, C++, Rust or Go run inside the browser at near-native speed, with JavaScript as the conductor. Figma (C++), Photoshop on the web, and many games use it. As a junior you mainly need the concept: heavy computation can be compiled to WASM, and JavaScript loads and calls it like this:</p>
-<pre><code>// Conceptual example: loading a compiled WASM module
-const { instance } = await WebAssembly.instantiateStreaming(
-  fetch("math-engine.wasm")
-);
-// Call a function written originally in Rust or C:
-console.log(instance.exports.fibonacci(40));</code></pre>
-<p>When an interviewer asks "how would you handle CPU-heavy work in the browser?", the professional answer is: a Web Worker for parallelism, WebAssembly for raw speed, or push it to a server-side service — and you now understand all three options.</p>
-<h2 id="8-6-checkpoint-project-the-polyglot-dashboard">8.6  Checkpoint Project: The Polyglot Dashboard</h2>
-<p>Combine the part: build one HTML/JS dashboard page with three panels, each fed by a different backend you have built:</p>
-<p>Panel 1 — Jobs: fetched from your Node/Express + SQLite capstone API (Part 7).</p>
-<p>Panel 2 — Statistics: salary list sent to your Python FastAPI analyzer; display average, median, max.</p>
-<p>Panel 3 — Products: fetched from your PHP endpoint.</p>
-<p>Each panel must show a loading state and handle its server being offline with a friendly error message.</p>
-<p><strong>MILESTONE REACHED</strong></p>
-<p>You can now design systems where multiple languages cooperate — the literal definition of a full-stack engineer’s daily reality.</p>
+<h2 id="8-1-errors-and-debugging-are-the-job">8.1 Errors and Debugging Are the Job</h2>
+<p>A huge part of real programming is <em>dealing with things going wrong</em> — handling errors gracefully and debugging when code misbehaves — and getting good at this is what separates a frustrated beginner from a capable developer. Code <em>will</em> have bugs and hit errors (bad input, failed network requests, unexpected states); the question is whether your code handles them gracefully and whether you can find and fix problems efficiently. <strong>Error handling</strong> means anticipating what can go wrong (a fetch fails, a value is missing, input is invalid) and dealing with it cleanly (try/catch around risky operations, checking for missing data, showing users friendly messages instead of crashing). <strong>Debugging</strong> is the systematic skill of finding <em>why</em> code isn't working — reading error messages, using <code>console.log</code> and the browser's debugger to inspect what's happening, and narrowing down the problem. These are everyday realities of programming, and being confident with them — rather than panicking at a red error — makes you far more effective and is exactly what professional work requires. The mindset shift: errors and bugs aren't failures, they're normal parts of programming that you have the tools to handle.</p>
+<h2 id="8-2-handling-errors-and-debugging-practical">8.2 Handling Errors and Debugging (Practical)</h2>
+<pre><code>ERROR HANDLING, DEBUGGING &amp; CLEAN CODE
+  ERROR HANDLING:
+    try { riskyOperation(); }
+    catch (error) { console.error(error); /* show friendly message, handle gracefully */ }
+    · wrap risky things (fetch, parsing, anything that can fail) in try/catch
+    · check for missing/invalid data BEFORE using it (guard clauses, optional chaining)
+    · throw your own errors when appropriate: throw new Error('message')
+  DEBUGGING (find why it's broken — systematically):
+    · READ the error message: type, message, and the line/stack — it usually tells you a lot
+    · console.log values to see what's actually happening (your #1 tool)
+    · use the browser DEBUGGER: breakpoints, step through code, inspect variables (DevTools &gt; Sources)
+    · narrow it down: isolate where it breaks; check assumptions one by one
+  CLEAN CODE (read far more than written):
+    · clear, descriptive NAMES · small, single-purpose FUNCTIONS · consistent formatting
+    · avoid repetition (DRY) · comment the WHY (not the obvious) · organise into modules
+KEY: try/catch + guard against bad data · read errors + console.log + debugger · clean, named, modular code.</code></pre>
+<p><strong>Error handling</strong>: wrap risky operations (fetch, parsing, anything that can fail) in <strong>try/catch</strong>, handling errors gracefully (logging them, showing friendly messages rather than crashing); check for missing or invalid data <em>before</em> using it (guard clauses, optional chaining); and throw your own errors when appropriate. <strong>Debugging</strong> systematically: <em>read</em> the error message (type, message, line/stack — it tells you a lot), use <code>console.log</code> to see what's actually happening (your #1 tool), use the <strong>browser debugger</strong> (breakpoints, stepping through code, inspecting variables in DevTools), and <em>narrow down</em> where it breaks by checking assumptions one at a time. <strong>Clean code</strong>: clear descriptive names, small single-purpose functions, consistent formatting, avoiding repetition (DRY), commenting the <em>why</em>, and organising into modules. These are the everyday craft of real development.</p>
+<h2 id="8-3-writing-code-like-a-professional">8.3 Writing Code Like a Professional</h2>
+<p>Beyond fixing problems, this part is about <em>writing code like a professional</em> — robust and clean — which is what makes you employable and your projects credible. <strong>Robustness</strong> means your code handles the real world: it anticipates failures (a fetch might fail, data might be missing), handles them gracefully, validates input, and doesn't crash or behave bizarrely when something unexpected happens. <strong>Clean code</strong> means your code is readable and maintainable: clear names that explain themselves, functions that each do one thing, sensible organisation (splitting code into modules), no needless repetition, and just enough commenting to explain the non-obvious. This matters enormously because <em>code is read far more than it's written</em> — by teammates, by reviewers, by your future self — and clean code is faster to understand, debug, and extend, while messy code becomes a liability. Professional developers are judged not just on whether their code works, but on whether it's robust and clean, and these qualities are exactly what reviewers notice in your portfolio projects (and in interviews). The combination — anticipating and handling errors, debugging confidently, and writing clean, organised, readable code — is what turns 'I can make it work' into 'I write quality software', which is the real bar for professional work. Polishing your projects to be robust and clean demonstrates this professional maturity, making your whole portfolio more convincing.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Make your projects robust and clean: add proper error handling (try/catch around risky operations, guard against missing data, friendly error messages), debug confidently (read errors, use console.log and the browser debugger), and refactor for clean code (clear names, small functions, modules, no repetition). Robust, clean code — not just code that works — is the real professional bar and what reviewers notice in your portfolio and interviews.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part7.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 7 · Databases &amp; Capstone</span></a>
-  <a class="next" href="part9.html"><span class="dir">NEXT →</span><span class="pt">Part 9 · Professional Practice</span></a>
+  <a href="part7.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 7 · Async &amp; APIs</span></a>
+  <a class="next" href="part9.html"><span class="dir">NEXT →</span><span class="pt">Part 9 · Capstone &amp; Career</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -430,7 +341,7 @@ console.log(instance.exports.fibonacci(40));</code></pre>
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

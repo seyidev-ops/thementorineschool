@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Node.js &amp; Express — JavaScript Developer · The Mentorine School</title>
+<title>Events &amp; Forms — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Events &amp; Forms — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,135 +294,47 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 6 · WEEKS 10–12</div>
-    <h1>Node.js &amp; Express: Building the Back End</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#6-1-front-end-vs-back-end-the-full-picture">6.1  Front End vs Back End: The Full Picture</a><a href="#6-2-npm-the-world-s-largest-code-library">6.2  npm: The World’s Largest Code Library</a><a href="#6-3-your-first-web-server-practical">6.3  Your First Web Server (Practical)</a><a href="#6-4-rest-apis-the-grammar-of-the-web">6.4  REST APIs: The Grammar of the Web</a><a href="#6-5-project-the-remote-job-board-api">6.5  Project: The Remote Job Board API</a><a href="#6-6-serving-your-front-end-from-your-back-end">6.6  Serving Your Front End From Your Back End</a></div>
+    <div class="kicker">Part 6 · WEEK 4</div>
+    <h1>Events &amp; Forms</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#6-1-reacting-to-the-user">6.1 Reacting to the User</a><a href="#6-2-event-handling-and-forms-practical">6.2 Event Handling and Forms (Practical)</a><a href="#6-3-building-real-interactive-apps">6.3 Building Real Interactive Apps</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Weeks 10–12 (12–14 days).</em></p>
-<h2 id="6-1-front-end-vs-back-end-the-full-picture">6.1  Front End vs Back End: The Full Picture</h2>
-<p>Everything so far ran in the browser — the front end, the part users see. The back end is the program running on a server somewhere that the front end talks to: it owns the database, enforces the rules, protects the secrets, and answers requests. In Part 5 you consumed other people’s APIs; in this part you build your own. Node.js makes this possible in JavaScript — the same language, new superpowers: reading files, opening network ports, talking to databases.</p>
-<h2 id="6-2-npm-the-world-s-largest-code-library">6.2  npm: The World’s Largest Code Library</h2>
-<p>npm (Node Package Manager) gives you instant access to over two million free packages — pre-built solutions to almost every problem. Initialise a project, then install what you need:</p>
-<pre><code>cd part6-node
-npm init -y                 # creates package.json (your project's ID card)
-npm install express         # installs the Express web framework</code></pre>
-<p><code>package.json</code> records your project’s name and its dependencies — the packages it needs.</p>
-<p><code>node_modules/</code> is where installed packages live. Never edit it, never email it; anyone can rebuild it by running <code>npm install</code>.</p>
-<p>Open <code>package.json</code> and add <code>"type": "module"</code> at the top level so you can use modern import/export syntax in Node.</p>
-<h2 id="6-3-your-first-web-server-practical">6.3  Your First Web Server (Practical)</h2>
-<p>Express is the most widely used Node framework — minimal, battle-tested, and the standard line on junior job descriptions.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part6-node/server.js</code></div>
-<pre><code>import express from "express";
-const app = express();
-const PORT = 3000;
-// A "route": WHEN someone visits this path, run this function
-app.get("/", (req, res) =&gt; {
-  res.send("&lt;h1&gt;My server is alive!&lt;/h1&gt;");
-});
-app.get("/about", (req, res) =&gt; {
-  res.send("This server was built by a future professional developer.");
-});
-// A route that returns JSON — congratulations, this is an API
-app.get("/api/status", (req, res) =&gt; {
-  res.json({ status: "ok", time: new Date().toISOString() });
-});
-app.listen(PORT, () =&gt; {
-  console.log(`Server running at http://localhost:${PORT}`);
-});</code></pre>
-<p>Run <code>node server.js</code>, then visit <code>http://localhost:3000</code> in your browser. <code>localhost</code> means "this computer"; <code>3000</code> is the port — a numbered door into your machine. <code>req</code> (request) carries everything about the incoming visit; <code>res</code> (response) is your reply. Press Ctrl+C in the terminal to stop the server; restart it after every code change (or run <code>node --watch server.js</code> to auto-restart).</p>
-<h2 id="6-4-rest-apis-the-grammar-of-the-web">6.4  REST APIs: The Grammar of the Web</h2>
-<p>A REST API maps the four things you do with data — Create, Read, Update, Delete (CRUD) — onto four HTTP methods. Every modern app speaks this grammar:</p>
-<div class="tbl-wrap"><table>
-<thead><tr><th>HTTP Method</th><th>CRUD Action</th><th>Example Route</th><th>Meaning</th></tr></thead><tbody>
-<tr><td>GET</td><td>Read</td><td>GET /api/jobs</td><td>Give me all jobs</td></tr>
-<tr><td>GET</td><td>Read one</td><td>GET /api/jobs/3</td><td>Give me job number 3</td></tr>
-<tr><td>POST</td><td>Create</td><td>POST /api/jobs</td><td>Here is a new job — store it</td></tr>
-<tr><td>PUT</td><td>Update</td><td>PUT /api/jobs/3</td><td>Replace job 3 with this version</td></tr>
-<tr><td>DELETE</td><td>Delete</td><td>DELETE /api/jobs/3</td><td>Remove job 3</td></tr>
-</tbody></table></div>
-<h2 id="6-5-project-the-remote-job-board-api">6.5  Project: The Remote Job Board API</h2>
-<p>A complete CRUD API for managing remote job listings — a real-world product foundation. Data lives in memory for now; Part 7 adds a database.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part6-node/jobs-api.js</code></div>
-<pre><code>import express from "express";
-const app = express();
-app.use(express.json());   // teach Express to read JSON request bodies
-// ----- IN-MEMORY DATA (the database arrives in Part 7) -----
-let jobs = [
-  { id: 1, title: "Frontend Developer", company: "RemoteFirst",
-    salary: 250000, type: "full-time" },
-  { id: 2, title: "Virtual Assistant", company: "GlobalDesk",
-    salary: 150000, type: "part-time" },
-];
-let nextId = 3;
-// READ all (with optional filtering: /api/jobs?type=full-time)
-app.get("/api/jobs", (req, res) =&gt; {
-  const { type } = req.query;
-  const result = type ? jobs.filter(j =&gt; j.type === type) : jobs;
-  res.json(result);
-});
-// READ one
-app.get("/api/jobs/:id", (req, res) =&gt; {
-  const job = jobs.find(j =&gt; j.id === Number(req.params.id));
-  if (!job) return res.status(404).json({ error: "Job not found" });
-  res.json(job);
-});
-// CREATE
-app.post("/api/jobs", (req, res) =&gt; {
-  const { title, company, salary, type } = req.body;
-  if (!title || !company) {
-    return res.status(400).json({ error: "title and company are required" });
-  }
-  const job = { id: nextId++, title, company,
-                salary: salary ?? 0, type: type ?? "full-time" };
-  jobs.push(job);
-  res.status(201).json(job);   // 201 = "Created"
-});
-// UPDATE
-app.put("/api/jobs/:id", (req, res) =&gt; {
-  const id = Number(req.params.id);
-  const index = jobs.findIndex(j =&gt; j.id === id);
-  if (index === -1) return res.status(404).json({ error: "Job not found" });
-  jobs[index] = { ...jobs[index], ...req.body, id };
-  res.json(jobs[index]);
-});
-// DELETE
-app.delete("/api/jobs/:id", (req, res) =&gt; {
-  const id = Number(req.params.id);
-  const before = jobs.length;
-  jobs = jobs.filter(j =&gt; j.id !== id);
-  if (jobs.length === before) {
-    return res.status(404).json({ error: "Job not found" });
-  }
-  res.status(204).end();   // 204 = "Done, nothing to say"
-});
-app.listen(3000, () =&gt; console.log("Job API on http://localhost:3000"));</code></pre>
-<h3>Testing Your API Like a Professional</h3>
-<p>Browsers only easily send GET requests. Test the others with <code>curl</code> in a second terminal window (keep the server running in the first):</p>
-<pre><code># READ all jobs
-curl http://localhost:3000/api/jobs
-# CREATE a job (POST with a JSON body)
-curl -X POST http://localhost:3000/api/jobs -H "Content-Type: application/json" -d "{\"title\":\"Backend Developer\",\"company\":\"NaijaTech\",\"salary\":400000}"
-# UPDATE job 1
-curl -X PUT http://localhost:3000/api/jobs/1 -H "Content-Type: application/json" -d "{\"salary\":300000}"
-# DELETE job 2
-curl -X DELETE http://localhost:3000/api/jobs/2</code></pre>
-<p><strong>STATUS CODES YOU MUST KNOW</strong></p>
-<p>200 OK · 201 Created · 204 No Content · 400 Bad Request (their fault) · 401 Unauthorized · 404 Not Found · 500 Server Error (your fault). Returning the right code is a mark of professionalism. For more comfortable testing, install the free Postman app or the Thunder Client extension in VS Code.</p>
-<h2 id="6-6-serving-your-front-end-from-your-back-end">6.6  Serving Your Front End From Your Back End</h2>
-<p>One line lets Express serve your HTML/CSS/JS files: create a folder named <code>public</code>, put a front end inside, and add <code>app.use(express.static("public"));</code> near the top of your server. Now <code>http://localhost:3000</code> serves your page AND your API — one app, front to back. This is the architecture of the Part 7 capstone.</p>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a route <code>GET /api/jobs/stats</code> returning <code>{ total, averageSalary, byType }</code> computed with filter and reduce. Careful: define it BEFORE the <code>/api/jobs/:id</code> route, or Express will think "stats" is an id — your first real routing lesson.</p></div>
+<h2 id="6-1-reacting-to-the-user">6.1 Reacting to the User</h2>
+<p>Interactivity means <em>responding to what the user does</em> — clicks, typing, submitting forms, hovering, key presses — and JavaScript handles this through <strong>events</strong>. An event is something that happens (a button is clicked, an input changes, a form is submitted), and you write <strong>event handlers</strong> — functions that run <em>in response</em> to those events. This is what makes a page truly interactive rather than static: 'when this button is clicked, do this', 'when this form is submitted, validate and process it', 'when this input changes, update the display'. Combined with the DOM (Part 5), events complete the front-end loop: the user does something → an event fires → your handler runs → it updates the data and the DOM → the user sees the result. <strong>Forms</strong> are an especially important case — they're how users <em>input</em> data (sign-ups, searches, settings, any data entry), so handling form submission, capturing input values, and validating them is a core, constant front-end task. Mastering events and forms is what lets you build interfaces that actually <em>do things</em> in response to users — i.e. real apps.</p>
+<h2 id="6-2-event-handling-and-forms-practical">6.2 Event Handling and Forms (Practical)</h2>
+<pre><code>EVENTS &amp; FORMS
+  EVENT LISTENERS (run a function when something happens):
+    button.addEventListener('click', () =&gt; { ... });
+    input.addEventListener('input', (e) =&gt; { console.log(e.target.value); });
+    common events: click, input, change, submit, keydown, mouseover, ...
+    the EVENT OBJECT (e): info about the event — e.target (the element), e.target.value, etc.
+  FORMS (capturing user input):
+    form.addEventListener('submit', (e) =&gt; {
+      e.preventDefault();              // STOP the default page reload (important!)
+      const name = nameInput.value;    // read input values
+      // ...validate, then process the data...
+    });
+  VALIDATION (never trust input — check it):
+    · check required fields, formats (email), lengths, etc.
+    · show clear error messages (update the DOM) · give feedback
+  THE FULL LOOP: user acts -&gt; event fires -&gt; handler runs -&gt; update data -&gt; update DOM (Part 5)
+  EVENT DELEGATION: one listener on a parent for many children (efficient for dynamic lists)
+KEY: addEventListener to react; for forms, preventDefault + read .value + validate + give feedback.</code></pre>
+<p><strong>Event listeners</strong>: <code>element.addEventListener('click', handler)</code> runs a function when an event fires — common events being click, input, change, submit, keydown, mouseover — and the handler receives an <strong>event object</strong> (<code>e</code>) with details like <code>e.target</code> (the element) and <code>e.target.value</code> (an input's value). <strong>Forms</strong>: listen for the <code>submit</code> event, call <code>e.preventDefault()</code> to stop the default page reload (important!), read the input <code>.value</code>s, then validate and process them. <strong>Validation</strong> ('never trust input'): check required fields, formats (email), and lengths, showing clear error messages by updating the DOM. This completes <strong>the full front-end loop</strong>: user acts → event fires → handler runs → data updates → DOM updates (Part 5). And <em>event delegation</em> (one listener on a parent for many children) handles dynamic lists efficiently.</p>
+<h2 id="6-3-building-real-interactive-apps">6.3 Building Real Interactive Apps</h2>
+<p>Events and forms, combined with everything so far, let you build <em>real interactive applications</em> — the kind of projects that prove you can do front-end work and that make great portfolio pieces. Think of the classic learning apps that are genuinely impressive: a to-do list (add tasks via a form, mark them done, delete them, render the list from data), a calculator, a quiz, a weather app (Part 7 adds the live data), an expense tracker, an interactive form with validation. Each brings the whole picture together: data structures (Part 3) hold the state, the DOM (Part 5) renders it, events (this part) respond to the user, and functions (Part 2) organise the logic — the complete front-end loop in action. Building these teaches you to <em>structure</em> an interactive app: where the data lives, how the user's actions change it, and how the display updates to match — which is exactly the mental model that React formalises. It also surfaces real concerns: validating and handling user input gracefully, giving clear feedback, and keeping the code organised as the app grows. A working interactive app — responding to user events, handling form input with validation, and updating the page — is a satisfying, portfolio-worthy demonstration that you can build the interactive front ends that are the most common entry point into web development careers.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Build a working interactive app: something that responds to user events and handles form input with validation — e.g. a to-do list, a quiz, or an expense tracker — bringing together data (state), the DOM (rendering), events (responding), and functions (logic), with <code>preventDefault</code>, input reading, validation, and clear feedback. A real interactive app is a portfolio-worthy proof you can build the front ends that launch web-development careers.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part5.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 5 · Modern &amp; Async JS</span></a>
-  <a class="next" href="part7.html"><span class="dir">NEXT →</span><span class="pt">Part 7 · Databases &amp; Capstone</span></a>
+  <a href="part5.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 5 · The DOM</span></a>
+  <a class="next" href="part7.html"><span class="dir">NEXT →</span><span class="pt">Part 7 · Async &amp; APIs</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -418,7 +343,7 @@ curl -X DELETE http://localhost:3000/api/jobs/2</code></pre>
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

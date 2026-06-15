@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cheat Sheets — JavaScript Developer · The Mentorine School</title>
+<title>Cheat Sheets — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cheat Sheets — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,65 +294,56 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">APPENDIX A · REFERENCE</div>
+    <div class="kicker">Part 10 · REFERENCE</div>
     <h1>Quick-Reference Cheat Sheets</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#a-1-html-skeleton-memorise-this">A.1  HTML Skeleton (memorise this)</a><a href="#a-2-javascript-essentials-on-one-page">A.2  JavaScript Essentials on One Page</a><a href="#a-3-terminal-git-on-one-page">A.3  Terminal &amp; Git on One Page</a><a href="#a-4-recommended-free-resources">A.4  Recommended Free Resources</a></div>
+    <div class="anchor-row" data-live="stagger"><a href="#a-1-fundamentals-data-on-one-page">A.1 Fundamentals &amp; Data on One Page</a><a href="#a-2-modern-js-the-dom-on-one-page">A.2 Modern JS &amp; the DOM on One Page</a><a href="#a-3-events-async-clean-code-on-one-page">A.3 Events, Async &amp; Clean Code on One Page</a></div>
   </div>
   <article>
-<h2 id="a-1-html-skeleton-memorise-this">A.1  HTML Skeleton (memorise this)</h2>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Page Title&lt;/title&gt;
-  &lt;link rel="stylesheet" href="styles.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;!-- content --&gt;
-  &lt;script src="app.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h2 id="a-2-javascript-essentials-on-one-page">A.2  JavaScript Essentials on One Page</h2>
-<pre><code>// Variables          const fixed = 1;  let changeable = 2;
-// Template literal   `Hello ${name}`
-// Function           const fn = (a, b) =&gt; a + b;
-// Condition          if (x &gt; 5) {...} else {...}
-// Loop               for (const item of list) {...}
-// Array Big Three    list.map(x =&gt; ...)  .filter(x =&gt; ...)  .reduce((t,x) =&gt; ..., 0)
-// Object             const o = { key: "value" };  o.key;  const { key } = o;
-// DOM                document.querySelector("#id")
-// Event              el.addEventListener("click", () =&gt; {...})
-// Fetch              const data = await (await fetch(url)).json();
-// Async function     async function f() { try { await ... } catch (e) {...} }
-// Storage            localStorage.setItem("k", JSON.stringify(v));
-//                    JSON.parse(localStorage.getItem("k"))</code></pre>
-<h2 id="a-3-terminal-git-on-one-page">A.3  Terminal &amp; Git on One Page</h2>
-<pre><code># Terminal
-cd folder        # enter a folder        cd ..   # go up one level
-ls  (or dir)     # list contents         mkdir x # create folder
-node file.js     # run JavaScript        Ctrl+C  # stop a running program
-# Project setup
-npm init -y &amp;&amp; npm install express
-# Git daily loop
-git add . &amp;&amp; git commit -m "message" &amp;&amp; git push</code></pre>
-<h2 id="a-4-recommended-free-resources">A.4  Recommended Free Resources</h2>
-<p><strong>MDN Web Docs </strong>(developer.mozilla.org) — the definitive HTML/CSS/JS reference.</p>
-<p><strong>The Odin Project </strong>(theodinproject.com) — a free full-stack curriculum to reinforce this guide.</p>
-<p><strong>roadmap.sh </strong>— visual maps of what to learn next for any developer role.</p>
-<p><strong>JavaScript.info </strong>— the best free deep-dive book on modern JavaScript.</p>
-<p><strong>freeCodeCamp </strong>— thousands of practice exercises and free certifications.</p>
+<h2 id="a-1-fundamentals-data-on-one-page">A.1 Fundamentals &amp; Data on One Page</h2>
+<pre><code>GOLDEN RULES: UNDERSTAND don't memorise · BUILD constantly · read errors · clean code ·
+  embrace ASYNC · use MODERN JS
+BASICS: const (prefer) / let · types: string `${}` · number · boolean · null/undefined ·
+  operators: + - * / % · === !== (strict, USE these) · &amp;&amp; || ! · console.log()
+CONTROL FLOW: if/else · ternary (c ? a : b) · switch · for / for...of / while
+FUNCTIONS: function f(x){return..} / const f = x =&gt; ... · params + return · SCOPE (block/fn) ·
+  one job, clear name, reusable
+DATA: ARRAYS [..] (push/pop, [i]) · OBJECTS {key:val} (.key) ·
+  ARRAY METHODS: map (transform) · filter (select) · find · forEach · reduce (aggregate) ·
+  JSON.parse / JSON.stringify (arrays of objects = real data shape)</code></pre>
+<h2 id="a-2-modern-js-the-dom-on-one-page">A.2 Modern JS &amp; the DOM on One Page</h2>
+<pre><code>MODERN JS (ES2015+): arrow fns (x =&gt; ...) · destructuring ({a,b}=obj) · spread/rest (...) ·
+  template literals (`${}`) · default params · optional chaining (a?.b) · nullish (?? ) ·
+  MODULES (export / import) -&gt; clean, idiomatic; the foundation for React
+THE DOM (manipulate the page):
+  SELECT: document.querySelector('.x') / querySelectorAll / getElementById
+  CHANGE: el.textContent · el.classList.add/remove/toggle · el.value · el.setAttribute
+  CREATE: document.createElement -&gt; appendChild · el.remove()
+  RENDER DATA: array.map/forEach -&gt; build &amp; insert elements (data drives the page)
+FRONT-END LOOP: user acts -&gt; EVENT -&gt; handler -&gt; update DATA -&gt; update DOM</code></pre>
+<h2 id="a-3-events-async-clean-code-on-one-page">A.3 Events, Async &amp; Clean Code on One Page</h2>
+<pre><code>EVENTS: el.addEventListener('click'/'input'/'submit', e =&gt; {...}) · e.target / e.target.value
+  FORMS: on 'submit' -&gt; e.preventDefault() -&gt; read .value -&gt; VALIDATE -&gt; feedback (DOM)
+ASYNC &amp; APIs:
+  async function f(){ try {
+    const res = await fetch(url); if(!res.ok) throw new Error();
+    const data = await res.json(); /* render it */
+  } catch(e){ /* friendly error */ } }
+  flow: fetch -&gt; await -&gt; .json() -&gt; render · handle LOADING / SUCCESS / ERROR states
+ERRORS &amp; DEBUGGING: try/catch round risky code · guard bad data (optional chaining) ·
+  READ the error · console.log · browser DEBUGGER (breakpoints) · narrow it down
+CLEAN CODE: clear names · small single-purpose functions · DRY · modules · comment the WHY
+CAREER: front-end -&gt; REACT next · + NODE = full-stack · portfolio-driven · keep building</code></pre>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part9.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 9 · Professional Practice</span></a>
-  <a class="next" href="part11.html"><span class="dir">NEXT →</span><span class="pt">Part 11 · 16-Week Daily Plan</span></a>
+  <a href="part9.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 9 · Capstone &amp; Career</span></a>
+  <a class="next" href="part11.html"><span class="dir">NEXT →</span><span class="pt">Part 11 · Study Plan</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -348,7 +352,7 @@ git add . &amp;&amp; git commit -m "message" &amp;&amp; git push</code></pre>
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

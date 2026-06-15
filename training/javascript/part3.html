@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JavaScript Fundamentals — JavaScript Developer · The Mentorine School</title>
+<title>Data Structures — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Structures — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,326 +294,47 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 3 · WEEKS 3–6</div>
-    <h1>JavaScript Fundamentals: Learning to Think Like a Programmer</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#3-1-what-is-javascript-and-where-does-it-run">3.1  What Is JavaScript, and Where Does It Run?</a><a href="#3-2-variables-the-computer-s-memory">3.2  Variables: The Computer’s Memory</a><a href="#3-3-operators-doing-things-with-values">3.3  Operators: Doing Things With Values</a><a href="#3-4-conditionals-teaching-the-computer-to-decide">3.4  Conditionals: Teaching the Computer to Decide</a><a href="#3-5-loops-doing-things-repeatedly">3.5  Loops: Doing Things Repeatedly</a><a href="#3-6-functions-reusable-machines">3.6  Functions: Reusable Machines</a><a href="#3-7-arrays-ordered-lists-of-anything">3.7  Arrays: Ordered Lists of Anything</a><a href="#3-8-objects-describing-real-world-things">3.8  Objects: Describing Real-World Things</a></div>
+    <div class="kicker">Part 3 · WEEK 2</div>
+    <h1>Data Structures</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#3-1-arrays-and-objects-how-data-is-organised">3.1 Arrays and Objects: How Data Is Organised</a><a href="#3-2-arrays-objects-and-their-methods-practical">3.2 Arrays, Objects, and Their Methods (Practical)</a><a href="#3-3-transforming-data-fluently">3.3 Transforming Data Fluently</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Weeks 3–6 (18–24 days). This is the heart of the course. Do not rush it.</em></p>
-<h2 id="3-1-what-is-javascript-and-where-does-it-run">3.1  What Is JavaScript, and Where Does It Run?</h2>
-<p>JavaScript (JS) is a true programming language: it makes decisions, repeats actions, remembers things, and responds to events. It is the only language every web browser understands natively, and thanks to Node.js it also runs on servers — which is why JavaScript developers can build entire applications, front to back, with one language. It is consistently the most in-demand language in remote job listings worldwide.</p>
-<h3>Two Ways to Run JavaScript (Practical)</h3>
-<p><strong>Way 1 — The browser console: </strong>open Chrome, press F12, click the "Console" tab, type the line below, and press Enter:</p>
-<pre><code>console.log("Hello from the console!");</code></pre>
-<p><strong>Way 2 — Node.js in the terminal: </strong>create a file <code>part3-js/hello.js</code> containing that same line, then in the terminal run:</p>
-<pre><code>cd part3-js
-node hello.js</code></pre>
-<p><code>console.log()</code> prints things to the screen. It is your flashlight for the entire journey — when in doubt, log it out. For browser practicals in this part, use this HTML wrapper and put your JS between the <code>&lt;script&gt;</code> tags:</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part3-js/playground.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;JS Playground&lt;/title&gt;&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Open the console (F12) to see output&lt;/h1&gt;
-  &lt;script&gt;
-    // Your JavaScript goes here
-    console.log("Playground ready");
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h2 id="3-2-variables-the-computer-s-memory">3.2  Variables: The Computer’s Memory</h2>
-<p>A variable is a labelled box where you store a value to use later. Modern JavaScript gives you two keywords:</p>
-<p><code>let</code> — a box whose contents can change later.</p>
-<p><code>const</code> — a box that is sealed after you fill it (constant). Professionals default to const and only use let when the value genuinely changes.</p>
-<pre><code>const myName = "Adaeze";     // text (a "string") — note the quotes
-let age = 24;                 // a number — no quotes
-let isLearning = true;        // true/false (a "boolean")
-let salary;                   // declared but empty: undefined
-console.log(myName);          // Adaeze
-console.log("Age:", age);     // Age: 24
-age = 25;                     // allowed: let can change
-// myName = "Bola";           // ERROR: const cannot be reassigned
-// Joining text with values: template literals (backtick quotes)
-console.log(`My name is ${myName} and I am ${age} years old.`);</code></pre>
-<p><strong>NAMING RULES</strong></p>
-<p>Variable names use camelCase (firstName, totalPrice), cannot start with a number, cannot contain spaces, and should describe their contents. monthlySalary is professional; x is not.</p>
-<h3>The Core Data Types</h3>
-<div class="tbl-wrap"><table>
-<thead><tr><th>Type</th><th>What It Is</th><th>Example</th></tr></thead><tbody>
-<tr><td>String</td><td>Text, wrapped in quotes or backticks</td><td>"Lagos", 'remote job', `Hi ${name}`</td></tr>
-<tr><td>Number</td><td>Integers and decimals alike</td><td>42, 3.14, -250000</td></tr>
-<tr><td>Boolean</td><td>true or false — the basis of all decisions</td><td>true, false</td></tr>
-<tr><td>Undefined</td><td>Declared but not yet given a value</td><td>let x;</td></tr>
-<tr><td>Null</td><td>Deliberately empty — "nothing, on purpose"</td><td>let winner = null;</td></tr>
-<tr><td>Array</td><td>An ordered list of values</td><td>[10, 20, 30]</td></tr>
-<tr><td>Object</td><td>A collection of labelled values</td><td>{ name: "Ada", age: 24 }</td></tr>
-</tbody></table></div>
-<h2 id="3-3-operators-doing-things-with-values">3.3  Operators: Doing Things With Values</h2>
-<pre><code>// Arithmetic
-console.log(10 + 3);   // 13
-console.log(10 - 3);   // 7
-console.log(10 * 3);   // 30
-console.log(10 / 3);   // 3.333...
-console.log(10 % 3);   // 1  (remainder — surprisingly useful)
-console.log(2 ** 5);   // 32 (2 to the power of 5)
-// Shorthand
-let score = 10;
-score += 5;            // same as score = score + 5  → 15
-score++;               // add 1                       → 16
-// Comparison (result is always true or false)
-console.log(5 &gt; 3);          // true
-console.log(5 &gt;= 5);         // true
-console.log(5 === 5);        // true  (equal in value AND type)
-console.log(5 === "5");      // false (number vs string)
-console.log(5 !== 4);        // true  (not equal)
-// Logical
-console.log(true &amp;&amp; false);  // false — AND: both must be true
-console.log(true || false);  // true  — OR: at least one true
-console.log(!true);          // false — NOT: flips the value</code></pre>
-<p><strong>CRITICAL RULE</strong></p>
-<p>Always compare with === (triple equals), never == (double). Double equals performs sneaky type conversion (5 == "5" is true!) and causes bugs that take hours to find. A single = is assignment, not comparison at all.</p>
-<h2 id="3-4-conditionals-teaching-the-computer-to-decide">3.4  Conditionals: Teaching the Computer to Decide</h2>
-<pre><code>const hour = 14;
-if (hour &lt; 12) {
-  console.log("Good morning!");
-} else if (hour &lt; 17) {
-  console.log("Good afternoon!");
-} else {
-  console.log("Good evening!");
-}
-// Real-world example: grading
-const examScore = 73;
-let grade;
-if (examScore &gt;= 70)      grade = "A";
-else if (examScore &gt;= 60) grade = "B";
-else if (examScore &gt;= 50) grade = "C";
-else                      grade = "F";
-console.log(`Score ${examScore} = Grade ${grade}`);
-// The ternary operator: a one-line if/else
-const access = age &gt;= 18 ? "granted" : "denied";
-// switch: cleaner when checking one value against many options
-const day = "Saturday";
-switch (day) {
-  case "Saturday":
-  case "Sunday":
-    console.log("Weekend! Time for a side project.");
-    break;
-  default:
-    console.log("Workday. Code for 90 minutes anyway.");
-}</code></pre>
-<h3>Hands-On Practical: The ATM Simulator</h3>
-<p>Create <code>part3-js/atm.js</code> and run it with <code>node atm.js</code>. Then complete the Try This challenge.</p>
-<pre><code>const balance = 50000;       // Naira
-const withdrawal = 65000;
-const dailyLimit = 100000;
-if (withdrawal &gt; balance) {
-  console.log("Insufficient funds. Your balance is ₦" + balance);
-} else if (withdrawal &gt; dailyLimit) {
-  console.log("Amount exceeds your daily limit of ₦" + dailyLimit);
-} else {
-  const newBalance = balance - withdrawal;
-  console.log(`Success! Dispensing ₦${withdrawal}. New balance: ₦${newBalance}`);
-}</code></pre>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Add a rule that rejects withdrawals that are not multiples of 500 (hint: use the % operator), and a rule that warns when the remaining balance would fall below ₦1,000.</p></div>
-<h2 id="3-5-loops-doing-things-repeatedly">3.5  Loops: Doing Things Repeatedly</h2>
-<p>Computers exist to repeat boring work flawlessly. Loops are how you command repetition.</p>
-<pre><code>// for loop: when you know how many times
-for (let i = 1; i &lt;= 5; i++) {
-  console.log("Push-up number " + i);
-}
-// Reads as: start i at 1; keep going while i &lt;= 5; add 1 each round.
-// while loop: when you repeat until a condition changes
-let savings = 0;
-let week = 0;
-while (savings &lt; 100000) {
-  week++;
-  savings += 12500;     // save ₦12,500 per week
-}
-console.log(`Goal reached in ${week} weeks.`);
-// Looping over an array (you will do this daily as a developer)
-const skills = ["HTML", "CSS", "JavaScript"];
-for (const skill of skills) {
-  console.log("I am learning " + skill);
-}
-// break stops a loop early; continue skips one round
-for (let n = 1; n &lt;= 10; n++) {
-  if (n === 4) continue;   // skip 4
-  if (n === 8) break;      // stop completely at 8
-  console.log(n);          // prints 1 2 3 5 6 7
-}</code></pre>
-<h3>Hands-On Practical: The Multiplication Master</h3>
-<pre><code>// Prints the full 12 times table using a loop inside a loop
-for (let a = 1; a &lt;= 12; a++) {
-  let row = "";
-  for (let b = 1; b &lt;= 12; b++) {
-    row += (a * b) + "\t";   // \t is a tab character
-  }
-  console.log(row);
-}</code></pre>
-<div class="callout"><div class="co-label">TRY THIS</div><p>Write a loop that prints every number from 1 to 100, but prints "Fizz" for multiples of 3, "Buzz" for multiples of 5, and "FizzBuzz" for multiples of both. This is a genuine question asked in real job interviews.</p></div>
-<h2 id="3-6-functions-reusable-machines">3.6  Functions: Reusable Machines</h2>
-<p>A function is a named block of code you write once and run as many times as you like. Functions take inputs (parameters), do work, and hand back an output (return value). They are the single most important building block in all of programming.</p>
-<pre><code>// Defining a function
-function greet(name) {
-  return "Welcome aboard, " + name + "!";
-}
-// Calling (using) it
-console.log(greet("Chidi"));    // Welcome aboard, Chidi!
-console.log(greet("Funke"));    // Welcome aboard, Funke!
-// Multiple parameters and real logic
-function calculatePay(hourlyRate, hours) {
-  const gross = hourlyRate * hours;
-  const tax = gross * 0.075;        // 7.5% tax
-  return gross - tax;
-}
-console.log(calculatePay(5000, 40));  // 185000
-// Default parameter values
-function brew(drink = "coffee") {
-  return "Brewing " + drink;
-}
-console.log(brew());          // Brewing coffee
-console.log(brew("tea"));     // Brewing tea
-// Arrow functions: the modern, shorter syntax (you will see these everywhere)
-const add = (a, b) =&gt; a + b;
-const square = n =&gt; n * n;
-console.log(add(3, 4), square(5));   // 7 25</code></pre>
-<p><strong>MENTAL MODEL</strong></p>
-<p>Think of a function as a blender: ingredients go in (parameters), the machine does its work (the body), a smoothie comes out (the return value). return immediately ends the function and hands back the result — code after return never runs.</p>
-<h2 id="3-7-arrays-ordered-lists-of-anything">3.7  Arrays: Ordered Lists of Anything</h2>
-<pre><code>const jobs = ["Frontend Dev", "Backend Dev", "Data Analyst"];
-console.log(jobs[0]);          // "Frontend Dev" — counting starts at ZERO
-console.log(jobs.length);      // 3
-jobs.push("DevOps Engineer");  // add to the end
-jobs.unshift("Intern");        // add to the beginning
-const last = jobs.pop();       // remove and return the last item
-console.log(jobs.includes("Data Analyst"));  // true
-console.log(jobs.indexOf("Backend Dev"));    // 2
-// The Big Three array methods — learn these cold:
-const prices = [1000, 2500, 4000, 800];
-// map: transform every item → new array
-const withVAT = prices.map(p =&gt; p * 1.075);
-// filter: keep only items that pass a test → new array
-const affordable = prices.filter(p =&gt; p &lt; 3000);
-// reduce: boil everything down to one value
-const total = prices.reduce((sum, p) =&gt; sum + p, 0);
-console.log(withVAT);     // [1075, 2687.5, 4300, 860]
-console.log(affordable);  // [1000, 2500, 800]
-console.log(total);       // 8300
-// Sorting (numbers need a compare function)
-const sorted = [...prices].sort((a, b) =&gt; a - b);  // [800,1000,2500,4000]</code></pre>
-<h2 id="3-8-objects-describing-real-world-things">3.8  Objects: Describing Real-World Things</h2>
-<p>An array answers "what is in the list?"; an object answers "what are this thing’s properties?". Almost every piece of data you will ever receive from a server arrives as objects.</p>
-<pre><code>const job = {
-  title: "Junior Frontend Developer",
-  company: "RemoteFirst Ltd",
-  salary: 250000,
-  isRemote: true,
-  skills: ["HTML", "CSS", "JavaScript"],
-  // Objects can contain functions, called "methods"
-  describe: function () {
-    return `${this.title} at ${this.company}`;
-  }
-};
-// Reading values — two equivalent ways
-console.log(job.title);          // dot notation (preferred)
-console.log(job["salary"]);      // bracket notation
-// Changing and adding
-job.salary = 300000;
-job.location = "Anywhere";
-console.log(job.describe());     // Junior Frontend Developer at RemoteFirst Ltd
-// Arrays of objects: THE most common data shape in real work
-const applicants = [
-  { name: "Ada",  score: 85 },
-  { name: "Bayo", score: 62 },
-  { name: "Chi",  score: 91 },
-];
-const passed = applicants.filter(a =&gt; a.score &gt;= 70);
-const names = passed.map(a =&gt; a.name);
-console.log(names);              // ["Ada", "Chi"]</code></pre>
-<p><code>this</code> inside a method refers to the object the method belongs to — "this very object". You will meet it again in Part 4.</p>
-<h2 id="3-9-checkpoint-project-1-the-number-guessing-game">3.9  Checkpoint Project 1: The Number-Guessing Game</h2>
-<p>Your first complete program with logic, loops, functions, and randomness. Save as <code>part3-js/guess.html</code> and open with Live Server. (It uses the browser’s simple <code>prompt()</code> pop-up so we can focus purely on logic — Part 4 replaces pop-ups with real interfaces.)</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part3-js/guess.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;Guess the Number&lt;/title&gt;&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Guess the Number (1–100)&lt;/h1&gt;
-  &lt;p&gt;Check the console for your game history.&lt;/p&gt;
-  &lt;script&gt;
-    // Math.random() gives 0–0.999...; scale it to 1–100
-    const secret = Math.floor(Math.random() * 100) + 1;
-    const maxAttempts = 7;
-    let attempts = 0;
-    let won = false;
-    while (attempts &lt; maxAttempts &amp;&amp; !won) {
-      const input = prompt(`Attempt ${attempts + 1} of ${maxAttempts}. Your guess?`);
-      const guess = Number(input);          // convert text → number
-      attempts++;
-      if (Number.isNaN(guess)) {
-        alert("That is not a number. Try again!");
-        attempts--;                          // don't punish typos
-      } else if (guess === secret) {
-        alert(`Correct! You won in ${attempts} attempts.`);
-        won = true;
-      } else if (guess &lt; secret) {
-        alert("Too low. Go higher.");
-      } else {
-        alert("Too high. Go lower.");
-      }
-      console.log(`Attempt ${attempts}: guessed ${guess}`);
-    }
-    if (!won) alert(`Out of attempts! The number was ${secret}.`);
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h2 id="3-10-checkpoint-project-2-console-expense-tracker">3.10  Checkpoint Project 2: Console Expense Tracker</h2>
-<p>Run with <code>node expenses.js</code>. This project mirrors exactly how real applications model data: an array of objects plus functions that operate on it.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part3-js/expenses.js</code></div>
-<pre><code>const expenses = [];
-function addExpense(description, amount, category) {
-  expenses.push({
-    id: expenses.length + 1,
-    description,
-    amount,
-    category,
-    date: new Date().toLocaleDateString(),
-  });
-}
-function totalSpent() {
-  return expenses.reduce((sum, e) =&gt; sum + e.amount, 0);
-}
-function totalByCategory(category) {
-  return expenses
-    .filter(e =&gt; e.category === category)
-    .reduce((sum, e) =&gt; sum + e.amount, 0);
-}
-function printReport() {
-  console.log("=== EXPENSE REPORT ===");
-  for (const e of expenses) {
-    console.log(`#${e.id} [${e.category}] ${e.description}: ₦${e.amount}`);
-  }
-  console.log("Total spent: ₦" + totalSpent());
-}
-// --- Use the tracker ---
-addExpense("Internet data", 5000, "utilities");
-addExpense("Lunch", 2500, "food");
-addExpense("Transport to meetup", 1500, "transport");
-addExpense("Suya", 3000, "food");
-printReport();
-console.log("Food total: ₦" + totalByCategory("food"));</code></pre>
-<p><strong>Try This (your final Part 3 exam): </strong>Add three functions: <code>removeExpense(id)</code> (hint: filter), <code>biggestExpense()</code> (hint: reduce or sort), and <code>averageExpense()</code>. If you can build these without looking anything up, you have genuinely internalised JavaScript fundamentals.</p>
+<h2 id="3-1-arrays-and-objects-how-data-is-organised">3.1 Arrays and Objects: How Data Is Organised</h2>
+<p>Real programs work with <em>collections</em> and <em>structured</em> data, and JavaScript's two core data structures handle this. <strong>Arrays</strong> are ordered lists of values (<code>[1, 2, 3]</code>, <code>['Ada', 'Grace']</code>) — perfect for sequences of things (a list of users, products, tasks). <strong>Objects</strong> are collections of named properties (<code>{ name: 'Ada', age: 36 }</code>) — perfect for representing a <em>thing</em> with multiple attributes (a user with a name, email, and role). Almost all real data is some combination of these: a list of user <em>objects</em>, an object containing <em>arrays</em>, and so on (this nested structure is also exactly what <strong>JSON</strong> — the universal data format of the web and APIs — looks like, so understanding arrays and objects means understanding JSON too). Mastering how to create, access, and manipulate arrays and objects is fundamental, because <em>working with data</em> is most of what programs do — and JavaScript provides exceptionally powerful, expressive methods for doing so, which are a joy to learn and a core part of fluency.</p>
+<h2 id="3-2-arrays-objects-and-their-methods-practical">3.2 Arrays, Objects, and Their Methods (Practical)</h2>
+<pre><code>DATA STRUCTURES &amp; THEIR METHODS
+  ARRAYS (ordered lists):
+    const nums = [1, 2, 3];
+    nums.length · nums[0] (access) · nums.push(4) (add) · nums.pop() (remove last)
+    POWERFUL ARRAY METHODS (master these — the heart of JS data work):
+      .map(n =&gt; n * 2)            // transform each -&gt; new array [2,4,6]
+      .filter(n =&gt; n &gt; 1)         // keep matching -&gt; [2,3]
+      .find(n =&gt; n === 2)         // first match -&gt; 2
+      .forEach(n =&gt; console.log(n))   // do something with each
+      .reduce((sum, n) =&gt; sum + n, 0) // combine into one value -&gt; 6
+      .sort(), .includes(), .some(), .every()
+  OBJECTS (named properties):
+    const user = { name: "Ada", age: 36, skills: ["JS"] };
+    user.name · user["age"] (access) · user.email = "..." (add/change)
+    Object.keys(user) · Object.values(user) · Object.entries(user)
+  NESTING &amp; JSON: arrays of objects (a list of users) = the shape of most real data &amp; JSON
+    JSON.parse(str) / JSON.stringify(obj)   // convert between JSON text and JS
+KEY: arrays (lists) + objects (things) + array methods (map/filter/reduce) = working with data.</code></pre>
+<p><strong>Arrays</strong>: create, access by index (<code>nums[0]</code>), <code>push</code>/<code>pop</code> to add/remove — but the real power is the <strong>array methods</strong>, which you should master: <code>.map()</code> (transform each item into a new array), <code>.filter()</code> (keep matching items), <code>.find()</code> (first match), <code>.forEach()</code> (do something with each), <code>.reduce()</code> (combine into one value), plus <code>sort</code>, <code>includes</code>, <code>some</code>, <code>every</code>. These expressive methods are the heart of JavaScript data work and replace clunky manual loops. <strong>Objects</strong>: named properties accessed with <code>.name</code> or <code>["name"]</code>, added/changed by assignment, with <code>Object.keys/values/entries</code> to inspect them. And <strong>nesting</strong> — arrays of objects (a list of users) is the shape of most real data and of <strong>JSON</strong>, which you convert with <code>JSON.parse</code>/<code>JSON.stringify</code>. Arrays, objects, and array methods are how you work with data.</p>
+<h2 id="3-3-transforming-data-fluently">3.3 Transforming Data Fluently</h2>
+<p>The array methods — especially <code>map</code>, <code>filter</code>, and <code>reduce</code> — deserve real focus because <em>transforming collections of data</em> is so central to modern JavaScript (and to React, Node, and almost everything you'll build). Instead of writing manual loops to process lists, you express transformations declaratively: 'take this list of products and <code>map</code> it to their names', 'take these users and <code>filter</code> to the active ones', 'take these prices and <code>reduce</code> them to a total'. This functional, method-chaining style (<code>users.filter(u =&gt; u.active).map(u =&gt; u.name)</code>) is clean, readable, and ubiquitous in professional JavaScript — you'll see and use it constantly, especially in React where rendering lists of data is <code>array.map()</code> everywhere. Becoming <em>fluent</em> with these methods — reaching naturally for <code>map</code> to transform, <code>filter</code> to select, <code>find</code> to locate, <code>reduce</code> to aggregate — is a hallmark of someone comfortable in JavaScript, and it makes working with the data that flows through every app feel natural rather than laborious. Combined with understanding objects (representing structured things) and JSON (the data format you'll constantly send and receive from APIs in Part 7), mastering data structures and their methods is core fluency. Demonstrating clean data manipulation — transforming, filtering, and aggregating real collections with array methods — shows the practical command of data that all real JavaScript work depends on.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Manipulate real data: take a collection (an array of objects — like a list of products or users) and transform it with array methods — <code>map</code> to reshape, <code>filter</code> to select, <code>find</code> to locate, <code>reduce</code> to aggregate — chaining them where useful, plus access and update object properties, and convert to/from JSON. Fluency with arrays, objects, and methods like map/filter/reduce is core JavaScript skill that underpins React, Node, and everything you'll build.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part2.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 2 · CSS</span></a>
-  <a class="next" href="part4.html"><span class="dir">NEXT →</span><span class="pt">Part 4 · The DOM</span></a>
+  <a href="part2.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 2 · Control Flow &amp; Functions</span></a>
+  <a class="next" href="part4.html"><span class="dir">NEXT →</span><span class="pt">Part 4 · Modern JavaScript</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -609,7 +343,7 @@ console.log("Food total: ₦" + totalByCategory("food"));</code></pre>
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>

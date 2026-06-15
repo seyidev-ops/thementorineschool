@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The DOM — JavaScript Developer · The Mentorine School</title>
+<title>Modern JavaScript — JavaScript · The Mentorine School</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern JavaScript — JavaScript · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career &amp; Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
 <script>/* theme bootstrap: system default, no flash */
 (function(){var m=localStorage.getItem("ms_theme")||"system";
 var r=m==="system"?(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"night":"day"):m;
 document.documentElement.setAttribute("data-theme",r);})();</script>
-<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML — Front-End Web Developer · The Mentorine School">
+<meta property="og:description" content="A lesson in your Career & Skill Track at The Mentorine School by Ona Services.">
+<meta property="og:image" content="../../assets/og/track-javascript.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../assets/og/track-javascript.png">
+<link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -281,247 +294,48 @@ footer.site .col{display:flex;justify-content:space-between;gap:1rem;flex-wrap:w
   </nav>
 <main class="col">
   <div class="part-hero">
-    <div class="kicker">PART 4 · WEEKS 6–8</div>
-    <h1>The DOM: Making Web Pages Come Alive</h1>
-    <div class="anchor-row" data-live="stagger"><a href="#4-1-what-is-the-dom">4.1  What Is the DOM?</a><a href="#4-2-selecting-and-changing-elements">4.2  Selecting and Changing Elements</a><a href="#4-3-events-responding-to-the-user">4.3  Events: Responding to the User</a><a href="#4-4-project-the-to-do-list-every-developer-s-rite-of-passage">4.4  Project: The To-Do List (Every Developer’s Rite of Passage)</a><a href="#4-5-localstorage-remembering-data-after-the-tab-closes">4.5  localStorage: Remembering Data After the Tab Closes</a><a href="#4-6-project-a-working-calculator">4.6  Project: A Working Calculator</a><a href="#4-7-checkpoint-project-the-quiz-app">4.7  Checkpoint Project: The Quiz App</a></div>
+    <div class="kicker">Part 4 · WEEKS 2–3</div>
+    <h1>Modern JavaScript (ES2015+)</h1>
+    <div class="anchor-row" data-live="stagger"><a href="#4-1-why-modern-javascript-matters">4.1 Why Modern JavaScript Matters</a><a href="#4-2-the-modern-toolkit-practical">4.2 The Modern Toolkit (Practical)</a><a href="#4-3-writing-clean-idiomatic-code">4.3 Writing Clean, Idiomatic Code</a></div>
   </div>
   <article>
-<p><em>Estimated duration: Weeks 6–8 (12–14 days).</em></p>
-<h2 id="4-1-what-is-the-dom">4.1  What Is the DOM?</h2>
-<p>When the browser loads your HTML, it builds a live, in-memory model of the page called the Document Object Model (DOM) — a family tree where every tag is a node JavaScript can find, read, change, create, or delete. This is the moment HTML, CSS, and JavaScript finally meet: HTML provides the elements, CSS the appearance, and JavaScript reaches into the DOM to change both in response to the user.</p>
-<h2 id="4-2-selecting-and-changing-elements">4.2  Selecting and Changing Elements</h2>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part4-dom/dom-basics.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;DOM Basics&lt;/title&gt;&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1 id="headline"&gt;Original Headline&lt;/h1&gt;
-  &lt;p class="note"&gt;First note&lt;/p&gt;
-  &lt;p class="note"&gt;Second note&lt;/p&gt;
-  &lt;button id="magicBtn"&gt;Click Me&lt;/button&gt;
-  &lt;script&gt;
-    // SELECTING — querySelector uses the same syntax as CSS selectors
-    const headline = document.querySelector("#headline");  // by id
-    const firstNote = document.querySelector(".note");     // first match
-    const allNotes = document.querySelectorAll(".note");   // ALL matches
-    // READING &amp; CHANGING content
-    console.log(headline.textContent);          // "Original Headline"
-    headline.textContent = "JavaScript Was Here";
-    // CHANGING style and classes
-    headline.style.color = "#C8A04B";
-    firstNote.classList.add("highlight");       // add a CSS class
-    firstNote.classList.toggle("highlight");    // add if absent, remove if present
-    // LOOPING over a selection
-    allNotes.forEach((note, i) =&gt; {
-      note.textContent = `Note number ${i + 1}, rewritten by JS`;
-    });
-    // CREATING new elements
-    const badge = document.createElement("p");
-    badge.textContent = "I was created entirely by JavaScript.";
-    document.body.appendChild(badge);
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<div class="callout"><div class="co-label">GOLDEN RULE</div><p></p></div>
-<p>The &lt;script&gt; tag goes at the BOTTOM of &lt;body&gt; (or use the defer attribute). JavaScript cannot select an element that the browser has not drawn yet — scripts placed in &lt;head&gt; without defer find an empty page and fail silently.</p>
-<h2 id="4-3-events-responding-to-the-user">4.3  Events: Responding to the User</h2>
-<p>An event is anything that happens: a click, a keypress, typing in a box, submitting a form, scrolling. You attach a listener — a function that runs when the event fires.</p>
-<pre><code>const btn = document.querySelector("#magicBtn");
-// addEventListener(eventName, functionToRun)
-btn.addEventListener("click", () =&gt; {
-  alert("You clicked the button!");
-});
-// Reading what the user types, live
-const input = document.querySelector("#searchBox");
-input.addEventListener("input", (event) =&gt; {
-  console.log("Current text:", event.target.value);
-});
-// Handling a form submission properly
-const form = document.querySelector("#myForm");
-form.addEventListener("submit", (event) =&gt; {
-  event.preventDefault();   // STOP the page from reloading — crucial!
-  console.log("Form submitted, page did not reload.");
-});</code></pre>
-<p>The <code>event</code> object handed to your listener describes what happened; <code>event.target</code> is the element it happened to. The most common events: <code>click, input, change, submit, keydown, mouseover, load</code>.</p>
-<h2 id="4-4-project-the-to-do-list-every-developer-s-rite-of-passage">4.4  Project: The To-Do List (Every Developer’s Rite of Passage)</h2>
-<p>This single file combines everything so far: HTML structure, CSS styling, DOM selection, events, arrays of objects, and rendering. Type or paste it, run it, then study the comments until every line makes sense.</p>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part4-dom/todo.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;My Tasks&lt;/title&gt;
-  &lt;style&gt;
-    body { font-family: Arial, sans-serif; max-width: 480px;
-           margin: 40px auto; padding: 0 16px; }
-    h1 { font-family: Georgia, serif; }
-    form { display: flex; gap: 8px; }
-    input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-    button { padding: 10px 16px; border: none; border-radius: 6px;
-             background: #0A0A0A; color: #fff; cursor: pointer; }
-    ul { list-style: none; padding: 0; }
-    li { display: flex; justify-content: space-between; align-items: center;
-         padding: 10px; border-bottom: 1px solid #eee; }
-    .done { text-decoration: line-through; color: #999; }
-    .delete { background: #c0392b; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;My Tasks&lt;/h1&gt;
-  &lt;form id="taskForm"&gt;
-    &lt;input type="text" id="taskInput" placeholder="What needs doing?" required&gt;
-    &lt;button type="submit"&gt;Add&lt;/button&gt;
-  &lt;/form&gt;
-  &lt;ul id="taskList"&gt;&lt;/ul&gt;
-  &lt;p id="counter"&gt;&lt;/p&gt;
-  &lt;script&gt;
-    // ----- STATE: the single source of truth -----
-    let tasks = [];   // each task: { id, text, done }
-    // ----- ELEMENT REFERENCES -----
-    const form = document.querySelector("#taskForm");
-    const input = document.querySelector("#taskInput");
-    const list = document.querySelector("#taskList");
-    const counter = document.querySelector("#counter");
-    // ----- RENDER: redraw the list from the tasks array -----
-    function render() {
-      list.innerHTML = "";   // wipe and rebuild — simple and reliable
-      tasks.forEach(task =&gt; {
-        const li = document.createElement("li");
-        const span = document.createElement("span");
-        span.textContent = task.text;
-        if (task.done) span.classList.add("done");
-        // Clicking the text toggles done
-        span.addEventListener("click", () =&gt; toggleTask(task.id));
-        const del = document.createElement("button");
-        del.textContent = "✕";
-        del.classList.add("delete");
-        del.addEventListener("click", () =&gt; deleteTask(task.id));
-        li.appendChild(span);
-        li.appendChild(del);
-        list.appendChild(li);
-      });
-      const remaining = tasks.filter(t =&gt; !t.done).length;
-      counter.textContent = `${remaining} task(s) remaining`;
-    }
-    // ----- ACTIONS: change state, then re-render -----
-    function addTask(text) {
-      tasks.push({ id: Date.now(), text, done: false });
-      render();
-    }
-    function toggleTask(id) {
-      tasks = tasks.map(t =&gt; t.id === id ? { ...t, done: !t.done } : t);
-      render();
-    }
-    function deleteTask(id) {
-      tasks = tasks.filter(t =&gt; t.id !== id);
-      render();
-    }
-    // ----- EVENTS -----
-    form.addEventListener("submit", (e) =&gt; {
-      e.preventDefault();
-      addTask(input.value.trim());
-      input.value = "";
-      input.focus();
-    });
-    render();   // initial draw
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><strong>THE PROFESSIONAL PATTERN YOU JUST LEARNED</strong></p>
-<p>State → Render → Actions → Events. Keep your data in one place (the array), have one function that redraws the screen from that data, and have every user action change the data then call render. This exact pattern is the heart of React, Vue, and every modern framework. You just built it from scratch.</p>
-<h2 id="4-5-localstorage-remembering-data-after-the-tab-closes">4.5  localStorage: Remembering Data After the Tab Closes</h2>
-<p>Right now your to-do list forgets everything on refresh. <code>localStorage</code> is a small permanent store inside the browser. It only stores text, so we convert with <code>JSON.stringify</code> (object → text) and <code>JSON.parse</code> (text → object).</p>
-<pre><code>// Add these two upgrades to your to-do app:
-// 1. Load saved tasks when the page opens (replace: let tasks = [];)
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-// 2. Save inside render(), so every change is persisted
-function render() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  // ...rest of render stays the same
-}</code></pre>
-<p>Refresh the page. Your tasks survive. You have just implemented data persistence — a real software engineering concept.</p>
-<h2 id="4-6-project-a-working-calculator">4.6  Project: A Working Calculator</h2>
-<div class="file-label"><span class="fl-tag">FILE</span><code>part4-dom/calculator.html</code></div>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Calculator&lt;/title&gt;
-  &lt;style&gt;
-    body { display: flex; justify-content: center; padding-top: 60px;
-           background: #f4f4f4; font-family: Arial; }
-    .calc { background: #0A0A0A; padding: 20px; border-radius: 16px; }
-    #screen { width: 100%; height: 56px; font-size: 28px; text-align: right;
-              border: none; border-radius: 8px; margin-bottom: 12px;
-              padding: 0 12px; box-sizing: border-box; }
-    .keys { display: grid; grid-template-columns: repeat(4, 64px); gap: 8px; }
-    .keys button { height: 56px; font-size: 20px; border: none;
-                   border-radius: 8px; cursor: pointer; }
-    .op { background: #C8A04B; color: white; }
-    .eq { background: #2e7d32; color: white; grid-column: span 2; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="calc"&gt;
-    &lt;input id="screen" disabled&gt;
-    &lt;div class="keys" id="keys"&gt;
-      &lt;button&gt;7&lt;/button&gt;&lt;button&gt;8&lt;/button&gt;&lt;button&gt;9&lt;/button&gt;&lt;button class="op"&gt;/&lt;/button&gt;
-      &lt;button&gt;4&lt;/button&gt;&lt;button&gt;5&lt;/button&gt;&lt;button&gt;6&lt;/button&gt;&lt;button class="op"&gt;*&lt;/button&gt;
-      &lt;button&gt;1&lt;/button&gt;&lt;button&gt;2&lt;/button&gt;&lt;button&gt;3&lt;/button&gt;&lt;button class="op"&gt;-&lt;/button&gt;
-      &lt;button&gt;0&lt;/button&gt;&lt;button&gt;.&lt;/button&gt;&lt;button class="op"&gt;+&lt;/button&gt;&lt;button id="clear"&gt;C&lt;/button&gt;
-      &lt;button class="eq" id="equals"&gt;=&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;script&gt;
-    const screen = document.querySelector("#screen");
-    const keys = document.querySelector("#keys");
-    // Event delegation: ONE listener on the parent handles all buttons
-    keys.addEventListener("click", (e) =&gt; {
-      if (e.target.tagName !== "BUTTON") return;
-      const key = e.target.textContent;
-      if (e.target.id === "clear") {
-        screen.value = "";
-      } else if (e.target.id === "equals") {
-        calculate();
-      } else {
-        screen.value += key;
-      }
-    });
-    function calculate() {
-      try {
-        // Function() safely evaluates the arithmetic expression string
-        const result = Function('"use strict"; return (' + screen.value + ')')();
-        screen.value = Number.isFinite(result) ? result : "Error";
-      } catch {
-        screen.value = "Error";
-      }
-    }
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><strong>New technique — event delegation: </strong>instead of 17 listeners on 17 buttons, one listener on the container inspects <code>e.target</code> to see which child was clicked. Essential for lists where items are created dynamically.</p>
-<h2 id="4-7-checkpoint-project-the-quiz-app">4.7  Checkpoint Project: The Quiz App</h2>
-<p>Build this one with less hand-holding. Requirements:</p>
-<p>Store at least five questions as an array of objects: { question, options (array of 4), correctIndex }.</p>
-<p>Show one question at a time with its four options as buttons.</p>
-<p>Clicking an option shows green/red feedback, updates the score, and moves to the next question after one second (hint: setTimeout(fn, 1000)).</p>
-<p>At the end, show the score, a message based on performance (use if/else), and a Restart button.</p>
-<p>Stretch goal: save the best score in localStorage and display "Best: X".</p>
-<p><strong>MILESTONE REACHED</strong></p>
-<p>You can now build interactive browser applications with persistent data. Many self-taught developers get hired with little more than what you now know — but we are going much further.</p>
+<h2 id="4-1-why-modern-javascript-matters">4.1 Why Modern JavaScript Matters</h2>
+<p>JavaScript has evolved enormously since 2015 (the ES2015/ES6 release and every year since), and <strong>modern JavaScript</strong> — the current syntax and features — is what all professional code uses today; learning it (not outdated styles) is essential. Modern features make code cleaner, more expressive, and more powerful: arrow functions, destructuring, the spread/rest operators, template literals, default parameters, modules, optional chaining, and more. These aren't just cosmetic — they're the idioms you'll see and write in every codebase, every framework (React especially leans heavily on modern syntax), and every tutorial, so reading and writing them fluently is a baseline expectation. The golden rule 'use modern JavaScript' means learning these current patterns directly, rather than older, clunkier styles that mark code as dated. You've already met some (<code>const</code>/<code>let</code>, template literals, arrow functions, array methods); this part consolidates the modern toolkit so your code is clean, current, and ready for the frameworks and real codebases that assume it. Writing modern, idiomatic JavaScript is part of being a competent 2026 developer.</p>
+<h2 id="4-2-the-modern-toolkit-practical">4.2 The Modern Toolkit (Practical)</h2>
+<pre><code>MODERN JAVASCRIPT (ES2015+ — the 2026 standard)
+  ARROW FUNCTIONS (concise functions, used everywhere esp. with array methods):
+    const add = (a, b) =&gt; a + b;        const sq = n =&gt; n * n;
+  DESTRUCTURING (pull values out of objects/arrays cleanly):
+    const { name, age } = user;         // from an object
+    const [first, second] = myArray;    // from an array
+  SPREAD &amp; REST (...):
+    const merged = { ...user, role: "admin" };   // spread: copy/merge objects
+    const all = [...arr1, ...arr2];               // spread arrays
+    function sum(...nums) { ... }                  // rest: gather args into an array
+  TEMPLATE LITERALS: `Hello ${name}, you have ${count} messages`  (backticks + ${})
+  DEFAULT PARAMETERS: function greet(name = "friend") { ... }
+  OPTIONAL CHAINING &amp; NULLISH: user?.address?.city   ·   value ?? "default"
+  MODULES (split code across files — like Node):
+    export const x = ...;  /  export default ...;     // in one file
+    import { x } from './file.js';  /  import Thing from './file.js';   // in another
+  SHORTHAND: { name, age } (property shorthand) · array methods (Part 3) are 'modern' too
+KEY: arrow fns, destructuring, spread/rest, template literals, optional chaining &amp; modules
+  = clean, current, idiomatic JS.</code></pre>
+<p>The modern toolkit: <strong>arrow functions</strong> (concise, used everywhere especially with array methods); <strong>destructuring</strong> (pulling values out of objects/arrays cleanly — <code>const { name, age } = user</code>); the <strong>spread/rest</strong> operator (<code>...</code> — spread to copy/merge objects and arrays, rest to gather arguments); <strong>template literals</strong> (backticks with <code>${}</code>); <strong>default parameters</strong>; <strong>optional chaining</strong> (<code>user?.address?.city</code>) and <strong>nullish coalescing</strong> (<code>value ?? "default"</code>) to handle missing data safely; and <strong>modules</strong> (<code>export</code>/<code>import</code> to split code across files, just like Node). Plus shorthands like property shorthand (<code>{ name, age }</code>). These are the idioms of all current JavaScript — reading and writing them fluently is a baseline expectation, and they make your code clean, current, and ready for frameworks.</p>
+<h2 id="4-3-writing-clean-idiomatic-code">4.3 Writing Clean, Idiomatic Code</h2>
+<p>Modern features aren't just syntax to memorise — used well, they make your code genuinely <em>cleaner and more readable</em>, which is the deeper goal (the golden rule 'write clean, readable code'). Destructuring makes it obvious what data you're using; arrow functions and array methods make transformations concise and clear; spread makes copying and combining data elegant; optional chaining safely handles the missing-data cases that used to require clumsy checks; modules keep your code organised across files. Writing <em>idiomatic</em> JavaScript — the natural, current way the community writes it — means your code is easy for other developers to read (and you to read theirs), and it's expected in any professional setting and assumed by every framework and tutorial. It also prepares you directly for <strong>React</strong> (the school's React skill), which is built on modern JavaScript — components are functions, props are destructured, lists are mapped, state is spread — so the modern JS you learn here is exactly what makes React learnable. The throughline: learn the current language, write it cleanly and idiomatically, and you'll both produce better code and be ready for the modern ecosystem. Demonstrating clean, modern, idiomatic JavaScript shows you're a current, professional developer ready for real codebases and frameworks.</p>
+<div class="callout"><div class="co-label">CHECKPOINT</div><p>Refactor and write clean modern code: take earlier exercises and rewrite them using modern features — arrow functions, destructuring, spread/rest, template literals, optional chaining/nullish, and split code into modules (import/export). Aim for clean, readable, idiomatic code. Modern, idiomatic JavaScript is the baseline for professional work and the direct foundation for React, which is built on exactly these features.</p></div>
   </article>
 <nav class="pager" data-live="off">
-  <a href="part3.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 3 · JavaScript Fundamentals</span></a>
-  <a class="next" href="part5.html"><span class="dir">NEXT →</span><span class="pt">Part 5 · Modern &amp; Async JS</span></a>
+  <a href="part3.html"><span class="dir">← PREVIOUS</span><span class="pt">Part 3 · Data Structures</span></a>
+  <a class="next" href="part5.html"><span class="dir">NEXT →</span><span class="pt">Part 5 · The DOM</span></a>
 </nav>
 </main>
 
 <footer class="site">
   <div class="col">
     <div><span class="bm">Mentorine<span class="bm-i">School</span></span> · mentorineschool.com</div>
-    <div>JavaScript Developer · zero to professional in 16 weeks</div>
+    <div>JavaScript · zero to job-ready in a recommended 5–8 weeks</div>
     <div>&copy; 2026 Mentorine School by Ona Services Ltd. All rights reserved.</div>
   </div>
 </footer>
@@ -530,7 +344,7 @@ function render() {
 
 <script src="../../assets/app.js"></script>
 <script>MS.initTheme();</script>
-<script>window.MS_GATE={course:"javascript-developer",home:"../../"};</script>
+<script>window.MS_GATE={course:"javascript",home:"../../"};</script>
 <script src="../../assets/gate.js"></script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
 <script src="../../assets/liveliness.js" defer></script>
