@@ -120,7 +120,10 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 .tier .dur{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
 .tier .price{font-family:'Fraunces',serif;font-size:2rem;font-weight:500;font-variant-numeric:tabular-nums}
 .tier .was{color:var(--ink-faint);text-decoration:line-through;font-size:.85rem;font-family:'DM Sans',sans-serif;font-weight:300;margin-left:.5rem}
-.tier .for{font-size:.88rem;color:var(--ink-soft);margin:.5rem 0 1.1rem}
+.tier .for{font-size:.88rem;color:var(--ink-soft);margin:.5rem 0 .8rem}
+.tier-points{list-style:none;padding:0;margin:0 0 1.1rem;display:flex;flex-direction:column;gap:.4rem}
+.tier-points li{font-size:.82rem;color:var(--ink-soft);padding-left:1.2rem;position:relative;line-height:1.35}
+.tier-points li::before{content:"";position:absolute;left:0;top:.42em;width:.55rem;height:.32rem;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
 .tier.hl{border-color:color-mix(in srgb, var(--accent) 50%, transparent)}
 .tier .pick{margin-top:auto}
 /* persuasive standalone CTA */
@@ -204,6 +207,20 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 /* static course grid (tumble on hover, but no auto-scroll) */
 .tracks{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.1rem}
 @media (prefers-reduced-motion: reduce){.cm-row{animation:none}}
+/* partners marquee */
+.partners{padding:3.2rem 0 3.6rem;background:var(--paper-2);border-top:1px solid var(--line)}
+.partners .section-head{margin-bottom:1.8rem}
+.pt-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.pt-row{display:flex;gap:1.1rem;width:max-content;animation:pt-roll 42s linear infinite}
+.partners:hover .pt-row{animation-play-state:paused}
+@keyframes pt-roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pt-logo{flex:0 0 auto;width:200px;height:96px;border-radius:14px;border:1px solid var(--line);
+  background:var(--card);display:flex;align-items:center;justify-content:center;overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.pt-logo:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.10);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.pt-logo img{max-width:78%;max-height:66%;object-fit:contain;display:block}
+@media (prefers-reduced-motion: reduce){.pt-row{animation:none;flex-wrap:nowrap;overflow-x:auto;width:auto}}
+@media (max-width:600px){.pt-logo{width:160px;height:82px}}
 
 /* nav dropdown: Career & Skill Tracks */
 .nav-dd{position:relative}
@@ -290,10 +307,10 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <a class="link-quiet" href="#courses">Browse the fields</a>
     </div>
     <div class="stats" data-live="stagger">
-      <div class="stat"><b>40+</b><span>Career &amp; Skill Tracks</span></div>
-      <div class="stat"><b>7</b><span>Skill Fields</span></div>
+      <div class="stat"><b>40+</b><span>Career Tracks</span></div>
+      <div class="stat"><b>7</b><span>Fields &amp; Skills</span></div>
       <div class="stat"><b>100%</b><span>Remote-Friendly</span></div>
-      <div class="stat"><b>1</b><span>Certificate Verified Per Track</span></div>
+      <div class="stat"><b>1</b><span>Certificate Per Track</span></div>
     </div>
   </div>
 </header>
@@ -348,8 +365,8 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   <div class="wrap">
     <div class="section-head">
       <div class="kicker">Registration Tiers &amp; Investment</div>
-      <h2>Flexible plans, <em class="ac">introductory</em> pricing.</h2>
-      <p>Pick the duration that fits your pace. These are <strong>introductory prices</strong> — they revert to standard (crossed out) when the countdown ends.</p>
+      <h2>Two ways to learn: <em class="ac">Tutored</em> or Self-Study.</h2>
+      <p>The tiered plans below are <strong>Tutored</strong> — mentorship, live sessions, community and a verified certificate. Prefer to go solo? The <strong>Self-Study</strong> standalone track is further down. All prices are <strong>introductory</strong> and revert to standard (crossed out) when the countdown ends.</p>
       <div class="countdown" id="countdown" data-live="off" aria-label="Time left at introductory pricing">
         <span class="cd-label">Introductory pricing ends in</span>
         <div class="cd-clock">
@@ -363,21 +380,36 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
     </div>
     <div class="tiers" data-live="stagger">
       <div class="card tier">
-        <span class="dur">3 Months</span>
+        <span class="dur">3 Months &middot; Tutored</span>
         <span class="price">₦100,000<span class="was">₦250,000</span></span>
-        <p class="for"><strong>The Accelerator.</strong> Ideal for upskilling in a specific tool or mastering a niche skill quickly.</p>
+        <p class="for"><strong>The Accelerator.</strong> Ideal for upskilling in a specific tool or mastering a niche skill quickly — with a mentor in your corner.</p>
+        <ul class="tier-points">
+          <li>Live mentor sessions &amp; feedback</li>
+          <li>Cohort community access</li>
+          <li>Verified certificate &amp; capstone review</li>
+        </ul>
         <a class="link-quiet pick" href="register.html?plan=3mo">Choose this plan</a>
       </div>
       <div class="card tier hl">
-        <span class="dur">6 Months</span>
+        <span class="dur">6 Months &middot; Tutored</span>
         <span class="price">₦300,000<span class="was">₦500,000</span></span>
-        <p class="for"><strong>The Career Switcher.</strong> Perfect for pivoting to a new industry, with time for portfolio building.</p>
+        <p class="for"><strong>The Career Switcher.</strong> Perfect for pivoting to a new industry, with time for portfolio building and ongoing mentorship.</p>
+        <ul class="tier-points">
+          <li>Everything in 3 Months</li>
+          <li>Extended mentorship &amp; portfolio coaching</li>
+          <li>Priority support &amp; career guidance</li>
+        </ul>
         <a class="btn pick" href="register.html?plan=6mo" style="justify-content:center">Choose this plan <span class="arr">→</span></a>
       </div>
       <div class="card tier">
-        <span class="dur">1 Year</span>
+        <span class="dur">1 Year &middot; Tutored</span>
         <span class="price">₦500,000<span class="was">₦700,000</span></span>
-        <p class="for"><strong>The Mastery Path.</strong> Best for beginners starting from zero or professionals aiming for senior-level competency.</p>
+        <p class="for"><strong>The Mastery Path.</strong> Best for beginners starting from zero or professionals aiming for senior-level competency, fully mentored.</p>
+        <ul class="tier-points">
+          <li>Everything in 6 Months</li>
+          <li>Full year of mentorship &amp; community</li>
+          <li>Multiple tracks &amp; certificates</li>
+        </ul>
         <a class="link-quiet pick" href="register.html?plan=1yr">Choose this plan</a>
       </div>
     </div>
@@ -386,15 +418,15 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
       <div class="sa-body">
         <div class="sa-left">
           <span class="sa-kicker">Standalone Track &middot; Self-Study</span>
-          <h3 class="sa-title">A whole career track, your pace.</h3>
-          <p class="sa-sub">Not ready for the full programme? Get one complete track &mdash; the Career Path Document plus every course in it &mdash; for 30 days.</p>
+          <h3 class="sa-title">A whole career track, on your own.</h3>
+          <p class="sa-sub">Not ready for the full Tutored programme? Get one complete track &mdash; the Career Path Document plus every course in it &mdash; to study solo for 30 days.</p>
           <ul class="sa-points">
             <li>The full Career Path Document</li>
             <li>Every course &amp; lesson in the track</li>
-            <li>Learn anytime, anywhere</li>
+            <li>Learn anytime, anywhere, at your pace</li>
             <li>Instant access &mdash; pay, send proof, start</li>
           </ul>
-          <p class="sa-fine">Self-study. Community &amp; certificate come with the full tiers above.</p>
+          <p class="sa-fine"><strong>Self-study only.</strong> No live mentor sessions, cohort community or certificate &mdash; those come with the Tutored tiers above.</p>
         </div>
         <div class="sa-right">
           <span class="sa-price-label">Introductory price</span>
@@ -460,6 +492,20 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 </section>
 
 
+
+
+<section class="partners" id="partners" aria-label="Our partners">
+  <div class="wrap">
+    <div class="section-head" data-live="rise">
+      <div class="kicker">In good company</div>
+      <h2>Our <em class="ac">partners</em> &amp; collaborators.</h2>
+      <p>Brands and organisations we build, train and grow alongside.</p>
+    </div>
+    <div class="pt-marquee" data-live="off">
+      <div class="pt-row" id="ptRow"></div>
+    </div>
+  </div>
+</section>
 
 
 <footer class="footer-grand" data-live="off">
@@ -577,6 +623,24 @@ function fieldCardHTML(c){
     '</a>';
   }
   var html = picks.map(tcard).join('');
+  row.innerHTML = html + html;   // duplicated for a seamless loop
+})();
+
+/* ---- partners marquee (logos in motion, like featured) ---- */
+(function(){
+  var row = document.getElementById('ptRow'); if(!row) return;
+  var partners = [
+    { name:'Ona Services',                 img:'assets/partners/ona-services.png' },
+    { name:'Numerical Holdings',           img:'assets/partners/numerical-holdings.png' },
+    { name:'Country Ministries International', img:'assets/partners/country-ministries.png' },
+    { name:'Cities of Refuge Campaign',    img:'assets/partners/cities-of-refuge.png' },
+    { name:'Bootcamp',                     img:'assets/partners/bootcamp.png' },
+    { name:'Atinglez Cakes',               img:'assets/partners/atinglez-cakes.png' }
+  ];
+  function pcard(p){
+    return '<div class="pt-logo" title="'+p.name+'"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></div>';
+  }
+  var html = partners.map(pcard).join('');
   row.innerHTML = html + html;   // duplicated for a seamless loop
 })();
 
