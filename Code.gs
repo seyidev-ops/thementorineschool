@@ -18,7 +18,7 @@
  */
 
 /* ====== CONFIG — change this ONE value, then redeploy ====== */
-var SHARED_SECRET = "CHANGE-ME-to-a-long-random-string-9f3b2";  // must match app.js
+var SHARED_SECRET = "Mentorine-7d13-O2P2-T1g1";  // must match app.js
 var SHEET_NAME = "AccessCodes";   // tab name inside your spreadsheet
 /* =========================================================== */
 
