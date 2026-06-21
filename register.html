@@ -12,9 +12,9 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <meta property="og:title" content="Register — The Mentorine School by Ona Services">
 <meta property="og:description" content="Pick a Career & Skill Track, choose a plan, and unlock your training instantly.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/og-image.png">
+<meta property="og:image" content="assets/og/page-register.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="assets/og-image.png">
+<meta name="twitter:image" content="assets/og/page-register.png">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0D8C4F">
@@ -168,11 +168,15 @@ document.getElementById('regForm').addEventListener('submit', function(e){
   var email = document.getElementById('rEmail').value.trim();
   var pass = document.getElementById('rPass').value;
   if(!name || !email || pass.length < 4){ alert('Please complete all fields (password: 4+ characters).'); return; }
-  MS.register({ name:name, email:email, pass:pass, course:sel.value, tier:document.getElementById('rTier').value });
-  document.getElementById('regForm').style.display='none';
-  document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
-  document.getElementById('regSuccess').style.display='block';
-  var cta = document.getElementById('loginCta'); cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+  var btn = e.target.querySelector('button[type=submit]');
+  if(btn){ btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Registering…'; }
+  MS.register({ name:name, email:email, pass:pass, course:sel.value, tier:document.getElementById('rTier').value })
+    .then(function(){
+      document.getElementById('regForm').style.display='none';
+      document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
+      document.getElementById('regSuccess').style.display='block';
+      var cta = document.getElementById('loginCta'); cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+    });
 });
 
 /* logged-in nav state */

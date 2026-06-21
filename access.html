@@ -12,9 +12,9 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Access Your Training — The Mentorine School by Ona Services">
 <meta property="og:description" content="Enter your access code to unlock your training portal at The Mentorine School.">
-<meta property="og:image" content="assets/og-image.png">
+<meta property="og:image" content="assets/og/page-home.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="assets/og-image.png">
+<meta name="twitter:image" content="assets/og/page-home.png">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0D8C4F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,8 +94,15 @@ if (student && (!trainingUrl || student.course !== course)) {
 
 document.getElementById('gateForm').addEventListener('submit', function(e){
   e.preventDefault();
-  if (MS.verifyCode(document.getElementById('gCode').value)) location.href = trainingUrl;
-  else document.getElementById('gateErr').style.display = 'block';
+  var btn = e.target.querySelector('button[type=submit]');
+  var errEl = document.getElementById('gateErr');
+  errEl.style.display = 'none';
+  if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Checking…'; }
+  MS.verifyCode(document.getElementById('gCode').value).then(function(ok){
+    if (ok) { location.href = trainingUrl; return; }
+    errEl.style.display = 'block';
+    if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Unlock'; }
+  });
 });
 </script>
 <script>window.LIVELINESS={accent:"#0D8C4F",distance:14,duration:900};</script>
