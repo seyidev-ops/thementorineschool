@@ -43,9 +43,9 @@
   var CFG = Object.assign({
     auto: true,
     distance: 14,
-    duration: 900,
-    stagger: 90,
-    threshold: 0.12,
+    duration: 560,
+    stagger: 70,
+    threshold: 0.01,
     once: true,
     hover: true,
     ripple: true,
@@ -150,8 +150,27 @@
   }
 
   /* ---- prepare elements (set hidden state) ------------------------------ */
+  function inOrAboveViewport(el) {
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    // already on-screen, or scrolled past (above the top) -> should be visible now
+    return r.top < vh + 120 && r.bottom > -120 ? "visible"
+         : (r.bottom <= 0 ? "above" : "below");
+  }
+
   function prep(el, kind, delayMs) {
     if (el.__llDone) return;
+    // If the element is already visible or has been scrolled past, reveal it
+    // immediately (no hidden flash, no waiting on the observer) — this is the
+    // main guard against blank/slow blocks during fast scrolling or on load.
+    var where = inOrAboveViewport(el);
+    if (where !== "below") {
+      el.__llKind = kind;
+      el.__llDelay = 0;
+      el.classList.add("ll-in");
+      el.__llDone = true;
+      return;
+    }
     el.classList.add("ll-prep");
     if (kind === "fade") el.classList.add("ll-fade");
     else if (kind === "left") el.classList.add("ll-left");
@@ -193,7 +212,7 @@
           prep(e.target, e.target.__llKind, e.target.__llDelay);
         }
       });
-    }, { threshold: CFG.threshold, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: CFG.threshold, rootMargin: "120px 0px 120px 0px" });
   }
 
   /* ---- hover / micro-interaction wiring --------------------------------- */
@@ -287,6 +306,35 @@
     wireHover();
     wireRipple();
     wireAnchors();
+
+    /* ---- fast-scroll / lag failsafe -----------------------------------
+       If the user scrolls quickly the IntersectionObserver callback can
+       lag behind, briefly leaving prepped blocks blank. This cheap,
+       rAF-throttled pass force-reveals anything already in view. */
+    var ticking = false;
+    function sweepVisible() {
+      ticking = false;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var prepped = document.querySelectorAll(".ll-prep");
+      for (var i = 0; i < prepped.length; i++) {
+        var el = prepped[i];
+        var r = el.getBoundingClientRect();
+        if (r.top < vh + 60 && r.bottom > -60) reveal(el);
+      }
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(sweepVisible);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    // run once after load to catch anything below the fold but already near it
+    window.requestAnimationFrame(sweepVisible);
+    // final safety net: reveal everything still hidden after 2.5s no matter what
+    setTimeout(function () {
+      document.querySelectorAll(".ll-prep").forEach(function (el) { reveal(el); });
+    }, 2500);
   }
 
   if (document.readyState === "loading") {
