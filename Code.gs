@@ -3,7 +3,7 @@
  * Google Apps Script (bound to a Google Sheet)
  * ---------------------------------------------------------------------------
  * What it does
- *   - register : a student registers for a track -> a row is added (status PENDING)
+ *   - register : a student registers for a track -> a row is added (status APPROVED)
  *   - verify   : a student enters their code -> we confirm it is APPROVED for that track
  *   - status   : (optional) check a student's current status by email
  *
