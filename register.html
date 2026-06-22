@@ -168,11 +168,15 @@ document.getElementById('regForm').addEventListener('submit', function(e){
   var email = document.getElementById('rEmail').value.trim();
   var pass = document.getElementById('rPass').value;
   if(!name || !email || pass.length < 4){ alert('Please complete all fields (password: 4+ characters).'); return; }
-  MS.register({ name:name, email:email, pass:pass, course:sel.value, tier:document.getElementById('rTier').value });
-  document.getElementById('regForm').style.display='none';
-  document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
-  document.getElementById('regSuccess').style.display='block';
-  var cta = document.getElementById('loginCta'); cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+  var btn = e.target.querySelector('button[type=submit]');
+  if(btn){ btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Registering…'; }
+  MS.register({ name:name, email:email, pass:pass, course:sel.value, tier:document.getElementById('rTier').value })
+    .then(function(){
+      document.getElementById('regForm').style.display='none';
+      document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
+      document.getElementById('regSuccess').style.display='block';
+      var cta = document.getElementById('loginCta'); cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+    });
 });
 
 /* logged-in nav state */
