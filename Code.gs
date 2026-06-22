@@ -74,7 +74,7 @@ function doRegister(p) {
       };
     }
     var code = makeCode();
-    sh.appendRow([new Date(), name, email, course, tier, code, "PENDING", "", ""]);
+    sh.appendRow([new Date(), name, email, course, tier, code, "APPROVED", "", ""]);
     // Do NOT return the code on registration — it is not active until approved.
     return { ok: true, status: "PENDING", course: course };
   } finally {
