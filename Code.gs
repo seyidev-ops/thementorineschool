@@ -3,7 +3,7 @@
  * Google Apps Script (bound to a Google Sheet)
  * ---------------------------------------------------------------------------
  * What it does
- *   - register : a student registers for a track -> a row is added (status APPROVED)
+ *   - register : a student registers for a track -> a row is added (status PENDING)
  *   - verify   : a student enters their code -> we confirm it is APPROVED for that track
  *   - status   : (optional) check a student's current status by email
  *
@@ -18,7 +18,7 @@
  */
 
 /* ====== CONFIG — change this ONE value, then redeploy ====== */
-var SHARED_SECRET = "Mentorine-7d13-O2P2-T1g1";  // must match app.js
+var SHARED_SECRET = "Mentorine-7d13-O2P2-T1g1.";  // must match app.js
 var SHEET_NAME = "AccessCodes";   // tab name inside your spreadsheet
 /* =========================================================== */
 
@@ -74,7 +74,7 @@ function doRegister(p) {
       };
     }
     var code = makeCode();
-    sh.appendRow([new Date(), name, email, course, tier, code, "APPROVED", "", ""]);
+    sh.appendRow([new Date(), name, email, course, tier, code, "PENDING", "", ""]);
     // Do NOT return the code on registration — it is not active until approved.
     return { ok: true, status: "PENDING", course: course };
   } finally {
@@ -174,3 +174,4 @@ function setup() {
   getSheet();
   Logger.log("Sheet '" + SHEET_NAME + "' is ready.");
 }
+
