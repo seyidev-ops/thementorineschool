@@ -2425,7 +2425,26 @@ window.MS = (function () {
     return t ? genericSyllabus(t) : null;
   }
 
-  /* ---------- Registration / auth / lock state (demo, localStorage) ---------- */
+  /* ---------- Access-code backend (Google Apps Script) ----------
+     Paste your deployed Web App URL + the same secret you set in Code.gs.
+     If BACKEND_URL is left blank, the site falls back to local codes
+     (so nothing breaks before you deploy). */
+  var BACKEND_URL = "https://script.google.com/macros/s/AKfycbwMoG-PNZ0m6_FPRxkZOENkdkYxahTfs4tQiw93Lsw3PUpiRFaCU2nzQeWnn8TddmTq/exec"
+  var BACKEND_SECRET = "Mentorine-7d13-O2P2-T1g1";  // must match Code.gs
+  function backendOn() { return !!BACKEND_URL; }
+
+  function backendCall(action, payload) {
+    // Apps Script web apps accept simple POSTs without a CORS preflight when
+    // the content-type is text/plain. We send JSON as a plain-text body.
+    var body = JSON.stringify(Object.assign({ action: action, secret: BACKEND_SECRET }, payload || {}));
+    return fetch(BACKEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: body
+    }).then(function (r) { return r.json(); });
+  }
+
+  /* ---------- Registration / auth / lock state ---------- */
   function getStudent() {
     try { return JSON.parse(localStorage.getItem("ms_student")) || null; }
     catch (e) { return null; }
@@ -2436,16 +2455,24 @@ window.MS = (function () {
     for (var i = 0; i < 8; i++) { if (i === 4) c += "-"; c += A[Math.floor(Math.random() * A.length)]; }
     return c;
   }
+  /* register(): records the student locally (so the dashboard works) and, when
+     the backend is configured, also files the registration in your Sheet as
+     PENDING. Returns a Promise either way so callers can await it. */
   function register(data) {
     var s = {
       name: data.name, email: data.email.toLowerCase().trim(), pass: data.pass,
       course: data.course, tier: data.tier,
-      accessCode: makeCode(), codeVerified: false,
+      accessCode: backendOn() ? "" : makeCode(),  // server issues the real code
+      codeVerified: false,
       registeredAt: new Date().toISOString(), progress: {}
     };
     saveStudent(s);
     sessionStorage.setItem("ms_session", s.email);
-    return s;
+    if (!backendOn()) return Promise.resolve(s);
+    return backendCall("register", {
+      name: s.name, email: s.email, course: s.course, tier: s.tier
+    }).then(function () { return s; })
+      .catch(function () { return s; });  // never block the UI on a network hiccup
   }
   function login(email, pass) {
     var s = getStudent();
@@ -2460,12 +2487,27 @@ window.MS = (function () {
     var s = getStudent();
     return (s && sessionStorage.getItem("ms_session") === s.email) ? s : null;
   }
+  /* verifyCode(): returns a Promise<boolean>. When the backend is configured,
+     it asks your Sheet whether this code is APPROVED for the student's course.
+     Otherwise it falls back to the locally generated code. */
   function verifyCode(input) {
-    var s = getStudent(); if (!s) return false;
-    if (input.trim().toUpperCase() === s.accessCode) {
-      s.codeVerified = true; saveStudent(s); return true;
+    var s = getStudent();
+    var code = (input || "").trim().toUpperCase().replace(/\s+/g, "");
+    if (!s) return Promise.resolve(false);
+    if (!backendOn()) {
+      var ok = code === String(s.accessCode).toUpperCase();
+      if (ok) { s.codeVerified = true; saveStudent(s); }
+      return Promise.resolve(ok);
     }
-    return false;
+    return backendCall("verify", { code: code, course: s.course, email: s.email })
+      .then(function (res) {
+        if (res && res.verified) {
+          s.codeVerified = true; s.accessCode = code; saveStudent(s);
+          return true;
+        }
+        return false;
+      })
+      .catch(function () { return false; });
   }
   function isUnlocked(slug) {
     var s = getStudent();
