@@ -2429,7 +2429,7 @@ window.MS = (function () {
      Paste your deployed Web App URL + the same secret you set in Code.gs.
      If BACKEND_URL is left blank, the site falls back to local codes
      (so nothing breaks before you deploy). */
-  var BACKEND_URL = "https://script.google.com/macros/library/d/113Y4F-uNQm6bi1mZ5UwHSnPhLTIfMER6Gq1qcMG20M9B6jQVpVrdkaeB/2"
+  var BACKEND_URL = "https://script.google.com/macros/s/AKfycbwMoG-PNZ0m6_FPRxkZOENkdkYxahTfs4tQiw93Lsw3PUpiRFaCU2nzQeWnn8TddmTq/exec"
   var BACKEND_SECRET = "Mentorine-7d13-O2P2-T1g1";  // must match Code.gs
   function backendOn() { return !!BACKEND_URL; }
 
