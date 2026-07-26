@@ -94,6 +94,8 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
         </div>
         <button class="btn" type="submit" style="width:100%;justify-content:center">Enter admin panel <span class="arr">→</span></button>
       </form>
+      <button class="btn-quiet" type="button" id="admTest" style="width:100%;margin-top:.7rem">Test the backend connection</button>
+      <div id="admTestOut" style="font-size:.8rem;color:var(--ink-soft);margin-top:.8rem;line-height:1.6"></div>
     </div>
   </div>
 
@@ -152,12 +154,19 @@ document.getElementById('adminForm').addEventListener('submit', function(e){
     showPanel(res.students || []);
   }).catch(function(ex){
     var m = String(ex.message || ex);
-    err.textContent =
+    var url = MS.backendUrl();
+    var link = '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--accent);word-break:break-all">' + url + '</a>';
+    err.innerHTML =
       m.indexOf('bad_admin_key') > -1 ? 'That admin key is not right.' :
       m.indexOf('admin_key_not_set') > -1 ? 'Run setup() in the Apps Script editor first, then use the key it prints.' :
       m.indexOf('bad_response') > -1 ? 'The backend answered with a web page, not data. Re-deploy the Apps Script as a NEW version with access set to "Anyone".' :
-      m.indexOf('unknown_action') > -1 ? 'The deployed script is the old version. Paste the new Code.gs and deploy a NEW version.' :
-      'Could not reach the backend (' + m + ').';
+      m.indexOf('unknown_action') > -1 ? 'The deployed script is the old version. Paste the new Code.gs, then Deploy \u25b8 Manage deployments \u25b8 \u270f\ufe0f \u25b8 Version: New version.' :
+      m.indexOf('timeout') > -1 ? 'The backend did not answer within 20 seconds. Try again.' :
+      '<strong>The browser could not reach the backend at all.</strong><br><br>' +
+      'This is almost always the deployment, not your key. Open this URL in a <em>private window</em>:<br>' + link +
+      '<br><br>If you see a Google sign-in page, the web app\u2019s <em>Who has access</em> is not set to <strong>Anyone</strong>. ' +
+      'If you see an error page, the deployment behind this URL no longer exists \u2014 deploy again and paste the new /exec URL into ' +
+      '<code>assets/app.js</code>. Only JSON means the pipe is open.';
     err.style.display = 'block';
     btn.disabled = false; btn.textContent = 'Enter admin panel →';
   });
@@ -270,6 +279,30 @@ document.getElementById('studentBox').addEventListener('click', function(e){
 
 document.getElementById('admSearch').addEventListener('input', render);
 document.getElementById('admRefresh').addEventListener('click', refresh);
+
+/* Connection self-test — tells you exactly which of the four things is wrong. */
+document.getElementById('admTest').addEventListener('click', function(){
+  var out = document.getElementById('admTestOut');
+  var url = MS.backendUrl();
+  if (!url) { out.innerHTML = 'BACKEND_URL is empty in assets/app.js.'; return; }
+  out.innerHTML = 'Testing…';
+  MS.ping().then(function(res){
+    out.innerHTML = '<b style="color:var(--accent)">Connected.</b> Backend version ' +
+      (res.version || '?') + ', ' + (res.rows != null ? res.rows : '?') +
+      ' row(s) in the Sheet.' + (res.version < 2
+        ? '<br>But this is the OLD script — paste the new Code.gs and deploy a new version.'
+        : '<br>The pipe is open, so any failure now is the admin key itself.');
+  }).catch(function(ex){
+    var m = String(ex.message || ex);
+    out.innerHTML = '<b>Failed:</b> ' + (m.indexOf('bad_response') > -1
+        ? 'the URL returned a web page instead of data.'
+        : m.indexOf('bad_secret') > -1
+        ? 'BACKEND_SECRET in app.js does not match PUBLIC_SECRET in Code.gs.'
+        : 'the browser could not reach it at all (blocked or the deployment is gone).') +
+      '<br><br>Open this in a <em>private window</em> and see what it shows:<br>' +
+      '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--accent);word-break:break-all">' + url + '</a>';
+  });
+});
 document.getElementById('admOut').addEventListener('click', function(){
   sessionStorage.removeItem('ms_admin_key');
   location.reload();
