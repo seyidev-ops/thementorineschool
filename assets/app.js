@@ -2758,6 +2758,7 @@ window.MS = (function () {
     getStudent: getStudent, isUnlocked: isUnlocked,
     setProgress: setProgress, getProgress: getProgress, initTheme: initTheme, initChat: initChat,
     backendOn: backendOn, ping: ping, adminCall: adminCall,
+    backendUrl: function () { return BACKEND_URL; },
     flushQueue: flushQueue, pendingSync: queueGet,
     lastVerifyReason: function () { return lastVerifyReason; }
   };
