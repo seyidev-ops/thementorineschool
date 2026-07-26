@@ -100,6 +100,12 @@ document.getElementById('gateForm').addEventListener('submit', function(e){
   if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Checking…'; }
   MS.verifyCode(document.getElementById('gCode').value).then(function(ok){
     if (ok) { location.href = trainingUrl; return; }
+    var why = MS.lastVerifyReason();
+    errEl.textContent =
+      why === 'pending'     ? 'We have your code, but your payment has not been confirmed yet. Send your proof of payment on WhatsApp and we will activate it.' :
+      why === 'wrongcourse' ? 'That code belongs to a different track. Check that you are on the right course, or chat with admissions.' :
+      why.indexOf('offline') === 0 ? 'We could not reach our servers just now. Check your connection and try again in a moment.' :
+      "That code doesn't match. Check it carefully — or chat with admissions if you haven't received yours.";
     errEl.style.display = 'block';
     if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Unlock'; }
   });

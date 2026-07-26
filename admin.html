@@ -22,7 +22,21 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <style>
-.admin-shell{max-width:760px;margin:0 auto;padding:clamp(2rem,6vw,3.6rem) clamp(1.2rem,4vw,2rem)}
+.admin-shell{max-width:1080px;margin:0 auto;padding:clamp(2rem,6vw,3.6rem) clamp(1.2rem,4vw,2rem)}
+.adm-bar{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-bottom:1.2rem}
+.adm-bar input{flex:1;min-width:200px;padding:.6rem .8rem;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);color:var(--ink);font-family:inherit;font-size:.88rem}
+.adm-status{font-size:.78rem;color:var(--ink-faint);margin-bottom:1rem}
+.adm-status b{color:var(--accent);font-weight:500}
+.stu{border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:.8rem;background:var(--card)}
+.stu-top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline}
+.stu-name{font-family:'Fraunces',serif;font-size:1.1rem}
+.stu-meta{font-size:.82rem;color:var(--ink-soft);margin:.35rem 0 .7rem;line-height:1.6}
+.stu-acts{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+.stu-acts button{border:1px solid var(--line);background:none;color:var(--ink-soft);border-radius:var(--r-sm);padding:.45rem .9rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.78rem}
+.stu-acts button:hover{border-color:var(--accent);color:var(--accent)}
+.pill{font-size:.66rem;letter-spacing:2px;text-transform:uppercase;padding:.25rem .6rem;border-radius:99px;border:1px solid var(--line)}
+.pill.ok{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.pill.wait{color:var(--ink-faint)}
 .admin-shell h1{font-size:clamp(1.8rem,5vw,2.5rem);margin-bottom:.4rem}
 .admin-shell .sub{color:var(--ink-soft);font-size:.92rem;margin-bottom:1.8rem}
 .kv{display:grid;grid-template-columns:160px 1fr;gap:.4rem .8rem;font-size:.92rem;margin:1.1rem 0}
@@ -67,13 +81,16 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   <div id="adminLogin">
     <div class="kicker">Admin</div>
     <h1>Administrator <em class="ac">login</em>.</h1>
-    <p class="sub">For school staff only — manage student registrations, issue unique access codes, and reset progress.</p>
-    <div class="err" id="adminErr">Incorrect admin passcode.</div>
+    <p class="sub">For school staff only — see every registration from the Sheet, approve payments, and issue access codes.</p>
+    <div class="err" id="adminErr">Incorrect admin key.</div>
     <div class="card" style="max-width:420px">
       <form id="adminForm" novalidate>
         <div class="field">
-          <label for="aPass">Admin passcode</label>
+          <label for="aPass">Admin key</label>
           <input type="password" id="aPass" required placeholder="••••••••••">
+          <p style="font-size:.72rem;color:var(--ink-faint);margin-top:.4rem">
+            The key printed by <code>setup()</code> in the Apps Script editor. It is stored in Script Properties, never in this page.
+          </p>
         </div>
         <button class="btn" type="submit" style="width:100%;justify-content:center">Enter admin panel <span class="arr">→</span></button>
       </form>
@@ -84,7 +101,13 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   <div id="adminPanel" style="display:none">
     <div class="kicker">Admin · Student Access</div>
     <h1>Student <em class="ac">registrations</em>.</h1>
-    <p class="sub">Issue the access code to the student once payment is confirmed — it unlocks their training portal.</p>
+    <p class="sub">Approve a student once payment is confirmed — that is what makes their access code work.</p>
+    <div class="adm-bar">
+      <input type="search" id="admSearch" placeholder="Search name, email, course or code…">
+      <button class="btn-quiet" id="admRefresh" type="button">Refresh</button>
+      <button class="btn-quiet" id="admOut" type="button">Sign out</button>
+    </div>
+    <div class="adm-status" id="admStatus"></div>
     <div id="studentBox"></div>
   </div>
 </div>
@@ -95,80 +118,172 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
 <script>
 MS.initTheme();
 
-/* Change this passcode before deploying. Demo only — move admin auth to a real backend in production. */
-var ADMIN_PASS = "1711@Prim$";
+/* ---------------------------------------------------------------------------
+   The admin panel reads the Google Sheet through the Apps Script backend.
+   It used to read localStorage, which only ever contains the ONE student who
+   registered in this very browser — which is why it always looked empty.
+   The admin key is typed in each session and kept only in sessionStorage.
+--------------------------------------------------------------------------- */
+
+var KEY = null;
+var CACHE = [];
+
+function esc(v){
+  return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
 
 document.getElementById('adminForm').addEventListener('submit', function(e){
   e.preventDefault();
-  if (document.getElementById('aPass').value === ADMIN_PASS) {
-    sessionStorage.setItem('ms_admin', '1');
-    showPanel();
-  } else document.getElementById('adminErr').style.display = 'block';
+  var err = document.getElementById('adminErr');
+  var key = document.getElementById('aPass').value.trim();
+  var btn = e.target.querySelector('button[type=submit]');
+  err.style.display = 'none';
+  if (!MS.backendOn()) {
+    err.textContent = 'No backend configured. Set BACKEND_URL in assets/app.js.';
+    err.style.display = 'block';
+    return;
+  }
+  btn.disabled = true; btn.textContent = 'Checking…';
+  MS.adminCall(key, 'list').then(function(res){
+    KEY = key;
+    sessionStorage.setItem('ms_admin_key', key);
+    showPanel(res.students || []);
+  }).catch(function(ex){
+    var m = String(ex.message || ex);
+    err.textContent =
+      m.indexOf('bad_admin_key') > -1 ? 'That admin key is not right.' :
+      m.indexOf('admin_key_not_set') > -1 ? 'Run setup() in the Apps Script editor first, then use the key it prints.' :
+      m.indexOf('bad_response') > -1 ? 'The backend answered with a web page, not data. Re-deploy the Apps Script as a NEW version with access set to "Anyone".' :
+      m.indexOf('unknown_action') > -1 ? 'The deployed script is the old version. Paste the new Code.gs and deploy a NEW version.' :
+      'Could not reach the backend (' + m + ').';
+    err.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enter admin panel →';
+  });
 });
 
-function showPanel(){
+function showPanel(students){
   document.getElementById('adminLogin').style.display = 'none';
   document.getElementById('adminPanel').style.display = 'block';
+  CACHE = students;
   render();
 }
 
+function refresh(){
+  var st = document.getElementById('admStatus');
+  st.innerHTML = 'Loading from the Sheet…';
+  MS.adminCall(KEY, 'list').then(function(res){
+    CACHE = res.students || [];
+    render();
+  }).catch(function(ex){
+    st.innerHTML = 'Could not refresh: ' + esc(ex.message || ex);
+  });
+}
+
 function render(){
+  var q = (document.getElementById('admSearch').value || '').toLowerCase().trim();
+  var list = CACHE.filter(function(s){
+    if (!q) return true;
+    return [s.name, s.email, s.course, s.tier, s.code, s.status]
+      .join(' ').toLowerCase().indexOf(q) > -1;
+  });
+
+  var pending = CACHE.filter(function(s){ return s.status !== 'APPROVED'; }).length;
+  document.getElementById('admStatus').innerHTML =
+    CACHE.length + ' registration' + (CACHE.length === 1 ? '' : 's') +
+    ' in the Sheet · <b>' + pending + ' awaiting approval</b>';
+
   var box = document.getElementById('studentBox');
-  var s = MS.getStudent();
-  if (!s) {
-    box.innerHTML = '<div class="empty">No student registrations on this device yet.<br>Registrations appear here as soon as a student signs up on the landing page.</div>';
+  if (!list.length) {
+    box.innerHTML = '<div class="empty">' + (CACHE.length
+      ? 'No registration matches that search.'
+      : 'No registrations in the Sheet yet.<br>A student who completes the form on register.html appears here within seconds.')
+      + '</div>';
     return;
   }
-  var track = MS.findTrack(s.course);
-  var syl = MS.getSyllabus(s.course);
-  var prog = MS.getProgress(s.course);
-  var total = syl ? syl.modules.length : 0;
-  var done = Object.keys(prog).filter(function(k){return prog[k];}).length;
-  var pct = total ? Math.min(100, Math.round(done/total*100)) : 0;
 
-  box.innerHTML =
-    '<div class="card">' +
-      '<dl class="kv">' +
-        '<dt>Student</dt><dd>' + s.name + '</dd>' +
-        '<dt>Email</dt><dd>' + s.email + '</dd>' +
-        '<dt>Course</dt><dd>' + (track ? track.name : s.course) + '</dd>' +
-        '<dt>Plan</dt><dd>' + s.tier + '</dd>' +
-        '<dt>Registered</dt><dd>' + new Date(s.registeredAt).toLocaleString() + '</dd>' +
-        '<dt>Access code</dt><dd><span class="code-pill"><span id="codeTxt">' + s.accessCode + '</span>' +
-          '<button type="button" id="copyCode">COPY</button></span></dd>' +
-        '<dt>Code status</dt><dd>' + (s.codeVerified
-            ? '<span class="badge open">● Verified — portal unlocked</span>'
-            : '<span class="badge locked">Awaiting student entry</span>') + '</dd>' +
-        '<dt>Progress</dt><dd>' + pct + '% · ' + done + ' of ' + total + ' modules</dd>' +
-      '</dl>' +
-      '<div class="admin-actions">' +
-        '<button class="btn-quiet" id="resetProg">Reset progress</button>' +
-        '<button class="btn-quiet" id="revokeCode">Revoke code access</button>' +
-        '<button class="btn-quiet" id="deleteStudent">Delete registration</button>' +
+  box.innerHTML = list.map(function(s){
+    var track = MS.findTrack(s.course);
+    var when = s.timestamp ? new Date(s.timestamp).toLocaleString() : '—';
+    var approved = s.status === 'APPROVED';
+    return '<div class="stu" data-code="' + esc(s.code) + '">' +
+      '<div class="stu-top">' +
+        '<span class="stu-name">' + esc(s.name || '(no name)') + '</span>' +
+        '<span class="pill ' + (approved ? 'ok' : 'wait') + '">' +
+          (approved ? '● Approved' : 'Awaiting payment') + '</span>' +
+      '</div>' +
+      '<div class="stu-meta">' +
+        esc(s.email) + '<br>' +
+        esc(track ? track.name : s.course) + ' · ' + esc(s.tier || '—') + '<br>' +
+        'Registered ' + esc(when) +
+        (s.verifiedAt ? ' · code used ' + esc(new Date(s.verifiedAt).toLocaleString()) : '') +
+      '</div>' +
+      '<span class="code-pill"><span>' + esc(s.code || '—') + '</span>' +
+        '<button type="button" data-act="copy">COPY</button></span>' +
+      '<div class="stu-acts">' +
+        (approved
+          ? '<button type="button" data-act="revoke">Revoke access</button>'
+          : '<button type="button" data-act="approve">Approve &amp; issue code</button>') +
+        '<button type="button" data-act="wa">Send code on WhatsApp</button>' +
+        '<button type="button" data-act="remove">Delete registration</button>' +
       '</div>' +
     '</div>';
-
-  document.getElementById('copyCode').onclick = function(){
-    navigator.clipboard && navigator.clipboard.writeText(s.accessCode);
-    this.textContent = 'COPIED ✓'; var b=this; setTimeout(function(){ b.textContent='COPY'; }, 1500);
-  };
-  document.getElementById('resetProg').onclick = function(){
-    if (confirm('Reset all progress for this student?')) { s.progress = {}; persist(s); }
-  };
-  document.getElementById('revokeCode').onclick = function(){
-    if (confirm('Revoke training-portal access? The student will need to re-enter the code.')) {
-      s.codeVerified = false; persist(s);
-    }
-  };
-  document.getElementById('deleteStudent').onclick = function(){
-    if (confirm('Delete this registration entirely?')) {
-      localStorage.removeItem('ms_student'); sessionStorage.removeItem('ms_session'); render();
-    }
-  };
+  }).join('');
 }
-function persist(s){ localStorage.setItem('ms_student', JSON.stringify(s)); render(); }
 
-if (sessionStorage.getItem('ms_admin') === '1') showPanel();
+document.getElementById('studentBox').addEventListener('click', function(e){
+  var btn = e.target.closest('button[data-act]');
+  if (!btn) return;
+  var card = btn.closest('.stu');
+  var code = card.getAttribute('data-code');
+  var rec = CACHE.filter(function(s){ return s.code === code; })[0] || {};
+  var act = btn.getAttribute('data-act');
+
+  if (act === 'copy') {
+    if (navigator.clipboard) navigator.clipboard.writeText(code);
+    btn.textContent = 'COPIED ✓';
+    setTimeout(function(){ btn.textContent = 'COPY'; }, 1500);
+    return;
+  }
+  if (act === 'wa') {
+    var msg = 'Hello ' + (rec.name || '').split(' ')[0] +
+      ', your payment is confirmed. Your Mentorine access code is ' + code +
+      '. Enter it at https://thementorineschool.com/access.html to unlock your training portal.';
+    if (navigator.clipboard) navigator.clipboard.writeText(msg);
+    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+    return;
+  }
+  if (act === 'remove' && !confirm('Delete this registration from the Sheet? This cannot be undone.')) return;
+  if (act === 'revoke' && !confirm('Revoke access for ' + (rec.name || code) + '?')) return;
+
+  btn.disabled = true;
+  var label = btn.textContent;
+  btn.textContent = 'Working…';
+  MS.adminCall(KEY, act, { code: code }).then(function(){
+    refresh();
+  }).catch(function(ex){
+    alert('That did not go through: ' + (ex.message || ex));
+    btn.disabled = false; btn.textContent = label;
+  });
+});
+
+document.getElementById('admSearch').addEventListener('input', render);
+document.getElementById('admRefresh').addEventListener('click', refresh);
+document.getElementById('admOut').addEventListener('click', function(){
+  sessionStorage.removeItem('ms_admin_key');
+  location.reload();
+});
+
+/* resume a session */
+(function(){
+  var saved = sessionStorage.getItem('ms_admin_key');
+  if (!saved || !MS.backendOn()) return;
+  KEY = saved;
+  MS.adminCall(saved, 'list')
+    .then(function(res){ showPanel(res.students || []); })
+    .catch(function(){ sessionStorage.removeItem('ms_admin_key'); });
+})();
 </script>
 </body>
 </html>

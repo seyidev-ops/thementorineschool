@@ -124,7 +124,9 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
               <div><span class="pay-k">Account number</span><span class="pay-v">0710642377</span></div>
               <div><span class="pay-k">Bank</span><span class="pay-v">GTBank</span></div>
             </div>
-            <p style="font-size:.85rem">Pay to the account above, then send proof of payment to our WhatsApp line to receive your unique access code.</p>
+            <p style="font-size:.85rem">Pay to the account above, then send proof of payment to our WhatsApp line. Quote your reference below and we will activate it.</p>
+            <p id="regRef" style="font-family:'Cinzel',serif;letter-spacing:3px;font-size:1rem;color:var(--accent);margin:.4rem 0 .9rem"></p>
+            <p id="regWarn" style="display:none;font-size:.82rem;border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:var(--r-sm);padding:.7rem .9rem;margin-bottom:.9rem;color:var(--ink-soft);text-align:left"></p>
             <a class="btn" href="https://wa.me/message/OF4HWNSJM6ZTK1" target="_blank" rel="noopener">Send proof of payment on WhatsApp <span class="arr">→</span></a>
             <a class="btn" href="dashboard.html">Go to my dashboard <span class="arr">→</span></a>
           </div>
@@ -170,12 +172,26 @@ document.getElementById('regForm').addEventListener('submit', function(e){
   if(!name || !email || pass.length < 4){ alert('Please complete all fields (password: 4+ characters).'); return; }
   var btn = e.target.querySelector('button[type=submit]');
   if(btn){ btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Registering…'; }
+  function showSuccess(student, warning){
+    document.getElementById('regForm').style.display='none';
+    document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
+    document.getElementById('regRef').textContent = (student && student.accessCode) ? student.accessCode : '';
+    if (warning) {
+      var w = document.getElementById('regWarn');
+      w.textContent = warning;
+      w.style.display = 'block';
+    }
+    document.getElementById('regSuccess').style.display='block';
+    var cta = document.getElementById('loginCta'); cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+  }
+
   MS.register({ name:name, email:email, pass:pass, course:sel.value, tier:document.getElementById('rTier').value })
-    .then(function(){
-      document.getElementById('regForm').style.display='none';
-      document.getElementById('regName').textContent = ', ' + name.split(' ')[0];
-      document.getElementById('regSuccess').style.display='block';
-      var cta = document.getElementById('loginCta'); cta.textContent = 'My Dashboard'; cta.href = 'dashboard.html';
+    .then(function(student){ showSuccess(student, ''); })
+    .catch(function(err){
+      // Saved on this device and queued for retry — but admissions has not been
+      // notified yet, so tell the student rather than pretending all is well.
+      showSuccess(err.student, 'We saved your registration on this device but could not reach our office just now. ' +
+        'Please send your name and course on WhatsApp so we can register you manually.');
     });
 });
 
