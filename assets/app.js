@@ -2436,12 +2436,75 @@ window.MS = (function () {
   function backendCall(action, payload) {
     // Apps Script web apps accept simple POSTs without a CORS preflight when
     // the content-type is text/plain. We send JSON as a plain-text body.
+    if (!backendOn()) return Promise.reject(new Error("backend_not_configured"));
     var body = JSON.stringify(Object.assign({ action: action, secret: BACKEND_SECRET }, payload || {}));
+    var ctrl = (typeof AbortController === "function") ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
     return fetch(BACKEND_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: body
-    }).then(function (r) { return r.json(); });
+      body: body,
+      redirect: "follow",
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (r) {
+      if (timer) clearTimeout(timer);
+      return r.text().then(function (txt) {
+        var data;
+        try { data = JSON.parse(txt); }
+        catch (e) {
+          // Almost always means the /exec URL is stale, or the deployment's
+          // "Who has access" is not set to Anyone (Google returns a login page).
+          throw new Error("bad_response: the backend returned HTML, not JSON. " +
+            "Re-deploy the Apps Script as a NEW version with access set to \"Anyone\".");
+        }
+        if (data && data.ok === false) throw new Error(data.error || "backend_error");
+        return data;
+      });
+    }, function (err) {
+      if (timer) clearTimeout(timer);
+      throw new Error(err && err.name === "AbortError" ? "timeout" : "network_error");
+    });
+  }
+
+  /* Any registration that could not reach the Sheet is parked here and retried
+     on every subsequent page load, so a network hiccup never loses a student. */
+  function queueGet() {
+    try { return JSON.parse(localStorage.getItem("ms_pending_sync")) || []; }
+    catch (e) { return []; }
+  }
+  function queuePut(list) { localStorage.setItem("ms_pending_sync", JSON.stringify(list)); }
+  function queueAdd(rec) {
+    var q = queueGet();
+    q = q.filter(function (r) { return r.email !== rec.email || r.course !== rec.course; });
+    q.push(rec);
+    queuePut(q);
+  }
+  function flushQueue() {
+    if (!backendOn()) return Promise.resolve();
+    var q = queueGet();
+    if (!q.length) return Promise.resolve();
+    return q.reduce(function (chain, rec) {
+      return chain.then(function () {
+        return backendCall("register", rec).then(function (res) {
+          queuePut(queueGet().filter(function (r) {
+            return r.email !== rec.email || r.course !== rec.course;
+          }));
+          var s = getStudent();
+          if (s && s.email === rec.email && res && res.code) {
+            s.accessCode = res.code; s.synced = true; saveStudent(s);
+          }
+        }).catch(function () { /* leave it queued for next load */ });
+      });
+    }, Promise.resolve());
+  }
+
+  function ping() { return backendCall("ping", {}); }
+
+  /* ---------- Admin API ----------
+     The admin key is NEVER stored in this file. It lives in the Apps Script
+     project's Script Properties and is typed in at admin login. */
+  function adminCall(key, action, payload) {
+    return backendCall(action, Object.assign({ adminKey: key }, payload || {}));
   }
 
   /* ---------- Registration / auth / lock state ---------- */
@@ -2468,11 +2531,25 @@ window.MS = (function () {
     };
     saveStudent(s);
     sessionStorage.setItem("ms_session", s.email);
-    if (!backendOn()) return Promise.resolve(s);
-    return backendCall("register", {
-      name: s.name, email: s.email, course: s.course, tier: s.tier
-    }).then(function () { return s; })
-      .catch(function () { return s; });  // never block the UI on a network hiccup
+    if (!backendOn()) { s.synced = true; saveStudent(s); return Promise.resolve(s); }
+    var rec = { name: s.name, email: s.email, course: s.course, tier: s.tier };
+    return backendCall("register", rec).then(function (res) {
+      // The server issues the real code. Keep it, or the admin sees a blank.
+      if (res && res.code) s.accessCode = res.code;
+      s.synced = true;
+      saveStudent(s);
+      return s;
+    }).catch(function (err) {
+      // Do not lose the student: park the record and retry on the next load,
+      // and let the caller show an honest message instead of a false success.
+      queueAdd(rec);
+      s.synced = false;
+      s.syncError = String(err && err.message || err);
+      saveStudent(s);
+      var e = new Error(s.syncError);
+      e.student = s;
+      throw e;
+    });
   }
   function login(email, pass) {
     var s = getStudent();
@@ -2490,24 +2567,32 @@ window.MS = (function () {
   /* verifyCode(): returns a Promise<boolean>. When the backend is configured,
      it asks your Sheet whether this code is APPROVED for the student's course.
      Otherwise it falls back to the locally generated code. */
+  var lastVerifyReason = "";
   function verifyCode(input) {
     var s = getStudent();
     var code = (input || "").trim().toUpperCase().replace(/\s+/g, "");
-    if (!s) return Promise.resolve(false);
+    lastVerifyReason = "";
+    if (!s) { lastVerifyReason = "nostudent"; return Promise.resolve(false); }
     if (!backendOn()) {
       var ok = code === String(s.accessCode).toUpperCase();
+      lastVerifyReason = ok ? "ok" : "nomatch";
       if (ok) { s.codeVerified = true; saveStudent(s); }
       return Promise.resolve(ok);
     }
     return backendCall("verify", { code: code, course: s.course, email: s.email })
       .then(function (res) {
         if (res && res.verified) {
+          lastVerifyReason = "ok";
           s.codeVerified = true; s.accessCode = code; saveStudent(s);
           return true;
         }
+        lastVerifyReason = (res && res.reason) || "nomatch";
         return false;
       })
-      .catch(function () { return false; });
+      .catch(function (err) {
+        lastVerifyReason = "offline:" + (err && err.message || "network_error");
+        return false;
+      });
   }
   function isUnlocked(slug) {
     var s = getStudent();
@@ -2662,10 +2747,18 @@ window.MS = (function () {
     });
   }
 
+  /* Retry anything that failed to reach the Sheet, on every page load. */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { setTimeout(flushQueue, 1200); });
+  } else { setTimeout(flushQueue, 1200); }
+
   return {
     CATALOGUE: CATALOGUE, allTracks: allTracks, findTrack: findTrack, getSyllabus: getSyllabus,
     register: register, login: login, logout: logout, session: session, verifyCode: verifyCode,
     getStudent: getStudent, isUnlocked: isUnlocked,
-    setProgress: setProgress, getProgress: getProgress, initTheme: initTheme, initChat: initChat
+    setProgress: setProgress, getProgress: getProgress, initTheme: initTheme, initChat: initChat,
+    backendOn: backendOn, ping: ping, adminCall: adminCall,
+    flushQueue: flushQueue, pendingSync: queueGet,
+    lastVerifyReason: function () { return lastVerifyReason; }
   };
 })();
