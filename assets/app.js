@@ -2425,86 +2425,90 @@ window.MS = (function () {
     return t ? genericSyllabus(t) : null;
   }
 
-  /* ---------- Access-code backend (Google Apps Script) ----------
-     Paste your deployed Web App URL + the same secret you set in Code.gs.
-     If BACKEND_URL is left blank, the site falls back to local codes
-     (so nothing breaks before you deploy). */
-  var BACKEND_URL = "https://script.google.com/macros/s/AKfycbwMoG-PNZ0m6_FPRxkZOENkdkYxahTfs4tQiw93Lsw3PUpiRFaCU2nzQeWnn8TddmTq/exec"
-  var BACKEND_SECRET = "Mentorine-7d13-O2P2-T1g1";  // must match Code.gs
-  function backendOn() { return !!BACKEND_URL; }
+  /* ==================================================================
+     ACCESS CODES — self-contained, no server (ERJ-style signed codes)
+     ------------------------------------------------------------------
+     A code looks like:  MS-DATA-30-7K2P-9QX4
+       MS      fixed prefix
+       DATA    short track tag (or ANY = works for any track)
+       30      duration in days (30 or 60)
+       7K2P    random
+       9QX4    checksum (proves the code is genuine, no server needed)
 
-  function backendCall(action, payload) {
-    // Apps Script web apps accept simple POSTs without a CORS preflight when
-    // the content-type is text/plain. We send JSON as a plain-text body.
-    if (!backendOn()) return Promise.reject(new Error("backend_not_configured"));
-    var body = JSON.stringify(Object.assign({ action: action, secret: BACKEND_SECRET }, payload || {}));
-    var ctrl = (typeof AbortController === "function") ? new AbortController() : null;
-    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
-    return fetch(BACKEND_URL, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: body,
-      redirect: "follow",
-      signal: ctrl ? ctrl.signal : undefined
-    }).then(function (r) {
-      if (timer) clearTimeout(timer);
-      return r.text().then(function (txt) {
-        var data;
-        try { data = JSON.parse(txt); }
-        catch (e) {
-          // Almost always means the /exec URL is stale, or the deployment's
-          // "Who has access" is not set to Anyone (Google returns a login page).
-          throw new Error("bad_response: the backend returned HTML, not JSON. " +
-            "Re-deploy the Apps Script as a NEW version with access set to \"Anyone\".");
-        }
-        if (data && data.ok === false) throw new Error(data.error || "backend_error");
-        return data;
-      });
-    }, function (err) {
-      if (timer) clearTimeout(timer);
-      throw new Error(err && err.name === "AbortError" ? "timeout" : "network_error");
+     - The site VERIFIES a code by re-computing the checksum. No network.
+     - The clock starts the FIRST time a student activates the code
+       (stored in their browser as activation date).
+     - Codes past their window are refused ("expired").
+     - Revoke early by adding a code to the REVOKED list below (or to
+       the block-list saved from the admin page).
+     ================================================================== */
+
+  var CODE_SALT = "Mentorine-Ona-2026";           // change once if you ever want to invalidate ALL old codes
+  var CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";  // no I O 0 1
+
+  // Hard-coded revocations (optional). You can also revoke from the admin page,
+  // which saves to localStorage 'ms_revoked'. Both are honoured.
+  var REVOKED = [
+    // "MS-DATA-30-7K2P-9QX4",
+  ];
+
+  function revokedList() {
+    var extra = [];
+    try { extra = JSON.parse(localStorage.getItem("ms_revoked")) || []; } catch (e) {}
+    return REVOKED.concat(extra).map(function (c) {
+      return String(c).toUpperCase().replace(/\s+/g, "");
     });
   }
 
-  /* Any registration that could not reach the Sheet is parked here and retried
-     on every subsequent page load, so a network hiccup never loses a student. */
-  function queueGet() {
-    try { return JSON.parse(localStorage.getItem("ms_pending_sync")) || []; }
-    catch (e) { return []; }
-  }
-  function queuePut(list) { localStorage.setItem("ms_pending_sync", JSON.stringify(list)); }
-  function queueAdd(rec) {
-    var q = queueGet();
-    q = q.filter(function (r) { return r.email !== rec.email || r.course !== rec.course; });
-    q.push(rec);
-    queuePut(q);
-  }
-  function flushQueue() {
-    if (!backendOn()) return Promise.resolve();
-    var q = queueGet();
-    if (!q.length) return Promise.resolve();
-    return q.reduce(function (chain, rec) {
-      return chain.then(function () {
-        return backendCall("register", rec).then(function (res) {
-          queuePut(queueGet().filter(function (r) {
-            return r.email !== rec.email || r.course !== rec.course;
-          }));
-          var s = getStudent();
-          if (s && s.email === rec.email && res && res.code) {
-            s.accessCode = res.code; s.synced = true; saveStudent(s);
-          }
-        }).catch(function () { /* leave it queued for next load */ });
-      });
-    }, Promise.resolve());
+  // simple, stable string hash -> base32-ish chars (deterministic, offline)
+  function signChars(str, n) {
+    var h1 = 0x811c9dc5, h2 = 0x1234567;
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charCodeAt(i);
+      h1 = (h1 ^ c) >>> 0; h1 = (h1 * 0x01000193) >>> 0;
+      h2 = (((h2 << 5) - h2) + c) >>> 0;
+    }
+    var out = "", mix = (h1 ^ h2) >>> 0;
+    for (var k = 0; k < n; k++) {
+      out += CODE_ALPHABET.charAt(mix % CODE_ALPHABET.length);
+      mix = (Math.floor(mix / CODE_ALPHABET.length) + h1 + (k + 1) * 2654435761) >>> 0;
+    }
+    return out;
   }
 
-  function ping() { return backendCall("ping", {}); }
+  function randChars(n) {
+    var out = "";
+    for (var i = 0; i < n; i++) out += CODE_ALPHABET.charAt(Math.floor(Math.random() * CODE_ALPHABET.length));
+    return out;
+  }
 
-  /* ---------- Admin API ----------
-     The admin key is NEVER stored in this file. It lives in the Apps Script
-     project's Script Properties and is typed in at admin login. */
-  function adminCall(key, action, payload) {
-    return backendCall(action, Object.assign({ adminKey: key }, payload || {}));
+  function trackTag(slug) {
+    if (!slug) return "ANY";
+    // short, stable, uppercase tag from the slug's letters
+    var t = String(slug).toUpperCase().replace(/[^A-Z0-9]/g, "");
+    return (t.slice(0, 4) || "ANY");
+  }
+
+  /* mintCode(): create a signed code. Called by the admin generator page.
+     tag = track tag (or "ANY"); days = 30 or 60. */
+  function mintCode(tag, days) {
+    tag = (tag || "ANY").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4) || "ANY";
+    days = (parseInt(days, 10) === 60) ? 60 : 30;
+    var rand = randChars(4);
+    var base = "MS-" + tag + "-" + days + "-" + rand;
+    var sig = signChars(base + "|" + CODE_SALT, 4);
+    return base + "-" + sig;
+  }
+
+  /* parseCode(): pull the parts out and confirm the checksum. Offline. */
+  function parseCode(input) {
+    var code = String(input || "").trim().toUpperCase().replace(/\s+/g, "");
+    var m = code.match(/^MS-([A-Z0-9]{1,6})-(\d{2,3})-([A-Z0-9]{4})-([A-Z0-9]{4})$/);
+    if (!m) return { ok: false, reason: "format" };
+    var tag = m[1], days = parseInt(m[2], 10), rand = m[3], sig = m[4];
+    var base = "MS-" + tag + "-" + days + "-" + rand;
+    if (signChars(base + "|" + CODE_SALT, 4) !== sig) return { ok: false, reason: "badsig" };
+    return { ok: true, code: code, tag: tag, days: days, rand: rand };
   }
 
   /* ---------- Registration / auth / lock state ---------- */
@@ -2513,43 +2517,20 @@ window.MS = (function () {
     catch (e) { return null; }
   }
   function saveStudent(s) { localStorage.setItem("ms_student", JSON.stringify(s)); }
-  function makeCode() {
-    var A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", c = "MS-";
-    for (var i = 0; i < 8; i++) { if (i === 4) c += "-"; c += A[Math.floor(Math.random() * A.length)]; }
-    return c;
-  }
-  /* register(): records the student locally (so the dashboard works) and, when
-     the backend is configured, also files the registration in your Sheet as
-     PENDING. Returns a Promise either way so callers can await it. */
+
+  /* register(): records the student locally so the dashboard + login work.
+     No network. The access code is issued separately by you (admin page). */
   function register(data) {
     var s = {
       name: data.name, email: data.email.toLowerCase().trim(), pass: data.pass,
       course: data.course, tier: data.tier,
-      accessCode: backendOn() ? "" : makeCode(),  // server issues the real code
-      codeVerified: false,
+      accessCode: "", codeVerified: false,
+      activatedAt: null, expiresAt: null, codeDays: null,
       registeredAt: new Date().toISOString(), progress: {}
     };
     saveStudent(s);
     sessionStorage.setItem("ms_session", s.email);
-    if (!backendOn()) { s.synced = true; saveStudent(s); return Promise.resolve(s); }
-    var rec = { name: s.name, email: s.email, course: s.course, tier: s.tier };
-    return backendCall("register", rec).then(function (res) {
-      // The server issues the real code. Keep it, or the admin sees a blank.
-      if (res && res.code) s.accessCode = res.code;
-      s.synced = true;
-      saveStudent(s);
-      return s;
-    }).catch(function (err) {
-      // Do not lose the student: park the record and retry on the next load,
-      // and let the caller show an honest message instead of a false success.
-      queueAdd(rec);
-      s.synced = false;
-      s.syncError = String(err && err.message || err);
-      saveStudent(s);
-      var e = new Error(s.syncError);
-      e.student = s;
-      throw e;
-    });
+    return Promise.resolve(s);
   }
   function login(email, pass) {
     var s = getStudent();
@@ -2564,39 +2545,58 @@ window.MS = (function () {
     var s = getStudent();
     return (s && sessionStorage.getItem("ms_session") === s.email) ? s : null;
   }
-  /* verifyCode(): returns a Promise<boolean>. When the backend is configured,
-     it asks your Sheet whether this code is APPROVED for the student's course.
-     Otherwise it falls back to the locally generated code. */
+
+  /* codeStatus(): what state is the student's saved code in right now? */
+  function codeStatus() {
+    var s = getStudent();
+    if (!s || !s.codeVerified || !s.expiresAt) return { state: "none" };
+    var now = Date.now(), exp = new Date(s.expiresAt).getTime();
+    if (revokedList().indexOf(String(s.accessCode).toUpperCase()) !== -1) return { state: "revoked" };
+    if (now > exp) return { state: "expired", expiresAt: s.expiresAt };
+    var daysLeft = Math.ceil((exp - now) / 86400000);
+    return { state: "active", daysLeft: daysLeft, expiresAt: s.expiresAt };
+  }
+
+  /* verifyCode(): offline. Confirms the signature, checks the track matches,
+     checks it isn't revoked, and — on FIRST use — stamps the activation date
+     and computes the expiry. Returns a Promise<boolean>. */
   var lastVerifyReason = "";
   function verifyCode(input) {
     var s = getStudent();
-    var code = (input || "").trim().toUpperCase().replace(/\s+/g, "");
+    var code = String(input || "").trim().toUpperCase().replace(/\s+/g, "");
     lastVerifyReason = "";
     if (!s) { lastVerifyReason = "nostudent"; return Promise.resolve(false); }
-    if (!backendOn()) {
-      var ok = code === String(s.accessCode).toUpperCase();
-      lastVerifyReason = ok ? "ok" : "nomatch";
-      if (ok) { s.codeVerified = true; saveStudent(s); }
-      return Promise.resolve(ok);
+
+    // If they've already activated THIS code, just re-check its window.
+    if (s.codeVerified && s.accessCode === code && s.expiresAt) {
+      var st = codeStatus();
+      if (st.state === "active") { lastVerifyReason = "ok"; return Promise.resolve(true); }
+      lastVerifyReason = st.state; // expired / revoked
+      return Promise.resolve(false);
     }
-    return backendCall("verify", { code: code, course: s.course, email: s.email })
-      .then(function (res) {
-        if (res && res.verified) {
-          lastVerifyReason = "ok";
-          s.codeVerified = true; s.accessCode = code; saveStudent(s);
-          return true;
-        }
-        lastVerifyReason = (res && res.reason) || "nomatch";
-        return false;
-      })
-      .catch(function (err) {
-        lastVerifyReason = "offline:" + (err && err.message || "network_error");
-        return false;
-      });
+
+    var p = parseCode(code);
+    if (!p.ok) { lastVerifyReason = p.reason; return Promise.resolve(false); }
+    if (revokedList().indexOf(code) !== -1) { lastVerifyReason = "revoked"; return Promise.resolve(false); }
+
+    // Track match: code tag must be ANY, or match this student's course tag.
+    var want = trackTag(s.course);
+    if (p.tag !== "ANY" && p.tag !== want) { lastVerifyReason = "wrongtrack"; return Promise.resolve(false); }
+
+    // Activate now — clock starts on first use.
+    var now = new Date();
+    var exp = new Date(now.getTime() + p.days * 86400000);
+    s.accessCode = code; s.codeVerified = true;
+    s.activatedAt = now.toISOString(); s.expiresAt = exp.toISOString(); s.codeDays = p.days;
+    saveStudent(s);
+    lastVerifyReason = "ok";
+    return Promise.resolve(true);
   }
+
   function isUnlocked(slug) {
     var s = getStudent();
-    return !!(s && s.course === slug);
+    if (!s || s.course !== slug || !s.codeVerified) return false;
+    return codeStatus().state === "active";
   }
   function setProgress(slug, idx, done) {
     var s = getStudent(); if (!s) return;
@@ -2747,19 +2747,34 @@ window.MS = (function () {
     });
   }
 
-  /* Retry anything that failed to reach the Sheet, on every page load. */
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { setTimeout(flushQueue, 1200); });
-  } else { setTimeout(flushQueue, 1200); }
+  /* ---------- admin helpers (offline) ---------- */
+  function adminAuth(key) { return key === "1711@Prim$"; }   // same passcode as the admin page
+  function revoke(code) {
+    var c = String(code || "").trim().toUpperCase().replace(/\s+/g, "");
+    if (!c) return revokedList();
+    var extra = [];
+    try { extra = JSON.parse(localStorage.getItem("ms_revoked")) || []; } catch (e) {}
+    if (extra.indexOf(c) === -1) extra.push(c);
+    localStorage.setItem("ms_revoked", JSON.stringify(extra));
+    return revokedList();
+  }
+  function unrevoke(code) {
+    var c = String(code || "").trim().toUpperCase().replace(/\s+/g, "");
+    var extra = [];
+    try { extra = JSON.parse(localStorage.getItem("ms_revoked")) || []; } catch (e) {}
+    extra = extra.filter(function (x) { return x !== c; });
+    localStorage.setItem("ms_revoked", JSON.stringify(extra));
+    return revokedList();
+  }
 
   return {
     CATALOGUE: CATALOGUE, allTracks: allTracks, findTrack: findTrack, getSyllabus: getSyllabus,
     register: register, login: login, logout: logout, session: session, verifyCode: verifyCode,
     getStudent: getStudent, isUnlocked: isUnlocked,
     setProgress: setProgress, getProgress: getProgress, initTheme: initTheme, initChat: initChat,
-    backendOn: backendOn, ping: ping, adminCall: adminCall,
-    backendUrl: function () { return BACKEND_URL; },
-    flushQueue: flushQueue, pendingSync: queueGet,
+    // code system (offline)
+    mintCode: mintCode, parseCode: parseCode, trackTag: trackTag, codeStatus: codeStatus,
+    revoke: revoke, unrevoke: unrevoke, revokedList: revokedList, adminAuth: adminAuth,
     lastVerifyReason: function () { return lastVerifyReason; }
   };
 })();
