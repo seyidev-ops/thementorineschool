@@ -81,241 +81,166 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
   <div id="adminLogin">
     <div class="kicker">Admin</div>
     <h1>Administrator <em class="ac">login</em>.</h1>
-    <p class="sub">For school staff only — see every registration from the Sheet, approve payments, and issue access codes.</p>
-    <div class="err" id="adminErr">Incorrect admin key.</div>
+    <p class="sub">For school staff only — generate access codes and revoke them.</p>
+    <div class="err" id="adminErr">Incorrect admin passcode.</div>
     <div class="card" style="max-width:420px">
       <form id="adminForm" novalidate>
         <div class="field">
-          <label for="aPass">Admin key</label>
+          <label for="aPass">Admin passcode</label>
           <input type="password" id="aPass" required placeholder="••••••••••">
-          <p style="font-size:.72rem;color:var(--ink-faint);margin-top:.4rem">
-            The key printed by <code>setup()</code> in the Apps Script editor. It is stored in Script Properties, never in this page.
-          </p>
         </div>
-        <button class="btn" type="submit" style="width:100%;justify-content:center">Enter admin panel <span class="arr">→</span></button>
+        <button class="btn" type="submit" style="width:100%;justify-content:center">Enter admin panel <span class="arr">&rarr;</span></button>
       </form>
-      <button class="btn-quiet" type="button" id="admTest" style="width:100%;margin-top:.7rem">Test the backend connection</button>
-      <div id="admTestOut" style="font-size:.8rem;color:var(--ink-soft);margin-top:.8rem;line-height:1.6"></div>
     </div>
   </div>
 
   <!-- ADMIN PANEL -->
   <div id="adminPanel" style="display:none">
-    <div class="kicker">Admin · Student Access</div>
-    <h1>Student <em class="ac">registrations</em>.</h1>
-    <p class="sub">Approve a student once payment is confirmed — that is what makes their access code work.</p>
-    <div class="adm-bar">
-      <input type="search" id="admSearch" placeholder="Search name, email, course or code…">
-      <button class="btn-quiet" id="admRefresh" type="button">Refresh</button>
-      <button class="btn-quiet" id="admOut" type="button">Sign out</button>
+    <div class="kicker">Admin · Access Codes</div>
+    <h1>Generate an <em class="ac">access code</em>.</h1>
+    <p class="sub">Pick the track and duration, generate the code, and send it to the student on WhatsApp. The clock starts the first time they use it.</p>
+
+    <div class="card" style="max-width:640px;margin-bottom:1.4rem">
+      <div class="field">
+        <label for="gTrack">Track</label>
+        <select id="gTrack"></select>
+        <p style="font-size:.72rem;color:var(--ink-faint);margin-top:.4rem">Choose <b>Any track</b> to make a universal code that works for whatever track the student registered for.</p>
+      </div>
+      <div class="field">
+        <label>Duration</label>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <label class="dur-opt"><input type="radio" name="gDur" value="30" checked> 30 days</label>
+          <label class="dur-opt"><input type="radio" name="gDur" value="60"> 60 days</label>
+        </div>
+      </div>
+      <button class="btn" type="button" id="gMake" style="justify-content:center">Generate code <span class="arr">&rarr;</span></button>
+
+      <div id="gResult" style="display:none;margin-top:1.3rem">
+        <span class="sa-price-label" style="display:block;margin-bottom:.5rem">New access code</span>
+        <div class="code-pill"><span id="gCodeText">MS-XXXX-XX-XXXX-XXXX</span>
+          <button type="button" id="gCopy">Copy</button>
+        </div>
+        <p id="gMeta" style="font-size:.8rem;color:var(--ink-soft);margin-top:.7rem;line-height:1.6"></p>
+        <button class="btn-quiet" type="button" id="gWa" style="margin-top:.4rem">Copy WhatsApp message</button>
+      </div>
     </div>
-    <div class="adm-status" id="admStatus"></div>
-    <div id="studentBox"></div>
+
+    <!-- REVOKE -->
+    <div class="card" style="max-width:640px">
+      <div class="kicker" style="margin-bottom:.5rem">Revoke a code</div>
+      <p style="font-size:.85rem;color:var(--ink-soft);margin-bottom:.8rem">Paste a code to kill it early (before its days run out). It stops working on this browser immediately. To revoke it for everyone, add it to the <code>REVOKED</code> list in <code>app.js</code> and redeploy.</p>
+      <div class="adm-bar">
+        <input type="text" id="rCode" placeholder="MS-DATA-30-XXXX-XXXX">
+        <button class="btn-quiet" id="rDo" type="button">Revoke</button>
+      </div>
+      <div id="rList" style="font-size:.82rem;color:var(--ink-soft);line-height:1.9"></div>
+    </div>
+
+    <div class="admin-actions">
+      <button class="btn-quiet" type="button" id="admOut">Sign out</button>
+    </div>
   </div>
 </div>
 
 
 <footer class="footer" data-live="off" style="margin-top:0;padding:1.6rem 0 2rem;text-align:center"><div class="wrap" style="justify-content:center"><span>© 2026 Mentorine School by Ona Services Ltd. All rights reserved.</span></div></footer>
 <script src="assets/app.js"></script>
+<style>
+.dur-opt{border:1px solid var(--line);border-radius:var(--r-sm);padding:.5rem .9rem;cursor:pointer;font-size:.85rem;color:var(--ink-soft)}
+.dur-opt input{margin-right:.4rem}
+.rev-item{display:flex;justify-content:space-between;gap:1rem;align-items:center;border-bottom:1px solid var(--line);padding:.4rem 0}
+.rev-item button{border:none;background:none;color:var(--ink-faint);cursor:pointer;font-size:.75rem;font-family:'DM Sans',sans-serif}
+.rev-item button:hover{color:var(--accent)}
+</style>
 <script>
-MS.initTheme();
-
-/* ---------------------------------------------------------------------------
-   The admin panel reads the Google Sheet through the Apps Script backend.
-   It used to read localStorage, which only ever contains the ONE student who
-   registered in this very browser — which is why it always looked empty.
-   The admin key is typed in each session and kept only in sessionStorage.
---------------------------------------------------------------------------- */
-
-var KEY = null;
-var CACHE = [];
-
-function esc(v){
-  return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-  });
-}
-
-document.getElementById('adminForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  var err = document.getElementById('adminErr');
-  var key = document.getElementById('aPass').value.trim();
-  var btn = e.target.querySelector('button[type=submit]');
-  err.style.display = 'none';
-  if (!MS.backendOn()) {
-    err.textContent = 'No backend configured. Set BACKEND_URL in assets/app.js.';
-    err.style.display = 'block';
-    return;
-  }
-  btn.disabled = true; btn.textContent = 'Checking…';
-  MS.adminCall(key, 'list').then(function(res){
-    KEY = key;
-    sessionStorage.setItem('ms_admin_key', key);
-    showPanel(res.students || []);
-  }).catch(function(ex){
-    var m = String(ex.message || ex);
-    var url = MS.backendUrl();
-    var link = '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--accent);word-break:break-all">' + url + '</a>';
-    err.innerHTML =
-      m.indexOf('bad_admin_key') > -1 ? 'That admin key is not right.' :
-      m.indexOf('admin_key_not_set') > -1 ? 'Run setup() in the Apps Script editor first, then use the key it prints.' :
-      m.indexOf('bad_response') > -1 ? 'The backend answered with a web page, not data. Re-deploy the Apps Script as a NEW version with access set to "Anyone".' :
-      m.indexOf('unknown_action') > -1 ? 'The deployed script is the old version. Paste the new Code.gs, then Deploy \u25b8 Manage deployments \u25b8 \u270f\ufe0f \u25b8 Version: New version.' :
-      m.indexOf('timeout') > -1 ? 'The backend did not answer within 20 seconds. Try again.' :
-      '<strong>The browser could not reach the backend at all.</strong><br><br>' +
-      'This is almost always the deployment, not your key. Open this URL in a <em>private window</em>:<br>' + link +
-      '<br><br>If you see a Google sign-in page, the web app\u2019s <em>Who has access</em> is not set to <strong>Anyone</strong>. ' +
-      'If you see an error page, the deployment behind this URL no longer exists \u2014 deploy again and paste the new /exec URL into ' +
-      '<code>assets/app.js</code>. Only JSON means the pipe is open.';
-    err.style.display = 'block';
-    btn.disabled = false; btn.textContent = 'Enter admin panel →';
-  });
-});
-
-function showPanel(students){
-  document.getElementById('adminLogin').style.display = 'none';
-  document.getElementById('adminPanel').style.display = 'block';
-  CACHE = students;
-  render();
-}
-
-function refresh(){
-  var st = document.getElementById('admStatus');
-  st.innerHTML = 'Loading from the Sheet…';
-  MS.adminCall(KEY, 'list').then(function(res){
-    CACHE = res.students || [];
-    render();
-  }).catch(function(ex){
-    st.innerHTML = 'Could not refresh: ' + esc(ex.message || ex);
-  });
-}
-
-function render(){
-  var q = (document.getElementById('admSearch').value || '').toLowerCase().trim();
-  var list = CACHE.filter(function(s){
-    if (!q) return true;
-    return [s.name, s.email, s.course, s.tier, s.code, s.status]
-      .join(' ').toLowerCase().indexOf(q) > -1;
-  });
-
-  var pending = CACHE.filter(function(s){ return s.status !== 'APPROVED'; }).length;
-  document.getElementById('admStatus').innerHTML =
-    CACHE.length + ' registration' + (CACHE.length === 1 ? '' : 's') +
-    ' in the Sheet · <b>' + pending + ' awaiting approval</b>';
-
-  var box = document.getElementById('studentBox');
-  if (!list.length) {
-    box.innerHTML = '<div class="empty">' + (CACHE.length
-      ? 'No registration matches that search.'
-      : 'No registrations in the Sheet yet.<br>A student who completes the form on register.html appears here within seconds.')
-      + '</div>';
-    return;
-  }
-
-  box.innerHTML = list.map(function(s){
-    var track = MS.findTrack(s.course);
-    var when = s.timestamp ? new Date(s.timestamp).toLocaleString() : '—';
-    var approved = s.status === 'APPROVED';
-    return '<div class="stu" data-code="' + esc(s.code) + '">' +
-      '<div class="stu-top">' +
-        '<span class="stu-name">' + esc(s.name || '(no name)') + '</span>' +
-        '<span class="pill ' + (approved ? 'ok' : 'wait') + '">' +
-          (approved ? '● Approved' : 'Awaiting payment') + '</span>' +
-      '</div>' +
-      '<div class="stu-meta">' +
-        esc(s.email) + '<br>' +
-        esc(track ? track.name : s.course) + ' · ' + esc(s.tier || '—') + '<br>' +
-        'Registered ' + esc(when) +
-        (s.verifiedAt ? ' · code used ' + esc(new Date(s.verifiedAt).toLocaleString()) : '') +
-      '</div>' +
-      '<span class="code-pill"><span>' + esc(s.code || '—') + '</span>' +
-        '<button type="button" data-act="copy">COPY</button></span>' +
-      '<div class="stu-acts">' +
-        (approved
-          ? '<button type="button" data-act="revoke">Revoke access</button>'
-          : '<button type="button" data-act="approve">Approve &amp; issue code</button>') +
-        '<button type="button" data-act="wa">Send code on WhatsApp</button>' +
-        '<button type="button" data-act="remove">Delete registration</button>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-}
-
-document.getElementById('studentBox').addEventListener('click', function(e){
-  var btn = e.target.closest('button[data-act]');
-  if (!btn) return;
-  var card = btn.closest('.stu');
-  var code = card.getAttribute('data-code');
-  var rec = CACHE.filter(function(s){ return s.code === code; })[0] || {};
-  var act = btn.getAttribute('data-act');
-
-  if (act === 'copy') {
-    if (navigator.clipboard) navigator.clipboard.writeText(code);
-    btn.textContent = 'COPIED ✓';
-    setTimeout(function(){ btn.textContent = 'COPY'; }, 1500);
-    return;
-  }
-  if (act === 'wa') {
-    var msg = 'Hello ' + (rec.name || '').split(' ')[0] +
-      ', your payment is confirmed. Your Mentorine access code is ' + code +
-      '. Enter it at https://thementorineschool.com/access.html to unlock your training portal.';
-    if (navigator.clipboard) navigator.clipboard.writeText(msg);
-    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
-    return;
-  }
-  if (act === 'remove' && !confirm('Delete this registration from the Sheet? This cannot be undone.')) return;
-  if (act === 'revoke' && !confirm('Revoke access for ' + (rec.name || code) + '?')) return;
-
-  btn.disabled = true;
-  var label = btn.textContent;
-  btn.textContent = 'Working…';
-  MS.adminCall(KEY, act, { code: code }).then(function(){
-    refresh();
-  }).catch(function(ex){
-    alert('That did not go through: ' + (ex.message || ex));
-    btn.disabled = false; btn.textContent = label;
-  });
-});
-
-document.getElementById('admSearch').addEventListener('input', render);
-document.getElementById('admRefresh').addEventListener('click', refresh);
-
-/* Connection self-test — tells you exactly which of the four things is wrong. */
-document.getElementById('admTest').addEventListener('click', function(){
-  var out = document.getElementById('admTestOut');
-  var url = MS.backendUrl();
-  if (!url) { out.innerHTML = 'BACKEND_URL is empty in assets/app.js.'; return; }
-  out.innerHTML = 'Testing…';
-  MS.ping().then(function(res){
-    out.innerHTML = '<b style="color:var(--accent)">Connected.</b> Backend version ' +
-      (res.version || '?') + ', ' + (res.rows != null ? res.rows : '?') +
-      ' row(s) in the Sheet.' + (res.version < 2
-        ? '<br>But this is the OLD script — paste the new Code.gs and deploy a new version.'
-        : '<br>The pipe is open, so any failure now is the admin key itself.');
-  }).catch(function(ex){
-    var m = String(ex.message || ex);
-    out.innerHTML = '<b>Failed:</b> ' + (m.indexOf('bad_response') > -1
-        ? 'the URL returned a web page instead of data.'
-        : m.indexOf('bad_secret') > -1
-        ? 'BACKEND_SECRET in app.js does not match PUBLIC_SECRET in Code.gs.'
-        : 'the browser could not reach it at all (blocked or the deployment is gone).') +
-      '<br><br>Open this in a <em>private window</em> and see what it shows:<br>' +
-      '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--accent);word-break:break-all">' + url + '</a>';
-  });
-});
-document.getElementById('admOut').addEventListener('click', function(){
-  sessionStorage.removeItem('ms_admin_key');
-  location.reload();
-});
-
-/* resume a session */
 (function(){
-  var saved = sessionStorage.getItem('ms_admin_key');
-  if (!saved || !MS.backendOn()) return;
-  KEY = saved;
-  MS.adminCall(saved, 'list')
-    .then(function(res){ showPanel(res.students || []); })
-    .catch(function(){ sessionStorage.removeItem('ms_admin_key'); });
+  var WA = "https://wa.me/message/OF4HWNSJM6ZTK1";
+
+  /* ---- login ---- */
+  document.getElementById('adminForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var key = document.getElementById('aPass').value;
+    if (MS.adminAuth(key)) { openPanel(); }
+    else { document.getElementById('adminErr').style.display='block'; }
+  });
+  function openPanel(){
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminPanel').style.display='block';
+    fillTracks(); renderRevoked();
+  }
+  document.getElementById('admOut').addEventListener('click', function(){
+    document.getElementById('adminPanel').style.display='none';
+    document.getElementById('adminLogin').style.display='block';
+    document.getElementById('aPass').value='';
+  });
+
+  /* ---- track dropdown ---- */
+  function fillTracks(){
+    var sel = document.getElementById('gTrack');
+    var html = '<option value="ANY">Any track (universal code)</option>';
+    MS.CATALOGUE.forEach(function(cat){
+      html += '<optgroup label="'+cat.label+'">';
+      cat.tracks.forEach(function(t){
+        html += '<option value="'+t.slug+'">'+t.name+'</option>';
+      });
+      html += '</optgroup>';
+    });
+    sel.innerHTML = html;
+  }
+
+  /* ---- generate ---- */
+  var lastCode = '', lastDays = 30, lastTrackName = '';
+  document.getElementById('gMake').addEventListener('click', function(){
+    var slug = document.getElementById('gTrack').value;
+    var days = parseInt(document.querySelector('input[name=gDur]:checked').value, 10);
+    var tag = (slug === 'ANY') ? 'ANY' : MS.trackTag(slug);
+    var code = MS.mintCode(tag, days);
+    lastCode = code; lastDays = days;
+    lastTrackName = (slug === 'ANY') ? 'any track' :
+      (MS.findTrack(slug) ? MS.findTrack(slug).name : slug);
+    document.getElementById('gCodeText').textContent = code;
+    document.getElementById('gMeta').innerHTML =
+      'Track: <b>'+lastTrackName+'</b> &middot; Valid <b>'+days+' days</b> from first use &middot; '+
+      'This code is unique and self-verifying — no internet needed to check it.';
+    document.getElementById('gResult').style.display='block';
+  });
+
+  document.getElementById('gCopy').addEventListener('click', function(){
+    navigator.clipboard.writeText(lastCode);
+    this.textContent = 'Copied ✓'; var b=this; setTimeout(function(){b.textContent='Copy';},1500);
+  });
+
+  document.getElementById('gWa').addEventListener('click', function(){
+    var msg = "Hi! Your payment is confirmed ✅\n\n"+
+      "Here is your unique access code for the "+lastTrackName+" track:\n\n"+
+      "    "+lastCode+"\n\n"+
+      "Go to thementorineschool.com, open your track, and enter this code to unlock everything. "+
+      "It stays active for "+lastDays+" days from the moment you first use it. Welcome aboard! 💚";
+    navigator.clipboard.writeText(msg);
+    this.textContent = 'WhatsApp message copied ✓';
+    var b=this; setTimeout(function(){b.textContent='Copy WhatsApp message';},1800);
+  });
+
+  /* ---- revoke ---- */
+  document.getElementById('rDo').addEventListener('click', function(){
+    var c = document.getElementById('rCode').value.trim();
+    if(!c) return;
+    MS.revoke(c);
+    document.getElementById('rCode').value='';
+    renderRevoked();
+  });
+  function renderRevoked(){
+    var list = MS.revokedList();
+    var box = document.getElementById('rList');
+    if(!list.length){ box.innerHTML = '<span style="color:var(--ink-faint)">No codes revoked yet.</span>'; return; }
+    box.innerHTML = list.map(function(c){
+      return '<div class="rev-item"><span style="font-family:monospace">'+c+'</span>'+
+             '<button data-code="'+c+'">Un-revoke</button></div>';
+    }).join('');
+    Array.prototype.forEach.call(box.querySelectorAll('button'), function(btn){
+      btn.addEventListener('click', function(){ MS.unrevoke(btn.dataset.code); renderRevoked(); });
+    });
+  }
 })();
 </script>
 </body>

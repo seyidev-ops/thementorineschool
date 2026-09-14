@@ -102,9 +102,11 @@ document.getElementById('gateForm').addEventListener('submit', function(e){
     if (ok) { location.href = trainingUrl; return; }
     var why = MS.lastVerifyReason();
     errEl.textContent =
-      why === 'pending'     ? 'We have your code, but your payment has not been confirmed yet. Send your proof of payment on WhatsApp and we will activate it.' :
-      why === 'wrongcourse' ? 'That code belongs to a different track. Check that you are on the right course, or chat with admissions.' :
-      why.indexOf('offline') === 0 ? 'We could not reach our servers just now. Check your connection and try again in a moment.' :
+      why === 'expired'   ? 'This code has reached the end of its access period. Chat with admissions on WhatsApp to renew.' :
+      why === 'revoked'   ? 'This code is no longer active. Please contact admissions on WhatsApp.' :
+      why === 'wrongtrack'? 'That code belongs to a different track. Check you are on the right course, or chat with admissions.' :
+      why === 'nostudent' ? 'Please register for this track first, then enter your code here.' :
+      (why === 'format' || why === 'badsig') ? "That code doesn't look right. Check it carefully — codes look like MS-XXXX-30-XXXX-XXXX." :
       "That code doesn't match. Check it carefully — or chat with admissions if you haven't received yours.";
     errEl.style.display = 'block';
     if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Unlock'; }
