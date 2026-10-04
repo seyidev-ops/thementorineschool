@@ -2493,7 +2493,8 @@ window.MS = (function () {
      tag = track tag (or "ANY"); days = 30 or 60. */
   function mintCode(tag, days) {
     tag = (tag || "ANY").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4) || "ANY";
-    days = (parseInt(days, 10) === 60) ? 60 : 30;
+    days = parseInt(days, 10);
+    days = (days === 60 || days === 90) ? days : 30;   // 30 / 60 / 90 supported
     var rand = randChars(4);
     var base = "MS-" + tag + "-" + days + "-" + rand;
     var sig = signChars(base + "|" + CODE_SALT, 4);

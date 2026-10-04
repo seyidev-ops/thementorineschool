@@ -110,10 +110,12 @@ document.documentElement.setAttribute("data-theme",r);})();</script>
                 <option value="3 Months — ₦250,000">3 Months — ₦250,000 — The Accelerator (Tutored)</option>
                 <option value="6 Months — ₦500,000">6 Months — ₦500,000 — The Career Switcher (Tutored)</option>
                 <option value="1 Year — ₦700,000">1 Year — ₦700,000 — The Mastery Path (Tutored)</option>
+                <option value="ERJ Foundation — Included (90 days)">ERJ Foundation — Included — 90 days (no extra cost)</option>
               </select>
+              <p id="erjNote" style="display:none;font-size:.78rem;color:var(--accent);margin-top:.5rem;line-height:1.5">Included free with ERJ Remote Job Foundation Training (Stages 1–4). ERJ assigns your track after assessment, then issues your 90-day activation code — no payment here.</p>
             </div>
             <button class="btn" type="submit" style="width:100%;justify-content:center">Register &amp; unlock my track <span class="arr">→</span></button>
-            <p style="font-size:.78rem;color:var(--ink-faint);margin-top:.9rem">After registering, you'll get our bank details to pay and send proof on WhatsApp for your access code.</p>
+            <p id="payHelp" style="font-size:.78rem;color:var(--ink-faint);margin-top:.9rem">After registering, you'll get our bank details to pay and send proof on WhatsApp for your access code.</p>
           </form>
           <div class="reg-success" id="regSuccess">
             <div class="kicker" style="justify-content:center">Registered</div>
@@ -159,8 +161,18 @@ sel.innerHTML = MS.CATALOGUE.map(function(c){
   if(course && MS.findTrack(course)){ sel.value = course; }
   var plan = q.get('plan');
   var tier = document.getElementById('rTier');
-  var map = {'3mo':0,'6mo':1,'1yr':2,'standalone':3};
+  var map = {'standalone':0,'3mo':1,'6mo':2,'1yr':3,'erj':4};
   if(plan && plan in map){ tier.selectedIndex = map[plan]; }
+  // Show/hide ERJ note + adjust pay helper when the ERJ route is chosen
+  var erjNote = document.getElementById('erjNote');
+  var payHelp = document.getElementById('payHelp');
+  function syncErj(){
+    var isErj = tier.value.indexOf('ERJ Foundation') === 0;
+    if(erjNote) erjNote.style.display = isErj ? 'block' : 'none';
+    if(payHelp) payHelp.style.display = isErj ? 'none' : 'block';
+  }
+  tier.addEventListener('change', syncErj);
+  syncErj();
 })();
 
 /* submit */
