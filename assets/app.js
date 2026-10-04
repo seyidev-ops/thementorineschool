@@ -2494,7 +2494,9 @@ window.MS = (function () {
   function mintCode(tag, days) {
     tag = (tag || "ANY").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4) || "ANY";
     days = parseInt(days, 10);
-    days = (days === 60 || days === 90) ? days : 30;   // 30 / 60 / 90 supported
+    // Supported access windows: 30 (Starter) / 90 (3mo) / 180 (6mo) / 365 (1yr) / 60 / 90-ERJ
+    var allowed = [30, 60, 90, 180, 365];
+    days = (allowed.indexOf(days) !== -1) ? days : 30;
     var rand = randChars(4);
     var base = "MS-" + tag + "-" + days + "-" + rand;
     var sig = signChars(base + "|" + CODE_SALT, 4);
