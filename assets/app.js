@@ -2524,8 +2524,23 @@ window.MS = (function () {
   /* register(): records the student locally so the dashboard + login work.
      No network. The access code is issued separately by you (admin page). */
   function register(data) {
+    var email = data.email.toLowerCase().trim();
+    var prev = getStudent();
+    // If THIS browser already holds an ACTIVE code for the SAME person (same
+    // email), keep their activated course and code — a free/paid code is tied to
+    // one person + one course and must not be wiped or switched by re-registering.
+    // A genuinely different person (different email) always gets a clean record.
+    if (prev && prev.email === email && prev.codeVerified && codeStatus().state === "active") {
+      prev.name = data.name || prev.name;
+      if (data.pass) prev.pass = data.pass;
+      // course stays locked to what they activated; tier label may update
+      prev.tier = data.tier || prev.tier;
+      saveStudent(prev);
+      sessionStorage.setItem("ms_session", prev.email);
+      return Promise.resolve(prev);
+    }
     var s = {
-      name: data.name, email: data.email.toLowerCase().trim(), pass: data.pass,
+      name: data.name, email: email, pass: data.pass,
       course: data.course, tier: data.tier,
       accessCode: "", codeVerified: false,
       activatedAt: null, expiresAt: null, codeDays: null,
