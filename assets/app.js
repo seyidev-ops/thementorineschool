@@ -2514,6 +2514,29 @@ window.MS = (function () {
     return { ok: true, code: code, tag: tag, days: days, rand: rand };
   }
 
+  /* ------------------------------------------------------------------
+     PROMO / GIFT CODES — free access to ONE course via a special page.
+     Stored as a hash (never the plain code). The code is normalised
+     (trimmed, upper-cased, spaces removed) before hashing, so
+     "Oluwaseyi A@39" and "oluwaseyi a@39" both match.
+       hash   = signChars(NORMALISED + "|" + CODE_SALT, 10)
+       course = the only track this code unlocks
+       days   = access window from first activation
+     ------------------------------------------------------------------ */
+  var PROMO_CODES = [
+    // /seyibirthday — free Time Management for Seyi's birthday
+    { hash: "XARVWMBAB8", course: "time-management", days: 365, label: "Birthday Gift — Free (365 days)" }
+  ];
+  function matchPromo(input) {
+    var norm = String(input || "").trim().toUpperCase().replace(/\s+/g, "");
+    if (!norm) return null;
+    var h = signChars(norm + "|" + CODE_SALT, 10);
+    for (var i = 0; i < PROMO_CODES.length; i++) {
+      if (PROMO_CODES[i].hash === h) return PROMO_CODES[i];
+    }
+    return null;
+  }
+
   /* ---------- Registration / auth / lock state ---------- */
   function getStudent() {
     try { return JSON.parse(localStorage.getItem("ms_student")) || null; }
@@ -2591,6 +2614,21 @@ window.MS = (function () {
       if (st.state === "active") { lastVerifyReason = "ok"; return Promise.resolve(true); }
       lastVerifyReason = st.state; // expired / revoked
       return Promise.resolve(false);
+    }
+
+    // Promo / gift codes (e.g. the /seyibirthday free course)
+    var promo = matchPromo(code);
+    if (promo) {
+      if (revokedList().indexOf(code) !== -1) { lastVerifyReason = "revoked"; return Promise.resolve(false); }
+      if (s.course !== promo.course) { lastVerifyReason = "wrongtrack"; return Promise.resolve(false); }
+      var pNow = new Date();
+      s.accessCode = code; s.codeVerified = true;
+      s.activatedAt = pNow.toISOString();
+      s.expiresAt = new Date(pNow.getTime() + promo.days * 86400000).toISOString();
+      s.codeDays = promo.days;
+      saveStudent(s);
+      lastVerifyReason = "ok";
+      return Promise.resolve(true);
     }
 
     var p = parseCode(code);
@@ -2791,7 +2829,7 @@ window.MS = (function () {
     getStudent: getStudent, isUnlocked: isUnlocked,
     setProgress: setProgress, getProgress: getProgress, initTheme: initTheme, initChat: initChat,
     // code system (offline)
-    mintCode: mintCode, parseCode: parseCode, trackTag: trackTag, codeStatus: codeStatus,
+    mintCode: mintCode, parseCode: parseCode, matchPromo: matchPromo, trackTag: trackTag, codeStatus: codeStatus,
     revoke: revoke, unrevoke: unrevoke, revokedList: revokedList, adminAuth: adminAuth,
     lastVerifyReason: function () { return lastVerifyReason; }
   };
