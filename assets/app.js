@@ -2544,7 +2544,7 @@ window.MS = (function () {
      Until the URL is set (or if the network fails), sign-ups wait in a
      queue in the visitor's browser and are sent on their next page load.
      ------------------------------------------------------------------ */
-  var SIGNUP_URL = "";                      // ← paste the Apps Script /exec URL here
+  var SIGNUP_URL = "https://script.google.com/macros/s/AKfycbw5G8w7_eKhAl2NE0VGLSV8Vt4-le-chMsZWdH35BixUsW8N1xHXo6ro9euE_eQ_3Ps/exec";   // Apps Script "Mentorine Sign-ups" (lordseyii@gmail.com)
   var SIGNUP_SECRET = "MS-signups-2026";    // must match SECRET in signups-Code.gs
   function signupQueue() {
     try { return JSON.parse(localStorage.getItem("ms_signup_queue")) || []; } catch (e) { return []; }
