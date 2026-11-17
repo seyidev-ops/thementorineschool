@@ -166,7 +166,10 @@ document.getElementById('bdForm').addEventListener('submit', function(e){
   MS.register({ name: name, email: email, pass: pass, course: COURSE, tier: promo.label })
     .then(function(){ return MS.verifyCode(code); })
     .then(function(ok){
-      if (ok) { done(MS.session()); return; }
+      if (ok) {
+        MS.reportSignup({ name: name, email: email, course: COURSE, source: 'seyibirthday' });
+        done(MS.session()); return;
+      }
       var why = MS.lastVerifyReason();
       showErr(why === 'wrongtrack'
         ? 'This email already has a different active course on this device. Use a different email to claim the gift.'

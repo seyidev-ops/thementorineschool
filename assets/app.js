@@ -2537,6 +2537,45 @@ window.MS = (function () {
     return null;
   }
 
+  /* ------------------------------------------------------------------
+     SIGN-UP REPORTING — sends name/email/course of gift sign-ups to the
+     Google Sheet "Seyi Birthday Gift — Sign-ups" via the Apps Script in
+     backend/signups-Code.gs. Paste its /exec URL into SIGNUP_URL.
+     Until the URL is set (or if the network fails), sign-ups wait in a
+     queue in the visitor's browser and are sent on their next page load.
+     ------------------------------------------------------------------ */
+  var SIGNUP_URL = "";                      // ← paste the Apps Script /exec URL here
+  var SIGNUP_SECRET = "MS-signups-2026";    // must match SECRET in signups-Code.gs
+  function signupQueue() {
+    try { return JSON.parse(localStorage.getItem("ms_signup_queue")) || []; } catch (e) { return []; }
+  }
+  function saveSignupQueue(q) {
+    try { localStorage.setItem("ms_signup_queue", JSON.stringify(q)); } catch (e) {}
+  }
+  function flushSignups() {
+    if (!SIGNUP_URL || typeof fetch !== "function") return Promise.resolve();
+    var q = signupQueue();
+    if (!q.length) return Promise.resolve();
+    return Promise.all(q.map(function (item) {
+      // text/plain + no-cors = no CORS preflight; Apps Script accepts it fine.
+      return fetch(SIGNUP_URL, {
+        method: "POST", mode: "no-cors", keepalive: true,
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(Object.assign({ secret: SIGNUP_SECRET }, item))
+      }).then(function () { return null; }, function () { return item; });
+    })).then(function (left) {
+      saveSignupQueue(left.filter(Boolean));
+    });
+  }
+  function reportSignup(data) {
+    var q = signupQueue();
+    q.push({ name: data.name || "", email: data.email || "", course: data.course || "",
+             source: data.source || "", at: new Date().toISOString() });
+    saveSignupQueue(q);
+    return flushSignups();
+  }
+  try { if (typeof window !== "undefined") setTimeout(flushSignups, 1500); } catch (e) {}
+
   /* ---------- Registration / auth / lock state ---------- */
   function getStudent() {
     try { return JSON.parse(localStorage.getItem("ms_student")) || null; }
@@ -2829,7 +2868,7 @@ window.MS = (function () {
     getStudent: getStudent, isUnlocked: isUnlocked,
     setProgress: setProgress, getProgress: getProgress, initTheme: initTheme, initChat: initChat,
     // code system (offline)
-    mintCode: mintCode, parseCode: parseCode, matchPromo: matchPromo, trackTag: trackTag, codeStatus: codeStatus,
+    mintCode: mintCode, parseCode: parseCode, matchPromo: matchPromo, reportSignup: reportSignup, trackTag: trackTag, codeStatus: codeStatus,
     revoke: revoke, unrevoke: unrevoke, revokedList: revokedList, adminAuth: adminAuth,
     lastVerifyReason: function () { return lastVerifyReason; }
   };
