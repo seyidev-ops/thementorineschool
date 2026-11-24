@@ -80,3 +80,19 @@ def ms_cta(lt, head, sub, pills, button, foot2='or chat with admissions on Whats
 
 def checklist(lt, items, y0=700, gap=120, start=0.3, step=0.7):
     return ''.join(check_item(150, y0 + i*gap, t, P(lt, start + i*step, start + i*step + 0.4)) for i, t in enumerate(items))
+
+# ---- Name pronunciation (confirmed by Seyi, Nov 2026). Spoken audio only; captions keep the real spelling.
+import re
+SAY_AS = {
+    'Adaeze': 'Ah-dah-eh-zeh',   # Àdáézè: ah-dah-EH-zeh
+    'Ngozi': 'N-goh-zee',
+    'Chidi': 'Chee-dee',
+    'Emeka': 'Eh-meh-kah',
+    'Seyi': 'Sheh-yee',
+    'Yakubu': 'Yakubu',
+}
+_tts = engine.tts
+def _tts_named(text, *a):
+    for k, v in SAY_AS.items(): text = re.sub(rf'\b{k}\b', v, text)
+    return _tts(text, *a)
+engine.tts = _tts_named

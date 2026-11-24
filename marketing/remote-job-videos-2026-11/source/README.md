@@ -10,3 +10,18 @@ re-coloured to Mentorine green, with Nigerian neural voices from `edge-tts`
     python3 mama.py 0.2 0.5   # stills at 20% and 50% for checking
 
 `ms.py` holds the Mentorine branding (footer, call-to-action card, certificate, danfo, etc.).
+
+## Name pronunciation
+
+`SAY_AS` in `ms.py` respells names for the voice only (on-screen text keeps the real spelling):
+
+| Name | Spoken as | Notes |
+|------|-----------|-------|
+| Adaeze | Ah-dah-eh-zeh | Àdáézè: ah-dah-EH-zeh, crisp "ah" and "eh" vowels |
+| Ngozi | N-goh-zee | |
+| Chidi | Chee-dee | |
+| Emeka | Eh-meh-kah | |
+| Seyi | Sheh-yee | |
+| Yakubu | Yakubu | plain spelling is correct |
+
+Add new names here before rendering. The voice cannot reproduce Igbo/Yoruba tones exactly; respelling fixes the vowels and syllables.
