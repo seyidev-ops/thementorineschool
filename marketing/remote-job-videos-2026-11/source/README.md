@@ -5,7 +5,7 @@ re-coloured to Mentorine green, with Nigerian neural voices from `edge-tts`
 (`en-NG-EzinneNeural`, `en-NG-AbeoNeural`).
 
     pip install edge-tts cairosvg numpy pillow   # plus ffmpeg
-    python3 chidi.py      # -> out/Mentorine-Video1-Chidi-Traffic-to-Laptop.mp4
+    python3 daniel.py     # -> out/Mentorine-Video1-Daniel-Traffic-to-Laptop.mp4
     python3 mama.py       # -> out/Mentorine-Video2-Mama-Is-It-Real.mp4
     python3 mama.py 0.2 0.5   # stills at 20% and 50% for checking
 
@@ -25,3 +25,6 @@ re-coloured to Mentorine green, with Nigerian neural voices from `edge-tts`
 | Yakubu | Yakubu | plain spelling is correct |
 
 Add new names here before rendering. The voice cannot reproduce Igbo/Yoruba tones exactly; respelling fixes the vowels and syllables.
+
+Nov 2026: the characters now use English names (Daniel, Grace, Joy) because the voices
+could not pronounce the Igbo names well. The SAY_AS list stays in ms.py for future use.

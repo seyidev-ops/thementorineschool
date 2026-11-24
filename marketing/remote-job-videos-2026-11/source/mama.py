@@ -14,7 +14,7 @@ def s1(lt, L):
     wag = math.sin(lt*9)*25
     m, _ = mama(780, face='sad', aL=(-30, -10), aR=(150 + wag, 175 + wag)); a, _ = ada(260, face='happy', aL=(-20, -10), aR=(60, 90))
     o += m + a + f'<rect x="352" y="{G-330}" width="40" height="72" rx="8" fill="#1D1D21" stroke="{CREAM}" stroke-width="4"/>'
-    return o + bubble(360, 540, 680, 210, ['Adaeze! Remote job?', 'Is it not yahoo-yahoo?'], P(lt, 0.2, 0.7), size=40, tail='right')
+    return o + bubble(360, 540, 680, 210, ['Joy! Remote job?', 'Is it not yahoo-yahoo?'], P(lt, 0.2, 0.7), size=40, tail='right')
 
 def s1b(lt, L):
     o = sofa(520, 1480) + ground()
@@ -48,7 +48,7 @@ def s3(lt, L):
     return o
 
 def s4(lt, L):
-    o = cap(['Adaeze chose', 'Virtual Assistant.'], P(lt, 0.05, 0.6), gold=(1,))
+    o = cap(['Joy chose', 'Virtual Assistant.'], P(lt, 0.05, 0.6), gold=(1,))
     o += checklist(lt, ['Learn at your own pace', 'A practical in every part', 'A capstone for your portfolio', 'A verified certificate'], y0=720, start=0.6, step=L*0.18)
     a, _ = ada(820, face='happy', aL=(-60, -100), aR=(30, 10)); o += a + f'<rect x="742" y="{G-310}" width="40" height="72" rx="8" fill="#1D1D21" stroke="{CREAM}" stroke-width="4"/>'
     return o + ground()
@@ -73,11 +73,11 @@ NARR = lambda s: (MV, '+3%', '+0Hz', s)       # Abeo, narrator
 MAMA = lambda s: (NV, '-6%', '-14Hz', s)      # Ezinne, older and lower
 ADA = lambda s: (NV, '+6%', '+8Hz', s)        # Ezinne, younger and brighter
 beats = [
- dict(say=MAMA("Adaeze! Remote job? Is it not yahoo-yahoo?"), draw=s1, scene='a', pre=0.4, post=0.2),
+ dict(say=MAMA("Joy! Remote job? Is it not yahoo-yahoo?"), draw=s1, scene='a', pre=0.4, post=0.2),
  dict(say=ADA("Mama, no o! It's real work, from my laptop."), draw=s1b, scene='a', pre=0.1, post=0.5),
  dict(say=NARR("Remote work is real. What you need is a skill that people will pay for."), draw=s2, post=0.5),
  dict(say=NARR("At The Mentorine School, there are over forty career tracks to choose from. Virtual assistant, data, design, social media, project management, and many more."), draw=s3, post=0.6),
- dict(say=NARR("Adaeze chose Virtual Assistant. She learned at her own pace, did a practical in every part, built a capstone for her portfolio, and earned a verified certificate."), draw=s4, post=0.6),
+ dict(say=NARR("Joy chose Virtual Assistant. She learned at her own pace, did a practical in every part, built a capstone for her portfolio, and earned a verified certificate."), draw=s4, post=0.6),
  dict(say=MAMA("Ehen! My daughter don get certificate!"), draw=s5, scene='c', pre=0.6, post=0.2),
  dict(say=ADA("And my first client abroad, Mama!"), draw=s5b, scene='c', pre=0.1, post=0.8),
  dict(say=NARR("Whatever you want to do, there is a track for you. Start with one track for thirty days, from fifty thousand naira. Register today at the mentorine school dot com."), draw=s6, post=1.6, min=9),

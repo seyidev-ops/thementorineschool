@@ -6,7 +6,7 @@ def traffic(lt):
     return car(-260, G, '#6A4C93', jig(1)) + danfo(300, G, jig(2)) + car(860, G, '#3D6FA5', jig(3))
 
 def s1(lt, L):
-    o = cap(['Meet Chidi.', '3 hours in', 'Lagos traffic.'], P(lt, 0.1, 0.8), gold=(2,)) + ground() + traffic(lt)
+    o = cap(['Meet Daniel.', '3 hours in', 'Lagos traffic.'], P(lt, 0.1, 0.8), gold=(2,)) + ground() + traffic(lt)
     hh = 6 + 3*ease(P(lt, 0.3, L)); o += clock(860, 760, 90, int(hh), int((hh % 1)*60))
     sp, head, _ = stick(170, G, 1.05, aL=(-20, -10), aR=(160, 190), face='sad')  # leaning out of the bus queue
     return o + f'<g>{sp}</g>' + sweat(head[0] + 45, head[1] - 25, lt)
@@ -18,7 +18,7 @@ def s1b(lt, L):
     return o + bubble(80, 560, 640, 170, ['Na so we dey', 'every day.'], P(lt, 0.15, 0.6), tail='left')
 
 def s2(lt, L):
-    o = cap(['Then Ngozi asked…'], P(lt, 0.05, 0.5)) + ground()
+    o = cap(['Then Grace asked…'], P(lt, 0.05, 0.5)) + ground()
     sp, _, _ = stick(260, G, 1.2, face='neutral'); o += sp
     fx = 1200 - 400*ease(P(lt, 0.0, 1.0)); walk = math.sin(lt*10)*22*(1 - P(lt, 0.8, 1.0))
     wm, _ = woman(fx, G, 1.2, face='happy', dress='#2E7D6B', aL=(-20 - walk*0.5, -10), aR=(-70, -110), lL=(-walk, 0), lR=(walk, 0))
@@ -76,19 +76,19 @@ def s6(lt, L):
 def s7(lt, L): return ms_cta(lt, ['Your remote', 'career starts', 'here.'], '1 track · 30 days · Starter plan', ['40+ tracks', 'Capstone project', 'Certificate'], 'thementorineschool.com')
 
 NARR = lambda s: (NV, '+5%', '+0Hz', s)      # Ezinne, narrator
-CHIDI = lambda s: (MV, '+3%', '+0Hz', s)     # Abeo
-NGOZI = lambda s: (NV, '+8%', '+12Hz', s)
+DANIEL = lambda s: (MV, '+3%', '+0Hz', s)     # Abeo
+GRACE = lambda s: (NV, '+8%', '+12Hz', s)
 beats = [
- dict(say=NARR("Meet Chidi. Every single day, three hours in Lagos traffic."), draw=s1, scene='a', post=0.3),
- dict(say=CHIDI("Na so we dey every day. Small salary, long road."), draw=s1b, scene='a', pre=0.1, post=0.5),
- dict(say=NGOZI("Chidi, why you no learn skill for remote work?"), draw=s2, scene='b', pre=1.0, post=0.2),
- dict(say=CHIDI("Remote work? Where I go even start?"), draw=s2b, scene='b', pre=0.1, post=0.5),
- dict(say=NARR("So Chidi joined The Mentorine School. Over forty career tracks, in tech, design, marketing, business and support."), draw=s3, post=0.6),
+ dict(say=NARR("Meet Daniel. Every single day, three hours in Lagos traffic."), draw=s1, scene='a', post=0.3),
+ dict(say=DANIEL("Na so we dey every day. Small salary, long road."), draw=s1b, scene='a', pre=0.1, post=0.5),
+ dict(say=GRACE("Daniel, why you no learn skill for remote work?"), draw=s2, scene='b', pre=1.0, post=0.2),
+ dict(say=DANIEL("Remote work? Where I go even start?"), draw=s2b, scene='b', pre=0.1, post=0.5),
+ dict(say=NARR("So Daniel joined The Mentorine School. Over forty career tracks, in tech, design, marketing, business and support."), draw=s3, post=0.6),
  dict(say=NARR("He chose Data Analyst and learned at his own pace. Guided parts, practical work in every one, and a capstone project for his portfolio."), draw=s4, post=0.6),
  dict(say=NARR("When he finished, he got a verified certificate to show employers."), draw=s5, post=0.5),
- dict(say=CHIDI("Now my office na my own room. No more three hours for road!"), draw=s6, post=0.8),
+ dict(say=DANIEL("Now my office na my own room. No more three hours for road!"), draw=s6, post=0.8),
  dict(say=NARR("Your remote career starts here. The Starter plan gives you one track for thirty days, for fifty thousand naira. Visit the mentorine school dot com, or chat with admissions on WhatsApp."), draw=s7, post=1.6, min=9),
 ]
 if __name__ == '__main__':
     st = [float(x) for x in sys.argv[1:]] or None
-    build('Mentorine-Video1-Chidi-Traffic-to-Laptop', beats, [[45, 52, 57, 60], [41, 53, 57, 60], [48, 55, 60, 64], [43, 55, 59, 62]], 0.4, stills=st)
+    build('Mentorine-Video1-Daniel-Traffic-to-Laptop', beats, [[45, 52, 57, 60], [41, 53, 57, 60], [48, 55, 60, 64], [43, 55, 59, 62]], 0.4, stills=st)
